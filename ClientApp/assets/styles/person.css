@@ -1,0 +1,142 @@
+#person {}
+
+#person .person-menu {
+	float: left;
+	width: 230px;
+	height: 100%;
+	border: 1px solid #f1f1f1;
+	background: #FFFFFF;
+}
+
+#person .person-menu ul {
+	margin: 0px;
+	list-style: none;
+	padding: 0px;
+	border-top: 1px solid #f1f1f1;
+}
+
+#person .person-menu ul li {
+	line-height: 36px;
+	color: #101010;
+	border-bottom: 1px solid #f1f1f1;
+	cursor: pointer;
+}
+
+#person .person-menu ul li.current {
+	background: #F7F7F7;
+}
+
+#person .person-menu ul li>p {
+	width: 2px;
+	float: left;
+	height: 36px;
+}
+
+#person .person-menu ul li.current>p {
+	background: #ba2538;
+}
+
+#person .person-menu ul li .img {
+	width: 18px;
+	vertical-align: top;
+	margin: 9px;
+}
+
+#person .person-content {
+	margin-left: 250px;
+	border: 1px solid #f1f1f1;
+	background: #FFFFFF;
+	height: 100%;
+	overflow: auto;
+}
+
+#person .index-content {
+	max-width: 1200px;
+	margin: 0px auto;
+}
+
+#person .index-content .title {
+	line-height: 50px;
+	padding: 0px 10px;
+	color: #666666;
+	font-size: 16px;
+}
+
+#person .person-info-content {
+	width: 470px;
+	margin: 0px auto;
+	padding: 36px 0px;
+}
+
+#person .person-info-content .item {
+	margin-bottom: 16px;
+	position: relative;
+}
+
+#person .person-info-content .item>label {
+	line-height: 30px;
+	float: left;
+	width: 120px;
+	color: #101010;
+}
+
+#person .person-info-content .item>.text {
+	line-height: 30px;
+	margin-left: 120px;
+	color: #666666;
+}
+
+#person .person-info-content .item>.text input {
+	line-height: 28px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px;
+}
+
+#person .person-info-content .item>.text select {
+	border: 1px solid #CCCCCC;
+	height: 30px;
+	width: 100%;
+	border-radius: 4px;
+}
+
+#person .person-info-content .item>.text img {
+	width: 120px;
+	height: 120px;
+	border-radius: 4px;
+	border: 1px solid#DDDDDD;
+}
+
+#person .person-but1 {
+	outline: none;
+	background: #ba2538;
+	color: #FFFFFF;
+	border: none;
+	height: 34px;
+	width: 130px;
+	margin-right: 10px;
+}
+
+#person .person-but2 {
+	outline: none;
+	background: #FFFFFF;
+	color: #101010;
+	border: 1px solid #DDDDDD;
+	height: 34px;
+	width: 130px;
+	margin-left: 10px;
+}
+
+#file {
+	width: 120px !important;
+	height: 120px;
+	outline: none;
+	border: none !important;
+	opacity: 0;
+	cursor: pointer;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}

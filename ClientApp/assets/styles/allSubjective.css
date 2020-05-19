@@ -1,0 +1,39 @@
+#all-subjective .ti-cheng-fen{
+	float: left;
+	width: 100%;
+	transition: width ease 1s;
+	-moz-transition: width ease 1s; /* Firefox 4 */
+	-webkit-transition: width ease 1s; /* Safari 和 Chrome */
+	-o-transition: width ease 1s; /* Opera */
+}
+
+#all-subjective .ti-cheng-fen .table-box{
+	height: 395px !important;
+}
+#all-subjective .wen{
+	float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 18px;
+    position: relative;
+}
+#all-subjective .wen img{
+	width: 100%;
+	height: 100%;
+	vertical-align: top;
+}
+#all-subjective .wen p{
+	display: none;
+	line-height: 30px;
+    white-space: nowrap;
+    position: absolute;
+    right: 24px;
+    top: -4px;
+    background: #eee;
+    color: #666;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
+#all-subjective .wen:hover p{
+	display: block;
+}

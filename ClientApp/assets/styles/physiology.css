@@ -1,0 +1,7 @@
+#physiology .shengli-main{
+	float: left;
+	transition: width ease 1s;
+	-moz-transition: width ease 1s; /* Firefox 4 */
+	-webkit-transition: width ease 1s; /* Safari 和 Chrome */
+	-o-transition: width ease 1s; /* Opera */
+}

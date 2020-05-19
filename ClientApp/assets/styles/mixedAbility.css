@@ -1,0 +1,89 @@
+#mixedAbility .index-content {
+	margin: 0px 20px;
+}
+
+#mixedAbility .injury-menu {
+	width: 320px;
+	float: left;
+	height: 100%;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+	position: relative;
+	overflow: hidden;
+}
+
+#mixedAbility .injury-menu>section {
+	width: 400px;
+	position: absolute;
+	top: 57px;
+	bottom: 0px;
+	overflow-y: scroll;
+}
+
+#mixedAbility .index-content .title {
+	line-height: 56px;
+	margin: 0px 10px;
+	padding: 0px 10px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+#mixedAbility .injury-menu-list {
+	margin: 0px 10px;
+	width: 300px;
+}
+
+#mixedAbility .injury-menu-list>li {
+	height: 57px;
+	border-bottom: 1px solid #DDDDDD;
+	padding: 0px 10px;
+}
+
+#mixedAbility .injury-menu-list .portrait {
+	float: left;
+	width: 44px;
+	vertical-align: top;
+	margin-top: 6px;
+	border-radius: 2px;
+}
+
+#mixedAbility .injury-menu-list .right {
+	float: right;
+	width: 18px;
+	margin-top: 19px;
+	vertical-align: top;
+}
+
+#mixedAbility .injury-menu-text {
+	margin: 6px 0px 0px 10px;
+	float: left;
+}
+
+#mixedAbility .injury-menu-text>p:first-child {
+	line-height: 24px;
+	font-size: 16px;
+}
+
+#mixedAbility .injury-menu-text>p:last-child {
+	line-height: 20px;
+	font-size: 12px;
+	
+	    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#mixedAbility .injury-main {
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    margin-left: 340px;
+    position: relative;
+    overflow: hidden;
+}
+
+#mixedAbility .injury-main .box {
+	position: absolute;
+    bottom: 0px;
+    top: 57px;
+    left: 0px;
+    right: 0px;
+    overflow-y: auto;
+}

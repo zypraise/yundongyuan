@@ -1,0 +1,12 @@
+#body {}
+
+
+#body .body-tu{
+	float: left;
+	width: 60%;
+}
+
+#body .body-biao {
+	float: left;
+	width: 40%;
+}
