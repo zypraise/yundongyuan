@@ -1,7 +1,7 @@
 <template>
 	<div class="body-item">
 		<div class="title">
-			<div>训练强度</div>
+			<div>训练负荷</div>
 		</div>
 		<section>
 			<div class="table-box" style="height: 380px;">
@@ -23,9 +23,6 @@
 		},
 		watch: {
 			shuaxin: function() {
-				vm.getList();
-			},
-			userId: function(newVal, oldVal) {
 				vm.getList();
 			},
 			againBiao:function(){
@@ -72,8 +69,11 @@
 						data: []
 					}
 				];
+				var _thisTime = (new Date(document.getElementById('starttime').value.replace(/-/g,'/'))).getTime();
+				var _time = (new Date(document.getElementById('starttime').value.substr(0, 4) + '/01/01')).getTime();
+				var addIndex = parseInt((_thisTime - _time)/(60*60*24*1000*7));
 				for(var i = 0; i < vm.bodyList.length; i++) {
-					_dateList.push('第' + vm.bodyList[i].Testdate + '周');
+					_dateList.push('第' + (parseInt(vm.bodyList[i].Testdate) + addIndex) + '周');
 					_series[0].data.push(vm.bodyList[i].AvgIntensity);//平均值
 				}
 				document.getElementById('child2').setAttribute("_echarts_instance_", "");

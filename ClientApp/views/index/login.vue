@@ -123,7 +123,7 @@
 					}).then(function(result) {
 						if (result.body.Message == "登录成功") {
 							window.localStorage.setItem('Sport_Access_Token', result.body.Data.Token_Type + ' ' + result.body.Data.Access_Token);
-							window.localStorage.setItem('Sport_userType', result.body.Data.RoleName == '运动员' ? '运动员' : '教练');
+							window.localStorage.setItem('Sport_userType', result.body.Data.RoleName);
 							window.localStorage.setItem('Sport_userPicture', window.myPublic.publicUrl + result.body.Data.Picture ? result
 								.body.Data.Picture : '/web/wwwroot/dist/images/person.png');
 							vm.getUserInfo(result.body.Data);
@@ -141,7 +141,8 @@
 			 */
 			loginByMobile: function() {
 				if (!vm.isGetCode)
-					myPublic.alertResult('请先发送验证码')
+					myPublic.alertResult('请先发送验证码');
+					
 			},
 			/**
 			 * 获取用户权限
@@ -156,9 +157,15 @@
 						window.localStorage.setItem('user', JSON.stringify(result.body.Data));
 						if (result.body.StateCode == 0) {
 							if (window.localStorage.getItem('Sport_userType') == '运动员') {
+								if(result.body.Data.CoachId){
 								vm.$router.push({
 									path: '/subjective'
 								});
+								}else{
+									vm.$router.push({
+										path: '/choiceRegister'
+									});
+								}
 							} else {
 								vm.$router.push({
 									path: '/allSubjective'

@@ -190,7 +190,15 @@
 	position: absolute;
 	left: 0px;
 }
-
+#index-register .register-mian>li .inp .get-code{
+	line-height: 30px;
+	position: absolute;
+	top: 2px;
+	right: 10px;
+	color: #999;
+	font-size: 12px;
+	cursor: pointer;
+}
 #index-register .register-mian>li .is,
 #index-forget .forget-mian>li .is,
 #index-choice-register .choice-mian>li .is {

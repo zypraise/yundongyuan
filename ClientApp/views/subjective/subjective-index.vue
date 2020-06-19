@@ -1,6 +1,10 @@
 <template>
 	<div class="body-item">
 		<div class="title">
+			<ul class="title-tab">
+				<li class="item current">数据表</li>
+				<li class="item" v-on:click="setChildNum(2)">折线图</li>
+			</ul>
 			<div>主观评价指标</div>
 		</div>
 		<section>
@@ -20,7 +24,7 @@
 							<th>伤病疼痛评价</th>
 							<th>自我训练状态评价</th>
 							<th>RPE</th>
-							<th>训练强度</th>
+							<th>训练负荷</th>
 							<th>教练评价</th>
 						</tr>
 					</thead>
@@ -30,7 +34,7 @@
 							<td>{{item.DateSign}}</td>
 							<td>{{item.MorPulse}}</td>
 							<td>{{item.Weight}}</td>
-							<td><span v-if="item.SleepDuration>=8" class="shuiping1"></span><span v-if="item.SleepDuration>=5 && item.SleepDuration<=7" class="shuiping2"></span><span v-if="item.SleepDuration>=0 && item.SleepDuration<=4" class="shuiping3"></span>{{item.SleepDuration}}</td>
+							<td><span v-if="item.SleepDuration>=8" class="shuiping1"></span><span v-if="item.SleepDuration>=5 && item.SleepDuration<=7" class="shuiping2"></span><span v-if="item.SleepDuration>=0 && item.SleepDuration<=4" class="shuiping3"></span>{{parseInt(item.SleepDuration)}}</td>
 							<td><span v-if="item.SleepQuality>=8" class="shuiping1"></span><span v-if="item.SleepQuality>=5 && item.SleepQuality<=7" class="shuiping2"></span><span v-if="item.SleepQuality>=0 && item.SleepQuality<=4" class="shuiping3"></span>{{item.SleepQuality}}</td>
 							<td><span v-if="item.Desire>=8" class="shuiping1"></span><span v-if="item.Desire>=5 && item.Desire<=7" class="shuiping2"></span><span v-if="item.Desire>=0 && item.Desire<=4" class="shuiping3"></span>{{item.Desire}}</td>
 							<td><span v-if="item.SorenessLevel>=0 && item.SorenessLevel<=4" class="shuiping1"></span><span v-if="item.SorenessLevel>=5 && item.SorenessLevel<=7" class="shuiping2"></span><span v-if="item.SorenessLevel>=8" class="shuiping3"></span>{{item.SorenessLevel}}</td>
@@ -68,6 +72,9 @@
 		methods: {
 			start: function() {
 				myPublic.tableHeader('#table-header');
+			},
+			setChildNum:function(num){
+				window.bus.$emit('childNum', num)
 			},
 			showPingFen: function() {
 				vm.pingfen = !vm.pingfen;

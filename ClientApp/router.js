@@ -11,9 +11,12 @@ import choiceRegister from './views/index/choiceRegister.vue';
 import person from './views/person/person.vue';
 import sportInjury from './views/injury/sportInjury.vue'; //伤病运动员
 import trainInjury from './views/injury/trainInjury.vue'; //伤病教练员
+import allComposition from './views/body/allComposition.vue';//体成分
 import bodyComposition from './views/body/composition.vue';//体成分
 import phyConstituents from './views/physiology/constituents.vue';//体成分
+import allConstituents from './views/physiology/allConstituents.vue';//体成分
 import stamina from './views/stamina/stamina.vue';//体能训练
+import staminaAdd from './views/stamina/staminaAdd.vue';//体能测试
 import subjective from './views/subjective/subjective.vue';//运动员主观评价
 import allSubjective from './views/allSubjective/allSubjective.vue';//主观评价
 //import primary from './views/primary/primary.vue';//首页
@@ -57,11 +60,20 @@ window.router = new Router({
 			path: '/bodyComposition',
 			component:bodyComposition
 		},{
+			path: '/allComposition',
+			component:allComposition
+		},{
 			path: '/phyConstituents',
 			component:phyConstituents
+		},{
+			path: '/allConstituents',
+			component:allConstituents
 		}, {
 			path: '/stamina',
 			component:stamina
+		}, {
+			path:'/staminaAdd',
+			component:staminaAdd
 		}, {
 			path: '/subjective',
 			component:subjective

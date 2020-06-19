@@ -635,7 +635,7 @@ table tbody tr:nth-child(odd) {
     position: fixed;
     width: 100%;
     z-index: 1;
-    min-width: 1200px;
+    min-width: 512px;
 }
 
 #header.current {
@@ -800,6 +800,7 @@ table tbody tr:nth-child(odd) {
 
 .index-content {
 	height: 100%;
+	height: calc(100% - 82px);
 }
 
 #result {
@@ -1121,7 +1122,12 @@ text-align: center;
 	color: #666666;
 	font-size:14px ;
 }
-/* 整体设置 */
+#beian{
+	line-height: 40px;
+	    text-align: center;
+	    margin-top: 10px;
+	    background: #FFF;
+}/* 整体设置 */
 *{margin:0px;padding:0px;}
 /**
  * 设置日历的大小

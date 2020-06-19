@@ -100,11 +100,29 @@
 			/**
 			 * 找回密码
 			 */
-			forget: function() {},
+			forget: function() {
+				var _d = {
+					PhoneNumber: vm.mobile, //手机号
+					VerifyCode: vm.code, //验证码
+					Password: vm.password, //新密码
+					ConfirmPassword: vm.newpassword //确认新密码
+				};
+				vm.$http.post(myPublic.publicUrl + '/API/Account/ReSetPasswordByPhoneCode', _d).then(function(result) {
+						if (result.body.StateCode == 0) {
+							window.myPublic.alertResult(result.body.Message);
+							vm.$router.back(-1);
+						} else {
+							window.myPublic.alertResult(result.body.Message);
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+					});
+			},
 			/**
 			 * 去登陆
 			 */
-			back:function(){
+			back: function() {
 				vm.$router.back(-1);
 			}
 		},

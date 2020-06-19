@@ -5,20 +5,20 @@
 			<top-menu></top-menu>
 			<div class="index-content">
 				<div style="margin-bottom:20px;margin-right:20px;float:right;">
-					<select v-if="userType != '运动员'" class="sport-list" v-model="trainFirse">
+					<select class="sport-list" v-model="trainFirse">
 						<option value="">-全部大项-</option>
 						<option :value="index" v-for="(item,index) in zhuanxiangList" v-if="item.SystemId.length == 3">{{item.Name}}</option>
 					</select>
-					<select v-if="userType != '运动员'" class="sport-list" v-model="trainId">
+					<select class="sport-list" v-model="trainId">
 						<option value="">-全部小项-</option>
 						<option :value="item.Id" v-for="(item,index) in zhuanxiangList" v-if="item.SystemId.length == 6 && trainFirse !== '' && item.SystemId.substr(0,3) == zhuanxiangList[trainFirse].SystemId">{{item.Name}}</option>
 					</select>
-					<select v-if="userType != '运动员' && userType != '分队教练'" class="sport-list" v-model="sex">
+					<select v-if="userType != '分队教练'" class="sport-list" v-model="sex">
 						<option value="">-全部性别-</option>
 						<option value="男">男</option>
 						<option value="女">女</option>
 					</select>
-					<select v-if="userType != '运动员'" class="sport-list" v-model="sportIndex">
+					<select class="sport-list" v-model="sportIndex">
 						<option value="">-全部运动员-</option>
 						<option v-for="(item,index) in sportList" :value="index">{{item.FullName}}</option>
 					</select>
@@ -32,7 +32,8 @@
 						<input class='form_datetime' onclick='myDate.getFocus(this)' id='endtime' readonly='readonly' type='text'>
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
-					<button v-if="userType == '教练'" class="daochu" v-on:click="daochu = true">导出</button>
+					<button class="daochu" v-on:click="daochu = true">导出</button>
+					<button class="daochu" v-on:click="getBodyFatTrend()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
 				<section class="body-tu">
@@ -150,10 +151,6 @@
 			topMenu: topMenu
 		},
 		watch: {
-			sportIndex: function(newVal, oldVal) {
-				window.sportIndex = newVal;
-				vm.getBodyFatTrend();
-			},
 			allDaoChu: function(newVal, oldVal) {
 				if(newVal.length > 0) {
 					vm.getSport()
@@ -202,7 +199,6 @@
 				vm.GetAllTrain().then(() => {
 					vm.setTimeInp();
 					vm.getSport().then(() => {
-						
 							vm.getBodyFatTrend();
 					})
 				});
@@ -377,12 +373,10 @@
 					var _date2 = document.getElementById('endtime').value;
 					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 					if(_date2 == '' || isDate) {
-						vm.getBodyFatTrend();
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
 					document.getElementById('starttime').value = document.getElementById('endtime').value;
-					vm.getBodyFatTrend();
 				});
 				document.getElementById('endtime-section').addEventListener('blur', function() {
 					var _date1 = document.getElementById('starttime').value;
@@ -391,17 +385,14 @@
 					var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 					if(_isDate) {
 						document.getElementById('endtime').value = _thisDate;
-						vm.getBodyFatTrend();
 						return;
 					}
 					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 					if(_date1 == '' || isDate) {
-						vm.getBodyFatTrend();
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
 					document.getElementById('endtime').value = document.getElementById('starttime').value;
-					vm.getBodyFatTrend();
 				});
 			}
 		},

@@ -47,8 +47,8 @@
 }
 
 #stamina .injury-menu-text {
-	margin: 6px 0px 0px 10px;
-	float: left;
+	margin: 0px 20px 0px 50px;
+	padding-top: 6px;
 }
 
 #stamina .injury-menu-text>p:first-child {
@@ -59,83 +59,179 @@
 #stamina .injury-menu-text>p:last-child {
 	line-height: 20px;
 	font-size: 12px;
-	    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 #stamina .injury-main {
 	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    margin-left: 340px;
-    position: relative;
-    overflow: hidden;
-    background-color: #FFFFFF;
+	height: 100%;
+	margin-left: 340px;
+	position: relative;
+	overflow: hidden;
+	background-color: #FFFFFF;
 }
 
 #stamina .injury-main .box {
 	position: absolute;
-    bottom: 0px;
-    top: 57px;
-    left: 0px;
-    right: 0px;
-    overflow-y: auto;
+	bottom: 0px;
+	top: 57px;
+	left: 0px;
+	right: 0px;
+	overflow-y: auto;
 }
-#stamina .workout-add{
+
+#stamina .workout-add {
 	vertical-align: top;
-    width: 24px;
-    cursor: pointer;
-    margin: 16px;
+	width: 24px;
+	cursor: pointer;
+	margin: 16px;
 }
-#stamina .workout-inp{
+
+#stamina .workout-inp {
 	margin: 10px;
-    border: 1px solid #DDDDDD;
+	border: 1px solid #DDDDDD;
 }
-#stamina .workout-inp .top{
+
+#stamina .workout-inp .top {
 	text-align: right;
 	border-bottom: 1px solid #DDDDDD;
 	padding: 8px 10px;
 }
-#stamina .workout-inp-main{
-    padding: 10px;
-    width: 810px;
+
+#stamina .workout-inp-main {
+	padding: 10px;
+	width: 810px;
 }
-#stamina .workout-inp-main .item{
-    float:  left;
-    width:400px;
-    margin-bottom:10px;
+
+#stamina .workout-inp-main .item {
+	float: left;
+	width: 400px;
+	margin-bottom: 10px;
 }
-#stamina .workout-inp-main .item label{
-    width: 170px;
-    display:  inline-block;
-    line-height: 30px;
+
+#stamina .workout-inp-main .item label {
+	width: 170px;
+	display: inline-block;
+	line-height: 30px;
 }
-#stamina .workout-inp-main .item input{
-    height:  30px;
-    border: 1px solid #DDDDDD;
-    width: 200px;
+
+#stamina .workout-inp-main .item input {
+	height: 30px;
+	border: 1px solid #DDDDDD;
+	width: 200px;
 }
-#stamina .workout-inp-main .item span{
-    display:  inline-block;
-    line-height: 30px;
+
+#stamina .workout-inp-main .item span {
+	display: inline-block;
+	line-height: 30px;
 }
+
 #workout .workout-inp-but1,
-#stamina .workout-inp-but1{
+#stamina .workout-inp-but1 {
 	outline: none;
 	background: #ba2538;
-    color: #FFFFFF;
-    border: none;
-    height: 34px;
-    width: 130px;
-    margin-right:10px;
+	color: #FFFFFF;
+	border: none;
+	height: 34px;
+	width: 130px;
+	margin-right: 10px;
 }
+
 #workout .workout-inp-but2,
-#stamina .workout-inp-but2{
+#stamina .workout-inp-but2 {
 	outline: none;
 	background: #FFFFFF;
-    color: #101010;
-    border: 1px solid #DDDDDD;
-    height: 34px;
-    width: 130px;
-    margin-left:10px;
+	color: #101010;
+	border: 1px solid #DDDDDD;
+	height: 34px;
+	width: 130px;
+	margin-left: 10px;
+}
+
+#workout .shengli-main,
+#stamina .shengli-main {
+	float: left;
+	transition: width ease 1s;
+	-moz-transition: width ease 1s;
+	/* Firefox 4 */
+	-webkit-transition: width ease 1s;
+	/* Safari 和 Chrome */
+	-o-transition: width ease 1s;
+	/* Opera */
+}
+
+#stamina .edit-mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99999;
+	left: 0;
+	top: 0;
+}
+
+#stamina .is-edit {
+	position: relative;
+	margin: 0 auto 50px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-sizing: border-box;
+	margin-top: 15vh;
+	width: 600px;
+	background: #FFF;
+}
+
+#stamina .is-edit .header {
+	padding: 20px 20px 10px;
+	line-height: 24px;
+}
+
+#stamina .is-edit .body {
+	padding: 30px 10px;
+	color: #606266;
+	font-size: 14px;
+	word-break: break-all;
+}
+
+#stamina .is-edit .body .item {
+	display: inline-block;
+	margin: 10px;
+	vertical-align: top;
+}
+
+#stamina .is-edit .body .item .code {
+	border: 1px solid #dcdfe6;
+	border-radius: 2px;
+	width: 14px;
+	height: 14px;
+	margin-top: 4px;
+	float: left;
+	cursor: pointer;
+}
+
+#stamina .is-edit .body .item .code img {
+	width: 100%;
+	height: 100%;
+	vertical-align: top;
+}
+
+#stamina .is-edit .body .item.current .code {
+	border-color: #409EFF;
+}
+
+#stamina .is-edit .body .item .code:hover {
+	border-color: #409EFF;
+}
+
+#stamina .is-edit .body .item p {
+	white-space: nowrap;
+	margin-left: 24px;
+	line-height: 24px;
+}
+
+#stamina .is-edit .body .item.current p {
+	color: #409EFF;
 }

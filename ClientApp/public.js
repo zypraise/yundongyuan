@@ -2,15 +2,14 @@
 (function () {
 	const myPublic = {
 		// publicUrl:'http://www.cissatmes.com',
-		// publicUrl:'http://www.sport.uare.vip',
-		publicUrl:'http://localhost:80',
+		publicUrl:'http://www.sport.uare.vip',
+		// publicUrl:'http://localhost:80',
 		setTitle: function(title) {
 			document.title = title;
 		},
 		tableHeader:function(id){
 			var tableCont = document.querySelector(id)
 			  function scrollHandle (e){
-			    console.log(this)
 			    var scrollTop = this.scrollTop;
 			    this.querySelector('thead').style.transform = 'translateY(' + scrollTop +'px)';
 			  }

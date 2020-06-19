@@ -14,9 +14,6 @@
 			}
 		},
 		watch: {
-			phyConstituentsList: function() {
-				vm.setBiao();
-			},
 			showPingFen:function(){
 				window.setTimeout(function(){
 					vm.setBiao();

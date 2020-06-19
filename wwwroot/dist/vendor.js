@@ -150,12 +150,12 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 204);
+/******/ 	return __webpack_require__(__webpack_require__.s = 220);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 149:
+/***/ 160:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -329,7 +329,7 @@
 
 /***/ }),
 
-/***/ 150:
+/***/ 161:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1123,7 +1123,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 151:
+/***/ 162:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1133,15 +1133,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 (function () {
 	var myPublic = {
 		// publicUrl:'http://www.cissatmes.com',
-		// publicUrl:'http://www.sport.uare.vip',
-		publicUrl: 'http://localhost:80',
+		publicUrl: 'http://www.sport.uare.vip',
+		// publicUrl:'http://localhost:80',
 		setTitle: function setTitle(title) {
 			document.title = title;
 		},
 		tableHeader: function tableHeader(id) {
 			var tableCont = document.querySelector(id);
 			function scrollHandle(e) {
-				console.log(this);
 				var scrollTop = this.scrollTop;
 				this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
 			}
@@ -1264,44 +1263,44 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 154:
+/***/ 165:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 155:
+/***/ 166:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 156:
+/***/ 167:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 204:
+/***/ 220:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(150);
+__webpack_require__(161);
 
-__webpack_require__(151);
+__webpack_require__(162);
 
-__webpack_require__(149);
+__webpack_require__(160);
 
-__webpack_require__(156);
+__webpack_require__(167);
 
-__webpack_require__(155);
+__webpack_require__(166);
 
-__webpack_require__(154);
+__webpack_require__(165);
 
 /***/ })
 

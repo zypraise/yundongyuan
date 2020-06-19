@@ -1,0 +1,38 @@
+<template>
+
+	<div class="body-item">
+		<div class="title">
+			<div>躯干稳定性和上下肢左右侧力量均衡性参考标准</div>
+		</div>
+		<section>
+			<div class="" style="height: 708px !important;line-height: 30px;">
+				<p><b> 一、测试指标：</b></p>
+				<p>攀爬时间（秒）、攀爬距离（m）、平均心率、最大心率（实测值）、80%以上最大心率保持时间和总距离。</p>
+				<p><b>二、得分计算方法：</b></p>
+				<p>得分（百分制）=80%以上最大心率保持时间÷（攀爬时间-7）</p>
+				<p>说明：“最大心率”是指使用“220-年龄”推测出的“最大心率”；所有时间单位为“秒”。得分超过100分的按100分计算。</p>
+
+			</div>
+		</section>
+	</div>
+</template>
+
+<script>
+	var vm;
+	export default {
+		data: function() {
+			return {}
+		},
+		//计算属性
+		computed: {},
+		methods: {
+			start: function() {}
+		},
+		beforeCreate: function() {
+			vm = this;
+		},
+		mounted: function() {
+			vm.start();
+		}
+	}
+</script>

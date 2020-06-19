@@ -1,7 +1,7 @@
 <template>
 	<div class="body-item">
 			<div class="title">
-				<div>训练强度</div>
+				<div>训练负荷</div>
 			</div>
 			<section>
 				<div class="table-box">

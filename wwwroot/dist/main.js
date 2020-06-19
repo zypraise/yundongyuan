@@ -4,9 +4,9 @@ webpackJsonp([0],[
 
 var global = __webpack_require__(3);
 var core = __webpack_require__(25);
-var hide = __webpack_require__(14);
-var redefine = __webpack_require__(15);
-var ctx = __webpack_require__(21);
+var hide = __webpack_require__(15);
+var redefine = __webpack_require__(16);
+var ctx = __webpack_require__(22);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -193,8 +193,8 @@ module.exports = function (it) {
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store = __webpack_require__(68)('wks');
-var uid = __webpack_require__(44);
+var store = __webpack_require__(69)('wks');
+var uid = __webpack_require__(47);
 var Symbol = __webpack_require__(3).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
@@ -263,27 +263,17 @@ module.exports = function (it) {
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports) {
-
-module.exports = function (it) {
-  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
-  return it;
-};
-
-
-/***/ }),
-/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_header_vue__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_header_vue__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_header_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f6dbf3c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_header_vue__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f6dbf3c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_header_vue__ = __webpack_require__(515);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(523)
+  __webpack_require__(543)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -327,210 +317,28 @@ if (false) {(function () {
 
 
 /***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+
+/***/ }),
 /* 13 */
-/***/ (function(module, exports) {
-
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function (it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__(8);
-var createDesc = __webpack_require__(40);
-module.exports = __webpack_require__(7) ? function (object, key, value) {
-  return dP.f(object, key, createDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(3);
-var hide = __webpack_require__(14);
-var has = __webpack_require__(13);
-var SRC = __webpack_require__(44)('src');
-var TO_STRING = 'toString';
-var $toString = Function[TO_STRING];
-var TPL = ('' + $toString).split(TO_STRING);
-
-__webpack_require__(25).inspectSource = function (it) {
-  return $toString.call(it);
-};
-
-(module.exports = function (O, key, val, safe) {
-  var isFunction = typeof val == 'function';
-  if (isFunction) has(val, 'name') || hide(val, 'name', key);
-  if (O[key] === val) return;
-  if (isFunction) has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
-  if (O === global) {
-    O[key] = val;
-  } else if (!safe) {
-    delete O[key];
-    hide(O, key, val);
-  } else if (O[key]) {
-    O[key] = val;
-  } else {
-    hide(O, key, val);
-  }
-// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-})(Function.prototype, TO_STRING, function toString() {
-  return typeof this == 'function' && this[SRC] || $toString.call(this);
-});
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $export = __webpack_require__(0);
-var fails = __webpack_require__(4);
-var defined = __webpack_require__(26);
-var quot = /"/g;
-// B.2.3.2.1 CreateHTML(string, tag, attribute, value)
-var createHTML = function (string, tag, attribute, value) {
-  var S = String(defined(string));
-  var p1 = '<' + tag;
-  if (attribute !== '') p1 += ' ' + attribute + '="' + String(value).replace(quot, '&quot;') + '"';
-  return p1 + '>' + S + '</' + tag + '>';
-};
-module.exports = function (NAME, exec) {
-  var O = {};
-  O[NAME] = exec(createHTML);
-  $export($export.P + $export.F * fails(function () {
-    var test = ''[NAME]('"');
-    return test !== test.toLowerCase() || test.split('"').length > 3;
-  }), 'String', O);
-};
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var pIE = __webpack_require__(55);
-var createDesc = __webpack_require__(40);
-var toIObject = __webpack_require__(19);
-var toPrimitive = __webpack_require__(29);
-var has = __webpack_require__(13);
-var IE8_DOM_DEFINE = __webpack_require__(111);
-var gOPD = Object.getOwnPropertyDescriptor;
-
-exports.f = __webpack_require__(7) ? gOPD : function getOwnPropertyDescriptor(O, P) {
-  O = toIObject(O);
-  P = toPrimitive(P, true);
-  if (IE8_DOM_DEFINE) try {
-    return gOPD(O, P);
-  } catch (e) { /* empty */ }
-  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
-};
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__(13);
-var toObject = __webpack_require__(10);
-var IE_PROTO = __webpack_require__(88)('IE_PROTO');
-var ObjectProto = Object.prototype;
-
-module.exports = Object.getPrototypeOf || function (O) {
-  O = toObject(O);
-  if (has(O, IE_PROTO)) return O[IE_PROTO];
-  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectProto : null;
-};
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(54);
-var defined = __webpack_require__(26);
-module.exports = function (it) {
-  return IObject(defined(it));
-};
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// optional / simple context binding
-var aFunction = __webpack_require__(11);
-module.exports = function (fn, that, length) {
-  aFunction(fn);
-  if (that === undefined) return fn;
-  switch (length) {
-    case 1: return function (a) {
-      return fn.call(that, a);
-    };
-    case 2: return function (a, b) {
-      return fn.call(that, a, b);
-    };
-    case 3: return function (a, b, c) {
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function (/* ...args */) {
-    return fn.apply(that, arguments);
-  };
-};
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var fails = __webpack_require__(4);
-
-module.exports = function (method, arg) {
-  return !!method && fails(function () {
-    // eslint-disable-next-line no-useless-call
-    arg ? method.call(null, function () { /* empty */ }, 1) : method.call(null);
-  });
-};
-
-
-/***/ }),
-/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_menu_vue__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_menu_vue__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_menu_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_menu_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_34a572ce_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_menu_vue__ = __webpack_require__(486);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_34a572ce_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_menu_vue__ = __webpack_require__(500);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(520)
+  __webpack_require__(539)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -574,6 +382,198 @@ if (false) {(function () {
 
 
 /***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__(8);
+var createDesc = __webpack_require__(43);
+module.exports = __webpack_require__(7) ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(3);
+var hide = __webpack_require__(15);
+var has = __webpack_require__(14);
+var SRC = __webpack_require__(47)('src');
+var TO_STRING = 'toString';
+var $toString = Function[TO_STRING];
+var TPL = ('' + $toString).split(TO_STRING);
+
+__webpack_require__(25).inspectSource = function (it) {
+  return $toString.call(it);
+};
+
+(module.exports = function (O, key, val, safe) {
+  var isFunction = typeof val == 'function';
+  if (isFunction) has(val, 'name') || hide(val, 'name', key);
+  if (O[key] === val) return;
+  if (isFunction) has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
+  if (O === global) {
+    O[key] = val;
+  } else if (!safe) {
+    delete O[key];
+    hide(O, key, val);
+  } else if (O[key]) {
+    O[key] = val;
+  } else {
+    hide(O, key, val);
+  }
+// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+})(Function.prototype, TO_STRING, function toString() {
+  return typeof this == 'function' && this[SRC] || $toString.call(this);
+});
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(0);
+var fails = __webpack_require__(4);
+var defined = __webpack_require__(26);
+var quot = /"/g;
+// B.2.3.2.1 CreateHTML(string, tag, attribute, value)
+var createHTML = function (string, tag, attribute, value) {
+  var S = String(defined(string));
+  var p1 = '<' + tag;
+  if (attribute !== '') p1 += ' ' + attribute + '="' + String(value).replace(quot, '&quot;') + '"';
+  return p1 + '>' + S + '</' + tag + '>';
+};
+module.exports = function (NAME, exec) {
+  var O = {};
+  O[NAME] = exec(createHTML);
+  $export($export.P + $export.F * fails(function () {
+    var test = ''[NAME]('"');
+    return test !== test.toLowerCase() || test.split('"').length > 3;
+  }), 'String', O);
+};
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var pIE = __webpack_require__(56);
+var createDesc = __webpack_require__(43);
+var toIObject = __webpack_require__(20);
+var toPrimitive = __webpack_require__(29);
+var has = __webpack_require__(14);
+var IE8_DOM_DEFINE = __webpack_require__(111);
+var gOPD = Object.getOwnPropertyDescriptor;
+
+exports.f = __webpack_require__(7) ? gOPD : function getOwnPropertyDescriptor(O, P) {
+  O = toIObject(O);
+  P = toPrimitive(P, true);
+  if (IE8_DOM_DEFINE) try {
+    return gOPD(O, P);
+  } catch (e) { /* empty */ }
+  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
+};
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+var has = __webpack_require__(14);
+var toObject = __webpack_require__(10);
+var IE_PROTO = __webpack_require__(89)('IE_PROTO');
+var ObjectProto = Object.prototype;
+
+module.exports = Object.getPrototypeOf || function (O) {
+  O = toObject(O);
+  if (has(O, IE_PROTO)) return O[IE_PROTO];
+  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectProto : null;
+};
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__(55);
+var defined = __webpack_require__(26);
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__(12);
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var fails = __webpack_require__(4);
+
+module.exports = function (method, arg) {
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call
+    arg ? method.call(null, function () { /* empty */ }, 1) : method.call(null);
+  });
+};
+
+
+/***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -584,11 +584,11 @@ if (false) {(function () {
 // 4 -> Array#every
 // 5 -> Array#find
 // 6 -> Array#findIndex
-var ctx = __webpack_require__(21);
-var IObject = __webpack_require__(54);
+var ctx = __webpack_require__(22);
+var IObject = __webpack_require__(55);
 var toObject = __webpack_require__(10);
 var toLength = __webpack_require__(9);
-var asc = __webpack_require__(73);
+var asc = __webpack_require__(74);
 module.exports = function (TYPE, $create) {
   var IS_MAP = TYPE == 1;
   var IS_FILTER = TYPE == 2;
@@ -694,7 +694,7 @@ module.exports = function (it, S) {
 
 var Map = __webpack_require__(132);
 var $export = __webpack_require__(0);
-var shared = __webpack_require__(68)('metadata');
+var shared = __webpack_require__(69)('metadata');
 var store = shared.store || (shared.store = new (__webpack_require__(135))());
 
 var getOrCreateMetadataMap = function (target, targetKey, create) {
@@ -752,44 +752,44 @@ module.exports = {
 "use strict";
 
 if (__webpack_require__(7)) {
-  var LIBRARY = __webpack_require__(36);
+  var LIBRARY = __webpack_require__(39);
   var global = __webpack_require__(3);
   var fails = __webpack_require__(4);
   var $export = __webpack_require__(0);
-  var $typed = __webpack_require__(70);
-  var $buffer = __webpack_require__(94);
-  var ctx = __webpack_require__(21);
-  var anInstance = __webpack_require__(34);
-  var propertyDesc = __webpack_require__(40);
-  var hide = __webpack_require__(14);
-  var redefineAll = __webpack_require__(41);
+  var $typed = __webpack_require__(71);
+  var $buffer = __webpack_require__(95);
+  var ctx = __webpack_require__(22);
+  var anInstance = __webpack_require__(37);
+  var propertyDesc = __webpack_require__(43);
+  var hide = __webpack_require__(15);
+  var redefineAll = __webpack_require__(44);
   var toInteger = __webpack_require__(28);
   var toLength = __webpack_require__(9);
   var toIndex = __webpack_require__(130);
-  var toAbsoluteIndex = __webpack_require__(43);
+  var toAbsoluteIndex = __webpack_require__(46);
   var toPrimitive = __webpack_require__(29);
-  var has = __webpack_require__(13);
-  var classof = __webpack_require__(53);
+  var has = __webpack_require__(14);
+  var classof = __webpack_require__(54);
   var isObject = __webpack_require__(5);
   var toObject = __webpack_require__(10);
-  var isArrayIter = __webpack_require__(80);
-  var create = __webpack_require__(37);
-  var getPrototypeOf = __webpack_require__(18);
-  var gOPN = __webpack_require__(38).f;
-  var getIterFn = __webpack_require__(96);
-  var uid = __webpack_require__(44);
+  var isArrayIter = __webpack_require__(81);
+  var create = __webpack_require__(40);
+  var getPrototypeOf = __webpack_require__(19);
+  var gOPN = __webpack_require__(41).f;
+  var getIterFn = __webpack_require__(97);
+  var uid = __webpack_require__(47);
   var wks = __webpack_require__(6);
   var createArrayMethod = __webpack_require__(24);
-  var createArrayIncludes = __webpack_require__(57);
-  var speciesConstructor = __webpack_require__(69);
-  var ArrayIterators = __webpack_require__(97);
-  var Iterators = __webpack_require__(48);
-  var $iterDetect = __webpack_require__(63);
-  var setSpecies = __webpack_require__(42);
-  var arrayFill = __webpack_require__(72);
+  var createArrayIncludes = __webpack_require__(58);
+  var speciesConstructor = __webpack_require__(70);
+  var ArrayIterators = __webpack_require__(98);
+  var Iterators = __webpack_require__(49);
+  var $iterDetect = __webpack_require__(64);
+  var setSpecies = __webpack_require__(45);
+  var arrayFill = __webpack_require__(73);
   var arrayCopyWithin = __webpack_require__(103);
   var $DP = __webpack_require__(8);
-  var $GOPD = __webpack_require__(17);
+  var $GOPD = __webpack_require__(18);
   var dP = $DP.f;
   var gOPD = $GOPD.f;
   var RangeError = global.RangeError;
@@ -1239,7 +1239,7 @@ if (__webpack_require__(7)) {
 // 22.1.3.31 Array.prototype[@@unscopables]
 var UNSCOPABLES = __webpack_require__(6)('unscopables');
 var ArrayProto = Array.prototype;
-if (ArrayProto[UNSCOPABLES] == undefined) __webpack_require__(14)(ArrayProto, UNSCOPABLES, {});
+if (ArrayProto[UNSCOPABLES] == undefined) __webpack_require__(15)(ArrayProto, UNSCOPABLES, {});
 module.exports = function (key) {
   ArrayProto[UNSCOPABLES][key] = true;
 };
@@ -1249,9 +1249,9 @@ module.exports = function (key) {
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(44)('meta');
+var META = __webpack_require__(47)('meta');
 var isObject = __webpack_require__(5);
-var has = __webpack_require__(13);
+var has = __webpack_require__(14);
 var setDesc = __webpack_require__(8).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
@@ -1306,197 +1306,6 @@ var meta = module.exports = {
 
 /***/ }),
 /* 34 */
-/***/ (function(module, exports) {
-
-module.exports = function (it, Constructor, name, forbiddenField) {
-  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
-    throw TypeError(name + ': incorrect invocation!');
-  } return it;
-};
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var ctx = __webpack_require__(21);
-var call = __webpack_require__(114);
-var isArrayIter = __webpack_require__(80);
-var anObject = __webpack_require__(2);
-var toLength = __webpack_require__(9);
-var getIterFn = __webpack_require__(96);
-var BREAK = {};
-var RETURN = {};
-var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
-  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
-  var f = ctx(fn, that, entries ? 2 : 1);
-  var index = 0;
-  var length, step, iterator, result;
-  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
-  // fast case for arrays with default iterator
-  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
-    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
-    if (result === BREAK || result === RETURN) return result;
-  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
-    result = call(iterator, f, step.value, entries);
-    if (result === BREAK || result === RETURN) return result;
-  }
-};
-exports.BREAK = BREAK;
-exports.RETURN = RETURN;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-module.exports = false;
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(2);
-var dPs = __webpack_require__(120);
-var enumBugKeys = __webpack_require__(76);
-var IE_PROTO = __webpack_require__(88)('IE_PROTO');
-var Empty = function () { /* empty */ };
-var PROTOTYPE = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(75)('iframe');
-  var i = enumBugKeys.length;
-  var lt = '<';
-  var gt = '>';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(78).appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty();
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys = __webpack_require__(122);
-var hiddenKeys = __webpack_require__(76).concat('length', 'prototype');
-
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
-  return $keys(O, hiddenKeys);
-};
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(122);
-var enumBugKeys = __webpack_require__(76);
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
-};
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var redefine = __webpack_require__(15);
-module.exports = function (target, src, safe) {
-  for (var key in src) redefine(target, key, src[key], safe);
-  return target;
-};
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var global = __webpack_require__(3);
-var dP = __webpack_require__(8);
-var DESCRIPTORS = __webpack_require__(7);
-var SPECIES = __webpack_require__(6)('species');
-
-module.exports = function (KEY) {
-  var C = global[KEY];
-  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
-    configurable: true,
-    get: function () { return this; }
-  });
-};
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(28);
-var max = Math.max;
-var min = Math.min;
-module.exports = function (index, length) {
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports) {
-
-var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-
-/***/ }),
-/* 45 */
 /***/ (function(module, exports) {
 
 /*
@@ -1578,13 +1387,13 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 46 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/person.png";
+module.exports = __webpack_require__.p + "images/wen.png";
 
 /***/ }),
-/* 47 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1603,7 +1412,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(526)
+var listToStyles = __webpack_require__(546)
 
 /*
 type StyleObject = {
@@ -1805,18 +1614,215 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+module.exports = function (it, Constructor, name, forbiddenField) {
+  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
+};
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ctx = __webpack_require__(22);
+var call = __webpack_require__(114);
+var isArrayIter = __webpack_require__(81);
+var anObject = __webpack_require__(2);
+var toLength = __webpack_require__(9);
+var getIterFn = __webpack_require__(97);
+var BREAK = {};
+var RETURN = {};
+var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
+  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
+  var f = ctx(fn, that, entries ? 2 : 1);
+  var index = 0;
+  var length, step, iterator, result;
+  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
+  // fast case for arrays with default iterator
+  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
+    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
+    if (result === BREAK || result === RETURN) return result;
+  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
+    result = call(iterator, f, step.value, entries);
+    if (result === BREAK || result === RETURN) return result;
+  }
+};
+exports.BREAK = BREAK;
+exports.RETURN = RETURN;
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+module.exports = false;
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject = __webpack_require__(2);
+var dPs = __webpack_require__(120);
+var enumBugKeys = __webpack_require__(77);
+var IE_PROTO = __webpack_require__(89)('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = __webpack_require__(76)('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  __webpack_require__(79).appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty();
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys = __webpack_require__(122);
+var hiddenKeys = __webpack_require__(77).concat('length', 'prototype');
+
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return $keys(O, hiddenKeys);
+};
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__(122);
+var enumBugKeys = __webpack_require__(77);
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var redefine = __webpack_require__(16);
+module.exports = function (target, src, safe) {
+  for (var key in src) redefine(target, key, src[key], safe);
+  return target;
+};
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var global = __webpack_require__(3);
+var dP = __webpack_require__(8);
+var DESCRIPTORS = __webpack_require__(7);
+var SPECIES = __webpack_require__(6)('species');
+
+module.exports = function (KEY) {
+  var C = global[KEY];
+  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
+    configurable: true,
+    get: function () { return this; }
+  });
+};
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__(28);
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
 /* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/close.png";
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(8).f;
-var has = __webpack_require__(13);
+var has = __webpack_require__(14);
 var TAG = __webpack_require__(6)('toStringTag');
 
 module.exports = function (it, tag, stat) {
@@ -1825,13 +1831,13 @@ module.exports = function (it, tag, stat) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
 var defined = __webpack_require__(26);
 var fails = __webpack_require__(4);
-var spaces = __webpack_require__(92);
+var spaces = __webpack_require__(93);
 var space = '[' + spaces + ']';
 var non = '\u200b\u0085';
 var ltrim = RegExp('^' + space + space + '*');
@@ -1861,7 +1867,7 @@ module.exports = exporter;
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(5);
@@ -1872,17 +1878,17 @@ module.exports = function (it, TYPE) {
 
 
 /***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/cuo.png";
-
-/***/ }),
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "images/person.png";
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(20);
+var cof = __webpack_require__(21);
 var TAG = __webpack_require__(6)('toStringTag');
 // ES3 wrong here
 var ARG = cof(function () { return arguments; }()) == 'Arguments';
@@ -1907,11 +1913,11 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(20);
+var cof = __webpack_require__(21);
 // eslint-disable-next-line no-prototype-builtins
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
@@ -1919,27 +1925,27 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/right.png";
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(19);
+var toIObject = __webpack_require__(20);
 var toLength = __webpack_require__(9);
-var toAbsoluteIndex = __webpack_require__(43);
+var toAbsoluteIndex = __webpack_require__(46);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIObject($this);
@@ -1961,23 +1967,23 @@ module.exports = function (IS_INCLUDES) {
 
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var global = __webpack_require__(3);
 var $export = __webpack_require__(0);
-var redefine = __webpack_require__(15);
-var redefineAll = __webpack_require__(41);
+var redefine = __webpack_require__(16);
+var redefineAll = __webpack_require__(44);
 var meta = __webpack_require__(33);
-var forOf = __webpack_require__(35);
-var anInstance = __webpack_require__(34);
+var forOf = __webpack_require__(38);
+var anInstance = __webpack_require__(37);
 var isObject = __webpack_require__(5);
 var fails = __webpack_require__(4);
-var $iterDetect = __webpack_require__(63);
-var setToStringTag = __webpack_require__(49);
-var inheritIfRequired = __webpack_require__(79);
+var $iterDetect = __webpack_require__(64);
+var setToStringTag = __webpack_require__(50);
+var inheritIfRequired = __webpack_require__(80);
 
 module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
   var Base = global[NAME];
@@ -2053,13 +2059,13 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var hide = __webpack_require__(14);
-var redefine = __webpack_require__(15);
+var hide = __webpack_require__(15);
+var redefine = __webpack_require__(16);
 var fails = __webpack_require__(4);
 var defined = __webpack_require__(26);
 var wks = __webpack_require__(6);
@@ -2088,7 +2094,7 @@ module.exports = function (KEY, length, exec) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2108,23 +2114,23 @@ module.exports = function () {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(20);
+var cof = __webpack_require__(21);
 module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(5);
-var cof = __webpack_require__(20);
+var cof = __webpack_require__(21);
 var MATCH = __webpack_require__(6)('match');
 module.exports = function (it) {
   var isRegExp;
@@ -2133,7 +2139,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ITERATOR = __webpack_require__(6)('iterator');
@@ -2161,13 +2167,13 @@ module.exports = function (exec, skipClosing) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // Forced replacement prototype accessors methods
-module.exports = __webpack_require__(36) || !__webpack_require__(4)(function () {
+module.exports = __webpack_require__(39) || !__webpack_require__(4)(function () {
   var K = Math.random();
   // In FF throws only define methods
   // eslint-disable-next-line no-undef, no-useless-call
@@ -2177,23 +2183,23 @@ module.exports = __webpack_require__(36) || !__webpack_require__(4)(function () 
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://tc39.github.io/proposal-setmap-offrom/
 var $export = __webpack_require__(0);
-var aFunction = __webpack_require__(11);
-var ctx = __webpack_require__(21);
-var forOf = __webpack_require__(35);
+var aFunction = __webpack_require__(12);
+var ctx = __webpack_require__(22);
+var forOf = __webpack_require__(38);
 
 module.exports = function (COLLECTION) {
   $export($export.S, COLLECTION, { from: function from(source /* , mapFn, thisArg */) {
@@ -2219,7 +2225,7 @@ module.exports = function (COLLECTION) {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2238,7 +2244,7 @@ module.exports = function (COLLECTION) {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(3);
@@ -2250,12 +2256,12 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = __webpack_require__(2);
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var SPECIES = __webpack_require__(6)('species');
 module.exports = function (O, D) {
   var C = anObject(O).constructor;
@@ -2265,12 +2271,12 @@ module.exports = function (O, D) {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(3);
-var hide = __webpack_require__(14);
-var uid = __webpack_require__(44);
+var hide = __webpack_require__(15);
+var uid = __webpack_require__(47);
 var TYPED = uid('typed_array');
 var VIEW = uid('view');
 var ABV = !!(global.ArrayBuffer && global.DataView);
@@ -2299,20 +2305,65 @@ module.exports = {
 
 
 /***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/close.png";
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b07ab1e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_pingFen_vue__ = __webpack_require__(501);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b07ab1e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_pingFen_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\components\\pingFen.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] pingFen.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3b07ab1e", Component.options)
+  } else {
+    hotAPI.reload("data-v-3b07ab1e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 
 var toObject = __webpack_require__(10);
-var toAbsoluteIndex = __webpack_require__(43);
+var toAbsoluteIndex = __webpack_require__(46);
 var toLength = __webpack_require__(9);
 module.exports = function fill(value /* , start = 0, end = @length */) {
   var O = toObject(this);
@@ -2327,11 +2378,11 @@ module.exports = function fill(value /* , start = 0, end = @length */) {
 
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
-var speciesConstructor = __webpack_require__(207);
+var speciesConstructor = __webpack_require__(223);
 
 module.exports = function (original, length) {
   return new (speciesConstructor(original))(length);
@@ -2339,13 +2390,13 @@ module.exports = function (original, length) {
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $defineProperty = __webpack_require__(8);
-var createDesc = __webpack_require__(40);
+var createDesc = __webpack_require__(43);
 
 module.exports = function (object, index, value) {
   if (index in object) $defineProperty.f(object, index, createDesc(0, value));
@@ -2354,7 +2405,7 @@ module.exports = function (object, index, value) {
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(5);
@@ -2367,7 +2418,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 // IE 8- don't enum bug keys
@@ -2377,7 +2428,7 @@ module.exports = (
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MATCH = __webpack_require__(6)('match');
@@ -2395,7 +2446,7 @@ module.exports = function (KEY) {
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var document = __webpack_require__(3).document;
@@ -2403,11 +2454,11 @@ module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(5);
-var setPrototypeOf = __webpack_require__(87).set;
+var setPrototypeOf = __webpack_require__(88).set;
 module.exports = function (that, target, C) {
   var S = target.constructor;
   var P;
@@ -2418,11 +2469,11 @@ module.exports = function (that, target, C) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators = __webpack_require__(48);
+var Iterators = __webpack_require__(49);
 var ITERATOR = __webpack_require__(6)('iterator');
 var ArrayProto = Array.prototype;
 
@@ -2432,18 +2483,18 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var create = __webpack_require__(37);
-var descriptor = __webpack_require__(40);
-var setToStringTag = __webpack_require__(49);
+var create = __webpack_require__(40);
+var descriptor = __webpack_require__(43);
+var setToStringTag = __webpack_require__(50);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(14)(IteratorPrototype, __webpack_require__(6)('iterator'), function () { return this; });
+__webpack_require__(15)(IteratorPrototype, __webpack_require__(6)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -2452,20 +2503,20 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(36);
+var LIBRARY = __webpack_require__(39);
 var $export = __webpack_require__(0);
-var redefine = __webpack_require__(15);
-var hide = __webpack_require__(14);
-var has = __webpack_require__(13);
-var Iterators = __webpack_require__(48);
-var $iterCreate = __webpack_require__(81);
-var setToStringTag = __webpack_require__(49);
-var getPrototypeOf = __webpack_require__(18);
+var redefine = __webpack_require__(16);
+var hide = __webpack_require__(15);
+var has = __webpack_require__(14);
+var Iterators = __webpack_require__(49);
+var $iterCreate = __webpack_require__(82);
+var setToStringTag = __webpack_require__(50);
+var getPrototypeOf = __webpack_require__(19);
 var ITERATOR = __webpack_require__(6)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
@@ -2529,7 +2580,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports) {
 
 // 20.2.2.14 Math.expm1(x)
@@ -2545,7 +2596,7 @@ module.exports = (!$expm1
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports) {
 
 // 20.2.2.28 Math.sign(x)
@@ -2556,15 +2607,15 @@ module.exports = Math.sign || function sign(x) {
 
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(3);
-var macrotask = __webpack_require__(93).set;
+var macrotask = __webpack_require__(94).set;
 var Observer = global.MutationObserver || global.WebKitMutationObserver;
 var process = global.process;
 var Promise = global.Promise;
-var isNode = __webpack_require__(20)(process) == 'process';
+var isNode = __webpack_require__(21)(process) == 'process';
 
 module.exports = function () {
   var head, last, notify;
@@ -2630,13 +2681,13 @@ module.exports = function () {
 
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 25.4.1.5 NewPromiseCapability(C)
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 
 function PromiseCapability(C) {
   var resolve, reject;
@@ -2655,7 +2706,7 @@ module.exports.f = function (C) {
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Works with __proto__ only. Old v8 can't work with null proto objects.
@@ -2670,7 +2721,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function (test, buggy, set) {
       try {
-        set = __webpack_require__(21)(Function.call, __webpack_require__(17).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(22)(Function.call, __webpack_require__(18).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) { buggy = true; }
@@ -2686,18 +2737,18 @@ module.exports = {
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var shared = __webpack_require__(68)('keys');
-var uid = __webpack_require__(44);
+var shared = __webpack_require__(69)('keys');
+var uid = __webpack_require__(47);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(28);
@@ -2720,11 +2771,11 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // helper for String#{startsWith, endsWith, includes}
-var isRegExp = __webpack_require__(62);
+var isRegExp = __webpack_require__(63);
 var defined = __webpack_require__(26);
 
 module.exports = function (that, searchString, NAME) {
@@ -2734,7 +2785,7 @@ module.exports = function (that, searchString, NAME) {
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2753,7 +2804,7 @@ module.exports = function repeat(count) {
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
@@ -2761,13 +2812,13 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(21);
+var ctx = __webpack_require__(22);
 var invoke = __webpack_require__(112);
-var html = __webpack_require__(78);
-var cel = __webpack_require__(75);
+var html = __webpack_require__(79);
+var cel = __webpack_require__(76);
 var global = __webpack_require__(3);
 var process = global.process;
 var setTask = global.setImmediate;
@@ -2807,7 +2858,7 @@ if (!setTask || !clearTask) {
     delete queue[id];
   };
   // Node.js 0.8-
-  if (__webpack_require__(20)(process) == 'process') {
+  if (__webpack_require__(21)(process) == 'process') {
     defer = function (id) {
       process.nextTick(ctx(run, id, 1));
     };
@@ -2851,26 +2902,26 @@ module.exports = {
 
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var global = __webpack_require__(3);
 var DESCRIPTORS = __webpack_require__(7);
-var LIBRARY = __webpack_require__(36);
-var $typed = __webpack_require__(70);
-var hide = __webpack_require__(14);
-var redefineAll = __webpack_require__(41);
+var LIBRARY = __webpack_require__(39);
+var $typed = __webpack_require__(71);
+var hide = __webpack_require__(15);
+var redefineAll = __webpack_require__(44);
 var fails = __webpack_require__(4);
-var anInstance = __webpack_require__(34);
+var anInstance = __webpack_require__(37);
 var toInteger = __webpack_require__(28);
 var toLength = __webpack_require__(9);
 var toIndex = __webpack_require__(130);
-var gOPN = __webpack_require__(38).f;
+var gOPN = __webpack_require__(41).f;
 var dP = __webpack_require__(8).f;
-var arrayFill = __webpack_require__(72);
-var setToStringTag = __webpack_require__(49);
+var arrayFill = __webpack_require__(73);
+var setToStringTag = __webpack_require__(50);
 var ARRAY_BUFFER = 'ArrayBuffer';
 var DATA_VIEW = 'DataView';
 var PROTOTYPE = 'prototype';
@@ -3134,12 +3185,12 @@ exports[DATA_VIEW] = $DataView;
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(3);
 var core = __webpack_require__(25);
-var LIBRARY = __webpack_require__(36);
+var LIBRARY = __webpack_require__(39);
 var wksExt = __webpack_require__(131);
 var defineProperty = __webpack_require__(8).f;
 module.exports = function (name) {
@@ -3149,12 +3200,12 @@ module.exports = function (name) {
 
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(53);
+var classof = __webpack_require__(54);
 var ITERATOR = __webpack_require__(6)('iterator');
-var Iterators = __webpack_require__(48);
+var Iterators = __webpack_require__(49);
 module.exports = __webpack_require__(25).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
@@ -3163,21 +3214,21 @@ module.exports = __webpack_require__(25).getIteratorMethod = function (it) {
 
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var addToUnscopables = __webpack_require__(32);
 var step = __webpack_require__(115);
-var Iterators = __webpack_require__(48);
-var toIObject = __webpack_require__(19);
+var Iterators = __webpack_require__(49);
+var toIObject = __webpack_require__(20);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
 // 22.1.3.29 Array.prototype.values()
 // 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(82)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(83)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
   this._i = 0;                   // next index
   this._k = kind;                // kind
@@ -3204,16 +3255,10 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/logo.png";
-
-/***/ }),
 /* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/wen.png";
+module.exports = __webpack_require__.p + "images/logo.png";
 
 /***/ }),
 /* 100 */
@@ -10794,13 +10839,13 @@ setTimeout(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Vue$3);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(137), __webpack_require__(100)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(140), __webpack_require__(100)))
 
 /***/ }),
 /* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cof = __webpack_require__(20);
+var cof = __webpack_require__(21);
 module.exports = function (it, msg) {
   if (typeof it != 'number' && cof(it) != 'Number') throw TypeError(msg);
   return +it;
@@ -10815,7 +10860,7 @@ module.exports = function (it, msg) {
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 
 var toObject = __webpack_require__(10);
-var toAbsoluteIndex = __webpack_require__(43);
+var toAbsoluteIndex = __webpack_require__(46);
 var toLength = __webpack_require__(9);
 
 module.exports = [].copyWithin || function copyWithin(target /* = 0 */, start /* = 0, end = @length */) {
@@ -10844,7 +10889,7 @@ module.exports = [].copyWithin || function copyWithin(target /* = 0 */, start /*
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var forOf = __webpack_require__(35);
+var forOf = __webpack_require__(38);
 
 module.exports = function (iter, ITERATOR) {
   var result = [];
@@ -10857,9 +10902,9 @@ module.exports = function (iter, ITERATOR) {
 /* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var toObject = __webpack_require__(10);
-var IObject = __webpack_require__(54);
+var IObject = __webpack_require__(55);
 var toLength = __webpack_require__(9);
 
 module.exports = function (that, callbackfn, aLen, memo, isRight) {
@@ -10893,7 +10938,7 @@ module.exports = function (that, callbackfn, aLen, memo, isRight) {
 
 "use strict";
 
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var isObject = __webpack_require__(5);
 var invoke = __webpack_require__(112);
 var arraySlice = [].slice;
@@ -10926,17 +10971,17 @@ module.exports = Function.bind || function bind(that /* , ...args */) {
 "use strict";
 
 var dP = __webpack_require__(8).f;
-var create = __webpack_require__(37);
-var redefineAll = __webpack_require__(41);
-var ctx = __webpack_require__(21);
-var anInstance = __webpack_require__(34);
-var forOf = __webpack_require__(35);
-var $iterDefine = __webpack_require__(82);
+var create = __webpack_require__(40);
+var redefineAll = __webpack_require__(44);
+var ctx = __webpack_require__(22);
+var anInstance = __webpack_require__(37);
+var forOf = __webpack_require__(38);
+var $iterDefine = __webpack_require__(83);
 var step = __webpack_require__(115);
-var setSpecies = __webpack_require__(42);
+var setSpecies = __webpack_require__(45);
 var DESCRIPTORS = __webpack_require__(7);
 var fastKey = __webpack_require__(33).fastKey;
-var validate = __webpack_require__(51);
+var validate = __webpack_require__(52);
 var SIZE = DESCRIPTORS ? '_s' : 'size';
 
 var getEntry = function (that, key) {
@@ -11075,7 +11120,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var classof = __webpack_require__(53);
+var classof = __webpack_require__(54);
 var from = __webpack_require__(104);
 module.exports = function (NAME) {
   return function toJSON() {
@@ -11091,15 +11136,15 @@ module.exports = function (NAME) {
 
 "use strict";
 
-var redefineAll = __webpack_require__(41);
+var redefineAll = __webpack_require__(44);
 var getWeak = __webpack_require__(33).getWeak;
 var anObject = __webpack_require__(2);
 var isObject = __webpack_require__(5);
-var anInstance = __webpack_require__(34);
-var forOf = __webpack_require__(35);
+var anInstance = __webpack_require__(37);
+var forOf = __webpack_require__(38);
 var createArrayMethod = __webpack_require__(24);
-var $has = __webpack_require__(13);
-var validate = __webpack_require__(51);
+var $has = __webpack_require__(14);
+var validate = __webpack_require__(52);
 var arrayFind = createArrayMethod(5);
 var arrayFindIndex = createArrayMethod(6);
 var id = 0;
@@ -11184,10 +11229,10 @@ module.exports = {
 "use strict";
 
 // https://tc39.github.io/proposal-flatMap/#sec-FlattenIntoArray
-var isArray = __webpack_require__(61);
+var isArray = __webpack_require__(62);
 var isObject = __webpack_require__(5);
 var toLength = __webpack_require__(9);
-var ctx = __webpack_require__(21);
+var ctx = __webpack_require__(22);
 var IS_CONCAT_SPREADABLE = __webpack_require__(6)('isConcatSpreadable');
 
 function flattenIntoArray(target, original, source, sourceLen, start, depth, mapper, thisArg) {
@@ -11228,7 +11273,7 @@ module.exports = flattenIntoArray;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(7) && !__webpack_require__(4)(function () {
-  return Object.defineProperty(__webpack_require__(75)('div'), 'a', { get: function () { return 7; } }).a != 7;
+  return Object.defineProperty(__webpack_require__(76)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
 
@@ -11298,7 +11343,7 @@ module.exports = function (done, value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.16 Math.fround(x)
-var sign = __webpack_require__(84);
+var sign = __webpack_require__(85);
 var pow = Math.pow;
 var EPSILON = pow(2, -52);
 var EPSILON32 = pow(2, -23);
@@ -11363,11 +11408,11 @@ module.exports = Math.scale || function scale(x, inLow, inHigh, outLow, outHigh)
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__(39);
-var gOPS = __webpack_require__(65);
-var pIE = __webpack_require__(55);
+var getKeys = __webpack_require__(42);
+var gOPS = __webpack_require__(66);
+var pIE = __webpack_require__(56);
 var toObject = __webpack_require__(10);
-var IObject = __webpack_require__(54);
+var IObject = __webpack_require__(55);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
@@ -11403,7 +11448,7 @@ module.exports = !$assign || __webpack_require__(4)(function () {
 
 var dP = __webpack_require__(8);
 var anObject = __webpack_require__(2);
-var getKeys = __webpack_require__(39);
+var getKeys = __webpack_require__(42);
 
 module.exports = __webpack_require__(7) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
@@ -11421,8 +11466,8 @@ module.exports = __webpack_require__(7) ? Object.defineProperties : function def
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(19);
-var gOPN = __webpack_require__(38).f;
+var toIObject = __webpack_require__(20);
+var gOPN = __webpack_require__(41).f;
 var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -11445,10 +11490,10 @@ module.exports.f = function getOwnPropertyNames(it) {
 /* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(13);
-var toIObject = __webpack_require__(19);
-var arrayIndexOf = __webpack_require__(57)(false);
-var IE_PROTO = __webpack_require__(88)('IE_PROTO');
+var has = __webpack_require__(14);
+var toIObject = __webpack_require__(20);
+var arrayIndexOf = __webpack_require__(58)(false);
+var IE_PROTO = __webpack_require__(89)('IE_PROTO');
 
 module.exports = function (object, names) {
   var O = toIObject(object);
@@ -11468,9 +11513,9 @@ module.exports = function (object, names) {
 /* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys = __webpack_require__(39);
-var toIObject = __webpack_require__(19);
-var isEnum = __webpack_require__(55).f;
+var getKeys = __webpack_require__(42);
+var toIObject = __webpack_require__(20);
+var isEnum = __webpack_require__(56).f;
 module.exports = function (isEntries) {
   return function (it) {
     var O = toIObject(it);
@@ -11491,8 +11536,8 @@ module.exports = function (isEntries) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // all object keys, includes non-enumerable and symbols
-var gOPN = __webpack_require__(38);
-var gOPS = __webpack_require__(65);
+var gOPN = __webpack_require__(41);
+var gOPS = __webpack_require__(66);
 var anObject = __webpack_require__(2);
 var Reflect = __webpack_require__(3).Reflect;
 module.exports = Reflect && Reflect.ownKeys || function ownKeys(it) {
@@ -11507,9 +11552,9 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var $parseFloat = __webpack_require__(3).parseFloat;
-var $trim = __webpack_require__(50).trim;
+var $trim = __webpack_require__(51).trim;
 
-module.exports = 1 / $parseFloat(__webpack_require__(92) + '-0') !== -Infinity ? function parseFloat(str) {
+module.exports = 1 / $parseFloat(__webpack_require__(93) + '-0') !== -Infinity ? function parseFloat(str) {
   var string = $trim(String(str), 3);
   var result = $parseFloat(string);
   return result === 0 && string.charAt(0) == '-' ? -0 : result;
@@ -11521,8 +11566,8 @@ module.exports = 1 / $parseFloat(__webpack_require__(92) + '-0') !== -Infinity ?
 /***/ (function(module, exports, __webpack_require__) {
 
 var $parseInt = __webpack_require__(3).parseInt;
-var $trim = __webpack_require__(50).trim;
-var ws = __webpack_require__(92);
+var $trim = __webpack_require__(51).trim;
+var ws = __webpack_require__(93);
 var hex = /^[-+]?0[xX]/;
 
 module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? function parseInt(str, radix) {
@@ -11550,7 +11595,7 @@ module.exports = function (exec) {
 
 var anObject = __webpack_require__(2);
 var isObject = __webpack_require__(5);
-var newPromiseCapability = __webpack_require__(86);
+var newPromiseCapability = __webpack_require__(87);
 
 module.exports = function (C, x) {
   anObject(C);
@@ -11568,7 +11613,7 @@ module.exports = function (C, x) {
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(9);
-var repeat = __webpack_require__(91);
+var repeat = __webpack_require__(92);
 var defined = __webpack_require__(26);
 
 module.exports = function (that, maxLength, fillString, left) {
@@ -11614,11 +11659,11 @@ exports.f = __webpack_require__(6);
 "use strict";
 
 var strong = __webpack_require__(107);
-var validate = __webpack_require__(51);
+var validate = __webpack_require__(52);
 var MAP = 'Map';
 
 // 23.1 Map Objects
-module.exports = __webpack_require__(58)(MAP, function (get) {
+module.exports = __webpack_require__(59)(MAP, function (get) {
   return function Map() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
   // 23.1.3.6 Map.prototype.get(key)
@@ -11640,7 +11685,7 @@ module.exports = __webpack_require__(58)(MAP, function (get) {
 // 21.2.5.3 get RegExp.prototype.flags()
 if (__webpack_require__(7) && /./g.flags != 'g') __webpack_require__(8).f(RegExp.prototype, 'flags', {
   configurable: true,
-  get: __webpack_require__(60)
+  get: __webpack_require__(61)
 });
 
 
@@ -11651,11 +11696,11 @@ if (__webpack_require__(7) && /./g.flags != 'g') __webpack_require__(8).f(RegExp
 "use strict";
 
 var strong = __webpack_require__(107);
-var validate = __webpack_require__(51);
+var validate = __webpack_require__(52);
 var SET = 'Set';
 
 // 23.2 Set Objects
-module.exports = __webpack_require__(58)(SET, function (get) {
+module.exports = __webpack_require__(59)(SET, function (get) {
   return function Set() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
   // 23.2.3.1 Set.prototype.add(value)
@@ -11672,13 +11717,13 @@ module.exports = __webpack_require__(58)(SET, function (get) {
 "use strict";
 
 var each = __webpack_require__(24)(0);
-var redefine = __webpack_require__(15);
+var redefine = __webpack_require__(16);
 var meta = __webpack_require__(33);
 var assign = __webpack_require__(119);
 var weak = __webpack_require__(109);
 var isObject = __webpack_require__(5);
 var fails = __webpack_require__(4);
-var validate = __webpack_require__(51);
+var validate = __webpack_require__(52);
 var WEAK_MAP = 'WeakMap';
 var getWeak = meta.getWeak;
 var isExtensible = Object.isExtensible;
@@ -11708,7 +11753,7 @@ var methods = {
 };
 
 // 23.3 WeakMap Objects
-var $WeakMap = module.exports = __webpack_require__(58)(WEAK_MAP, wrapper, methods, weak, true, true);
+var $WeakMap = module.exports = __webpack_require__(59)(WEAK_MAP, wrapper, methods, weak, true, true);
 
 // IE11 WeakMap frozen keys fix
 if (fails(function () { return new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7; })) {
@@ -11739,6 +11784,24 @@ if (fails(function () { return new $WeakMap().set((Object.freeze || Object)(tmp)
 
 /***/ }),
 /* 137 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 140 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11928,68 +11991,86 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 138 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/add.png";
 
 /***/ }),
-/* 139 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/menu-2.png";
-
-/***/ }),
-/* 140 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/menu-3.png";
-
-/***/ }),
-/* 141 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/menu-4.png";
-
-/***/ }),
 /* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/menu-5.png";
+module.exports = __webpack_require__.p + "images/code.png";
 
 /***/ }),
 /* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/menu-current-2.png";
+module.exports = __webpack_require__.p + "images/cuo.png";
 
 /***/ }),
 /* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/menu-current-3.png";
+module.exports = __webpack_require__.p + "images/edit.png";
 
 /***/ }),
 /* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/menu-current-4.png";
+module.exports = __webpack_require__.p + "images/menu-2.png";
 
 /***/ }),
 /* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "images/menu-current-5.png";
+module.exports = __webpack_require__.p + "images/menu-3.png";
 
 /***/ }),
 /* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/menu-4.png";
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/menu-5.png";
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/menu-current-2.png";
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/menu-current-3.png";
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/menu-current-4.png";
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/menu-current-5.png";
+
+/***/ }),
+/* 153 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b07ab1e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_pingFen_vue__ = __webpack_require__(487);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_bankuai_vue__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_bankuai_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_bankuai_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7a2bcffc_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_bankuai_vue__ = __webpack_require__(520);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -12003,15 +12084,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_pingFen_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b07ab1e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_pingFen_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_bankuai_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7a2bcffc_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_bankuai_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "yundongyuan\\ClientApp\\components\\pingFen.vue"
+Component.options.__file = "yundongyuan\\ClientApp\\components\\bankuai.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] pingFen.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] bankuai.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -12020,9 +12101,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3b07ab1e", Component.options)
+    hotAPI.createRecord("data-v-7a2bcffc", Component.options)
   } else {
-    hotAPI.reload("data-v-3b07ab1e", Component.options)
+    hotAPI.reload("data-v-7a2bcffc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -12033,14 +12114,269 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 148 */
+/* 154 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_qugan_vue__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_qugan_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_qugan_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c3b3dd5e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_qugan_vue__ = __webpack_require__(530);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_qugan_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c3b3dd5e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_qugan_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\components\\qugan.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] qugan.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c3b3dd5e", Component.options)
+  } else {
+    hotAPI.reload("data-v-c3b3dd5e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 155 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f8f480f2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_shengli_vue__ = __webpack_require__(536);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f8f480f2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_shengli_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\components\\shengli.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] shengli.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f8f480f2", Component.options)
+  } else {
+    hotAPI.reload("data-v-f8f480f2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 156 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_tineng_vue__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_tineng_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_tineng_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_83f23358_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_tineng_vue__ = __webpack_require__(523);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_tineng_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_83f23358_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_tineng_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\components\\tineng.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] tineng.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83f23358", Component.options)
+  } else {
+    hotAPI.reload("data-v-83f23358", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 157 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da27e640_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(534);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da27e640_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\childNum1.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] childNum1.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-da27e640", Component.options)
+  } else {
+    hotAPI.reload("data-v-da27e640", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 158 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da0bb73e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(533);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da0bb73e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\childNum2.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] childNum2.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-da0bb73e", Component.options)
+  } else {
+    hotAPI.reload("data-v-da0bb73e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 159 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4d903b6c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__ = __webpack_require__(491);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d9ef883c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__ = __webpack_require__(532);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -12055,12 +12391,12 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4d903b6c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d9ef883c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "yundongyuan\\ClientApp\\views\\workout\\childNum3.vue"
+Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\childNum3.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] childNum3.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12071,9 +12407,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4d903b6c", Component.options)
+    hotAPI.createRecord("data-v-d9ef883c", Component.options)
   } else {
-    hotAPI.reload("data-v-4d903b6c", Component.options)
+    hotAPI.reload("data-v-d9ef883c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -12084,10 +12420,10 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12101,79 +12437,91 @@ var _vue = __webpack_require__(101);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(518);
+var _vueRouter = __webpack_require__(537);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _index = __webpack_require__(444);
+var _index = __webpack_require__(459);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _login = __webpack_require__(445);
+var _login = __webpack_require__(460);
 
 var _login2 = _interopRequireDefault(_login);
 
-var _policy = __webpack_require__(446);
+var _policy = __webpack_require__(461);
 
 var _policy2 = _interopRequireDefault(_policy);
 
-var _technology = __webpack_require__(450);
+var _technology = __webpack_require__(465);
 
 var _technology2 = _interopRequireDefault(_technology);
 
-var _register = __webpack_require__(447);
+var _register = __webpack_require__(462);
 
 var _register2 = _interopRequireDefault(_register);
 
-var _forget = __webpack_require__(443);
+var _forget = __webpack_require__(458);
 
 var _forget2 = _interopRequireDefault(_forget);
 
-var _choiceRegister = __webpack_require__(442);
+var _choiceRegister = __webpack_require__(457);
 
 var _choiceRegister2 = _interopRequireDefault(_choiceRegister);
 
-var _person = __webpack_require__(456);
+var _person = __webpack_require__(472);
 
 var _person2 = _interopRequireDefault(_person);
 
-var _sportInjury = __webpack_require__(451);
+var _sportInjury = __webpack_require__(466);
 
 var _sportInjury2 = _interopRequireDefault(_sportInjury);
 
-var _trainInjury = __webpack_require__(452);
+var _trainInjury = __webpack_require__(467);
 
 var _trainInjury2 = _interopRequireDefault(_trainInjury);
 
-var _composition = __webpack_require__(441);
+var _allComposition = __webpack_require__(455);
+
+var _allComposition2 = _interopRequireDefault(_allComposition);
+
+var _composition = __webpack_require__(456);
 
 var _composition2 = _interopRequireDefault(_composition);
 
-var _constituents = __webpack_require__(460);
+var _constituents = __webpack_require__(474);
 
 var _constituents2 = _interopRequireDefault(_constituents);
 
-var _stamina = __webpack_require__(464);
+var _allConstituents = __webpack_require__(473);
+
+var _allConstituents2 = _interopRequireDefault(_allConstituents);
+
+var _stamina = __webpack_require__(477);
 
 var _stamina2 = _interopRequireDefault(_stamina);
 
-var _subjective = __webpack_require__(469);
+var _staminaAdd = __webpack_require__(478);
+
+var _staminaAdd2 = _interopRequireDefault(_staminaAdd);
+
+var _subjective = __webpack_require__(483);
 
 var _subjective2 = _interopRequireDefault(_subjective);
 
-var _allSubjective = __webpack_require__(437);
+var _allSubjective = __webpack_require__(451);
 
 var _allSubjective2 = _interopRequireDefault(_allSubjective);
 
-var _workout = __webpack_require__(472);
+var _workout = __webpack_require__(486);
 
 var _workout2 = _interopRequireDefault(_workout);
 
-var _workoutAdd = __webpack_require__(473);
+var _workoutAdd = __webpack_require__(487);
 
 var _workoutAdd2 = _interopRequireDefault(_workoutAdd);
 
-var _mixedAbility = __webpack_require__(453);
+var _mixedAbility = __webpack_require__(468);
 
 var _mixedAbility2 = _interopRequireDefault(_mixedAbility);
 
@@ -12183,15 +12531,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 //体能测试
 //运动员主观评价
+//体能训练
 //体成分
-//伤病教练员
-// 引用模板
+//体成分
+//伤病运动员
 _vue2["default"].use(_vueRouter2["default"]); //体能测试
 //主观评价
 //import primary from './views/primary/primary.vue';//首页
-//体能训练
+//体能测试
 //体成分
-//伤病运动员
+//体成分
+//伤病教练员
+// 引用模板
 
 window.router = new _vueRouter2["default"]({
 	routes: [{
@@ -12228,11 +12579,20 @@ window.router = new _vueRouter2["default"]({
 		path: '/bodyComposition',
 		component: _composition2["default"]
 	}, {
+		path: '/allComposition',
+		component: _allComposition2["default"]
+	}, {
 		path: '/phyConstituents',
 		component: _constituents2["default"]
 	}, {
+		path: '/allConstituents',
+		component: _allConstituents2["default"]
+	}, {
 		path: '/stamina',
 		component: _stamina2["default"]
+	}, {
+		path: '/staminaAdd',
+		component: _staminaAdd2["default"]
 	}, {
 		path: '/subjective',
 		component: _subjective2["default"]
@@ -12253,17 +12613,17 @@ window.router = new _vueRouter2["default"]({
 exports["default"] = router;
 
 /***/ }),
-/* 153 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-__webpack_require__(405);
+__webpack_require__(421);
 
-__webpack_require__(205);
+__webpack_require__(221);
 
-__webpack_require__(206);
+__webpack_require__(222);
 
 if (global._babelPolyfill) {
   throw new Error("only one instance of babel-polyfill is allowed");
@@ -12288,17 +12648,17 @@ define(String.prototype, "padRight", "".padEnd);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(100)))
 
 /***/ }),
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_app_vue__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_app_vue__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_app_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_app_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e00c81b0_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_app_vue__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e00c81b0_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_app_vue__ = __webpack_require__(535);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -12342,7 +12702,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 158 */
+/* 169 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13444,7 +13804,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = __webpack_require__(527);
+    var client = __webpack_require__(547);
 
     return new PromiseObj(function (resolve) {
 
@@ -13920,7 +14280,55 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 
 /***/ }),
-/* 159 */
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	data: function data() {
+		return {};
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14036,7 +14444,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 160 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14154,9 +14562,16 @@ exports["default"] = {
 					//体成分
 					_d = 4;
 					break;
+				case '/allComposition':
+					//体成分
+					_d = 11;
 				case '/phyConstituents':
 					//体成分
 					_d = 3;
+					break;
+				case '/allConstituents':
+					//体成分
+					_d = 12;
 					break;
 				case '/stamina':
 					//体成分
@@ -14189,1836 +14604,6 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 161 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	data: function data() {
-		return {};
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 162 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	data: function data() {
-		return {};
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['shuaxin', 'bodyList'],
-	data: function data() {
-		return {
-			pingfen: true
-		};
-	},
-	watch: {
-		shuaxin: function shuaxin() {
-			vm.$forceUpdate();
-		}
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			myPublic.tableHeader('.table-box');
-		},
-		showPingFen: function showPingFen() {
-			vm.pingfen = !vm.pingfen;
-			window.bus.$emit('pingfen', vm.pingfen);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-var _menu = __webpack_require__(23);
-
-var _menu2 = _interopRequireDefault(_menu);
-
-var _pingFen = __webpack_require__(147);
-
-var _pingFen2 = _interopRequireDefault(_pingFen);
-
-var _allSubjectiveIndex = __webpack_require__(436);
-
-var _allSubjectiveIndex2 = _interopRequireDefault(_allSubjectiveIndex);
-
-var _childNum = __webpack_require__(438);
-
-var _childNum2 = _interopRequireDefault(_childNum);
-
-var _childNum3 = __webpack_require__(439);
-
-var _childNum4 = _interopRequireDefault(_childNum3);
-
-var _childNum5 = __webpack_require__(440);
-
-var _childNum6 = _interopRequireDefault(_childNum5);
-
-__webpack_require__(413);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			againBiao: true,
-			getOnr: {},
-			allDaoChu: ['1'],
-			allDaoChuNext: [],
-			daochuNum: 1,
-			userXuanZe: [],
-			daochuList: [],
-			sportList: [],
-			sportIndex: 0,
-			bodyList: [],
-			shuaxin: true,
-			showPingFen: true,
-			daochu: false
-		};
-	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"],
-		pingFen: _pingFen2["default"],
-		subjectiveIndex: _allSubjectiveIndex2["default"],
-		childComponentFirst: _childNum2["default"],
-		childComponentSecond: _childNum4["default"],
-		childComponentThird: _childNum6["default"],
-		topMenu: _menu2["default"]
-	},
-	watch: {
-		sportIndex: function sportIndex(newVal, oldVal) {
-			window.sportIndex = newVal;
-			vm.shuaxin = !vm.shuaxin;
-			vm.getList();
-		},
-		allDaoChu: function allDaoChu(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.getSport();
-			} else {
-				vm.userXuanZe = [];
-			}
-		},
-		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.daochuList = ["MorPulse,晨脉", "Weight,体重", "SleepDuration,睡眠时间", "SleepQuality,睡眠质量", "Desire,饮食欲望", "SorenessLevel,肌肉酸痛评价", "FatigueLevel,伤病疼痛评价", "TrainStatus,自我训练状态评价", "Fatigue,RPE", "TrainIntensity,训练强度", "Evaluate,教练评价"];
-			} else {
-				vm.daochuList = [];
-			}
-		}
-	},
-	//计算属性
-	computed: {
-		userId: function userId() {
-			return vm.sportList[vm.sportIndex] ? vm.sportList[vm.sportIndex].UserId : '';
-		},
-		daochuUrl: function daochuUrl() {
-			var _nameList = [];
-			var _valueList = [];
-			for (var i = 0; i < vm.daochuList.length; i++) {
-				if (vm.daochuList[i]) {
-					if (i != 0) {
-						_nameList += ',';
-						_valueList += ',';
-					}
-					_nameList += vm.daochuList[i].split(',')[0];
-					_valueList += vm.daochuList[i].split(',')[1];
-				}
-			}
-			var data = '';
-			data += "starttime=" + document.getElementById('starttime').value;
-			data += "&endtime=" + document.getElementById('endtime').value;
-			data += "&userid=" + vm.userXuanZe.join(',');
-			data += "&projectValue=" + _nameList;
-			data += "&projectName=" + _valueList;
-			return myPublic.publicUrl + '/API/Excelreport/SubjectiveExport?' + data;
-		}
-	},
-	methods: {
-		start: function start() {
-			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddDayDate(null, -14), 'yyyy-MM-dd');
-			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-			window.bus.$on('pingfen', function (val) {
-				vm.showPingFen = val;
-			});
-			vm.getSport();
-			vm.setTimeInp();
-		},
-		//获取远动员列表
-		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.sportList = result.body.Data;
-					for (var i = 0; i < result.body.Data.length; i++) {
-						vm.userXuanZe.push(result.body.Data[i].UserId);
-					}
-					if (result.body.Data && result.body.Data.length > 0) {
-						vm.sportIndex = window.sportIndex ? window.sportIndex : 0;
-						vm.getList();
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		getList: function getList() {
-			if (!vm.userId) {
-				return;
-			}
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllUserSubjective', {
-				params: {
-					sportuserid: vm.userId,
-					starttime: document.getElementById('starttime').value,
-					endtime: document.getElementById('endtime').value,
-					pagesize: 999,
-					pageindex: 1
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.bodyList = result.body.Data;
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		setTimeInp: function setTimeInp() {
-			document.getElementById('starttime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date2 == '' || isDate) {
-					vm.shuaxin = !vm.shuaxin;
-					vm.getList();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('starttime').value = document.getElementById('endtime').value;
-				vm.shuaxin = !vm.shuaxin;
-				vm.getList();
-			});
-			document.getElementById('endtime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_isDate) {
-					document.getElementById('endtime').value = _thisDate;
-					vm.shuaxin = !vm.shuaxin;
-					vm.getList();
-					return;
-				}
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date1 == '' || isDate) {
-					vm.shuaxin = !vm.shuaxin;
-					vm.getList();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('endtime').value = document.getElementById('starttime').value;
-				vm.shuaxin = !vm.shuaxin;
-				vm.getList();
-			});
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	beforeDestroy: function beforeDestroy() {
-		window.bus.$off('pingfen');
-	},
-	mounted: function mounted() {
-		vm.start();
-		vm.getOnr = {};
-		window.onresize = function () {
-			clearTimeout(vm.getOnr);
-			vm.getOnr = setTimeout(function () {
-				vm.againBiao = !vm.againBiao;
-			}, 200);
-		};
-	}
-};
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['againBiao', 'shuaxin', 'bodyList'],
-	data: function data() {
-		return {};
-	},
-	watch: {
-		shuaxin: function shuaxin() {
-			vm.setBiao();
-		},
-		bodyList: function bodyList() {
-			vm.setBiao();
-		},
-		againBiao: function againBiao() {
-			vm.start();
-		}
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			vm.setBiao();
-		},
-		setBiao: function setBiao() {
-			var _dateList = [];
-			var _series = [{
-				name: '睡眠时间',
-				type: 'line',
-				data: []
-			}, {
-				name: '睡眠质量',
-				type: 'line',
-				data: []
-			}, {
-				name: '饮食欲望',
-				type: 'line',
-				data: []
-			}, {
-				name: '肌肉酸痛评价',
-				type: 'line',
-				data: []
-			}, {
-				name: '伤病疼痛评价',
-				type: 'line',
-				data: []
-			}, {
-				name: '自我训练状态评价',
-				type: 'line',
-				data: []
-			}, {
-				name: 'RPE',
-				type: 'line',
-				data: []
-			}, {
-				name: '训练强度',
-				type: 'line',
-				data: []
-			}];
-			for (var i = 0; i < vm.bodyList.length; i++) {
-				_dateList.push(vm.bodyList[i].DateSign);
-				_series[0].data[i] = vm.bodyList[i].SleepDuration; //睡眠时间
-				_series[1].data[i] = vm.bodyList[i].SleepQuality; //睡眠质量
-				_series[2].data[i] = vm.bodyList[i].Desire; //饮食欲望
-				_series[3].data[i] = vm.bodyList[i].SorenessLevel; //肌肉酸痛评价
-				_series[4].data[i] = vm.bodyList[i].FatigueLevel; //伤病疼痛评价
-				_series[5].data[i] = vm.bodyList[i].TrainStatus; //自我训练状态评价
-				_series[6].data[i] = vm.bodyList[i].Fatigue; //RPE
-			}
-			document.getElementById('child1').setAttribute("_echarts_instance_", "");
-			document.getElementById('child1').innerHTML = '';
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('child1'));
-
-			// 指定图表的配置项和数据
-			var option = {
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: { // 坐标轴指示器，坐标轴触发有效
-						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-					}
-				},
-				legend: {
-					data: ['睡眠时间', '睡眠质量', '饮食欲望', '肌肉酸痛评价', '伤病疼痛评价', '自我训练状态评价', 'RPE']
-				},
-				grid: {
-					left: '10px',
-					right: '20px',
-					bottom: '10px',
-					containLabel: true
-				},
-				xAxis: {
-					type: 'category',
-					boundaryGap: false,
-					data: _dateList
-				},
-				yAxis: {
-					type: 'value'
-
-				},
-				series: _series
-			};
-
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['againBiao', 'shuaxin', 'userId'],
-	data: function data() {
-		return {
-			bodyList: []
-		};
-	},
-	watch: {
-		shuaxin: function shuaxin() {
-			vm.getList();
-		},
-		userId: function userId(newVal, oldVal) {
-			vm.getList();
-		},
-		againBiao: function againBiao() {
-			vm.start();
-		}
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			vm.getList();
-		},
-		getList: function getList() {
-			if (!vm.userId) {
-				return;
-			}
-			vm.$http.get(myPublic.publicUrl + '/API/Analysis/GetExerciseIntensityTrend', {
-				params: {
-					sportuserid: vm.userId,
-					starttime: document.getElementById('starttime').value,
-					endtime: document.getElementById('endtime').value
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.bodyList = result.body.Data;
-					vm.setBiao();
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		setBiao: function setBiao() {
-
-			var _dateList = [];
-			var _series = [{
-				name: '强度平均值',
-				type: 'bar',
-				stack: '总量',
-				barWidth: '50%',
-				data: []
-			}];
-			for (var i = 0; i < vm.bodyList.length; i++) {
-				_dateList.push('第' + vm.bodyList[i].Testdate + '周');
-				_series[0].data.push(vm.bodyList[i].AvgIntensity); //平均值
-			}
-			document.getElementById('child2').setAttribute("_echarts_instance_", "");
-			document.getElementById('child2').innerHTML = '';
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('child2'));
-
-			// 指定图表的配置项和数据
-			var option = {
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: { // 坐标轴指示器，坐标轴触发有效
-						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-					}
-				},
-				color: ["#3FA7DC"],
-				legend: {
-					data: ['强度平均值']
-				},
-				grid: {
-					left: '10px',
-					right: '20px',
-					bottom: '10px',
-					containLabel: true
-				},
-				xAxis: {
-					type: 'category',
-					data: _dateList
-				},
-				yAxis: [{
-					type: 'value',
-					name: '周训练负荷',
-					axisLabel: {
-						formatter: '{value}'
-					}
-
-				}],
-				series: _series
-			};
-
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 167 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['againBiao', 'shuaxin', 'bodyList'],
-	data: function data() {
-		return {};
-	},
-	watch: {
-		shuaxin: function shuaxin() {
-			vm.setBiao();
-		},
-		bodyList: function bodyList() {
-			vm.setBiao();
-		},
-		againBiao: function againBiao() {
-			vm.start();
-		}
-	},
-	//计算属性
-	computed: {
-		leida: function leida() {
-			var item = {
-				Fatigue: 0, //RPE
-				SleepQuality: 0, //睡眠质量
-				Desire: 0, //饮食欲望
-				SorenessLevel: 0, //肌肉酸痛评价
-				FatigueLevel: 0, //伤病疼痛评价
-				TrainStatus: 0, //自我训练状态
-				FatigueLength: 0,
-				SleepQualityLength: 0,
-				DesireLength: 0,
-				SorenessLevelLength: 0,
-				FatigueLevelLength: 0,
-				TrainStatusLength: 0
-			};
-			for (var i = 0; i < vm.bodyList.length; i++) {
-				item.Fatigue += vm.bodyList[i].Fatigue;
-				item.FatigueLength = vm.bodyList[i].Fatigue ? item.FatigueLength - -1 : item.FatigueLength;
-				item.SleepQuality += vm.bodyList[i].SleepQuality;
-				item.SleepQualityLength = vm.bodyList[i].SleepQuality ? item.SleepQualityLength - -1 : item.SleepQualityLength;
-				item.Desire += vm.bodyList[i].Desire;
-				item.DesireLength = vm.bodyList[i].Desire ? item.DesireLength - -1 : item.DesireLength;
-				item.SorenessLevel += vm.bodyList[i].SorenessLevel;
-				item.SorenessLevelLength = vm.bodyList[i].SorenessLevel ? item.SorenessLevelLength - -1 : item.SorenessLevelLength;
-				item.FatigueLevel += vm.bodyList[i].FatigueLevel;
-				item.FatigueLevelLength = vm.bodyList[i].FatigueLevel ? item.FatigueLevelLength - -1 : item.FatigueLevelLength;
-				item.TrainStatus += vm.bodyList[i].TrainStatus;
-				item.TrainStatusLength = vm.bodyList[i].TrainStatus ? item.TrainStatusLength - -1 : item.TrainStatusLength;
-			}
-			item.Fatigue = (item.Fatigue / (item.FatigueLength ? item.FatigueLength : 1)).toFixed(1);
-			item.SleepQuality = (item.SleepQuality / (item.SleepQualityLength ? item.SleepQualityLength : 1)).toFixed(1);
-			item.Desire = (item.Desire / (item.DesireLength ? item.DesireLength : 1)).toFixed(1);
-			item.SorenessLevel = (item.SorenessLevel / (item.SorenessLevelLength ? item.SorenessLevelLength : 1)).toFixed(1);
-			item.FatigueLevel = (item.FatigueLevel / (item.FatigueLevelLength ? item.FatigueLevelLength : 1)).toFixed(1);
-			item.TrainStatus = (item.TrainStatus / (item.TrainStatusLength ? item.TrainStatusLength : 1)).toFixed(1);
-			return item;
-		}
-	},
-	methods: {
-		start: function start() {
-			vm.setBiao();
-		},
-		setBiao: function setBiao() {
-			var _series = [vm.leida.Fatigue, vm.leida.SleepQuality, vm.leida.Desire, vm.leida.SorenessLevel, vm.leida.FatigueLevel, vm.leida.TrainStatus];
-			document.getElementById('biao-leida').setAttribute("_echarts_instance_", "");
-			document.getElementById('biao-leida').innerHTML = '';
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('biao-leida'));
-
-			// 指定图表的配置项和数据
-			var option = {
-				tooltip: {},
-				legend: {
-					data: ['标准', '选择时间段的平均值']
-				},
-				polar: {},
-				angleAxis: {
-					show: false
-				},
-				radiusAxis: {
-					type: 'value',
-					min: 0,
-					max: 10,
-					interval: 2,
-					axisTick: {
-						show: false
-					},
-					splitLine: {
-						show: false
-					}
-				},
-				radar: {
-					name: {
-						textStyle: {
-							color: '#fff',
-							backgroundColor: 'rgba(186, 37, 56,0.5)',
-							borderRadius: 3,
-							padding: [3, 5]
-						}
-					},
-					radius: '70%',
-					indicator: [{
-						name: 'RPE',
-						max: 10
-					}, {
-						name: '睡眠质量',
-						max: 10
-					}, {
-						name: '饮食欲望',
-						max: 10
-					}, {
-						name: '肌肉酸痛评价',
-						max: 10
-					}, {
-						name: '伤病疼痛评价',
-						max: 10
-					}, {
-						name: '自我训练状态评价',
-						max: 10
-					}]
-				},
-				series: [{
-					name: '主观评价雷达图',
-					type: 'radar',
-					data: [{
-						value: [10, 10, 10, 10, 10, 10],
-						name: '标准'
-					}, {
-						value: _series,
-						name: '选择时间段的平均值'
-					}]
-				}]
-			};
-
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 168 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	name: 'app',
-	data: function data() {
-		return {};
-	},
-	methods: {
-		start: function start() {
-			if (vm.$route.path == '/policy' || vm.$route.path == '/technology') {
-				return;
-			}
-			if (window.localStorage.getItem('Sport_Access_Token')) {
-				vm.getUserInfo(window.localStorage.getItem('Sport_Access_Token'));
-			} else {
-				vm.$router.push({
-					path: '/login'
-				});
-			}
-		},
-		getUserInfo: function getUserInfo(data) {
-			vm.$http.get(myPublic.publicUrl + '/API/User/GetUserInfo', {
-				headers: {
-					token: data
-				}
-			}).then(function (result) {
-				try {
-					if (result.body.StateCode != 0) {
-						vm.$router.push({
-							path: '/login'
-						});
-					} else {
-						window.localStorage.setItem('user', JSON.stringify(result.body.Data));
-					}
-				} catch (err) {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 169 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-var _menu = __webpack_require__(23);
-
-var _menu2 = _interopRequireDefault(_menu);
-
-__webpack_require__(414);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			getOnr: {},
-			allDaoChu: ['1'],
-			allDaoChuNext: [],
-			daochuNum: 1,
-			userXuanZe: [],
-			daochuList: [],
-			daochu: false,
-			bodyList: [],
-			userType: '',
-			sportList: [],
-			sportIndex: 0
-		};
-	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"],
-		topMenu: _menu2["default"]
-	},
-	watch: {
-		sportIndex: function sportIndex(newVal, oldVal) {
-			window.sportIndex = newVal;
-			vm.getBodyFatTrend();
-		},
-		allDaoChu: function allDaoChu(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.getSport();
-			} else {
-				vm.userXuanZe = [];
-			}
-		},
-		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.daochuList = ["TotalMass,总质量", "Muscle,肌肉", "Fat,脂肪", "BoneMSalt,骨矿物盐", "BF,体脂率"];
-			} else {
-				vm.daochuList = [];
-			}
-		}
-	},
-	//计算属性
-	computed: {
-		daochuUrl: function daochuUrl() {
-			var _nameList = [];
-			var _valueList = [];
-			for (var i = 0; i < vm.daochuList.length; i++) {
-				if (vm.daochuList[i]) {
-					if (i != 0) {
-						_nameList += ',';
-						_valueList += ',';
-					}
-					_nameList += vm.daochuList[i].split(',')[0];
-					_valueList += vm.daochuList[i].split(',')[1];
-				}
-			}
-			var data = '';
-			data += "starttime=" + document.getElementById('starttime').value;
-			data += "&endtime=" + document.getElementById('endtime').value;
-			data += "&userid=" + vm.userXuanZe.join(',');
-			data += "&projectValue=" + _nameList;
-			data += "&projectName=" + _valueList;
-			return myPublic.publicUrl + '/API/Excelreport/BodyCompositionExport?' + data;
-		}
-	},
-	methods: {
-		start: function start() {
-			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
-			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-			if (window.localStorage.getItem('Sport_userType') == '教练') {
-				//教练
-				vm.userType = '教练';
-				vm.getSport();
-			} else {
-				//运动员
-				vm.userType = '运动员';
-				vm.getBodyFatTrend();
-			}
-			myPublic.tableHeader('#table-header');
-			vm.setTimeInp();
-		},
-		//获取远动员列表
-		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.sportList = result.body.Data;
-					for (var i = 0; i < result.body.Data.length; i++) {
-						vm.userXuanZe.push(result.body.Data[i].UserId);
-					}
-					if (result.body.Data && result.body.Data.length > 0) {
-						vm.sportIndex = window.sportIndex ? window.sportIndex : 0;
-						vm.getBodyFatTrend();
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		//获取体成分
-		getBodyFatTrend: function getBodyFatTrend() {
-			var userId = '';
-			if (vm.userType == '教练') {
-				userId = vm.sportList[vm.sportIndex].UserId;
-			}
-			vm.$http.get(myPublic.publicUrl + '/API/Analysis/GetBodyFatTrend', {
-				params: {
-					sportuserid: userId,
-					starttime: document.getElementById('starttime').value,
-					endtime: document.getElementById('endtime').value
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.bodyList = result.body.Data;
-					vm.setBiao();
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		setBiao: function setBiao() {
-			var _dateList = [];
-			var _series = [{
-				name: '体脂率',
-				type: 'line',
-				yAxisIndex: 1,
-				data: []
-			}, {
-				name: '骨矿物盐',
-				barWidth: '50%',
-				type: 'bar',
-				stack: '总量',
-				data: []
-			}, {
-				name: '脂肪',
-				type: 'bar',
-				stack: '总量',
-				data: []
-			}, {
-				name: '肌肉',
-				type: 'bar',
-				stack: '总量',
-				data: []
-			}];
-			for (var i = 0; i < vm.bodyList.length; i++) {
-				_dateList.push(vm.bodyList[i].Testdate);
-				_series[0].data.push(vm.bodyList[i].BF);
-				_series[1].data.push(vm.bodyList[i].BoneMSalt);
-				_series[2].data.push(vm.bodyList[i].Fat);
-				_series[3].data.push(vm.bodyList[i].Muscle);
-			}
-			document.getElementById('biao').setAttribute("_echarts_instance_", "");
-			document.getElementById('biao').innerHTML = '';
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('biao'));
-
-			// 指定图表的配置项和数据
-			var option = {
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: { // 坐标轴指示器，坐标轴触发有效
-						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-					}
-				},
-				legend: {
-					data: ['体脂率', '骨矿物盐', '脂肪', '肌肉']
-				},
-				grid: {
-					left: '50px',
-					right: '50px',
-					bottom: '10px',
-					containLabel: true
-				},
-				xAxis: {
-					type: 'category',
-					data: _dateList
-				},
-				yAxis: [{
-					type: 'value',
-					name: '质量',
-					axisLabel: {
-						formatter: '{value} kg'
-					}
-
-				}, {
-					type: 'value',
-					name: '百分比',
-					max: 50,
-					axisLabel: {
-						formatter: '{value} %'
-					}
-				}],
-				series: _series
-			};
-
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-		},
-		setTimeInp: function setTimeInp() {
-			document.getElementById('starttime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date2 == '' || isDate) {
-					vm.getBodyFatTrend();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('starttime').value = document.getElementById('endtime').value;
-				vm.getBodyFatTrend();
-			});
-			document.getElementById('endtime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_isDate) {
-					document.getElementById('endtime').value = _thisDate;
-					vm.getBodyFatTrend();
-					return;
-				}
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date1 == '' || isDate) {
-					vm.getBodyFatTrend();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('endtime').value = document.getElementById('starttime').value;
-				vm.getBodyFatTrend();
-			});
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-		vm.getOnr = {};
-		window.onresize = function () {
-			clearTimeout(vm.getOnr);
-			vm.getOnr = setTimeout(function () {
-				vm.start();
-			}, 200);
-		};
-	}
-};
-
-/***/ }),
-/* 170 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			role: '运动员'
-		};
-	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"]
-	},
-	watch: {},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {},
-		next: function next() {
-			vm.$router.push({
-				path: '/register'
-			});
-		},
-		back: function back() {
-			vm.$router.back(-1);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 171 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			mobile: '',
-			code: '',
-			password: '',
-			newpassword: '',
-
-			isMobile: '',
-			isCode: '',
-			isPassword: '',
-			isNewpassword: '',
-
-			isGetCode: false,
-			getCodeText: '获取验证码'
-		};
-	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"]
-	},
-	watch: {},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {},
-		/**
-   * 获取验证码
-   */
-		getCode: function getCode() {
-			if (vm.getCodeText != '获取验证码') return;
-			vm.isGetCode = true;
-			var i = 60;
-			vm.getCodeText = i + '重新发送';
-			var _time = setInterval(function () {
-				vm.getCodeText = --i + '重新发送';
-				if (i < 0) {
-					clearInterval(_time);
-					vm.getCodeText = '获取验证码';
-				}
-			}, 1000);
-		},
-		/**
-   * 找回密码
-   */
-		forget: function forget() {},
-		/**
-   * 去登陆
-   */
-		back: function back() {
-			vm.$router.back(-1);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 172 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-__webpack_require__(415);
-
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			list: []
-		};
-	},
-	//公共模板
-	components: {},
-	watch: {},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			vm.list = [{
-				name: 'as'
-			}, {
-				name: 'ed'
-			}, {
-				name: 'asd'
-			}];
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
 /* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16028,17 +14613,58 @@ exports["default"] = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-var _methods;
-
-function _defineProperty(obj, key, value) {
-	if (key in obj) {
-		Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-	} else {
-		obj[key] = value;
-	}return obj;
-}
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16085,134 +14711,14 @@ function _defineProperty(obj, key, value) {
 
 var vm;
 exports["default"] = {
-	//变量
 	data: function data() {
-		return {
-			loginType: true,
-			isMessage: {},
-			jiyi: [], //记住密码
-			userName: '',
-			passWord: '',
-			mobile: '',
-			code: '',
-			isGetCode: false,
-			getCodeText: '获取验证码'
-		};
+		return {};
 	},
-	//公共模板
-	components: {},
-	watch: {},
 	//计算属性
 	computed: {},
-	methods: (_methods = {
-		start: function start() {
-			if (window.localStorage.getItem('Sport_jiyi')) {
-				vm.jiyi = ['yes'];
-				vm.userName = window.localStorage.getItem('Sport_jiyi');
-				vm.passWord = window.localStorage.getItem('Sport_jiyiPass');
-			} else {
-				vm.jiyi = [];
-			}
-		},
-		/**
-   * 获取验证码
-   */
-		getCode: function getCode() {
-			if (vm.getCodeText != '获取验证码') return;
-			vm.isGetCode = true;
-			var i = 60;
-			vm.getCodeText = i + '重新发送';
-			var _time = setInterval(function () {
-				vm.getCodeText = --i + '重新发送';
-				if (i < 0) {
-					clearInterval(_time);
-					vm.getCodeText = '获取验证码';
-				}
-			}, 1000);
-		},
-		/**
-   * 忘记密码
-   */
-		forget: function forget() {
-			vm.$router.push({
-				path: '/register'
-			});
-		},
-		/**
-   * 记住用户
-   */
-		jiyiChange: function jiyiChange() {
-			console.log(vm.jiyi);
-			if (vm.jiyi.length > 0) {
-				window.localStorage.setItem('Sport_jiyi', vm.userName);
-				window.localStorage.setItem('Sport_jiyiPass', vm.passWord);
-			} else {
-				window.localStorage.removeItem('Sport_jiyi', vm.userName);
-				window.localStorage.removeItem('Sport_jiyiPass', vm.passWord);
-			}
-		},
-		/**
-   * 登录
-   */
-		login: function login() {
-			vm.$http.post(myPublic.publicUrl + '/API/Account/Login', {
-				'UserName': vm.userName,
-				'Password': vm.passWord
-			}).then(function (result) {
-				if (result.body.Message == "登录成功") {
-					window.localStorage.setItem('Sport_Access_Token', result.body.Data.Token_Type + ' ' + result.body.Data.Access_Token);
-					window.localStorage.setItem('Sport_userType', result.body.Data.RoleName == '运动员' ? '运动员' : '教练');
-					window.localStorage.setItem('Sport_userPicture', window.myPublic.publicUrl + result.body.Data.Picture ? result.body.Data.Picture : '/web/wwwroot/dist/images/person.png');
-					vm.getUserInfo(result.body.Data);
-				} else {
-					vm.isMessage = result.body.ErrorMessges;
-					window.myPublic.alertResult(result.body.Message);
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		/**
-   * 手机号登录
-   */
-		loginByMobile: function loginByMobile() {
-			if (!vm.isGetCode) myPublic.alertResult('请先发送验证码');
-		},
-		/**
-   * 获取用户权限
-   * @param {Object} data
-   */
-		getUserInfo: function getUserInfo(data) {
-			vm.$http.get(myPublic.publicUrl + '/API/User/GetUserInfo', {
-				headers: {
-					token: data.Token_Type + ' ' + data.Access_Token
-				}
-			}).then(function (result) {
-				window.localStorage.setItem('user', JSON.stringify(result.body.Data));
-				if (result.body.StateCode == 0) {
-					if (window.localStorage.getItem('Sport_userType') == '运动员') {
-						vm.$router.push({
-							path: '/subjective'
-						});
-					} else {
-						vm.$router.push({
-							path: '/allSubjective'
-						});
-					}
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		}
-	}, _defineProperty(_methods, 'forget', function forget() {
-		vm.$router.push({
-			path: '/forget'
-		});
-	}), _defineProperty(_methods, 'register', function register() {
-		vm.$router.push({
-			path: '/register'
-		});
-	}), _methods),
+	methods: {
+		start: function start() {}
+	},
 	beforeCreate: function beforeCreate() {
 		vm = this;
 	},
@@ -16285,16 +14791,118 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var vm;
 exports["default"] = {
-	//变量
 	data: function data() {
 		return {};
 	},
-	//公共模板
-	components: {},
-	watch: {},
 	//计算属性
 	computed: {},
 	methods: {
@@ -16318,23 +14926,66 @@ exports["default"] = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-var _yunDongYuan = __webpack_require__(449);
-
-var _yunDongYuan2 = _interopRequireDefault(_yunDongYuan);
-
-var _jiaoLian = __webpack_require__(448);
-
-var _jiaoLian2 = _interopRequireDefault(_jiaoLian);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16362,27 +15013,20 @@ function _interopRequireDefault(obj) {
 
 var vm;
 exports["default"] = {
-	//变量
 	data: function data() {
-		return {
-			role: '1',
-			isRole: ''
-		};
+		return {};
 	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"],
-		yunComponent: _yunDongYuan2["default"],
-		jiaoComponent: _jiaoLian2["default"]
-	},
-	watch: {},
 	//计算属性
 	computed: {},
-	methods: {},
+	methods: {
+		start: function start() {}
+	},
 	beforeCreate: function beforeCreate() {
 		vm = this;
 	},
-	mounted: function mounted() {}
+	mounted: function mounted() {
+		vm.start();
+	}
 };
 
 /***/ }),
@@ -16548,55 +15192,2908 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var vm;
+exports["default"] = {
+	data: function data() {
+		return {};
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ['shuaxin', 'bodyList'],
+	data: function data() {
+		return {
+			pingfen: true
+		};
+	},
+	watch: {
+		shuaxin: function shuaxin() {
+			vm.$forceUpdate();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			myPublic.tableHeader('.table-box');
+		},
+		setChildNum: function setChildNum(num) {
+			window.bus.$emit('childNum', num);
+		},
+		showPingFen: function showPingFen() {
+			vm.pingfen = !vm.pingfen;
+			window.bus.$emit('pingfen', vm.pingfen);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _pingFen = __webpack_require__(72);
+
+var _pingFen2 = _interopRequireDefault(_pingFen);
+
+var _allSubjectiveIndex = __webpack_require__(450);
+
+var _allSubjectiveIndex2 = _interopRequireDefault(_allSubjectiveIndex);
+
+var _childNum = __webpack_require__(452);
+
+var _childNum2 = _interopRequireDefault(_childNum);
+
+var _childNum3 = __webpack_require__(453);
+
+var _childNum4 = _interopRequireDefault(_childNum3);
+
+var _childNum5 = __webpack_require__(454);
+
+var _childNum6 = _interopRequireDefault(_childNum5);
+
+__webpack_require__(430);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			userType: '',
+			trainId: '', //小项
+			trainFirse: '', //专项父级
+			zhuanxiangList: [], //项目列表
+			sex: "",
+			againBiao: true,
+			getOnr: {},
+			allDaoChu: ['1'],
+			allDaoChuNext: [],
+			daochuNum: 1,
+			userXuanZe: [],
+			daochuList: [],
+			sportList: [],
+			sportIndex: '',
+			bodyList: [],
+			shuaxin: true,
+			showPingFen: true,
+			daochu: false,
+			childNum: 1
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		pingFen: _pingFen2["default"],
+		subjectiveIndex: _allSubjectiveIndex2["default"],
+		childComponentFirst: _childNum2["default"],
+		childComponentSecond: _childNum4["default"],
+		childComponentThird: _childNum6["default"],
+		topMenu: _menu2["default"]
+	},
+	watch: {
+		trainFirse: function trainFirse(newVal, oldVal) {
+			vm.trainId = '';
+			vm.sportIndex = '';
+		},
+		trainId: function trainId(newVal, oldVal) {
+			vm.sportIndex = '';
+			vm.getSport();
+		},
+		sex: function sex(newVal, oldVal) {
+			vm.sportIndex = '';
+			vm.getSport();
+		},
+		allDaoChu: function allDaoChu(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.getSport();
+			} else {
+				vm.userXuanZe = [];
+			}
+		},
+		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.daochuList = ["MorPulse,晨脉", "Weight,体重", "SleepDuration,睡眠时间", "SleepQuality,睡眠质量", "Desire,饮食欲望", "SorenessLevel,肌肉酸痛评价", "FatigueLevel,伤病疼痛评价", "TrainStatus,自我训练状态评价", "Fatigue,RPE", "TrainIntensity,训练负荷", "Evaluate,教练评价"];
+			} else {
+				vm.daochuList = [];
+			}
+		}
+	},
+	//计算属性
+	computed: {
+		userId: function userId() {
+			return vm.sportList[vm.sportIndex] ? vm.sportList[vm.sportIndex].UserId : '';
+		},
+		daochuUrl: function daochuUrl() {
+			var _nameList = [];
+			var _valueList = [];
+			for (var i = 0; i < vm.daochuList.length; i++) {
+				if (vm.daochuList[i]) {
+					if (i != 0) {
+						_nameList += ',';
+						_valueList += ',';
+					}
+					_nameList += vm.daochuList[i].split(',')[0];
+					_valueList += vm.daochuList[i].split(',')[1];
+				}
+			}
+			var data = '';
+			data += "starttime=" + document.getElementById('starttime').value;
+			data += "&endtime=" + document.getElementById('endtime').value;
+			data += "&userid=" + vm.userXuanZe.join(',');
+			data += "&projectValue=" + _nameList;
+			data += "&projectName=" + _valueList;
+			return myPublic.publicUrl + '/API/Excelreport/SubjectiveExport?' + data;
+		}
+	},
+	methods: {
+		start: function start() {
+			vm.userType = window.localStorage.getItem('Sport_userType');
+			if (vm.userType == '分队教练') {
+				vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
+			}
+			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddDayDate(null, -14), 'yyyy-MM-dd');
+			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+			window.bus.$on('pingfen', function (val) {
+				vm.showPingFen = val;
+			});
+
+			window.bus.$on('childNum', function (val) {
+				vm.childNum = val;
+			});
+			vm.GetAllTrain().then(function () {
+				vm.getSport().then(function () {
+					vm.setTimeInp();
+					// vm.getList();
+				});
+			});
+		},
+		//获取训练专项
+		GetAllTrain: function GetAllTrain() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+					params: {
+						userName: ''
+					}
+				}).then(function (result) {
+					if (result.body.StateCode == 0) {
+						vm.zhuanxiangList = result.body.Data;
+						vm.$nextTick(function () {
+							var _id = JSON.parse(window.localStorage.getItem('user')).TrainId;
+							for (var i = 0; i < vm.zhuanxiangList.length; i++) {
+								if (vm.zhuanxiangList[i].Id == _id) {
+
+									vm.trainFirse = i;
+									break;
+								}
+							}
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+					reject();
+				});
+			});
+		},
+		//获取远动员列表
+		getSport: function getSport() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+					if (result.body.StateCode == 0) {
+						vm.sportList = result.body.Data;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							vm.userXuanZe.push(result.body.Data[i].UserId);
+						}
+						// if (result.body.Data && result.body.Data.length > 0) {
+						// 	vm.sportIndex = 0;
+						// }
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+					reject();
+				});
+			});
+		},
+		getList: function getList(totle) {
+			vm.shuaxin = !vm.shuaxin;
+			var _d = {};
+			_d.trainId = vm.trainFirse === '' ? '' : vm.zhuanxiangList[vm.trainFirse].Id;
+			_d.trainSecId = vm.trainFirse === '' ? '' : vm.trainId;
+			_d.sex = vm.sex;
+			_d.sportuserid = vm.sportIndex !== '' ? vm.userId : '';
+			_d.starttime = document.getElementById('starttime').value;
+			_d.endtime = document.getElementById('endtime').value;
+			_d.pagesize = totle ? totle : 999;
+			_d.pageindex = 1;
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllUserSubjective', {
+				params: _d
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					vm.bodyList = result.body.Data;
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setTimeInp: function setTimeInp() {
+			document.getElementById('starttime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date2 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('starttime').value = document.getElementById('endtime').value;
+			});
+			document.getElementById('endtime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_isDate) {
+					document.getElementById('endtime').value = _thisDate;
+					return;
+				}
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date1 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('endtime').value = document.getElementById('starttime').value;
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	beforeDestroy: function beforeDestroy() {
+		window.bus.$off('pingfen');
+		window.bus.$off('childNum');
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.againBiao = !vm.againBiao;
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ['againBiao', 'shuaxin', 'bodyList'],
+	data: function data() {
+		return {
+			pingfen: true
+		};
+	},
+	watch: {
+		shuaxin: function shuaxin() {
+			vm.setBiao();
+		},
+		bodyList: function bodyList() {
+			vm.setBiao();
+		},
+		againBiao: function againBiao() {
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			vm.setBiao();
+		},
+		showPingFen: function showPingFen() {
+			vm.pingfen = !vm.pingfen;
+			window.bus.$emit('pingfen', vm.pingfen);
+		},
+		setChildNum: function setChildNum(num) {
+			window.bus.$emit('childNum', num);
+		},
+		setBiao: function setBiao() {
+			var _dateList = [];
+			var _series = [{
+				name: '睡眠时间',
+				type: 'line',
+				data: []
+			}, {
+				name: '睡眠质量',
+				type: 'line',
+				data: []
+			}, {
+				name: '饮食欲望',
+				type: 'line',
+				data: []
+			}, {
+				name: '肌肉酸痛评价',
+				type: 'line',
+				data: []
+			}, {
+				name: '伤病疼痛评价',
+				type: 'line',
+				data: []
+			}, {
+				name: '自我训练状态评价',
+				type: 'line',
+				data: []
+			}, {
+				name: 'RPE',
+				type: 'line',
+				data: []
+			}, {
+				name: '训练负荷',
+				type: 'line',
+				data: []
+			}];
+			try {
+
+				for (var i = 0; i < vm.bodyList.length; i++) {
+					_dateList.push(vm.bodyList[i].DateSign);
+					_series[0].data[i] = vm.bodyList[i].SleepDuration; //睡眠时间
+					_series[1].data[i] = vm.bodyList[i].SleepQuality; //睡眠质量
+					_series[2].data[i] = vm.bodyList[i].Desire; //饮食欲望
+					_series[3].data[i] = vm.bodyList[i].SorenessLevel; //肌肉酸痛评价
+					_series[4].data[i] = vm.bodyList[i].FatigueLevel; //伤病疼痛评价
+					_series[5].data[i] = vm.bodyList[i].TrainStatus; //自我训练状态评价
+					_series[6].data[i] = vm.bodyList[i].Fatigue; //RPE
+				}
+			} catch (e) {
+				//TODO handle the exception
+			}
+			document.getElementById('child1').setAttribute("_echarts_instance_", "");
+			document.getElementById('child1').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('child1'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+					data: ['睡眠时间', '睡眠质量', '饮食欲望', '肌肉酸痛评价', '伤病疼痛评价', '自我训练状态评价', 'RPE']
+				},
+				grid: {
+					left: '10px',
+					right: '20px',
+					bottom: '10px',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: _dateList
+				},
+				yAxis: {
+					type: 'value'
+
+				},
+				series: _series
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ['againBiao', 'shuaxin', 'userId'],
+	data: function data() {
+		return {
+			bodyList: []
+		};
+	},
+	watch: {
+		shuaxin: function shuaxin() {
+			vm.getList();
+		},
+		againBiao: function againBiao() {
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			vm.getList();
+		},
+		getList: function getList() {
+			if (!vm.userId) {
+				return;
+			}
+			vm.$http.get(myPublic.publicUrl + '/API/Analysis/GetExerciseIntensityTrend', {
+				params: {
+					sportuserid: vm.userId,
+					starttime: document.getElementById('starttime').value,
+					endtime: document.getElementById('endtime').value
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					vm.bodyList = result.body.Data;
+					vm.setBiao();
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setBiao: function setBiao() {
+
+			var _dateList = [];
+			var _series = [{
+				name: '强度平均值',
+				type: 'bar',
+				stack: '总量',
+				barWidth: '50%',
+				data: []
+			}];
+			var _thisTime = new Date(document.getElementById('starttime').value.replace(/-/g, '/')).getTime();
+			var _time = new Date(document.getElementById('starttime').value.substr(0, 4) + '/01/01').getTime();
+			var addIndex = parseInt((_thisTime - _time) / (60 * 60 * 24 * 1000 * 7));
+			for (var i = 0; i < vm.bodyList.length; i++) {
+				_dateList.push('第' + (parseInt(vm.bodyList[i].Testdate) + addIndex) + '周');
+				_series[0].data.push(vm.bodyList[i].AvgIntensity); //平均值
+			}
+			document.getElementById('child2').setAttribute("_echarts_instance_", "");
+			document.getElementById('child2').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('child2'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				color: ["#3FA7DC"],
+				legend: {
+					data: ['强度平均值']
+				},
+				grid: {
+					left: '10px',
+					right: '20px',
+					bottom: '10px',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					data: _dateList
+				},
+				yAxis: [{
+					type: 'value',
+					name: '周训练负荷',
+					axisLabel: {
+						formatter: '{value}'
+					}
+
+				}],
+				series: _series
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ['againBiao', 'shuaxin', 'bodyList'],
+	data: function data() {
+		return {};
+	},
+	watch: {
+		shuaxin: function shuaxin() {
+			vm.setBiao();
+		},
+		bodyList: function bodyList() {
+			vm.setBiao();
+		},
+		againBiao: function againBiao() {
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {
+		leida: function leida() {
+			var item = {
+				Fatigue: 0, //RPE
+				SleepQuality: 0, //睡眠质量
+				Desire: 0, //饮食欲望
+				SorenessLevel: 0, //肌肉酸痛评价
+				FatigueLevel: 0, //伤病疼痛评价
+				TrainStatus: 0, //自我训练状态
+				FatigueLength: 0,
+				SleepQualityLength: 0,
+				DesireLength: 0,
+				SorenessLevelLength: 0,
+				FatigueLevelLength: 0,
+				TrainStatusLength: 0
+			};
+			try {
+
+				for (var i = 0; i < vm.bodyList.length; i++) {
+					item.Fatigue += vm.bodyList[i].Fatigue;
+					item.FatigueLength = vm.bodyList[i].Fatigue ? item.FatigueLength - -1 : item.FatigueLength;
+					item.SleepQuality += vm.bodyList[i].SleepQuality;
+					item.SleepQualityLength = vm.bodyList[i].SleepQuality ? item.SleepQualityLength - -1 : item.SleepQualityLength;
+					item.Desire += vm.bodyList[i].Desire;
+					item.DesireLength = vm.bodyList[i].Desire ? item.DesireLength - -1 : item.DesireLength;
+					item.SorenessLevel += vm.bodyList[i].SorenessLevel;
+					item.SorenessLevelLength = vm.bodyList[i].SorenessLevel ? item.SorenessLevelLength - -1 : item.SorenessLevelLength;
+					item.FatigueLevel += vm.bodyList[i].FatigueLevel;
+					item.FatigueLevelLength = vm.bodyList[i].FatigueLevel ? item.FatigueLevelLength - -1 : item.FatigueLevelLength;
+					item.TrainStatus += vm.bodyList[i].TrainStatus;
+					item.TrainStatusLength = vm.bodyList[i].TrainStatus ? item.TrainStatusLength - -1 : item.TrainStatusLength;
+				}
+				item.Fatigue = (item.Fatigue / (item.FatigueLength ? item.FatigueLength : 1)).toFixed(1);
+				item.SleepQuality = (item.SleepQuality / (item.SleepQualityLength ? item.SleepQualityLength : 1)).toFixed(1);
+				item.Desire = (item.Desire / (item.DesireLength ? item.DesireLength : 1)).toFixed(1);
+				item.SorenessLevel = (item.SorenessLevel / (item.SorenessLevelLength ? item.SorenessLevelLength : 1)).toFixed(1);
+				item.FatigueLevel = (item.FatigueLevel / (item.FatigueLevelLength ? item.FatigueLevelLength : 1)).toFixed(1);
+				item.TrainStatus = (item.TrainStatus / (item.TrainStatusLength ? item.TrainStatusLength : 1)).toFixed(1);
+				return item;
+			} catch (e) {
+				return item;
+			}
+		}
+	},
+	methods: {
+		start: function start() {
+			vm.setBiao();
+		},
+		setBiao: function setBiao() {
+			var _series = [vm.leida.Fatigue, vm.leida.SleepQuality, vm.leida.Desire, vm.leida.SorenessLevel, vm.leida.FatigueLevel, vm.leida.TrainStatus];
+			document.getElementById('biao-leida').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao-leida').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('biao-leida'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {},
+				legend: {
+					data: ['标准', '选择时间段的平均值']
+				},
+				polar: {},
+				angleAxis: {
+					show: false
+				},
+				radiusAxis: {
+					type: 'value',
+					min: 0,
+					max: 10,
+					interval: 2,
+					axisTick: {
+						show: false
+					},
+					splitLine: {
+						show: false
+					}
+				},
+				radar: {
+					name: {
+						textStyle: {
+							color: '#fff',
+							backgroundColor: 'rgba(186, 37, 56,0.5)',
+							borderRadius: 3,
+							padding: [3, 5]
+						}
+					},
+					radius: '70%',
+					indicator: [{
+						name: 'RPE',
+						max: 10
+					}, {
+						name: '睡眠质量',
+						max: 10
+					}, {
+						name: '饮食欲望',
+						max: 10
+					}, {
+						name: '肌肉酸痛评价',
+						max: 10
+					}, {
+						name: '伤病疼痛评价',
+						max: 10
+					}, {
+						name: '自我训练状态评价',
+						max: 10
+					}]
+				},
+				series: [{
+					name: '主观评价雷达图',
+					type: 'radar',
+					data: [{
+						value: [10, 10, 10, 10, 10, 10],
+						name: '标准'
+					}, {
+						value: _series,
+						name: '选择时间段的平均值'
+					}]
+				}]
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	name: 'app',
+	data: function data() {
+		return {};
+	},
+	methods: {
+		start: function start() {
+			if (vm.$route.path == '/policy' || vm.$route.path == '/technology') {
+				return;
+			}
+			if (window.localStorage.getItem('Sport_Access_Token')) {
+				vm.getUserInfo(window.localStorage.getItem('Sport_Access_Token'));
+			} else {
+				vm.$router.push({
+					path: '/login'
+				});
+			}
+		},
+		getUserInfo: function getUserInfo(data) {
+			vm.$http.get(myPublic.publicUrl + '/API/User/GetUserInfo', {
+				headers: {
+					token: data
+				}
+			}).then(function (result) {
+				try {
+					if (result.body.StateCode != 0) {
+						vm.$router.push({
+							path: '/login'
+						});
+					} else {
+						window.localStorage.setItem('user', JSON.stringify(result.body.Data));
+					}
+				} catch (err) {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+__webpack_require__(136);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			getOnr: {},
+			allDaoChu: ['1'],
+			allDaoChuNext: [],
+			daochuNum: 1,
+			userXuanZe: [],
+			daochuList: [],
+			daochu: false,
+			bodyList: [],
+			userType: '',
+			sex: '',
+			trainId: '', //小项
+			trainFirse: '', //专项父级
+			zhuanxiangList: [], //项目列表
+			sportList: [],
+			sportIndex: ''
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		topMenu: _menu2["default"]
+	},
+	watch: {
+		allDaoChu: function allDaoChu(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.getSport();
+			} else {
+				vm.userXuanZe = [];
+			}
+		},
+		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.daochuList = ["TotalMass,总质量", "Muscle,肌肉", "Fat,脂肪", "BoneMSalt,骨矿物盐", "BF,体脂率"];
+			} else {
+				vm.daochuList = [];
+			}
+		}
+	},
+	//计算属性
+	computed: {
+		daochuUrl: function daochuUrl() {
+			var _nameList = [];
+			var _valueList = [];
+			for (var i = 0; i < vm.daochuList.length; i++) {
+				if (vm.daochuList[i]) {
+					if (i != 0) {
+						_nameList += ',';
+						_valueList += ',';
+					}
+					_nameList += vm.daochuList[i].split(',')[0];
+					_valueList += vm.daochuList[i].split(',')[1];
+				}
+			}
+			var data = '';
+			data += "starttime=" + document.getElementById('starttime').value;
+			data += "&endtime=" + document.getElementById('endtime').value;
+			data += "&userid=" + vm.userXuanZe.join(',');
+			data += "&projectValue=" + _nameList;
+			data += "&projectName=" + _valueList;
+			return myPublic.publicUrl + '/API/Excelreport/BodyCompositionExport?' + data;
+		}
+	},
+	methods: {
+		start: function start() {
+			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
+			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+			vm.userType = window.localStorage.getItem('Sport_userType');
+			myPublic.tableHeader('#table-header');
+			vm.GetAllTrain().then(function () {
+				vm.setTimeInp();
+				vm.getSport().then(function () {
+					vm.getBodyFatTrend();
+				});
+			});
+		},
+		//获取训练专项
+		GetAllTrain: function GetAllTrain() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+					params: {
+						userName: ''
+					}
+				}).then(function (result) {
+					if (result.body.StateCode == 0) {
+						vm.zhuanxiangList = result.body.Data;
+						vm.$nextTick(function () {
+							var _id = JSON.parse(window.localStorage.getItem('user')).TrainId;
+							for (var i = 0; i < vm.zhuanxiangList.length; i++) {
+								if (vm.zhuanxiangList[i].Id == _id) {
+
+									vm.trainFirse = i;
+									break;
+								}
+							}
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+					reject();
+				});
+			});
+		},
+		//获取远动员列表
+		getSport: function getSport() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+
+					if (result.body.StateCode == 0) {
+						vm.sportList = result.body.Data;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							vm.userXuanZe.push(result.body.Data[i].UserId);
+						}
+						// if (result.body.Data && result.body.Data.length > 0) {
+						// 	vm.sportIndex = 0;
+						// }
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+				});
+			});
+		},
+		//获取体成分
+		getBodyFatTrend: function getBodyFatTrend() {
+			var userId = '';
+			if (vm.userType == '教练') {
+				userId = vm.sportList[vm.sportIndex].UserId;
+			}
+			vm.$http.get(myPublic.publicUrl + '/API/Analysis/GetBodyFatTrend', {
+				params: {
+					sportuserid: userId,
+					starttime: document.getElementById('starttime').value,
+					endtime: document.getElementById('endtime').value
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					vm.bodyList = result.body.Data;
+					vm.setBiao();
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setBiao: function setBiao() {
+			var _dateList = [];
+			var _series = [{
+				name: '体脂率',
+				type: 'line',
+				yAxisIndex: 1,
+				data: []
+			}, {
+				name: '骨矿物盐',
+				barWidth: '50%',
+				type: 'bar',
+				stack: '总量',
+				data: []
+			}, {
+				name: '脂肪',
+				type: 'bar',
+				stack: '总量',
+				data: []
+			}, {
+				name: '肌肉',
+				type: 'bar',
+				stack: '总量',
+				data: []
+			}];
+			for (var i = 0; i < vm.bodyList.length; i++) {
+				_dateList.push(vm.bodyList[i].Testdate);
+				_series[0].data.push(vm.bodyList[i].BF);
+				_series[1].data.push(vm.bodyList[i].BoneMSalt);
+				_series[2].data.push(vm.bodyList[i].Fat);
+				_series[3].data.push(vm.bodyList[i].Muscle);
+			}
+			document.getElementById('biao').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('biao'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+					data: ['体脂率', '骨矿物盐', '脂肪', '肌肉']
+				},
+				grid: {
+					left: '50px',
+					right: '50px',
+					bottom: '10px',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					data: _dateList
+				},
+				yAxis: [{
+					type: 'value',
+					name: '质量',
+					axisLabel: {
+						formatter: '{value} kg'
+					}
+
+				}, {
+					type: 'value',
+					name: '百分比',
+					max: 50,
+					axisLabel: {
+						formatter: '{value} %'
+					}
+				}],
+				series: _series
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		},
+		setTimeInp: function setTimeInp() {
+			document.getElementById('starttime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date2 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('starttime').value = document.getElementById('endtime').value;
+			});
+			document.getElementById('endtime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_isDate) {
+					document.getElementById('endtime').value = _thisDate;
+					return;
+				}
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date1 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('endtime').value = document.getElementById('starttime').value;
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.start();
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+__webpack_require__(136);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			getOnr: {},
+			allDaoChu: ['1'],
+			allDaoChuNext: [],
+			daochuNum: 1,
+			userXuanZe: [],
+			daochuList: [],
+			daochu: false,
+			bodyList: [],
+			userType: '',
+			sex: '',
+			trainId: '', //小项
+			trainFirse: '', //专项父级
+			zhuanxiangList: [], //项目列表
+			sportList: [],
+			sportIndex: ''
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		topMenu: _menu2["default"]
+	},
+	watch: {
+		sportIndex: function sportIndex(newVal, oldVal) {
+			window.sportIndex = newVal;
+			vm.getBodyFatTrend();
+		},
+		allDaoChu: function allDaoChu(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.getSport();
+			} else {
+				vm.userXuanZe = [];
+			}
+		},
+		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.daochuList = ["TotalMass,总质量", "Muscle,肌肉", "Fat,脂肪", "BoneMSalt,骨矿物盐", "BF,体脂率"];
+			} else {
+				vm.daochuList = [];
+			}
+		}
+	},
+	//计算属性
+	computed: {
+		daochuUrl: function daochuUrl() {
+			var _nameList = [];
+			var _valueList = [];
+			for (var i = 0; i < vm.daochuList.length; i++) {
+				if (vm.daochuList[i]) {
+					if (i != 0) {
+						_nameList += ',';
+						_valueList += ',';
+					}
+					_nameList += vm.daochuList[i].split(',')[0];
+					_valueList += vm.daochuList[i].split(',')[1];
+				}
+			}
+			var data = '';
+			data += "starttime=" + document.getElementById('starttime').value;
+			data += "&endtime=" + document.getElementById('endtime').value;
+			data += "&userid=" + vm.userXuanZe.join(',');
+			data += "&projectValue=" + _nameList;
+			data += "&projectName=" + _valueList;
+			return myPublic.publicUrl + '/API/Excelreport/BodyCompositionExport?' + data;
+		}
+	},
+	methods: {
+		start: function start() {
+			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
+			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+			vm.userType = window.localStorage.getItem('Sport_userType');
+			myPublic.tableHeader('#table-header');
+			vm.GetAllTrain().then(function () {
+				vm.setTimeInp();
+				vm.getSport().then(function () {
+
+					vm.getBodyFatTrend();
+				});
+			});
+		},
+		//获取训练专项
+		GetAllTrain: function GetAllTrain() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+					params: {
+						userName: ''
+					}
+				}).then(function (result) {
+					if (result.body.StateCode == 0) {
+						vm.zhuanxiangList = result.body.Data;
+						vm.$nextTick(function () {
+							var _id = JSON.parse(window.localStorage.getItem('user')).TrainId;
+							for (var i = 0; i < vm.zhuanxiangList.length; i++) {
+								if (vm.zhuanxiangList[i].Id == _id) {
+
+									vm.trainFirse = i;
+									break;
+								}
+							}
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+					reject();
+				});
+			});
+		},
+		//获取远动员列表
+		getSport: function getSport() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+
+					if (result.body.StateCode == 0) {
+						vm.sportList = result.body.Data;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							vm.userXuanZe.push(result.body.Data[i].UserId);
+						}
+						// if (result.body.Data && result.body.Data.length > 0) {
+						// 	vm.sportIndex = 0;
+						// }
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+				});
+			});
+		},
+		//获取体成分
+		getBodyFatTrend: function getBodyFatTrend() {
+			var userId = '';
+			if (vm.userType == '教练') {
+				userId = vm.sportList[vm.sportIndex].UserId;
+			}
+			vm.$http.get(myPublic.publicUrl + '/API/Analysis/GetBodyFatTrend', {
+				params: {
+					sportuserid: userId,
+					starttime: document.getElementById('starttime').value,
+					endtime: document.getElementById('endtime').value
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					vm.bodyList = result.body.Data;
+					vm.setBiao();
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setBiao: function setBiao() {
+			var _dateList = [];
+			var _series = [{
+				name: '体脂率',
+				type: 'line',
+				yAxisIndex: 1,
+				data: []
+			}, {
+				name: '骨矿物盐',
+				barWidth: '50%',
+				type: 'bar',
+				stack: '总量',
+				data: []
+			}, {
+				name: '脂肪',
+				type: 'bar',
+				stack: '总量',
+				data: []
+			}, {
+				name: '肌肉',
+				type: 'bar',
+				stack: '总量',
+				data: []
+			}];
+			for (var i = 0; i < vm.bodyList.length; i++) {
+				_dateList.push(vm.bodyList[i].Testdate);
+				_series[0].data.push(vm.bodyList[i].BF);
+				_series[1].data.push(vm.bodyList[i].BoneMSalt);
+				_series[2].data.push(vm.bodyList[i].Fat);
+				_series[3].data.push(vm.bodyList[i].Muscle);
+			}
+			document.getElementById('biao').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('biao'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+					data: ['体脂率', '骨矿物盐', '脂肪', '肌肉']
+				},
+				grid: {
+					left: '50px',
+					right: '50px',
+					bottom: '10px',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					data: _dateList
+				},
+				yAxis: [{
+					type: 'value',
+					name: '质量',
+					axisLabel: {
+						formatter: '{value} kg'
+					}
+
+				}, {
+					type: 'value',
+					name: '百分比',
+					max: 50,
+					axisLabel: {
+						formatter: '{value} %'
+					}
+				}],
+				series: _series
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		},
+		setTimeInp: function setTimeInp() {
+			document.getElementById('starttime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date2 == '' || isDate) {
+					vm.getBodyFatTrend();
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('starttime').value = document.getElementById('endtime').value;
+				vm.getBodyFatTrend();
+			});
+			document.getElementById('endtime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_isDate) {
+					document.getElementById('endtime').value = _thisDate;
+					vm.getBodyFatTrend();
+					return;
+				}
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date1 == '' || isDate) {
+					vm.getBodyFatTrend();
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('endtime').value = document.getElementById('starttime').value;
+				vm.getBodyFatTrend();
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.start();
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			role: [''],
+			roleList: [],
+			isRole: ''
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"]
+	},
+	watch: {
+		roleJson: function roleJson(newVal, oldVal) {
+			var _d = JSON.parse(newVal);
+			if (window.t) {
+				clearTimeout(window.t);
+			}
+			window.t = '';
+			window.t = setTimeout(function () {
+				if (_d[_d.length - 1] != '') {
+					window.t = '';
+					vm.role.push('');
+					return;
+				} else {
+					vm.role = Array.from(new Set(_d));
+				}
+				if (_d.length == 1) {
+					vm.isRole = '专项不得为空';
+				} else {
+					vm.isRole = '';
+				}
+				window.t = '';
+			}, 50);
+		}
+	},
+	//计算属性
+	computed: {
+		roleJson: function roleJson() {
+			return JSON.stringify(vm.role);
+		}
+	},
+	methods: {
+		start: function start() {
+			vm.getAllCoach();
+		},
+		closeZhuanXiang: function closeZhuanXiang(i) {
+
+			vm.role.splice(i, 1);
+		},
+		getAllCoach: function getAllCoach() {
+
+			vm.$http.post(myPublic.publicUrl + '/API/Account/GetAllCoach').then(function (result) {
+				if (result.body.StateCode == 0) {
+					vm.roleList = result.body.Data;
+					vm.$forceUpdate();
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		next: function next() {
+			var _l = Object.assign([], vm.role);
+			_l.splice(_l.length - 1, 1);
+			vm.$http.post(myPublic.publicUrl + '/API/Account/SelectSportsCoach', _l).then(function (result) {
+				if (result.body.StateCode == 0 || result.body.Data) {
+					vm.$router.push({
+						path: '/subjective'
+					});
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+
+			vm.$router.push({
+				path: '/subjective'
+			});
+		},
+		back: function back() {
+			vm.$router.back(-1);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			mobile: '',
+			code: '',
+			password: '',
+			newpassword: '',
+
+			isMobile: '',
+			isCode: '',
+			isPassword: '',
+			isNewpassword: '',
+
+			isGetCode: false,
+			getCodeText: '获取验证码'
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"]
+	},
+	watch: {},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {},
+		/**
+   * 获取验证码
+   */
+		getCode: function getCode() {
+			if (vm.getCodeText != '获取验证码') return;
+			vm.isGetCode = true;
+			var i = 60;
+			vm.getCodeText = i + '重新发送';
+			var _time = setInterval(function () {
+				vm.getCodeText = --i + '重新发送';
+				if (i < 0) {
+					clearInterval(_time);
+					vm.getCodeText = '获取验证码';
+				}
+			}, 1000);
+		},
+		/**
+   * 找回密码
+   */
+		forget: function forget() {
+			var _d = {
+				PhoneNumber: vm.mobile, //手机号
+				VerifyCode: vm.code, //验证码
+				Password: vm.password, //新密码
+				ConfirmPassword: vm.newpassword //确认新密码
+			};
+			vm.$http.post(myPublic.publicUrl + '/API/Account/ReSetPasswordByPhoneCode', _d).then(function (result) {
+				if (result.body.StateCode == 0) {
+					window.myPublic.alertResult(result.body.Message);
+					vm.$router.back(-1);
+				} else {
+					window.myPublic.alertResult(result.body.Message);
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		/**
+   * 去登陆
+   */
+		back: function back() {
+			vm.$router.back(-1);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+__webpack_require__(431);
+
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			list: []
+		};
+	},
+	//公共模板
+	components: {},
+	watch: {},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			vm.list = [{
+				name: 'as'
+			}, {
+				name: 'ed'
+			}, {
+				name: 'asd'
+			}];
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _methods;
+
+function _defineProperty(obj, key, value) {
+	if (key in obj) {
+		Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+	} else {
+		obj[key] = value;
+	}return obj;
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			loginType: true,
+			isMessage: {},
+			jiyi: [], //记住密码
+			userName: '',
+			passWord: '',
+			mobile: '',
+			code: '',
+			isGetCode: false,
+			getCodeText: '获取验证码'
+		};
+	},
+	//公共模板
+	components: {},
+	watch: {},
+	//计算属性
+	computed: {},
+	methods: (_methods = {
+		start: function start() {
+			if (window.localStorage.getItem('Sport_jiyi')) {
+				vm.jiyi = ['yes'];
+				vm.userName = window.localStorage.getItem('Sport_jiyi');
+				vm.passWord = window.localStorage.getItem('Sport_jiyiPass');
+			} else {
+				vm.jiyi = [];
+			}
+		},
+		/**
+   * 获取验证码
+   */
+		getCode: function getCode() {
+			if (vm.getCodeText != '获取验证码') return;
+			vm.isGetCode = true;
+			var i = 60;
+			vm.getCodeText = i + '重新发送';
+			var _time = setInterval(function () {
+				vm.getCodeText = --i + '重新发送';
+				if (i < 0) {
+					clearInterval(_time);
+					vm.getCodeText = '获取验证码';
+				}
+			}, 1000);
+		},
+		/**
+   * 忘记密码
+   */
+		forget: function forget() {
+			vm.$router.push({
+				path: '/register'
+			});
+		},
+		/**
+   * 记住用户
+   */
+		jiyiChange: function jiyiChange() {
+			console.log(vm.jiyi);
+			if (vm.jiyi.length > 0) {
+				window.localStorage.setItem('Sport_jiyi', vm.userName);
+				window.localStorage.setItem('Sport_jiyiPass', vm.passWord);
+			} else {
+				window.localStorage.removeItem('Sport_jiyi', vm.userName);
+				window.localStorage.removeItem('Sport_jiyiPass', vm.passWord);
+			}
+		},
+		/**
+   * 登录
+   */
+		login: function login() {
+			vm.$http.post(myPublic.publicUrl + '/API/Account/Login', {
+				'UserName': vm.userName,
+				'Password': vm.passWord
+			}).then(function (result) {
+				if (result.body.Message == "登录成功") {
+					window.localStorage.setItem('Sport_Access_Token', result.body.Data.Token_Type + ' ' + result.body.Data.Access_Token);
+					window.localStorage.setItem('Sport_userType', result.body.Data.RoleName);
+					window.localStorage.setItem('Sport_userPicture', window.myPublic.publicUrl + result.body.Data.Picture ? result.body.Data.Picture : '/web/wwwroot/dist/images/person.png');
+					vm.getUserInfo(result.body.Data);
+				} else {
+					vm.isMessage = result.body.ErrorMessges;
+					window.myPublic.alertResult(result.body.Message);
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		/**
+   * 手机号登录
+   */
+		loginByMobile: function loginByMobile() {
+			if (!vm.isGetCode) myPublic.alertResult('请先发送验证码');
+		},
+		/**
+   * 获取用户权限
+   * @param {Object} data
+   */
+		getUserInfo: function getUserInfo(data) {
+			vm.$http.get(myPublic.publicUrl + '/API/User/GetUserInfo', {
+				headers: {
+					token: data.Token_Type + ' ' + data.Access_Token
+				}
+			}).then(function (result) {
+				window.localStorage.setItem('user', JSON.stringify(result.body.Data));
+				if (result.body.StateCode == 0) {
+					if (window.localStorage.getItem('Sport_userType') == '运动员') {
+						if (result.body.Data.CoachId) {
+							vm.$router.push({
+								path: '/subjective'
+							});
+						} else {
+							vm.$router.push({
+								path: '/choiceRegister'
+							});
+						}
+					} else {
+						vm.$router.push({
+							path: '/allSubjective'
+						});
+					}
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		}
+	}, _defineProperty(_methods, 'forget', function forget() {
+		vm.$router.push({
+			path: '/forget'
+		});
+	}), _defineProperty(_methods, 'register', function register() {
+		vm.$router.push({
+			path: '/register'
+		});
+	}), _methods),
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {};
+	},
+	//公共模板
+	components: {},
+	watch: {},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _yunDongYuan = __webpack_require__(464);
+
+var _yunDongYuan2 = _interopRequireDefault(_yunDongYuan);
+
+var _jiaoLian = __webpack_require__(463);
+
+var _jiaoLian2 = _interopRequireDefault(_jiaoLian);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			role: '1',
+			isRole: ''
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		yunComponent: _yunDongYuan2["default"],
+		jiaoComponent: _jiaoLian2["default"]
+	},
+	watch: {},
+	//计算属性
+	computed: {},
+	methods: {},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {}
+};
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+
+function valiTime() {
+	return new Promise(function (resolve, reject) {
+		if (window.t) {
+			clearTimeout(window.t);
+		}
+		window.t = '';
+		window.t = setTimeout(function () {
+			resolve();
+		}, 500);
+	});
+}
 exports["default"] = {
 	props: [],
 	data: function data() {
 		return {
-			trainFirse: [','], //专项父级
-			trainChild: '', //专项子级
-			trainChildList: [''],
-			zhuanxiangList: [],
-			zhuanxiangChileList: [],
-			departmentFirse: [''], //教练员父级
-			departmentSecond: [''],
-			departmentChild: '', //教练员子级
-			departmentChildLists: [''],
-			departmentList: [],
-			departmentChildList: [],
+			trainFirse: '', //专项父级
+			zhuanxiangList: [], //项目列表
 			userName: '',
 			name: '',
 			passWord: '',
 			repeatPassWord: '',
 			sex: '男',
-			year: 0,
-			month: 1,
-			day: 1,
+			mobile: '',
+			code: '',
 			SportGrade: 0, //运动等级
 			startTime: '',
 			isUserName: '',
 			isName: '',
 			isPassWord: '',
 			isRepeatPassWord: '',
-			isTrainChild: '',
-			isDepartmentChild: '',
-			isStartTime: ''
+			isMobile: '',
+			isCode: '',
+			isTrainFirse: '',
+			isStartTime: '',
+			isGetCode: false,
+			getCodeText: '获取验证码'
 		};
 	},
 	watch: {
 		userName: function userName(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				if (newVal != '') {
-					//						var reg = new RegExp("^(1[34578][0-9]{9})$"); //正则表达式
-					//						if(!reg.test(newVal)) { //正则验证不通过，格式不对
-					//							vm.isUserName = '手机号格式不正确';
-					//							return;
-					//						}
 					vm.$http.get(myPublic.publicUrl + '/API/Account/UserNameExists', {
 						params: {
 							userName: newVal
@@ -16614,28 +18111,20 @@ exports["default"] = {
 					vm.isUserName = '用户名不可为空';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
 		name: function name(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				if (newVal == '') {
 					vm.isName = '姓名不可为空';
 				} else {
 					vm.isName = '';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
 		passWord: function passWord(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				var reg = /[a-z]/; //正则表达式
 				if (newVal == '') {
 					vm.isPassWord = '密码不可为空';
@@ -16648,124 +18137,47 @@ exports["default"] = {
 					vm.isPassWord = '';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
 		repeatPassWord: function repeatPassWord(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				if (newVal == '') {
 					vm.isRepeatPassWord = '密码不可为空';
 				} else {
 					vm.isRepeatPassWord = '';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
-		trainChildListJson: function trainChildListJson(newVal, oldVal) {
-			var _d = JSON.parse(newVal);
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
-				if (_d[_d.length - 1] != '') {
-					window.t = '';
-					vm.trainChildList.push('');
-					vm.trainFirse.push(',');
-					return;
-				}
-				var _l = [];
-				var _ll = [];
-				for (var i = 0; i < _d.length - 1; i++) {
-					if (_d[i] != '') {
-						_l.push(_d[i]);
-						_ll.push(vm.trainFirse[i]);
-					}
-				}
-				_l.push(_d[_d.length - 1]);
-				_ll.push(vm.trainFirse[_d.length - 1]);
-				if (JSON.stringify(_l) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.trainChildList = _l;
-					vm.trainFirse = _ll;
-					return;
-				}
-				var temp = []; //一个新的临时数组
-				for (var i = 0; i < _d.length; i++) {
-					if (temp.indexOf(_d[i]) == -1) {
-						temp.push(_d[i]);
-					} else {
-						temp.push('');
-					}
-				}
-				if (JSON.stringify(temp) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.trainChildList = temp;
-					return;
-				}
-				if (_d.length == 1) {
-					vm.isTrainChild = '专项不得为空';
+		mobile: function mobile(newVal, oldVal) {
+			valiTime().then(function () {
+				if (newVal == '') {
+					vm.isMobile = '手机号不可为空';
 				} else {
-					vm.isTrainChild = '';
+					vm.isMobile = '';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
-		departmentChildListsJson: function departmentChildListsJson(newVal, oldVal) {
-			var _d = JSON.parse(newVal);
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
-				if (_d[_d.length - 1] != '') {
-					window.t = '';
-					vm.departmentChildLists.push('');
-					vm.departmentFirse.push('');
-					vm.departmentSecond.push('');
-					return;
-				}
-				var _l = [];
-				var _ll = [];
-				var _lll = [];
-				for (var i = 0; i < _d.length - 1; i++) {
-					if (_d[i] != '') {
-						_l.push(_d[i]);
-						_ll.push(vm.departmentFirse[i]);
-						_lll.push(vm.departmentSecond[i]);
-					}
-				}
-				_l.push(_d[_d.length - 1]);
-				_ll.push(vm.departmentFirse[_d.length - 1]);
-				_lll.push(vm.departmentSecond[_d.length - 1]);
-				if (JSON.stringify(_l) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.departmentChildLists = _l;
-					vm.departmentFirse = _ll;
-					vm.departmentSecond = _lll;
-					return;
-				}
-				var temp = []; //一个新的临时数组
-				for (var i = 0; i < _d.length; i++) {
-					if (temp.indexOf(_d[i]) == -1) {
-						temp.push(_d[i]);
-					}
-				}
-				if (JSON.stringify(temp) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.departmentChildLists = temp;
-					return;
-				}
-				if (_d.length == 1) {
-					vm.isDepartmentChild = '教练不得为空';
+		code: function code(newVal, oldVal) {
+			valiTime().then(function () {
+				if (newVal == '') {
+					vm.isCode = '验证码不可为空';
 				} else {
-					vm.isDepartmentChild = '';
+					vm.isCode = '';
 				}
 				window.t = '';
-			}, 500);
+			});
+		},
+		trainFirse: function trainFirse(newVal, oldVal) {
+			valiTime().then(function () {
+				if (newVal == '') {
+					vm.isTrainFirse = '运动项目不可为空';
+				} else {
+					vm.isTrainFirse = '';
+				}
+				window.t = '';
+			});
 		},
 		startTime: function startTime(newVal, oldVal) {
 			if (newVal == '') {
@@ -16790,27 +18202,6 @@ exports["default"] = {
 	},
 	//计算属性
 	computed: {
-		yearlength: function yearlength() {
-			var _y = new Date().getFullYear();
-			return _y - 1970;
-		},
-		trainChildListJson: function trainChildListJson() {
-			return JSON.stringify(vm.trainChildList);
-		},
-		departmentChildListsJson: function departmentChildListsJson() {
-			return JSON.stringify(vm.departmentChildLists);
-		},
-		dayLength: function dayLength() {
-			if (vm.month == 1 || vm.month == 3 || vm.month == 5 || vm.month == 7 || vm.month == 8 || vm.month == 10 || vm.month == 12) {
-				return 31;
-			} else if (vm.month == 4 || vm.month == 6 || vm.month == 9 || vm.month == 11) {
-				return 30;
-			} else if (vm.year % 4 == 0 && vm.year % 100 != 0 || vm.year % 400 == 0) {
-				return 29;
-			} else {
-				return 28;
-			}
-		},
 		valiDate: function valiDate() {
 			//用户名
 			if (vm.userName == '') {
@@ -16832,13 +18223,13 @@ exports["default"] = {
 				vm.isRepeatPassWord = '两次密码不一致';
 			}
 
-			//专项
-			if (vm.trainChildList.length == 1) {
-				vm.isTrainChild = '专项不得为空';
+			//姓名
+			if (vm.mobile == '') {
+				vm.isMobile = '手机号不得为空';
 			}
-			//教练
-			if (vm.departmentChildLists.length == 1) {
-				vm.isDepartmentChild = '教练不得为空';
+			//姓名
+			if (vm.code == '') {
+				vm.isCode = '验证码不得为空';
 			}
 			//开始时间
 			if (vm.startTime == '') {
@@ -16848,7 +18239,7 @@ exports["default"] = {
 				vm.isStartTime = '训练开始时间格式不正确';
 			}
 
-			if (vm.isUserName || vm.isName || vm.isPassWord || vm.isRepeatPassWord || vm.isTrainChild || vm.isDepartmentChild || vm.isStartTime) {
+			if (vm.isUserName || vm.isName || vm.isPassWord || vm.isRepeatPassWord || vm.isMobile || vm.isCode || vm.isTrainFirse || vm.isStartTime) {
 				return false;
 			} else {
 				return true;
@@ -16857,34 +18248,38 @@ exports["default"] = {
 	},
 	methods: {
 		start: function start() {
-			vm.GetAllDepartment();
 			vm.GetAllTrain();
-			var _d = new Date();
-			vm.startTime = _d.getFullYear();
-			vm.year = new Date().getFullYear();
 			vm.startTime = new Date().getFullYear();
 		},
-		closeJiaoLian: function closeJiaoLian(i) {
-			vm.departmentChildLists.splice(i, 1);
-			vm.departmentFirse.splice(i, 1);
-			vm.departmentSecond.splice(i, 1);
-		},
-		closeZhuanXiang: function closeZhuanXiang(i) {
-			vm.trainChildList.splice(i, 1);
-			vm.trainFirse.splice(i, 1);
-		},
-		//获取教练员
-		GetAllDepartment: function GetAllDepartment() {
+		/**
+   * 获取验证码
+   */
+		getCode: function getCode() {
+			if (vm.mobile == '') {
+				vm.isMobile = '验证码不得为空';
+				return;
+			} else {
+				vm.isMobile = '';
+			}
+			if (vm.getCodeText != '获取验证码' || vm.mobile == '') return;
+			vm.isGetCode = true;
+			var i = 60;
+			vm.getCodeText = i + '重新发送';
+			var _time = setInterval(function () {
+				vm.getCodeText = --i + '重新发送';
+				if (i < 0) {
+					clearInterval(_time);
+					vm.getCodeText = '获取验证码';
+				}
+			}, 1000);
 
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllDepartment', {}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					for (var i = 0; i < result.body.Data.length; i++) {
-						if (result.body.Data[i].SystemId.length == 3) {
-							vm.departmentList.push(result.body.Data[i]);
-						} else {
-							vm.departmentChildList.push(result.body.Data[i]);
-						}
-					}
+			vm.$http.post(myPublic.publicUrl + '/API/Account/SendCode2Phone', {
+				PhoneNumber: vm.mobile
+			}).then(function (result) {
+				if (result.body.StateCode == 100) {} else if (result.body.StateCode == 0) {
+					vm.$router.push({
+						path: '/login'
+					});
 				}
 			})["catch"](function (error) {
 				console.log(error);
@@ -16899,13 +18294,7 @@ exports["default"] = {
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
-					for (var i = 0; i < result.body.Data.length; i++) {
-						if (result.body.Data[i].SystemId.length == 3) {
-							vm.zhuanxiangList.push(result.body.Data[i]);
-						} else {
-							vm.zhuanxiangChileList.push(result.body.Data[i]);
-						}
-					}
+					vm.zhuanxiangList = result.body.Data;
 				}
 			})["catch"](function (error) {
 				console.log(error);
@@ -16914,41 +18303,27 @@ exports["default"] = {
 		register: function register() {
 			if (!vm.valiDate) {
 				return;
-				console.log('111');
-			}
-			var _l = [];
-			for (var i = 0; i < vm.trainChildList.length - 1; i++) {
-				if (vm.trainChildList[i] != '') {
-					_l.push(vm.trainChildList[i]);
-				}
-			}
-			var _s = [];
-			for (var i = 0; i < vm.departmentChildLists.length - 1; i++) {
-				if (vm.departmentChildLists[i] != '') {
-					_s.push(vm.departmentChildLists[i]);
-				}
 			}
 			vm.$http.post(myPublic.publicUrl + '/API/Account/Register', {
+				Type: '教练',
 				UserName: vm.userName,
 				Sex: vm.sex,
 				FullName: vm.name,
-				Birthday: vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day),
-				SportGrade: vm.SportGrade,
-				TrainId: _l, //训练项目
-				SysDepartmentId: _s, //教练员
-				Start4Training: vm.startTime,
+				SportGrade: vm.SportGrade, //运动等级
+				TrainId: [vm.trainFirse], //训练项目
+				PhoneNumber: vm.mobile,
+				VerifyCode: vm.code,
+				Start4Training: vm.startTime, //专训开始时间
 				Password: vm.passWord,
 				ConfirmPassword: vm.repeatPassWord
 			}).then(function (result) {
-				if (result.body.StateCode == 100) {
-					vm.isPassWord = result.body.ErrorMessges.Password ? result.body.ErrorMessges.Password : '';
-				} else if (result.body.StateCode == 0) {
+				if (result.body.StateCode == 0) {
+					myPublic.alertResult('注册成功');
 					vm.$router.push({
 						path: '/login'
 					});
-					//							window.localStorage.setItem('Sport_userType',result.body.Data.RoleName)
-					//							window.localStorage.setItem('Sport_Access_Token', result.body.Data.Token_Type + ' ' + result.body.Data.Access_Token);
-					//							vm.getUserInfo(result.body.Data);
+				} else {
+					myPublic.alertResult(result.body.Message);
 				}
 			})["catch"](function (error) {
 				console.log(error);
@@ -16985,7 +18360,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 177 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17121,16 +18496,91 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var vm;
+
+function valiTime() {
+	return new Promise(function (resolve, reject) {
+		if (window.t) {
+			clearTimeout(window.t);
+		}
+		window.t = '';
+		window.t = setTimeout(function () {
+			resolve();
+		}, 500);
+	});
+}
 exports["default"] = {
 	props: [],
 	data: function data() {
 		return {
-			trainFirse: [','], //专项父级
+			trainFirse: '', //专项父级
 			trainChild: '', //专项子级
 			trainChildList: [''],
-			zhuanxiangList: [],
+			zhuanxiangList: [], //项目列表
 			zhuanxiangChileList: [],
 			userName: '',
 			name: '',
@@ -17140,29 +18590,32 @@ exports["default"] = {
 			year: 0,
 			month: 1,
 			day: 1,
+			mobile: '',
+			code: '',
+			nativePlace: '', //籍贯
+			nation: '', //民族
+			bloodType: '', //血型
+			height: '', //身高
+			weight: '', //体重
 			SportGrade: 0, //运动等级
 			startTime: '',
 			isUserName: '',
 			isName: '',
 			isPassWord: '',
 			isRepeatPassWord: '',
+			isMobile: '',
+			isCode: '',
 			isTrainChild: '',
-			isStartTime: ''
+			isStartTime: '',
+
+			isGetCode: false,
+			getCodeText: '获取验证码'
 		};
 	},
 	watch: {
 		userName: function userName(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				if (newVal != '') {
-					//						var reg = new RegExp("^(1[34578][0-9]{9})$"); //正则表达式
-					//						if(!reg.test(newVal)) { //正则验证不通过，格式不对
-					//							vm.isUserName = '手机号格式不正确';
-					//							return;
-					//						}
 					vm.$http.get(myPublic.publicUrl + '/API/Account/UserNameExists', {
 						params: {
 							userName: newVal
@@ -17180,28 +18633,20 @@ exports["default"] = {
 					vm.isUserName = '用户名不可为空';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
 		name: function name(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				if (newVal == '') {
 					vm.isName = '姓名不可为空';
 				} else {
 					vm.isName = '';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
 		passWord: function passWord(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				var reg = /[a-z]/; //正则表达式
 				if (newVal == '') {
 					vm.isPassWord = '密码不可为空';
@@ -17214,21 +18659,37 @@ exports["default"] = {
 					vm.isPassWord = '';
 				}
 				window.t = '';
-			}, 500);
+			});
 		},
 		repeatPassWord: function repeatPassWord(newVal, oldVal) {
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
+			valiTime().then(function () {
 				if (newVal == '') {
 					vm.isRepeatPassWord = '密码不可为空';
 				} else {
 					vm.isRepeatPassWord = '';
 				}
 				window.t = '';
-			}, 500);
+			});
+		},
+		mobile: function mobile(newVal, oldVal) {
+			valiTime().then(function () {
+				if (newVal == '') {
+					vm.isMobile = '姓名不可为空';
+				} else {
+					vm.isMobile = '';
+				}
+				window.t = '';
+			});
+		},
+		code: function code(newVal, oldVal) {
+			valiTime().then(function () {
+				if (newVal == '') {
+					vm.isCode = '姓名不可为空';
+				} else {
+					vm.isCode = '';
+				}
+				window.t = '';
+			});
 		},
 		trainChildListJson: function trainChildListJson(newVal, oldVal) {
 			var _d = JSON.parse(newVal);
@@ -17240,37 +18701,9 @@ exports["default"] = {
 				if (_d[_d.length - 1] != '') {
 					window.t = '';
 					vm.trainChildList.push('');
-					vm.trainFirse.push(',');
 					return;
-				}
-				var _l = [];
-				var _ll = [];
-				for (var i = 0; i < _d.length - 1; i++) {
-					if (_d[i] != '') {
-						_l.push(_d[i]);
-						_ll.push(vm.trainFirse[i]);
-					}
-				}
-				_l.push(_d[_d.length - 1]);
-				_ll.push(vm.trainFirse[_d.length - 1]);
-				if (JSON.stringify(_l) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.trainChildList = _l;
-					vm.trainFirse = _ll;
-					return;
-				}
-				var temp = []; //一个新的临时数组
-				for (var i = 0; i < _d.length; i++) {
-					if (temp.indexOf(_d[i]) == -1) {
-						temp.push(_d[i]);
-					} else {
-						temp.push('');
-					}
-				}
-				if (JSON.stringify(temp) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.trainChildList = temp;
-					return;
+				} else {
+					vm.trainChildList = Array.from(new Set(_d));
 				}
 				if (_d.length == 1) {
 					vm.isTrainChild = '专项不得为空';
@@ -17278,7 +18711,7 @@ exports["default"] = {
 					vm.isTrainChild = '';
 				}
 				window.t = '';
-			}, 500);
+			}, 50);
 		},
 		startTime: function startTime(newVal, oldVal) {
 			if (newVal == '') {
@@ -17342,6 +18775,14 @@ exports["default"] = {
 				vm.isRepeatPassWord = '两次密码不一致';
 			}
 
+			//姓名
+			if (vm.mobile == '') {
+				vm.isMobile = '手机号不得为空';
+			}
+			//姓名
+			if (vm.code == '') {
+				vm.isCode = '验证码不得为空';
+			}
 			//专项
 			if (vm.trainChildList.length == 1) {
 				vm.isTrainChild = '专项不得为空';
@@ -17354,7 +18795,7 @@ exports["default"] = {
 				vm.isStartTime = '训练开始时间格式不正确';
 			}
 
-			if (vm.isUserName || vm.isName || vm.isPassWord || vm.isRepeatPassWord || vm.isTrainChild || vm.isStartTime) {
+			if (vm.isUserName || vm.isName || vm.isPassWord || vm.isRepeatPassWord || vm.isMobile || vm.isCode || vm.isTrainChild || vm.isStartTime) {
 				return false;
 			} else {
 				return true;
@@ -17364,14 +18805,27 @@ exports["default"] = {
 	methods: {
 		start: function start() {
 			vm.GetAllTrain();
-			var _d = new Date();
-			vm.startTime = _d.getFullYear();
 			vm.year = new Date().getFullYear();
 			vm.startTime = new Date().getFullYear();
 		},
+		/**
+   * 获取验证码
+   */
+		getCode: function getCode() {
+			if (vm.getCodeText != '获取验证码') return;
+			vm.isGetCode = true;
+			var i = 60;
+			vm.getCodeText = i + '重新发送';
+			var _time = setInterval(function () {
+				vm.getCodeText = --i + '重新发送';
+				if (i < 0) {
+					clearInterval(_time);
+					vm.getCodeText = '获取验证码';
+				}
+			}, 1000);
+		},
 		closeZhuanXiang: function closeZhuanXiang(i) {
 			vm.trainChildList.splice(i, 1);
-			vm.trainFirse.splice(i, 1);
 		},
 		//获取训练专项
 		GetAllTrain: function GetAllTrain() {
@@ -17406,26 +18860,31 @@ exports["default"] = {
 				}
 			}
 			vm.$http.post(myPublic.publicUrl + '/API/Account/Register', {
-				UserName: vm.userName,
-				Sex: vm.sex,
-				FullName: vm.name,
-				Birthday: vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day),
-				SportGrade: vm.SportGrade,
-				TrainId: _l, //训练项目
-				SysDepartmentId: [], //教练员
-				Start4Training: vm.startTime,
-				Password: vm.passWord,
-				ConfirmPassword: vm.repeatPassWord
+				Type: '运动员', //注册类型（运动员/教练）
+				UserName: vm.userName, //用户名
+				Sex: vm.sex, //性别
+				FullName: vm.name, //姓名
+				Birthday: vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day), //生日
+				NativePlace: vm.nativePlace, //籍贯
+				Nation: vm.nation, //民族
+				BloodType: vm.bloodType, //血型
+				Height: vm.height, //身高(cm)
+				Weight: vm.weight, //体重(kg)
+				SportGrade: vm.SportGrade, //运动等级
+				TrainId: _l, //运动小项
+				PhoneNumber: vm.mobile, //手机号
+				VerifyCode: vm.code, //验证码
+				Start4Training: vm.startTime, //专训开始时间
+				Password: vm.passWord, //密码
+				ConfirmPassword: vm.repeatPassWord //确认密码(注册时该项为必填项、关联该字段不填)
 			}).then(function (result) {
-				if (result.body.StateCode == 100) {
-					vm.isPassWord = result.body.ErrorMessges.Password ? result.body.ErrorMessges.Password : '';
-				} else if (result.body.StateCode == 0) {
+				if (result.body.StateCode == 0) {
+					myPublic.alertResult('注册成功');
 					vm.$router.push({
 						path: '/login'
 					});
-					//							window.localStorage.setItem('Sport_userType',result.body.Data.RoleName)
-					//							window.localStorage.setItem('Sport_Access_Token', result.body.Data.Token_Type + ' ' + result.body.Data.Access_Token);
-					//							vm.getUserInfo(result.body.Data);
+				} else {
+					myPublic.alertResult(result.body.Message);
 				}
 			})["catch"](function (error) {
 				console.log(error);
@@ -17462,7 +18921,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 178 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17536,7 +18995,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 179 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17546,15 +19005,15 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-__webpack_require__(416);
+__webpack_require__(432);
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
@@ -17677,7 +19136,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 180 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17687,11 +19146,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
@@ -17866,7 +19325,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 181 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17876,15 +19335,15 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-__webpack_require__(417);
+__webpack_require__(433);
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
@@ -17977,7 +19436,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 182 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18015,7 +19474,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 183 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18061,46 +19520,136 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var vm;
+exports["default"] = {
+	data: function data() {
+		return {
+			user: {
+				mobile: '',
+				mobileNew: '',
+				code: '',
+				codeNew: ''
+			},
+			isGetCode: false,
+			isGetCodeNew: false,
+			getCodeText: '获取验证码',
+			getCodeTextNew: '获取验证码'
+		};
+	},
+	watch: {},
+	//计算属性
+	computed: {
+		valiDate: function valiDate() {}
+	},
+	methods: {
+		start: function start() {
+			vm.getUserInfo(window.localStorage.getItem('Sport_Access_Token'));
+		},
+		save: function save() {
+			var _d = {
+				PhoneNumber: vm.user.mobile,
+				NewPhoneNumber: vm.user.mobileNew,
+				VerifyCode: vm.user.code,
+				NewVerifyCode: vm.user.codeNew
+			};
+			vm.$http.post(myPublic.publicUrl + '/API/Account/Verification', _d).then(function (result) {
+
+				if (result.body.StateCode == 0) {
+					window.myPublic.alertResult(result.body.Message);
+					vm.user = {
+						mobile: '',
+						mobileNew: '',
+						code: '',
+						codeNew: ''
+					};
+				} else {
+					window.myPublic.alertResult(result.body.Message);
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		/**
+   * 获取验证码
+   */
+		getCode: function getCode() {
+			if (vm.getCodeText != '获取验证码') return;
+			vm.isGetCode = true;
+			var i = 60;
+			vm.getCodeText = i + '重新发送';
+			var _time = setInterval(function () {
+				vm.getCodeText = --i + '重新发送';
+				if (i < 0) {
+					clearInterval(_time);
+					vm.getCodeText = '获取验证码';
+				}
+			}, 1000);
+		},
+		/**
+   * 获取验证码
+   */
+		getCodeNew: function getCodeNew() {
+			if (vm.getCodeTextNew != '获取验证码') return;
+			vm.isGetCodeNew = true;
+			var i = 60;
+			vm.getCodeTextNew = i + '重新发送';
+			var _time = setInterval(function () {
+				vm.getCodeTextNew = --i + '重新发送';
+				if (i < 0) {
+					clearInterval(_time);
+					vm.getCodeTextNew = '获取验证码';
+				}
+			}, 1000);
+		},
+		getUserInfo: function getUserInfo(data) {
+			vm.$http.get(myPublic.publicUrl + '/API/User/GetUserInfo', {
+				headers: {
+					token: data
+				}
+			}).then(function (result) {
+				try {
+					if (result.body.StateCode != 0) {
+						vm.$router.push({
+							path: '/login'
+						});
+					} else {
+						window.localStorage.setItem('user', JSON.stringify(result.body.Data));
+					}
+				} catch (err) {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+				vm.user = JSON.parse(window.localStorage.getItem('user'));
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		if (!window.localStorage.getItem('Sport_Access_Token')) {
+			vm.$router.push({
+				path: '/login'
+			});
+		}
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 199 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 //
 //
 //
@@ -18188,196 +19737,30 @@ var vm;
 exports["default"] = {
 	data: function data() {
 		return {
-			isUserName: '',
-			isT: '',
-			isD: '',
 			userType: '',
-			trainFirse: [''], //专项父级
-			trainChild: [''], //专项子级
-			zhuanxiangList: [],
-			zhuanxiangChileList: [],
-			departmentFirse: [''], //教练员父级
-			departmentSecond: [''],
-			departmentChild: [''], //教练员子级
-			departmentList: [],
-			departmentChildList: [],
 			zhuangtai: true, //true 显示，false 编辑
-			year: 1991,
-			month: 1,
-			day: 1,
 			personImg: '', //头像
 			user: {
 				FullName: '',
+				nativePlace: '',
+				nation: '',
+				bloodType: '',
+				height: '',
+				weight: '',
 				Sex: '',
 				Birthday: '',
 				SportGrade: 0,
 				TrainName: '',
-				DepartmentName: '',
+				CoachId: '',
 				Start4Training: 0
 			}
 		};
 	},
-	watch: {
-		year: function year(newVal, oldVal) {
-			vm.user.Birthday = vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day);
-		},
-		month: function month(newVal, oldVal) {
-			vm.user.Birthday = vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day);
-		},
-		day: function day(newVal, oldVal) {
-			vm.user.Birthday = vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day);
-		},
-		zhuangtai: function zhuangtai(newVal, oldVal) {
-			if (!newVal) {
-				vm.GetAllDepartment();
-				vm.GetAllTrain();
-			}
-		},
-		departmentChildListsJson: function departmentChildListsJson(newVal, oldVal) {
-			vm.isD = '';
-			var _d = JSON.parse(newVal);
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
-				if (_d[_d.length - 1] != '') {
-					window.t = '';
-					vm.departmentChild.push('');
-					vm.departmentFirse.push('');
-					vm.departmentSecond.push('');
-					return;
-				}
-				var _l = [];
-				var _ll = [];
-				var _lll = [];
-				for (var i = 0; i < _d.length - 1; i++) {
-					if (_d[i] != '') {
-						_l.push(_d[i]);
-						_ll.push(vm.departmentFirse[i]);
-						_lll.push(vm.departmentSecond[i]);
-					}
-				}
-				_l.push(_d[_d.length - 1]);
-				_ll.push(vm.departmentFirse[_d.length - 1]);
-				_lll.push(vm.departmentSecond[_d.length - 1]);
-				if (JSON.stringify(_l) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.departmentChild = _l;
-					vm.departmentFirse = _ll;
-					vm.departmentSecond = _lll;
-					return;
-				}
-				var temp = []; //一个新的临时数组
-				for (var i = 0; i < _d.length; i++) {
-					if (temp.indexOf(_d[i]) == -1) {
-						temp.push(_d[i]);
-					}
-				}
-				if (JSON.stringify(temp) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.departmentChild = temp;
-					return;
-				}
-				window.t = '';
-			}, 500);
-		},
-		trainChildListJson: function trainChildListJson(newVal, oldVal) {
-			vm.isT = '';
-			var _d = JSON.parse(newVal);
-			if (window.t) {
-				clearTimeout(window.t);
-			}
-			window.t = '';
-			window.t = setTimeout(function () {
-				if (_d[_d.length - 1] != '') {
-					window.t = '';
-					vm.trainChild.push('');
-					vm.trainFirse.push('');
-					return;
-				}
-				var _l = [];
-				var _ll = [];
-				for (var i = 0; i < _d.length - 1; i++) {
-					if (_d[i] != '') {
-						_l.push(_d[i]);
-						_ll.push(vm.trainFirse[i]);
-					}
-				}
-				_l.push(_d[_d.length - 1]);
-				_ll.push(vm.trainFirse[_d.length - 1]);
-				if (JSON.stringify(_l) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.trainChild = _l;
-					vm.trainFirse = _ll;
-					return;
-				}
-				var temp = []; //一个新的临时数组
-				for (var i = 0; i < _d.length; i++) {
-					if (temp.indexOf(_d[i]) == -1) {
-						temp.push(_d[i]);
-					} else {
-						temp.push('');
-					}
-				}
-				if (JSON.stringify(temp) != JSON.stringify(_d)) {
-					window.t = '';
-					vm.trainChild = temp;
-					return;
-				}
-				window.t = '';
-			}, 500);
-		}
-	},
+	watch: {},
 	//计算属性
 	computed: {
-		valiDate: function valiDate() {
-			//用户名
-			if (vm.user.FullName == '') {
-				vm.isUserName = '用户名不得为空';
-			} else {
-				vm.isUserName = '';
-			}
-			//姓名
-			var t = vm.trainChild.join(',');
-			if (t == '') {
-				vm.isT = '运动项目不得为空';
-			}
-			var d = vm.departmentChild.join(',');
-			//密码
-			if (d == '') {
-				vm.isD = '教练不得为空';
-			}
-			if (vm.isUserName || vm.isT || vm.isD) {
-				return false;
-			} else {
-				return true;
-			}
-		},
-		trainChildListJson: function trainChildListJson() {
-			return JSON.stringify(vm.trainChild);
-		},
-		departmentChildListsJson: function departmentChildListsJson() {
-			return JSON.stringify(vm.departmentChild);
-		},
-
-		yearlength: function yearlength() {
-			var _y = new Date().getFullYear();
-			return _y - 1970;
-		},
 		nianxian: function nianxian() {
 			return myPublic.dateForFormat(null, 'yyyy') - vm.user.Start4Training;
-		},
-		dayLength: function dayLength() {
-			if (vm.month == 1 || vm.month == 3 || vm.month == 5 || vm.month == 7 || vm.month == 8 || vm.month == 10 || vm.month == 12) {
-				return 31;
-			} else if (vm.month == 4 || vm.month == 6 || vm.month == 9 || vm.month == 11) {
-				return 30;
-			} else if (vm.year % 4 == 0 && vm.year % 100 != 0 || vm.year % 400 == 0) {
-				return 29;
-			} else {
-				return 28;
-			}
 		}
 	},
 	methods: {
@@ -18389,15 +19772,8 @@ exports["default"] = {
 			}
 			vm.imgInp();
 		},
-		closeZhuanXiang: function closeZhuanXiang(i) {
-			vm.trainFirse.splice(i, 1);
-			vm.trainChild.splice(i, 1);
-		},
-		closeJiaoLian: function closeJiaoLian(i) {
-			vm.departmentFirse.splice(i, 1);
-			vm.departmentSecond.splice(i, 1);
-			vm.departmentChild.splice(i, 1);
-		},
+		closeZhuanXiang: function closeZhuanXiang(i) {},
+		closeJiaoLian: function closeJiaoLian(i) {},
 		imgInp: function imgInp() {
 			document.getElementById('file').onchange = function () {
 
@@ -18405,7 +19781,7 @@ exports["default"] = {
 				var formData = new FormData(); //创建formData对象
 				formData.append('file', fileInput.files[0]);
 				var httpDemo = new XMLHttpRequest(); //创建httprequest对象
-				httpDemo.open('post', 'http://www.sport.uare.vip/API/User/SetUserHead', true); //初始化请求  post方式  接口  异步
+				httpDemo.open('post', 'http://localhost/API/User/SetUserHead', true); //初始化请求  post方式  接口  异步
 				httpDemo.onreadystatechange = function (e) {
 					if (httpDemo.readyState == 4 && httpDemo.status == 200) {
 						var res = JSON.parse(httpDemo.responseText);
@@ -18422,38 +19798,10 @@ exports["default"] = {
 						}
 					}
 				};
-
 				httpDemo.send(formData); //发送请求
 			};
 		},
-		save: function save() {
-			if (!vm.valiDate) {
-				return;
-				console.log('111');
-			}
-
-			var t = vm.trainChild.join(',');
-			var d = vm.departmentChild.join(',');
-			vm.$http.post(myPublic.publicUrl + '/API/User/SaveUserInfo', {
-				FullName: vm.user.FullName,
-				Sex: vm.user.Sex,
-				Birthday: vm.user.Birthday,
-				SportGrade: vm.user.SportGrade,
-				TrainId: t.substr(0, t.length - 1),
-				DepartmentId: d.substr(0, d.length - 1),
-				Start4Training: vm.user.Start4Training
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.getUserInfo(window.localStorage.getItem('Sport_Access_Token'), true);
-				} else if (result.body.StateCode == 0) {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
+		save: function save() {},
 		getUserInfo: function getUserInfo(data, is) {
 			vm.$http.get(myPublic.publicUrl + '/API/User/GetUserInfo', {
 				headers: {
@@ -18486,74 +19834,9 @@ exports["default"] = {
 			});
 		},
 		//获取教练员
-		GetAllDepartment: function GetAllDepartment() {
-
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllDepartment', {}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.departmentList = result.body.Data;
-					var f = [];
-					var s = [];
-					var t = [];
-					var _list = vm.user.DepartmentId.split(','); //运动项数组
-					vm.departmentFirse = []; //教练员父级
-					vm.departmentSecond = [];
-					vm.departmentChild = vm.user.DepartmentId.split(','); //教练员子级
-
-					for (var i = 0; i < vm.departmentChild.length; i++) {
-						if (vm.departmentChild[i] == '') {
-							vm.departmentFirse.push('');
-							vm.departmentSecond.push('');
-							break;
-						}
-						for (var j = 0; j < result.body.Data.length; j++) {
-							if (vm.departmentChild[i] == result.body.Data[j].Id) {
-								vm.departmentFirse.push(result.body.Data[j].SystemId.substr(0, 3));
-								vm.departmentSecond.push(result.body.Data[j].SystemId.substr(0, 6));
-								break;
-							}
-						}
-					}
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
+		GetAllDepartment: function GetAllDepartment() {},
 		//获取训练专项
-		GetAllTrain: function GetAllTrain() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
-				params: {
-					userName: ''
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.trainChild = [];
-					vm.trainFirse = [];
-
-					var _list = vm.user.TrainId.split(','); //运动项数组
-					for (var i = 0; i < result.body.Data.length; i++) {
-						if (result.body.Data[i].SystemId.length == 3) {
-							vm.zhuanxiangList.push(result.body.Data[i]);
-						} else {
-							vm.zhuanxiangChileList.push(result.body.Data[i]);
-						}
-					}
-					for (var j = 0; j < _list.length; j++) {
-						if (_list[j]) {
-							for (var i = 0; i < vm.zhuanxiangChileList.length; i++) {
-								if (vm.zhuanxiangChileList[i].Id == _list[j]) {
-									vm.trainFirse.push(vm.zhuanxiangChileList[i].SystemId.substr(0, 3));
-									vm.trainChild.push(vm.zhuanxiangChileList[i].Id);
-									break;
-								}
-							}
-						}
-					}
-					debugger;
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		}
+		GetAllTrain: function GetAllTrain() {}
 	},
 	beforeCreate: function beforeCreate() {
 		vm = this;
@@ -18569,7 +19852,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 184 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18579,28 +19862,33 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-var _personInfo = __webpack_require__(455);
+var _personInfo = __webpack_require__(471);
 
 var _personInfo2 = _interopRequireDefault(_personInfo);
 
-var _personAbility = __webpack_require__(454);
+var _personBand = __webpack_require__(470);
+
+var _personBand2 = _interopRequireDefault(_personBand);
+
+var _personAbility = __webpack_require__(469);
 
 var _personAbility2 = _interopRequireDefault(_personAbility);
 
-__webpack_require__(418);
+__webpack_require__(434);
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
 }
 
+//
 //
 //
 //
@@ -18645,6 +19933,7 @@ exports["default"] = {
 		headerComponent: _header2["default"],
 		topMenu: _menu2["default"],
 		personInfo: _personInfo2["default"],
+		personBand: _personBand2["default"],
 		personAbility: _personAbility2["default"]
 	},
 	watch: {},
@@ -18673,370 +19962,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['againBiao', 'phyConstituentsList', 'showPingFen'],
-	data: function data() {
-		return {
-			getOnr: {}
-		};
-	},
-	watch: {
-		phyConstituentsList: function phyConstituentsList() {
-			vm.setBiao();
-		},
-		showPingFen: function showPingFen() {
-			window.setTimeout(function () {
-				vm.setBiao();
-			}, 1000);
-		},
-		againBiao: function againBiao() {
-			vm.start();
-		}
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			vm.setBiao();
-		},
-		setBiao: function setBiao() {
-			document.getElementById('biao').setAttribute("_echarts_instance_", "");
-			document.getElementById('biao').innerHTML = '';
-			var _dateList = [];
-			var _series = [{
-				name: '睾酮',
-				type: 'line',
-				stack: '总量',
-				data: []
-			}, {
-				name: '睾酮/皮质醇',
-				type: 'line',
-				yAxisIndex: 1,
-				data: []
-			}];
-			for (var i = 0; i < vm.phyConstituentsList.length; i++) {
-				_dateList.push(vm.phyConstituentsList[i].Testdate);
-				_series[0].data.push(vm.phyConstituentsList[i].Testosterone);
-				try {
-					if (vm.phyConstituentsList[i].Testosterone / vm.phyConstituentsList[i].Cortisol) {
-						_series[1].data.push((vm.phyConstituentsList[i].Testosterone / vm.phyConstituentsList[i].Cortisol).toFixed(2));
-					} else {
-						_series[1].data.push(0);
-					}
-				} catch (e) {
-					_series[1].data.push(0);
-				}
-			}
-			document.getElementById('biao').setAttribute("_echarts_instance_", "");
-			document.getElementById('biao').innerHTML = '';
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('biao'));
-
-			// 指定图表的配置项和数据
-			var option = {
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: { // 坐标轴指示器，坐标轴触发有效
-						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-					}
-				},
-				legend: {
-					data: ['睾酮', '睾酮/皮质醇']
-				},
-				grid: {
-					left: '50px',
-					right: '50px',
-					bottom: '10px',
-					containLabel: true
-				},
-				xAxis: {
-					type: 'category',
-					boundaryGap: false,
-					data: _dateList
-				},
-				yAxis: [{
-					type: 'value',
-					name: '睾酮（ng/dl）',
-					axisLabel: {
-						formatter: '{value}'
-					}
-
-				}, {
-					type: 'value',
-					name: '睾酮/皮质醇',
-					axisLabel: {
-						formatter: '{value}'
-					}
-				}],
-				series: _series
-			};
-
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 186 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['againBiao', 'phyConstituentsList', 'showPingFen'],
-	data: function data() {
-		return {
-			getOnr: {}
-		};
-	},
-	watch: {
-		phyConstituentsList: function phyConstituentsList() {
-			vm.setBiao();
-		},
-		showPingFen: function showPingFen() {
-			window.setTimeout(function () {
-				vm.setBiao();
-			}, 1000);
-		},
-		againBiao: function againBiao() {
-			vm.start();
-		}
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			vm.setBiao();
-		},
-		setBiao: function setBiao() {
-			document.getElementById('biao').setAttribute("_echarts_instance_", "");
-			document.getElementById('biao').innerHTML = '';
-			var _dateList = [];
-			var _series = [{
-				name: '白细胞',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '红细胞',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '血红蛋白',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '中性粒细胞',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '淋巴细胞',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '血红蛋白',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '红细胞压积',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '血尿素',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '肌酸激酶',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '睾酮',
-				type: 'line',
-				smooth: true,
-				data: []
-			}, {
-				name: '皮质醇',
-				type: 'line',
-				smooth: true,
-				data: []
-			}];
-			for (var i = 0; i < vm.phyConstituentsList.length; i++) {
-				_dateList.push(vm.phyConstituentsList[i].Testdate);
-				_series[0].data.push(vm.phyConstituentsList[i].Leukocyte);
-				_series[1].data.push(vm.phyConstituentsList[i].Erythrocyte);
-				_series[2].data.push(vm.phyConstituentsList[i].Hemoglobin);
-				_series[3].data.push(vm.phyConstituentsList[i].Neutrophils);
-				_series[4].data.push(vm.phyConstituentsList[i].Lymphocyte);
-				_series[5].data.push(vm.phyConstituentsList[i].Hemoglobin);
-				_series[6].data.push(vm.phyConstituentsList[i].Hematocrit);
-				_series[7].data.push(vm.phyConstituentsList[i].BloodUrea);
-				_series[8].data.push(vm.phyConstituentsList[i].CreatineKinase);
-				_series[9].data.push(vm.phyConstituentsList[i].Testosterone);
-				_series[10].data.push(vm.phyConstituentsList[i].Cortisol);
-			}
-			document.getElementById('biao').setAttribute("_echarts_instance_", "");
-			document.getElementById('biao').innerHTML = '';
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('biao'));
-
-			// 指定图表的配置项和数据
-			var option = {
-				tooltip: {
-					trigger: 'axis'
-				},
-				color: ['#ff0000', '#ff00ff', '#7f00ff', '#0000ff', '#007fff', '#00ffff', '#00ff00', '#ffff00', '#000000', '#7f7f7f', '#ff7f00'],
-				legend: {
-					data: ['白细胞', '红细胞', '血红蛋白', '中性粒细胞', '淋巴细胞', '血红蛋白', '红细胞压积', '血尿素', '肌酸激酶', '睾酮', '皮质醇']
-				},
-				grid: {
-					left: '10px',
-					right: '10px',
-					bottom: '10px',
-					containLabel: true
-				},
-				xAxis: {
-					type: 'category',
-					boundaryGap: false,
-					data: _dateList
-				},
-				yAxis: {
-					type: 'value'
-				},
-				series: _series
-			};
-
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-		vm.getOnr = {};
-		window.onresize = function () {
-			clearTimeout(vm.getOnr);
-			vm.getOnr = setTimeout(function () {
-				vm.start();
-			}, 200);
-		};
-	}
-};
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	props: ['phyConstituentsList'],
-	data: function data() {
-		return {};
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			myPublic.tableHeader('.table-box');
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 188 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19046,36 +19972,52 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-var _shengli = __webpack_require__(435);
+var _shengli = __webpack_require__(155);
 
 var _shengli2 = _interopRequireDefault(_shengli);
 
-var _childNum = __webpack_require__(457);
+var _childNum = __webpack_require__(157);
 
 var _childNum2 = _interopRequireDefault(_childNum);
 
-var _childNum3 = __webpack_require__(458);
+var _childNum3 = __webpack_require__(158);
 
 var _childNum4 = _interopRequireDefault(_childNum3);
 
-var _childNum5 = __webpack_require__(459);
+var _childNum5 = __webpack_require__(159);
 
 var _childNum6 = _interopRequireDefault(_childNum5);
 
-__webpack_require__(419);
+__webpack_require__(137);
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
 }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19178,14 +20120,21 @@ exports["default"] = {
 			allDaoChuNext: [],
 			daochuNum: 1,
 			userXuanZe: [],
-			childNum: 3,
+			childNum: 0,
 			daochu: false,
 			daochuList: [],
 			showPingFen: true,
 			phyConstituentsList: [],
 			userType: '',
+
+			sex: '',
+			trainId: '', //小项
+			trainFirse: '', //专项父级
+			zhuanxiangList: [], //项目列表
+
+
 			sportList: [],
-			sportIndex: 0
+			sportIndex: ''
 		};
 	},
 	//公共模板
@@ -19198,10 +20147,6 @@ exports["default"] = {
 		topMenu: _menu2["default"]
 	},
 	watch: {
-		sportIndex: function sportIndex(newVal, oldVal) {
-			window.sportIndex = newVal;
-			vm.getPhyConstituents();
-		},
 		allDaoChu: function allDaoChu(newVal, oldVal) {
 			if (newVal.length > 0) {
 				vm.getSport();
@@ -19249,16 +20194,14 @@ exports["default"] = {
 			window.bus.$on('pingfen', function (val) {
 				vm.showPingFen = val;
 			});
-			if (window.localStorage.getItem('Sport_userType') == '教练') {
-				//教练
-				vm.userType = '教练';
-				vm.getSport();
-			} else {
-				//运动员
-				vm.userType = '运动员';
-				vm.getPhyConstituents();
-			}
-			vm.setTimeInp();
+			vm.userType = window.localStorage.getItem('Sport_userType');
+			vm.GetAllTrain().then(function () {
+				vm.setTimeInp();
+				vm.getSport().then(function () {
+					vm.childNum = 3;
+				});
+				// vm.getSportItem();
+			});
 		},
 		//查询生理生化
 		getPhyConstituents: function getPhyConstituents() {
@@ -19277,6 +20220,7 @@ exports["default"] = {
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
 					vm.phyConstituentsList = result.body.Data;
+					vm.againBiao = !vm.againBiao;
 				} else {
 					vm.$router.push({
 						path: '/login'
@@ -19286,29 +20230,56 @@ exports["default"] = {
 				console.log(error);
 			});
 		},
+		//获取训练专项
+		GetAllTrain: function GetAllTrain() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+					params: {
+						userName: ''
+					}
+				}).then(function (result) {
+					if (result.body.StateCode == 0) {
+						vm.zhuanxiangList = result.body.Data;
+						vm.$nextTick(function () {
+							var _id = JSON.parse(window.localStorage.getItem('user')).TrainId;
+							for (var i = 0; i < vm.zhuanxiangList.length; i++) {
+								if (vm.zhuanxiangList[i].Id == _id) {
+
+									vm.trainFirse = i;
+									break;
+								}
+							}
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+					reject();
+				});
+			});
+		},
 		//获取远动员列表
 		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.sportList = result.body.Data;
-					for (var i = 0; i < result.body.Data.length; i++) {
-						vm.userXuanZe.push(result.body.Data[i].UserId);
+			return new Promise(function (resolve, reject) {
+				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+
+					if (result.body.StateCode == 0) {
+						vm.sportList = result.body.Data;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							vm.userXuanZe.push(result.body.Data[i].UserId);
+						}
+						// if (result.body.Data && result.body.Data.length > 0) {
+						// 	vm.sportIndex = 0;
+						// }
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
 					}
-					if (result.body.Data && result.body.Data.length > 0) {
-						vm.sportIndex = window.sportIndex ? window.sportIndex : 0;
-						vm.getPhyConstituents();
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+				});
 			});
 		},
 		setTimeInp: function setTimeInp() {
@@ -19317,12 +20288,10 @@ exports["default"] = {
 				var _date2 = document.getElementById('endtime').value;
 				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 				if (_date2 == '' || isDate) {
-					vm.getPhyConstituents();
 					return;
 				}
 				myPublic.alertMy('开始时间不能大于结束时间');
 				document.getElementById('starttime').value = document.getElementById('endtime').value;
-				vm.getPhyConstituents();
 			});
 			document.getElementById('endtime-section').addEventListener('blur', function () {
 				var _date1 = document.getElementById('starttime').value;
@@ -19331,17 +20300,14 @@ exports["default"] = {
 				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 				if (_isDate) {
 					document.getElementById('endtime').value = _thisDate;
-					vm.getPhyConstituents();
 					return;
 				}
 				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 				if (_date1 == '' || isDate) {
-					vm.getPhyConstituents();
 					return;
 				}
 				myPublic.alertMy('开始时间不能大于结束时间');
 				document.getElementById('endtime').value = document.getElementById('starttime').value;
-				vm.getPhyConstituents();
 			});
 		}
 	},
@@ -19364,7 +20330,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 189 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19382,39 +20348,56 @@ Object.defineProperty(exports, "__esModule", {
 
 var vm;
 exports["default"] = {
-	props: ['staminaList', 'staminaName', 'staminaDate'],
+	props: ['againBiao', 'phyConstituentsList', 'showPingFen'],
 	data: function data() {
 		return {
 			getOnr: {}
 		};
 	},
 	watch: {
-		staminaList: function staminaList() {
-			vm.setBiao(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+		showPingFen: function showPingFen() {
+			window.setTimeout(function () {
+				vm.setBiao();
+			}, 1000);
+		},
+		againBiao: function againBiao() {
+			vm.start();
 		}
 	},
 	//计算属性
 	computed: {},
 	methods: {
 		start: function start() {
-			vm.setBiao(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+			vm.setBiao();
 		},
-		setBiao: function setBiao(_dateList, _list) {
-			var _series = [];
-			var _val = [];
-			for (var i = 0; i < vm.staminaName.length; i++) {
-				_val = [];
-				for (var j = 0; j < _dateList.length; j++) {
-					_val.push(_list[j].valueList[i]);
+		setBiao: function setBiao() {
+			document.getElementById('biao').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao').innerHTML = '';
+			var _dateList = [];
+			var _series = [{
+				name: '睾酮',
+				type: 'line',
+				stack: '总量',
+				data: []
+			}, {
+				name: '睾酮/皮质醇',
+				type: 'line',
+				yAxisIndex: 1,
+				data: []
+			}];
+			for (var i = 0; i < vm.phyConstituentsList.length; i++) {
+				_dateList.push(vm.phyConstituentsList[i].Testdate);
+				_series[0].data.push(vm.phyConstituentsList[i].Testosterone);
+				try {
+					if (vm.phyConstituentsList[i].Testosterone / vm.phyConstituentsList[i].Cortisol) {
+						_series[1].data.push((vm.phyConstituentsList[i].Testosterone / vm.phyConstituentsList[i].Cortisol).toFixed(2));
+					} else {
+						_series[1].data.push(0);
+					}
+				} catch (e) {
+					_series[1].data.push(0);
 				}
-				_series.push({
-					name: vm.staminaName[i],
-					type: 'line',
-					smooth: true,
-					data: _val
-				});
 			}
-
 			document.getElementById('biao').setAttribute("_echarts_instance_", "");
 			document.getElementById('biao').innerHTML = '';
 			// 基于准备好的dom，初始化echarts实例
@@ -19429,10 +20412,10 @@ exports["default"] = {
 					}
 				},
 				legend: {
-					data: vm.staminaName
+					data: ['睾酮', '睾酮/皮质醇']
 				},
 				grid: {
-					left: '10px',
+					left: '50px',
 					right: '50px',
 					bottom: '10px',
 					containLabel: true
@@ -19442,12 +20425,166 @@ exports["default"] = {
 					boundaryGap: false,
 					data: _dateList
 				},
-				yAxis: {
+				yAxis: [{
 					type: 'value',
+					name: '睾酮（ng/dl）',
 					axisLabel: {
 						formatter: '{value}'
 					}
 
+				}, {
+					type: 'value',
+					name: '睾酮/皮质醇',
+					axisLabel: {
+						formatter: '{value}'
+					}
+				}],
+				series: _series
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ['againBiao', 'phyConstituentsList', 'showPingFen'],
+	data: function data() {
+		return {
+			getOnr: {}
+		};
+	},
+	watch: {
+		showPingFen: function showPingFen() {
+			window.setTimeout(function () {
+				vm.setBiao();
+			}, 1000);
+		},
+		againBiao: function againBiao() {
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			vm.setBiao();
+		},
+		setBiao: function setBiao() {
+			document.getElementById('biao').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao').innerHTML = '';
+			var _dateList = [];
+			var _series = [{
+				name: '白细胞',
+				type: 'line',
+				data: []
+			}, {
+				name: '红细胞',
+				type: 'line',
+				data: []
+			}, {
+				name: '血红蛋白',
+				type: 'line',
+				data: []
+			}, {
+				name: '中性粒细胞',
+				type: 'line',
+				data: []
+			}, {
+				name: '淋巴细胞',
+				type: 'line',
+				data: []
+			}, {
+				name: '血红蛋白',
+				type: 'line',
+				data: []
+			}, {
+				name: '红细胞压积',
+				type: 'line',
+				data: []
+			}, {
+				name: '血尿素',
+				type: 'line',
+				data: []
+			}, {
+				name: '肌酸激酶',
+				type: 'line',
+				data: []
+			}, {
+				name: '睾酮',
+				type: 'line',
+				data: []
+			}, {
+				name: '皮质醇',
+				type: 'line',
+				data: []
+			}];
+			for (var i = 0; i < vm.phyConstituentsList.length; i++) {
+				_dateList.push(vm.phyConstituentsList[i].Testdate);
+				_series[0].data.push(vm.phyConstituentsList[i].Leukocyte);
+				_series[1].data.push(vm.phyConstituentsList[i].Erythrocyte);
+				_series[2].data.push(vm.phyConstituentsList[i].Hemoglobin);
+				_series[3].data.push(vm.phyConstituentsList[i].Neutrophils);
+				_series[4].data.push(vm.phyConstituentsList[i].Lymphocyte);
+				_series[5].data.push(vm.phyConstituentsList[i].Hemoglobin);
+				_series[6].data.push(vm.phyConstituentsList[i].Hematocrit);
+				_series[7].data.push(vm.phyConstituentsList[i].BloodUrea);
+				_series[8].data.push(vm.phyConstituentsList[i].CreatineKinase);
+				_series[9].data.push(vm.phyConstituentsList[i].Testosterone);
+				_series[10].data.push(vm.phyConstituentsList[i].Cortisol);
+			}
+			document.getElementById('biao').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('biao'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {
+					trigger: 'axis'
+				},
+				color: ['#ff0000', '#ff00ff', '#7f00ff', '#0000ff', '#007fff', '#00ffff', '#00ff00', '#ffff00', '#000000', '#7f7f7f', '#ff7f00'],
+				legend: {
+					data: ['白细胞', '红细胞', '血红蛋白', '中性粒细胞', '淋巴细胞', '血红蛋白', '红细胞压积', '血尿素', '肌酸激酶', '睾酮', '皮质醇']
+				},
+				grid: {
+					left: '10px',
+					right: '10px',
+					bottom: '10px',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: _dateList
+				},
+				yAxis: {
+					type: 'value'
 				},
 				series: _series
 			};
@@ -19472,7 +20609,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 190 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19499,17 +20636,29 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var vm;
 exports["default"] = {
-	props: ['staminaList', 'staminaName'],
+	props: ['phyConstituentsList'],
 	data: function data() {
 		return {};
-	},
-	watch: {
-		staminaList: function staminaList() {
-			vm.$forceUpdate();
-		}
 	},
 	//计算属性
 	computed: {},
@@ -19527,161 +20676,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 191 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	data: function data() {
-		return {
-			user: '',
-			picture: '',
-			trainList: []
-		};
-	},
-	//计算属性
-	computed: {},
-	methods: {
-		start: function start() {
-			vm.user = JSON.parse(window.localStorage.getItem('user'));
-			vm.picture = window.localStorage.getItem('Sport_userPicture');
-			document.getElementById('staminaTime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-			vm.getSport();
-		},
-		//查询体能测试项目
-		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetTrainName', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.trainList = result.body.Data;
-					for (var i = 0; i < result.body.Data.length; i++) {
-						vm.trainList[i].Value = ""; //项目值
-						vm.trainList[i].TestDate = ""; //评测时间
-					}
-					vm.getSportValue();
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		getSportValue: function getSportValue() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetNewTrainResult?sportuserid=' + '&date=' + document.getElementById('staminaTime').value, {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					for (var i = 0; i < vm.trainList.length; i++) {
-						vm.trainList[i].Value = result.body.Data[i] ? result.body.Data[i].Value : ''; //项目值
-					}
-					vm.$forceUpdate();
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		//保存体能训练
-		save: function save() {
-			var _list = [];
-			for (var i = 0; i < vm.trainList.length; i++) {
-				_list.push({
-					TrainId: vm.trainList[i].TrainId, //项目id
-					Value: vm.trainList[i].Value, //项目值
-					TestDate: document.getElementById('staminaTime').value //评测时间
-				});
-			}
-			vm.$http.post(myPublic.publicUrl + '/API/Test/SaveTrainResult?sportuserid=', _list, {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					myPublic.alertResult(result.body.Message);
-					vm.closeChild(1);
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		closeChild: function closeChild(num) {
-			window.bus.$emit('stamina', num);
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 192 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19691,32 +20686,102 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-var _childNum = __webpack_require__(461);
+var _shengli = __webpack_require__(155);
+
+var _shengli2 = _interopRequireDefault(_shengli);
+
+var _childNum = __webpack_require__(157);
 
 var _childNum2 = _interopRequireDefault(_childNum);
 
-var _childNum3 = __webpack_require__(462);
+var _childNum3 = __webpack_require__(158);
 
 var _childNum4 = _interopRequireDefault(_childNum3);
 
-var _childNum5 = __webpack_require__(463);
+var _childNum5 = __webpack_require__(159);
 
 var _childNum6 = _interopRequireDefault(_childNum5);
 
-__webpack_require__(420);
+__webpack_require__(137);
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
 }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19763,69 +20828,699 @@ exports["default"] = {
 	//变量
 	data: function data() {
 		return {
-			childNum: 1,
-			staminaList: [],
-			staminaName: [],
-			staminaDate: []
+			againBiao: true,
+			getOnr: {},
+			allDaoChu: ['1'],
+			allDaoChuNext: [],
+			daochuNum: 1,
+			userXuanZe: [],
+			childNum: 0,
+			daochu: false,
+			daochuList: [],
+			showPingFen: true,
+			phyConstituentsList: [],
+			userType: '',
+
+			sex: '',
+			zhuanxiangList: [], //项目列表
+
+
+			sportList: [],
+			sportIndex: 0
 		};
 	},
 	//公共模板
 	components: {
 		headerComponent: _header2["default"],
+		shengLi: _shengli2["default"],
 		childComponentFirst: _childNum2["default"],
 		childComponentSecond: _childNum4["default"],
 		childComponentThird: _childNum6["default"],
 		topMenu: _menu2["default"]
 	},
-	watch: {},
+	watch: {
+		allDaoChu: function allDaoChu(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.getSport();
+			} else {
+				vm.userXuanZe = [];
+			}
+		},
+		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
+			if (newVal.length > 0) {
+				vm.daochuList = ["Leukocyte,白细胞", "Erythrocyte,红细胞", "Hemoglobin,血红蛋白", "Lymphocyte,淋巴细胞", "Hematocrit,血球积压", "BloodUrea,血尿素", "CreatineKinase,肌酸激酶", "Cortisol,皮质醇", "Testosterone,睾酮"];
+			} else {
+				vm.daochuList = [];
+			}
+		}
+
+	},
 	//计算属性
-	computed: {},
+	computed: {
+		daochuUrl: function daochuUrl() {
+			var _nameList = [];
+			var _valueList = [];
+			for (var i = 0; i < vm.daochuList.length; i++) {
+				if (vm.daochuList[i]) {
+					if (i != 0) {
+						_nameList += ',';
+						_valueList += ',';
+					}
+					_nameList += vm.daochuList[i].split(',')[0];
+					_valueList += vm.daochuList[i].split(',')[1];
+				}
+			}
+			var data = '';
+			data += "starttime=" + document.getElementById('starttime').value;
+			data += "&endtime=" + document.getElementById('endtime').value;
+			data += "&userid=" + vm.userXuanZe.join(',');
+			data += "&projectValue=" + _nameList;
+			data += "&projectName=" + _valueList;
+			return myPublic.publicUrl + '/API/Excelreport/PeriodicTestExport?' + data;
+		}
+	},
 	methods: {
 		start: function start() {
 			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
 			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-			window.bus.$on('stamina', function (val) {
-				vm.childNum = val;
-				vm.getList();
+			window.bus.$on('pingfen', function (val) {
+				vm.showPingFen = val;
 			});
-			vm.getList();
-			vm.setTimeInp();
+			vm.userType = window.localStorage.getItem('Sport_userType');
+			vm.GetAllTrain().then(function () {
+				vm.setTimeInp();
+				vm.getSport().then(function () {
+					vm.childNum = 3;
+				});
+				// vm.getSportItem();
+			});
+		},
+		//查询生理生化
+		getPhyConstituents: function getPhyConstituents() {
+			// var userId = '';
+			// if(vm.userType == '教练') {
+			// 	userId = vm.sportList[vm.sportIndex].UserId;
+			// }
+			// vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest', {
+			// 	params: {
+			// 		sportuserid: userId,
+			// 		starttime: document.getElementById('starttime').value,
+			// 		endtime: document.getElementById('endtime').value,
+			// 		pagesize: 999,
+			// 		pageindex: 1
+			// 	}
+			// }).then(function(result) {
+			// 	if(result.body.StateCode == 0) {
+			// 		vm.phyConstituentsList = result.body.Data;
+			// 		vm.againBiao = !vm.againBiao;
+			// 	} else {
+			// 		vm.$router.push({
+			// 			path: '/login'
+			// 		});
+			// 	}
+			// }).catch(function(error) {
+			// 	console.log(error);
+			// });
+		},
+		setTimeInp: function setTimeInp() {
+			document.getElementById('starttime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date2 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('starttime').value = document.getElementById('endtime').value;
+			});
+			document.getElementById('endtime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_isDate) {
+					document.getElementById('endtime').value = _thisDate;
+					return;
+				}
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date1 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('endtime').value = document.getElementById('starttime').value;
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	beforeDestroy: function beforeDestroy() {
+		window.bus.$off('pingfen');
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.againBiao = !vm.againBiao;
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _tineng = __webpack_require__(156);
+
+var _tineng2 = _interopRequireDefault(_tineng);
+
+var _qugan = __webpack_require__(154);
+
+var _qugan2 = _interopRequireDefault(_qugan);
+
+var _bankuai = __webpack_require__(153);
+
+var _bankuai2 = _interopRequireDefault(_bankuai);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ["isGetList"],
+	data: function data() {
+		return {
+			listType: 1,
+			isEdit: false,
+			getOnr: {},
+			staminaList: [],
+			staminaName: [],
+			staminaDate: [],
+			LeiDaSeries: [],
+			xuanze: [{
+				is: true,
+				name: 'BMI'
+			}, {
+				is: true,
+				name: '坐位体前屈'
+			}, {
+				is: true,
+				name: '30m冲刺'
+			}, {
+				is: true,
+				name: '垂直纵跳'
+			}, {
+				is: true,
+				name: '深蹲相对力量'
+			}, {
+				is: true,
+				name: '卧推相对力量'
+			}, {
+				is: true,
+				name: '引体向上次'
+			}, {
+				is: true,
+				name: '腹肌耐力'
+			}, {
+				is: true,
+				name: '背肌耐力'
+			}, {
+				is: true,
+				name: '3000m'
+			}, {
+				is: false,
+				name: '2000m测功仪'
+			}],
+			jichuLeiDaHide: {}, //基础雷达高水平
+			jichuLeiDaAll: {}, //基础雷达平均水平
+			wendingLeiDaHide: {}, //稳定雷达平均水平
+			wendingLeiDaAll: {}, //稳定雷达平均水平
+
+			indicator: [],
+			showPingFen: true
+		};
+	},
+	//公共模板
+	components: {
+		tiNeng: _tineng2["default"],
+		quGan: _qugan2["default"],
+		banKuai: _bankuai2["default"]
+	},
+	watch: {
+		isGetList: function isGetList(newVal, oldVal) {
+			vm.start();
+		},
+		listType: function listType(newVal, oldVal) {
+			if (newVal != 1) {
+				vm.isEdit = false;
+			}
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			myPublic.tableHeader('.table-box');
+			vm.getinfo();
+		},
+		setXuanze: function setXuanze(index) {
+			vm.xuanze[index].is = !vm.xuanze[index].is;
+			vm.getinfo();
+		},
+		getinfo: function getinfo() {
+			if (vm.listType == 1) {
+				vm.getLeiDaHide().then(function () {
+					vm.getLeiDaAll().then(function () {
+						vm.getList();
+					});
+				});
+			}
+			if (vm.listType == 2) {
+				vm.getList();
+			}
+			if (vm.listType == 3) {
+				vm.getLeiDaHide().then(function () {
+					vm.getLeiDaAll().then(function () {
+						vm.getList();
+					});
+				});
+			}
+		},
+		getLeiDaHide: function getLeiDaHide() {
+			return new Promise(function (resolve, reject) {
+				if (vm.listType == 1) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/BasicPhysicalTop?sex=' + '', {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = result.body.Data.BMIScore;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = result.body.Data.SitForwardScore;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = result.body.Data.ThirtyMeterDashScore;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = result.body.Data.VerticalJumpScore;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = result.body.Data.RelativeSquatMaxStrengthScore;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = result.body.Data.RelativeLyingPushMaxStrengthScore;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = result.body.Data.PullUpScore;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = result.body.Data.AbdominalEnduranceScore;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = result.body.Data.BackMuscleEnduranceScore;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = result.body.Data.ThreeKmScore;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = result.body.Data.TwoKmDynamometerScore;
+							}
+							vm.jichuLeiDaHide = _j;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = 0;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = 0;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = 0;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = 0;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = 0;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = 0;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = 0;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = 0;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = 0;
+							}
+							vm.jichuLeiDaHide = _j;
+							resolve();
+						}
+					});
+				}
+				if (vm.listType == 3) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/TrunkTop?sex' + '', {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							vm.wendingLeiDaHide = result.body.Data;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							vm.wendingLeiDaHide = {
+								Left45Score: 0,
+								Left90Score: 0,
+								Left135Score: 0,
+								LowerLimbRatioScore: 0,
+								LowerLimbScore: 0,
+								OneHundredEightyScore: 0,
+								Right45Score: 0,
+								Right90Score: 0,
+								Right135Score: 0,
+								UpperLimbRatioScore: 0,
+								UpperLimbScore: 0,
+								ZeroScore: 0
+							};
+							resolve();
+						}
+						console.log(error);
+					});
+				}
+			});
+		},
+		getLeiDaAll: function getLeiDaAll() {
+			return new Promise(function (resolve, reject) {
+				if (vm.listType == 1) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/BasicPhysicalAverage?trainId=' + '' + '&sex=' + '', {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = result.body.Data.BMIScore;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = result.body.Data.SitForwardScore;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = result.body.Data.ThirtyMeterDashScore;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = result.body.Data.VerticalJumpScore;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = result.body.Data.RelativeSquatMaxStrengthScore;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = result.body.Data.RelativeLyingPushMaxStrengthScore;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = result.body.Data.PullUpScore;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = result.body.Data.AbdominalEnduranceScore;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = result.body.Data.BackMuscleEnduranceScore;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = result.body.Data.ThreeKmScore;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = result.body.Data.TwoKmDynamometerScore;
+							}
+							vm.jichuLeiDaAll = _j;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = 0;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = 0;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = 0;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = 0;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = 0;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = 0;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = 0;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = 0;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = 0;
+							}
+							vm.jichuLeiDaAll = _j;
+							resolve();
+						}
+						console.log(error);
+					});
+				}
+
+				if (vm.listType == 3) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/TrunkAverage?trainId=' + '' + '&sex=' + '', {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							vm.wendingLeiDaAll = result.body.Data;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							vm.wendingLeiDaAll = {
+								Left45Score: 0,
+								Left90Score: 0,
+								Left135Score: 0,
+								LowerLimbRatioScore: 0,
+								LowerLimbScore: 0,
+								OneHundredEightyScore: 0,
+								Right45Score: 0,
+								Right90Score: 0,
+								Right135Score: 0,
+								UpperLimbRatioScore: 0,
+								UpperLimbScore: 0,
+								ZeroScore: 0
+							};
+							resolve();
+						}
+						console.log(error);
+					});
+				}
+			});
 		},
 		getList: function getList() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainResult', {
-				params: {
-					sportuserid: '',
-					starttime: document.getElementById('starttime').value,
-					endtime: document.getElementById('endtime').value,
-					pagesize: 999,
-					pageindex: 1
+			if (vm.listType == 1) {
+				vm.getList1();
+				vm.getLeiDa1();
+			} else if (vm.listType == 2) {
+				vm.getList2();
+			} else if (vm.listType == 3) {
+				vm.getList3();
+				vm.getLeiDa3();
+			}
+		},
+		getList1: function getList1() {
+			var _d = '';
+			_d += 'trainId=' + '';
+			_d += '&trainSecId=' + '';
+			_d += '&sex=' + '';
+			_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
-					var _list = result.body.Data;
-					var itemDate = [];
-					var itemName = [];
-					var itemList = [];
-					for (var i = 0; i < _list.length; i++) {
-						if (itemName.indexOf(_list[i].TypeName) < 0) {
-							itemName.push(_list[i].TypeName);
-						}
 
-						if (itemDate.indexOf(_list[i].TestDate) >= 0) {
-							//包含
-							itemList[itemDate.indexOf(_list[i].TestDate)].valueList[itemName.indexOf(_list[i].TypeName)] = _list[i].Value;
-						} else {
-							itemDate.push(_list[i].TestDate);
-							itemList.push({
-								TestDate: _list[i].TestDate,
-								valueList: []
+					var _staminaDate = [];
+					var _staminaList = [];
+					var _staminaName = [];
+					if (vm.xuanze[0].is) {
+						_staminaName.push('BMI');
+					}
+					if (vm.xuanze[1].is) {
+						_staminaName.push('坐位体前屈');
+					}
+					if (vm.xuanze[2].is) {
+						_staminaName.push('30m冲刺');
+					}
+					if (vm.xuanze[3].is) {
+						_staminaName.push('垂直纵跳');
+					}
+					if (vm.xuanze[4].is) {
+						_staminaName.push('深蹲相对力量');
+					}
+					if (vm.xuanze[5].is) {
+						_staminaName.push('卧推相对力量');
+					}
+					if (vm.xuanze[6].is) {
+						_staminaName.push('引体向上次');
+					}
+					if (vm.xuanze[7].is) {
+						_staminaName.push('腹肌耐力');
+					}
+					if (vm.xuanze[8].is) {
+						_staminaName.push('背肌耐力');
+					}
+					if (vm.xuanze[9].is) {
+						_staminaName.push('3000m');
+					}
+					if (vm.xuanze[10].is) {
+						_staminaName.push('2000m测功仪');
+					}
+					if (result.body.Data) {
+						var valueList;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							_staminaDate.push(result.body.Data[i].Testdate);
+							valueList = [];
+							if (vm.xuanze[0].is) {
+								valueList.push(result.body.Data[i].BMI);
+							}
+							if (vm.xuanze[1].is) {
+								valueList.push(result.body.Data[i].SitForward);
+							}
+							if (vm.xuanze[2].is) {
+								valueList.push(result.body.Data[i].ThirtyMeterDash);
+							}
+							if (vm.xuanze[3].is) {
+								valueList.push(result.body.Data[i].VerticalJump);
+							}
+							if (vm.xuanze[4].is) {
+								valueList.push(result.body.Data[i].RelativeSquatMaxStrength);
+							}
+							if (vm.xuanze[5].is) {
+								valueList.push(result.body.Data[i].RelativeLyingPushMaxStrength);
+							}
+							if (vm.xuanze[6].is) {
+								valueList.push(result.body.Data[i].PullUp);
+							}
+							if (vm.xuanze[7].is) {
+								valueList.push(result.body.Data[i].AbdominalEndurance);
+							}
+							if (vm.xuanze[8].is) {
+								valueList.push(result.body.Data[i].BackMuscleEndurance);
+							}
+							if (vm.xuanze[9].is) {
+								valueList.push(result.body.Data[i].ThreeKm);
+							}
+							if (vm.xuanze[10].is) {
+								valueList.push(result.body.Data[i].TwoKmDynamometer);
+							}
+							_staminaList.push({
+								TestDate: result.body.Data[i].Testdate,
+								valueList: valueList
 							});
-							itemList[itemList.length - 1].valueList[itemName.indexOf(_list[i].TypeName)] = _list[i].Value;
 						}
 					}
-					vm.staminaName = itemName;
-					vm.staminaDate = itemDate;
-					vm.staminaList = itemList;
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
 				} else {
 					vm.$router.push({
 						path: '/login'
@@ -19835,18 +21530,840 @@ exports["default"] = {
 				console.log(error);
 			});
 		},
+		getList2: function getList2() {
+			var _d = '';
+			_d += 'trainId=' + '';
+			_d += '&trainSecId=' + '';
+			_d += '&sex=' + '';
+			_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _staminaName = ['攀爬时间（s）', '攀爬距离（m）', '平均心率', '最大心率', '80%以上最大心率保持时间和总距离'];
+					var _staminaDate = [];
+					var _staminaList = [];
+					if (result.body.Data) {
+						for (var i = 0; i < result.body.Data.length; i++) {
+							_staminaDate.push(result.body.Data[i].Testdate);
+							_staminaList.push({
+								TestDate: result.body.Data[i].Testdate,
+								valueList: [result.body.Data[i].ClimbingTime, result.body.Data[i].ClimbingDistance, result.body.Data[i].MeanHeartRate, result.body.Data[i].MaxHeartRate, result.body.Data[i].MaxHeartRateHoldTime]
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		getList3: function getList3() {
+			var _d = '';
+			_d += 'trainId=' + '';
+			_d += '&trainSecId=' + '';
+			_d += '&sex=' + '';
+			_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _staminaName = ['左45°s', '右45°s', '左135°s', '右135°s', '左90°s', '右90°s', '0°s', '180°s', '上肢', '下肢'];
+					var _staminaDate = [];
+					var _staminaList = [];
+					if (result.body.Data) {
+						for (var i = 0; i < result.body.Data.length; i++) {
+							_staminaDate.push(result.body.Data[i].Testdate);
+							_staminaList.push({
+								TestDate: result.body.Data[i].Testdate,
+								valueList: [result.body.Data[i].Left45, result.body.Data[i].Right45, result.body.Data[i].Left135, result.body.Data[i].Right135, result.body.Data[i].Left90, result.body.Data[i].Right90, result.body.Data[i].Zero, result.body.Data[i].OneHundredEighty, result.body.Data[i].UpperLimbRatio, result.body.Data[i].LowerLimbRatio]
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setBiaoAxis: function setBiaoAxis(_dateList, _list) {
+			try {
+				var _series = [];
+				var _val = [];
+				for (var i = 0; i < vm.staminaName.length; i++) {
+					_val = [];
+					for (var j = 0; j < _dateList.length; j++) {
+						_val.push(_list[j].valueList[i]);
+					}
+					_series.push({
+						name: vm.staminaName[i],
+						type: 'line',
+						data: _val
+					});
+				}
+				document.getElementById('biao1').setAttribute("_echarts_instance_", "");
+				document.getElementById('biao1').innerHTML = '';
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('biao1'));
+
+				// 指定图表的配置项和数据
+				var option = {
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: { // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					legend: {
+						data: vm.staminaName
+					},
+					grid: {
+						left: '10px',
+						right: '50px',
+						bottom: '10px',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'category',
+						boundaryGap: false,
+						data: _dateList
+					},
+					yAxis: {
+						type: 'value',
+						axisLabel: {
+							formatter: '{value}'
+						}
+
+					},
+					series: _series
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+			} catch (e) {
+				//TODO handle the exception
+			}
+		},
+		getLeiDa1: function getLeiDa1() {
+			var _indicator = [];
+			if (vm.xuanze[0].is) {
+				_indicator.push({
+					name: 'BMI', //BMI Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[1].is) {
+				_indicator.push({
+					name: '坐位体前屈', //Sit Forward Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[2].is) {
+				_indicator.push({
+					name: '30m冲刺', //ThirtyMeterDashScore
+					max: 10
+				});
+			}
+			if (vm.xuanze[3].is) {
+				_indicator.push({
+					name: '垂直纵跳', //VerticalJumpScore
+					max: 10
+				});
+			}
+			if (vm.xuanze[4].is) {
+				_indicator.push({
+					name: '深蹲相对力量', //Relative Squat Max Strength Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[5].is) {
+				_indicator.push({
+					name: '卧推相对力量', //Relative Lying Push Max Strength Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[6].is) {
+				_indicator.push({
+					name: '引体向上次', //Pull Up Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[7].is) {
+				_indicator.push({
+					name: '腹肌耐力', //Abdominal Endurance Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[8].is) {
+				_indicator.push({
+					name: '背肌耐力', //Back Muscle Endurance Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[9].is) {
+				_indicator.push({
+					name: '3000m', //Three Km Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[10].is) {
+				_indicator.push({
+					name: '2000m测功仪', //Three Km Score
+					max: 10
+				});
+			}
+			vm.indicator = _indicator;
+
+			function api() {
+				return new Promise(function (resolve, reject) {
+					var _d = '';
+					_d += 'sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+					var _data = {};
+					if (vm.xuanze[0].is) {
+						_data.BMIScore = 0;
+					}
+					if (vm.xuanze[1].is) {
+						_data.SitForwardScore = 0;
+					}
+					if (vm.xuanze[2].is) {
+						_data.ThirtyMeterDashScore = 0;
+					}
+					if (vm.xuanze[3].is) {
+						_data.VerticalJumpScore = 0;
+					}
+					if (vm.xuanze[4].is) {
+						_data.RelativeSquatMaxStrengthScore = 0;
+					}
+					if (vm.xuanze[5].is) {
+						_data.RelativeLyingPushMaxStrengthScore = 0;
+					}
+					if (vm.xuanze[6].is) {
+						_data.PullUpScore = 0;
+					}
+					if (vm.xuanze[7].is) {
+						_data.AbdominalEnduranceScore = 0;
+					}
+					if (vm.xuanze[8].is) {
+						_data.BackMuscleEnduranceScore = 0;
+					}
+					if (vm.xuanze[9].is) {
+						_data.ThreeKmScore = 0;
+					}
+					if (vm.xuanze[10].is) {
+						_data.TwoKmDynamometer = 0;
+					}
+
+					vm.$http.post(myPublic.publicUrl + '/API/Test/BasicPhysicalRadarChart?' + _d, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							resolve(result.body.Data);
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							resolve(_data);
+						}
+						console.log(error);
+					});
+				});
+			}
+			api().then(function (res) {
+				var _h = [];
+				var _all = [];
+				var _value = [];
+				if (vm.xuanze[0].is) {
+					_h.push(vm.jichuLeiDaHide.BMIScore);
+					_all.push(vm.jichuLeiDaAll.BMIScore);
+					_value.push(res.BMIScore);
+				}
+				if (vm.xuanze[1].is) {
+					_h.push(vm.jichuLeiDaHide.SitForwardScore);
+					_all.push(vm.jichuLeiDaAll.SitForwardScore);
+					_value.push(res.SitForwardScore);
+				}
+				if (vm.xuanze[2].is) {
+					_h.push(vm.jichuLeiDaHide.ThirtyMeterDashScore);
+					_all.push(vm.jichuLeiDaAll.ThirtyMeterDashScore);
+					_value.push(res.ThirtyMeterDashScore);
+				}
+				if (vm.xuanze[3].is) {
+					_h.push(vm.jichuLeiDaHide.VerticalJumpScore);
+					_all.push(vm.jichuLeiDaAll.VerticalJumpScore);
+					_value.push(res.VerticalJumpScore);
+				}
+				if (vm.xuanze[4].is) {
+					_h.push(vm.jichuLeiDaHide.RelativeSquatMaxStrengthScore);
+					_all.push(vm.jichuLeiDaAll.RelativeSquatMaxStrengthScore);
+					_value.push(res.RelativeSquatMaxStrengthScore);
+				}
+				if (vm.xuanze[5].is) {
+					_h.push(vm.jichuLeiDaHide.RelativeLyingPushMaxStrengthScore);
+					_all.push(vm.jichuLeiDaAll.RelativeLyingPushMaxStrengthScore);
+					_value.push(res.RelativeLyingPushMaxStrengthScore);
+				}
+				if (vm.xuanze[6].is) {
+
+					_h.push(vm.jichuLeiDaHide.PullUpScore);
+					_all.push(vm.jichuLeiDaAll.PullUpScore);
+					_value.push(res.PullUpScore);
+				}
+				if (vm.xuanze[7].is) {
+
+					_h.push(vm.jichuLeiDaHide.AbdominalEnduranceScore);
+					_all.push(vm.jichuLeiDaAll.AbdominalEnduranceScore);
+					_value.push(res.AbdominalEnduranceScore);
+				}
+				if (vm.xuanze[8].is) {
+					_h.push(vm.jichuLeiDaHide.BackMuscleEnduranceScore);
+					_all.push(vm.jichuLeiDaAll.BackMuscleEnduranceScore);
+					_value.push(res.BackMuscleEnduranceScore);
+				}
+				if (vm.xuanze[9].is) {
+					_h.push(vm.jichuLeiDaHide.ThreeKmScore);
+					_all.push(vm.jichuLeiDaAll.ThreeKmScore);
+					_value.push(res.ThreeKmScore);
+				}
+				if (vm.xuanze[10].is) {
+					_h.push(vm.jichuLeiDaHide.TwoKmDynamometer);
+					_all.push(vm.jichuLeiDaAll.TwoKmDynamometer);
+					_value.push('0');
+				}
+
+				vm.LeiDaSeries = [{
+					name: '基础体能',
+					type: 'radar',
+					// areaStyle: {normal: {}},
+					data: [{
+						value: _h,
+						name: '国际高水平'
+					}, {
+						value: _all,
+						name: '队内平均值'
+					}, {
+						value: _value,
+						name: '当前队员'
+					}]
+				}];
+
+				vm.$nextTick(function () {
+					// vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					vm.setBiaoRadar();
+				});
+			});
+		},
+		getLeiDa3: function getLeiDa3() {
+			vm.indicator = [{
+				name: '左45°s',
+				max: 10
+			}, {
+				name: '右45°s',
+				max: 10
+			}, {
+				name: '左135°s',
+				max: 10
+			}, {
+				name: '右135°s',
+				max: 10
+			}, {
+				name: '左90°s',
+				max: 10
+			}, {
+				name: '右90°s',
+				max: 10
+			}, {
+				name: '0°s',
+				max: 10
+			}, {
+				name: '180°s',
+				max: 10
+			}, {
+				name: '上肢',
+				max: 10
+			}, {
+				name: '下肢',
+				max: 10
+			}];
+
+			function api() {
+				return new Promise(function (resolve, reject) {
+					var _d = '';
+					_d += 'sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+					var _data = {
+						Left45Score: 0,
+						Right45Score: 0,
+						Left135Score: 0,
+						Right135Score: 0,
+						Left90Score: 0,
+						Right90Score: 0,
+						ZeroScore: 0,
+						OneHundredEightyScore: 0,
+						UpperLimbRatioScore: 0,
+						LowerLimbRatioScore: 0
+					};
+					vm.$http.post(myPublic.publicUrl + '/API/Test/TrunkRadarChart?' + _d, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							resolve(result.body.Data);
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							resolve(_data);
+						}
+						console.log(error);
+					});
+				});
+			}
+			api().then(function (res) {
+				var _h = [vm.wendingLeiDaHide.Left45Score, vm.wendingLeiDaHide.Right45Score, vm.wendingLeiDaHide.Left135Score, vm.wendingLeiDaHide.Right135Score, vm.wendingLeiDaHide.Left90Score, vm.wendingLeiDaHide.Right90Score, vm.wendingLeiDaHide.ZeroScore, vm.wendingLeiDaHide.OneHundredEightyScore, vm.wendingLeiDaHide.UpperLimbRatioScore, vm.wendingLeiDaHide.LowerLimbRatioScore];
+				var _all = [vm.wendingLeiDaAll.Left45Score, vm.wendingLeiDaAll.Right45Score, vm.wendingLeiDaAll.Left135Score, vm.wendingLeiDaAll.Right135Score, vm.wendingLeiDaAll.Left90Score, vm.wendingLeiDaAll.Right90Score, vm.wendingLeiDaAll.ZeroScore, vm.wendingLeiDaAll.OneHundredEightyScore, vm.wendingLeiDaAll.UpperLimbRatioScore, vm.wendingLeiDaAll.LowerLimbRatioScore];
+				vm.LeiDaSeries = [{
+					name: '稳定和均衡',
+					type: 'radar',
+					// areaStyle: {normal: {}},
+					data: [{
+						value: _h,
+						name: '国际高水平'
+					}, {
+						value: _all,
+						name: '队内平均值'
+					}, {
+						value: [res.Left45Score, res.Right45Score, res.Left135Score, res.Right135Score, res.Left90Score, res.Right90Score, res.ZeroScore, res.OneHundredEightyScore, res.UpperLimbRatioScore, res.LowerLimbRatioScore],
+						name: '当前队员'
+					}]
+				}];
+
+				vm.LeiDaSeries = [{
+					name: '基础体能',
+					type: 'radar',
+					// areaStyle: {normal: {}},
+					data: [{
+						value: _h,
+						name: '国际高水平'
+					}, {
+						value: _all,
+						name: '队内平均值'
+					}, {
+						value: [res.BMIScore, res.SitForwardScore, res.ThirtyMeterDashScore, res.VerticalJumpScore, res.RelativeSquatMaxStrengthScore, res.RelativeLyingPushMaxStrengthScore, res.PullUpScore, res.AbdominalEnduranceScore, res.BackMuscleEnduranceScore, res.ThreeKmScore],
+						name: '当前队员'
+					}]
+				}];
+
+				vm.$nextTick(function () {
+					// vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					vm.setBiaoRadar();
+				});
+			});
+		},
+		setBiaoRadar: function setBiaoRadar() {
+			try {
+				// vm.getInfo();
+
+				document.getElementById('biao2').setAttribute("_echarts_instance_", "");
+				document.getElementById('biao2').innerHTML = '';
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('biao2'));
+				// 指定图表的配置项和数据
+				var option = {
+					title: {
+						text: '基础雷达图'
+					},
+					tooltip: {},
+					legend: {
+						data: ['国际高水平', '队内平均值', '当前队员']
+					},
+					radar: {
+						// shape: 'circle',
+						name: {
+							textStyle: {
+								color: '#fff',
+								backgroundColor: '#999',
+								borderRadius: 3,
+								padding: [3, 5]
+							}
+						},
+						indicator: vm.indicator
+					},
+					series: vm.LeiDaSeries
+				};
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+			} catch (e) {
+				//TODO handle the exception
+			}
+		},
+		backWorkout: function backWorkout(num) {
+			window.bus.$emit('stamina', num);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.start();
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _pingFen = __webpack_require__(72);
+
+var _pingFen2 = _interopRequireDefault(_pingFen);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ["isGetList"],
+	data: function data() {
+		return {
+			getOnr: {},
+			staminaList: [],
+			staminaName: [],
+			staminaDate: [],
+			showPingFen: true
+		};
+	},
+	//公共模板
+	components: {
+		pingFen: _pingFen2["default"]
+	},
+	watch: {
+		isGetList: function isGetList(newVal, oldVal) {
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			myPublic.tableHeader('.table-box');
+			vm.getList();
+		},
+		getList: function getList() {
+			var _d = '';
+			_d += 'sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainResult?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _staminaName = [];
+					var _staminaDate = [];
+					var _l = [];
+					var _staminaList = [];
+					if (result.body.Data) {
+						for (var i = 0; i < result.body.Data.length; i++) {
+							if (_staminaName.indexOf(result.body.Data[i].TypeName) < 0) {
+								_staminaName.push(result.body.Data[i].TypeName);
+							}
+							if (_staminaDate.indexOf(result.body.Data[i].TestDate) < 0) {
+								_staminaDate.push(result.body.Data[i].TestDate);
+								_l.push([result.body.Data[i].Value]);
+							} else {
+								_l[_staminaDate.indexOf(result.body.Data[i].TestDate)].push(result.body.Data[i].Value);
+							}
+						}
+						for (var i = 0; i < _staminaDate.length; i++) {
+							_staminaList.push({
+								TestDate: _staminaDate[i],
+								valueList: _l[i]
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiao(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setBiao: function setBiao(_dateList, _list) {
+			var _series = [];
+			var _val = [];
+			for (var i = 0; i < vm.staminaName.length; i++) {
+				_val = [];
+				for (var j = 0; j < _dateList.length; j++) {
+					_val.push(_list[j].valueList[i]);
+				}
+				_series.push({
+					name: vm.staminaName[i],
+					type: 'line',
+					data: _val
+				});
+			}
+			document.getElementById('biao').setAttribute("_echarts_instance_", "");
+			document.getElementById('biao').innerHTML = '';
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('biao'));
+
+			// 指定图表的配置项和数据
+			var option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: { // 坐标轴指示器，坐标轴触发有效
+						type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+					}
+				},
+				legend: {
+					data: vm.staminaName
+				},
+				grid: {
+					left: '10px',
+					right: '50px',
+					bottom: '10px',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: _dateList
+				},
+				yAxis: {
+					type: 'value',
+					axisLabel: {
+						formatter: '{value}'
+					}
+
+				},
+				series: _series
+			};
+
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		},
+		backWorkout: function backWorkout(num) {
+			window.bus.$emit('stamina', num);
+		},
+		workoutAdd: function workoutAdd() {
+			vm.$router.push({
+				path: '/staminaAdd'
+			});
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.start();
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _childNum = __webpack_require__(475);
+
+var _childNum2 = _interopRequireDefault(_childNum);
+
+var _childNum3 = __webpack_require__(476);
+
+var _childNum4 = _interopRequireDefault(_childNum3);
+
+__webpack_require__(138);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			isGetList: true,
+			childNum: 0
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		jichu: _childNum2["default"],
+		zhuanxiang: _childNum4["default"],
+		topMenu: _menu2["default"]
+	},
+	watch: {},
+	beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+		if (from.fullPath == '/staminaAdd') {
+			window.localStorage.setItem('workoutFrom', '0');
+		} else {
+			window.localStorage.setItem('workoutFrom', '1');
+		}
+		next();
+	},
+
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
+			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+			vm.setTimeInp();
+			window.bus.$on('stamina', function (val) {
+				vm.childNum = val;
+			});
+			if (window.localStorage.getItem('workoutFrom') == '0') {
+				vm.childNum = 2;
+			} else {
+				vm.childNum = 1;
+			}
+		},
 		setTimeInp: function setTimeInp() {
 			document.getElementById('starttime-section').addEventListener('blur', function () {
 				var _date1 = document.getElementById('starttime').value;
 				var _date2 = document.getElementById('endtime').value;
 				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 				if (_date2 == '' || isDate) {
-					vm.getList();
 					return;
 				}
 				myPublic.alertMy('开始时间不能大于结束时间');
 				document.getElementById('starttime').value = document.getElementById('endtime').value;
-				vm.getList();
 			});
 			document.getElementById('endtime-section').addEventListener('blur', function () {
 				var _date1 = document.getElementById('starttime').value;
@@ -19855,17 +22372,14 @@ exports["default"] = {
 				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 				if (_isDate) {
 					document.getElementById('endtime').value = _thisDate;
-					vm.getList();
 					return;
 				}
 				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 				if (_date1 == '' || isDate) {
-					vm.getList();
 					return;
 				}
 				myPublic.alertMy('开始时间不能大于结束时间');
 				document.getElementById('endtime').value = document.getElementById('starttime').value;
-				vm.getList();
 			});
 		}
 	},
@@ -19881,7 +22395,196 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 193 */
+/* 209 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+__webpack_require__(138);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	//变量
+	data: function data() {
+		return {
+			url: '',
+			user: '',
+			trainList: [] //训练项目
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		topMenu: _menu2["default"]
+	},
+	watch: {},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			vm.user = JSON.parse(window.localStorage.getItem('user'));
+			document.getElementById('staminaTime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+			vm.url = myPublic.publicUrl;
+			vm.getSportItem();
+		},
+		//查询体能测试项目
+		getSportItem: function getSportItem() {
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainNames?sex=' + '', {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _l = result.body.Data;
+					for (var i = 0; i < _l.length; i++) {
+						_l[i].Value = ""; //项目值
+						_l[i].TestDate = ""; //评测时间
+					}
+					vm.trainList = _l;
+
+					vm.getSportValue();
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		getSportValue: function getSportValue() {
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetNewTrainResult?sportuserid=' + vm.user.Id + '&date=' + document.getElementById('staminaTime').value, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					for (var i = 0; i < vm.trainList.length; i++) {
+						vm.trainList[i].Value = result.body.Data[i] ? result.body.Data[i].Value : ''; //项目值
+					}
+				} else if (result.body.StateCode == 100) {
+					myPublic.alertResult('还未配置体能项目');
+					return;
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		//保存体能训练
+		save: function save() {
+			var _list = [];
+			for (var i = 0; i < vm.trainList.length; i++) {
+				_list.push({
+					TrainId: vm.trainList[i].TrainId, //项目id
+					Value: vm.trainList[i].Value, //项目值
+					TestDate: document.getElementById('staminaTime').value //评测时间
+				});
+			}
+			vm.$http.post(myPublic.publicUrl + '/API/Test/SaveTrainResult?sportuserid=' + vm.user.Id, _list, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					myPublic.alertResult(result.body.Message);
+					vm.closeChild(1);
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		closeChild: function closeChild(num) {
+			vm.$router.back(-1);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	beforeDestroy: function beforeDestroy() {},
+	mounted: function mounted() {
+		vm.start();
+	}
+};
+
+/***/ }),
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19904,12 +22607,20 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 var vm;
 exports["default"] = {
 	props: ['shuaxin', 'bodyList', 'againBiao'],
 	data: function data() {
-		return {};
+		return {
+			pingfen: true
+		};
 	},
 	watch: {
 		shuaxin: function shuaxin() {
@@ -19924,6 +22635,13 @@ exports["default"] = {
 	methods: {
 		start: function start() {
 			vm.setBiao();
+		},
+		showPingFen: function showPingFen() {
+			vm.pingfen = !vm.pingfen;
+			window.bus.$emit('pingfen', vm.pingfen);
+		},
+		setChildNum: function setChildNum(num) {
+			window.bus.$emit('childNum', num);
 		},
 		setBiao: function setBiao() {
 			var _dateList = [];
@@ -20013,7 +22731,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 194 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20022,6 +22740,10 @@ exports["default"] = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+//
+//
+//
+//
 //
 //
 //
@@ -20093,6 +22815,9 @@ exports["default"] = {
 		start: function start() {
 			myPublic.tableHeader('#table-header');
 		},
+		setChildNum: function setChildNum(num) {
+			window.bus.$emit('childNum', num);
+		},
 		showPingFen: function showPingFen() {
 			vm.pingfen = !vm.pingfen;
 			window.bus.$emit('pingfen', vm.pingfen);
@@ -20107,7 +22832,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 195 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20278,7 +23003,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 196 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20409,7 +23134,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 197 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20419,40 +23144,41 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _header = __webpack_require__(12);
+var _header = __webpack_require__(11);
 
 var _header2 = _interopRequireDefault(_header);
 
-var _menu = __webpack_require__(23);
+var _menu = __webpack_require__(13);
 
 var _menu2 = _interopRequireDefault(_menu);
 
-var _pingFen = __webpack_require__(147);
+var _pingFen = __webpack_require__(72);
 
 var _pingFen2 = _interopRequireDefault(_pingFen);
 
-var _subjectiveIndex = __webpack_require__(466);
+var _subjectiveIndex = __webpack_require__(480);
 
 var _subjectiveIndex2 = _interopRequireDefault(_subjectiveIndex);
 
-var _subjectiveCount = __webpack_require__(465);
+var _subjectiveCount = __webpack_require__(479);
 
 var _subjectiveCount2 = _interopRequireDefault(_subjectiveCount);
 
-var _subjectiveTrain = __webpack_require__(468);
+var _subjectiveTrain = __webpack_require__(482);
 
 var _subjectiveTrain2 = _interopRequireDefault(_subjectiveTrain);
 
-var _subjectiveLeida = __webpack_require__(467);
+var _subjectiveLeida = __webpack_require__(481);
 
 var _subjectiveLeida2 = _interopRequireDefault(_subjectiveLeida);
 
-__webpack_require__(421);
+__webpack_require__(435);
 
 function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
 }
 
+//
 //
 //
 //
@@ -20504,7 +23230,8 @@ exports["default"] = {
 			showPingFen: true,
 			shuaxin: true,
 			isshow: false,
-			bodyList: []
+			bodyList: [],
+			childNum: 1
 		};
 	},
 	//公共模板
@@ -20527,6 +23254,9 @@ exports["default"] = {
 			vm.isshow = true;
 			window.bus.$on('pingfen', function (val) {
 				vm.showPingFen = val;
+			});
+			window.bus.$on('childNum', function (val) {
+				vm.childNum = val;
 			});
 			vm.setTimeInp();
 			vm.getList();
@@ -20592,6 +23322,7 @@ exports["default"] = {
 	},
 	beforeDestroy: function beforeDestroy() {
 		window.bus.$off('pingfen');
+		window.bus.$off('childNum');
 	},
 	mounted: function mounted() {
 		vm.start();
@@ -20606,7 +23337,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 198 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20615,6 +23346,83 @@ exports["default"] = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _tineng = __webpack_require__(156);
+
+var _tineng2 = _interopRequireDefault(_tineng);
+
+var _qugan = __webpack_require__(154);
+
+var _qugan2 = _interopRequireDefault(_qugan);
+
+var _bankuai = __webpack_require__(153);
+
+var _bankuai2 = _interopRequireDefault(_bankuai);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20624,22 +23432,1104 @@ Object.defineProperty(exports, "__esModule", {
 
 var vm;
 exports["default"] = {
-	props: ['staminaList', 'staminaName', 'staminaDate'],
+	props: ["isGetList", "zhuanxiangList", "trainFirse", "trainId", "sportList", "sportIndex", "sex"],
 	data: function data() {
 		return {
-			getOnr: {}
+			listType: 1,
+			isEdit: false,
+			getOnr: {},
+			list: [],
+			staminaList: [],
+			staminaName: [],
+			staminaDate: [],
+			LeiDaSeries: [],
+			xuanze: [{
+				is: true,
+				name: 'BMI'
+			}, {
+				is: true,
+				name: '坐位体前屈'
+			}, {
+				is: true,
+				name: '30m冲刺'
+			}, {
+				is: true,
+				name: '垂直纵跳'
+			}, {
+				is: true,
+				name: '深蹲相对力量'
+			}, {
+				is: true,
+				name: '卧推相对力量'
+			}, {
+				is: true,
+				name: '引体向上次'
+			}, {
+				is: true,
+				name: '腹肌耐力'
+			}, {
+				is: true,
+				name: '背肌耐力'
+			}, {
+				is: true,
+				name: '3000m'
+			}, {
+				is: false,
+				name: '2000m测功仪'
+			}],
+			jichuLeiDaHide: {}, //基础雷达高水平
+			jichuLeiDaAll: {}, //基础雷达平均水平
+			wendingLeiDaHide: {}, //稳定雷达平均水平
+			wendingLeiDaAll: {}, //稳定雷达平均水平
+
+			indicator: [],
+			sport: undefined,
+			showPingFen: true
 		};
 	},
+	//公共模板
+	components: {
+		tiNeng: _tineng2["default"],
+		quGan: _qugan2["default"],
+		banKuai: _bankuai2["default"]
+	},
 	watch: {
-		staminaList: function staminaList() {
-			vm.setBiao(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+		isGetList: function isGetList(newVal, oldVal) {
+			vm.start();
+		},
+		listType: function listType(newVal, oldVal) {
+			if (newVal != 1) {
+				vm.isEdit = false;
+			}
+			vm.start();
 		}
 	},
 	//计算属性
 	computed: {},
 	methods: {
 		start: function start() {
-			vm.setBiao(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+			// myPublic.tableHeader('.table-box');
+			vm.sport = vm.sportIndex;
+			vm.getinfo();
+		},
+		setXuanze: function setXuanze(index) {
+			vm.xuanze[index].is = !vm.xuanze[index].is;
+			vm.getinfo();
+		},
+		getinfo: function getinfo() {
+			if (vm.listType == 1) {
+				vm.getLeiDaHide().then(function () {
+					vm.getLeiDaAll().then(function () {
+						vm.getList();
+					});
+				});
+			}
+			if (vm.listType == 2) {
+				vm.getList();
+			}
+			if (vm.listType == 3) {
+				vm.getLeiDaHide().then(function () {
+					vm.getLeiDaAll().then(function () {
+						vm.getList();
+					});
+				});
+			}
+		},
+		getLeiDaHide: function getLeiDaHide() {
+			return new Promise(function (resolve, reject) {
+				if (vm.listType == 1) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/BasicPhysicalTop?sex=' + vm.sex, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = result.body.Data.BMIScore;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = result.body.Data.SitForwardScore;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = result.body.Data.ThirtyMeterDashScore;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = result.body.Data.VerticalJumpScore;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = result.body.Data.RelativeSquatMaxStrengthScore;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = result.body.Data.RelativeLyingPushMaxStrengthScore;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = result.body.Data.PullUpScore;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = result.body.Data.AbdominalEnduranceScore;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = result.body.Data.BackMuscleEnduranceScore;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = result.body.Data.ThreeKmScore;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = result.body.Data.TwoKmDynamometerScore;
+							}
+							vm.jichuLeiDaHide = _j;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = 0;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = 0;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = 0;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = 0;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = 0;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = 0;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = 0;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = 0;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = 0;
+							}
+							vm.jichuLeiDaHide = _j;
+							resolve();
+						}
+					});
+				}
+				if (vm.listType == 3) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/TrunkTop?sex' + vm.sex, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							vm.wendingLeiDaHide = result.body.Data;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							vm.wendingLeiDaHide = {
+								Left45Score: 0,
+								Left90Score: 0,
+								Left135Score: 0,
+								LowerLimbRatioScore: 0,
+								LowerLimbScore: 0,
+								OneHundredEightyScore: 0,
+								Right45Score: 0,
+								Right90Score: 0,
+								Right135Score: 0,
+								UpperLimbRatioScore: 0,
+								UpperLimbScore: 0,
+								ZeroScore: 0
+							};
+							resolve();
+						}
+						console.log(error);
+					});
+				}
+			});
+		},
+		getLeiDaAll: function getLeiDaAll() {
+			return new Promise(function (resolve, reject) {
+				if (vm.listType == 1) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/BasicPhysicalAverage?trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = result.body.Data.BMIScore;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = result.body.Data.SitForwardScore;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = result.body.Data.ThirtyMeterDashScore;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = result.body.Data.VerticalJumpScore;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = result.body.Data.RelativeSquatMaxStrengthScore;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = result.body.Data.RelativeLyingPushMaxStrengthScore;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = result.body.Data.PullUpScore;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = result.body.Data.AbdominalEnduranceScore;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = result.body.Data.BackMuscleEnduranceScore;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = result.body.Data.ThreeKmScore;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = result.body.Data.TwoKmDynamometerScore;
+							}
+							vm.jichuLeiDaAll = _j;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							var _j = {};
+							if (vm.xuanze[0].is) {
+								_j.BMIScore = 0;
+							}
+							if (vm.xuanze[1].is) {
+								_j.SitForwardScore = 0;
+							}
+							if (vm.xuanze[2].is) {
+								_j.ThirtyMeterDashScore = 0;
+							}
+							if (vm.xuanze[3].is) {
+								_j.VerticalJumpScore = 0;
+							}
+							if (vm.xuanze[4].is) {
+								_j.RelativeSquatMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[5].is) {
+								_j.RelativeLyingPushMaxStrengthScore = 0;
+							}
+							if (vm.xuanze[6].is) {
+								_j.PullUpScore = 0;
+							}
+							if (vm.xuanze[7].is) {
+								_j.AbdominalEnduranceScore = 0;
+							}
+							if (vm.xuanze[8].is) {
+								_j.BackMuscleEnduranceScore = 0;
+							}
+							if (vm.xuanze[9].is) {
+								_j.ThreeKmScore = 0;
+							}
+							if (vm.xuanze[10].is) {
+								_j.TwoKmDynamometer = 0;
+							}
+							vm.jichuLeiDaAll = _j;
+							resolve();
+						}
+						console.log(error);
+					});
+				}
+
+				if (vm.listType == 3) {
+					vm.$http.post(myPublic.publicUrl + '/API/Test/TrunkAverage?trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							vm.wendingLeiDaAll = result.body.Data;
+							resolve();
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							vm.wendingLeiDaAll = {
+								Left45Score: 0,
+								Left90Score: 0,
+								Left135Score: 0,
+								LowerLimbRatioScore: 0,
+								LowerLimbScore: 0,
+								OneHundredEightyScore: 0,
+								Right45Score: 0,
+								Right90Score: 0,
+								Right135Score: 0,
+								UpperLimbRatioScore: 0,
+								UpperLimbScore: 0,
+								ZeroScore: 0
+							};
+							resolve();
+						}
+						console.log(error);
+					});
+				}
+			});
+		},
+		getList: function getList() {
+			if (vm.listType == 1) {
+				if (vm.sport !== '') {
+					vm.getLeiDa1();
+				}
+				vm.getList1();
+			} else if (vm.listType == 2) {
+				vm.getList2();
+			} else if (vm.listType == 3) {
+				if (vm.sport !== '') {
+					vm.getLeiDa3();
+				}
+				vm.getList3();
+			}
+		},
+		getList1: function getList1() {
+			var _d = '';
+			_d += 'trainId=' + (vm.trainFirse !== '' ? vm.zhuanxiangList[vm.trainFirse].Id : "");
+			_d += '&trainSecId=' + vm.trainId;
+			_d += '&sex=' + vm.sex;
+			_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					vm.list = result.body.Data ? result.body.Data : [];
+					var _staminaDate = [];
+					var _staminaList = [];
+					var _staminaName = [];
+					if (vm.xuanze[0].is) {
+						_staminaName.push('BMI');
+					}
+					if (vm.xuanze[1].is) {
+						_staminaName.push('坐位体前屈');
+					}
+					if (vm.xuanze[2].is) {
+						_staminaName.push('30m冲刺');
+					}
+					if (vm.xuanze[3].is) {
+						_staminaName.push('垂直纵跳');
+					}
+					if (vm.xuanze[4].is) {
+						_staminaName.push('深蹲相对力量');
+					}
+					if (vm.xuanze[5].is) {
+						_staminaName.push('卧推相对力量');
+					}
+					if (vm.xuanze[6].is) {
+						_staminaName.push('引体向上次');
+					}
+					if (vm.xuanze[7].is) {
+						_staminaName.push('腹肌耐力');
+					}
+					if (vm.xuanze[8].is) {
+						_staminaName.push('背肌耐力');
+					}
+					if (vm.xuanze[9].is) {
+						_staminaName.push('3000m');
+					}
+					if (vm.xuanze[10].is) {
+						_staminaName.push('2000m测功仪');
+					}
+					if (result.body.Data) {
+						var valueList;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							_staminaDate.push(result.body.Data[i].Testdate);
+							valueList = [];
+							if (vm.xuanze[0].is) {
+								valueList.push(result.body.Data[i].BMI);
+							}
+							if (vm.xuanze[1].is) {
+								valueList.push(result.body.Data[i].SitForward);
+							}
+							if (vm.xuanze[2].is) {
+								valueList.push(result.body.Data[i].ThirtyMeterDash);
+							}
+							if (vm.xuanze[3].is) {
+								valueList.push(result.body.Data[i].VerticalJump);
+							}
+							if (vm.xuanze[4].is) {
+								valueList.push(result.body.Data[i].RelativeSquatMaxStrength);
+							}
+							if (vm.xuanze[5].is) {
+								valueList.push(result.body.Data[i].RelativeLyingPushMaxStrength);
+							}
+							if (vm.xuanze[6].is) {
+								valueList.push(result.body.Data[i].PullUp);
+							}
+							if (vm.xuanze[7].is) {
+								valueList.push(result.body.Data[i].AbdominalEndurance);
+							}
+							if (vm.xuanze[8].is) {
+								valueList.push(result.body.Data[i].BackMuscleEndurance);
+							}
+							if (vm.xuanze[9].is) {
+								valueList.push(result.body.Data[i].ThreeKm);
+							}
+							if (vm.xuanze[10].is) {
+								valueList.push(result.body.Data[i].TwoKmDynamometer);
+							}
+							_staminaList.push({
+								TestDate: result.body.Data[i].Testdate,
+								valueList: valueList
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		getList2: function getList2() {
+			var _d = '';
+			_d += 'trainId=' + (vm.trainFirse !== '' ? vm.zhuanxiangList[vm.trainFirse].Id : "");
+			_d += '&trainSecId=' + vm.trainId;
+			_d += '&sex=' + vm.sex;
+			_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _staminaName = ['攀爬时间（s）', '攀爬距离（m）', '平均心率', '最大心率', '80%以上最大心率保持时间和总距离'];
+					var _staminaDate = [];
+					var _staminaList = [];
+
+					vm.list = result.body.Data ? result.body.Data : [];
+					if (result.body.Data) {
+						for (var i = 0; i < result.body.Data.length; i++) {
+							_staminaDate.push(result.body.Data[i].Testdate);
+							_staminaList.push({
+								TestDate: result.body.Data[i].Testdate,
+								valueList: [result.body.Data[i].ClimbingTime, result.body.Data[i].ClimbingDistance, result.body.Data[i].MeanHeartRate, result.body.Data[i].MaxHeartRate, result.body.Data[i].MaxHeartRateHoldTime]
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		getList3: function getList3() {
+			var _d = '';
+			_d += 'trainId=' + (vm.trainFirse !== '' ? vm.zhuanxiangList[vm.trainFirse].Id : "");
+			_d += '&trainSecId=' + vm.trainId;
+			_d += '&sex=' + vm.sex;
+			_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _staminaName = ['左45°s', '右45°s', '左135°s', '右135°s', '左90°s', '右90°s', '0°s', '180°s', '上肢', '下肢'];
+					var _staminaDate = [];
+					var _staminaList = [];
+					if (result.body.Data) {
+						vm.list = result.body.Data ? result.body.Data : [];
+						for (var i = 0; i < result.body.Data.length; i++) {
+							_staminaDate.push(result.body.Data[i].Testdate);
+							_staminaList.push({
+								TestDate: result.body.Data[i].Testdate,
+								valueList: [result.body.Data[i].Left45, result.body.Data[i].Right45, result.body.Data[i].Left135, result.body.Data[i].Right135, result.body.Data[i].Left90, result.body.Data[i].Right90, result.body.Data[i].Zero, result.body.Data[i].OneHundredEighty, result.body.Data[i].UpperLimbRatio, result.body.Data[i].LowerLimbRatio]
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				} else {
+					vm.$router.push({
+						path: '/login'
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
+		},
+		setBiaoAxis: function setBiaoAxis(_dateList, _list) {
+			try {
+				var _series = [];
+				var _val = [];
+				for (var i = 0; i < vm.staminaName.length; i++) {
+					_val = [];
+					for (var j = 0; j < _dateList.length; j++) {
+						_val.push(_list[j].valueList[i]);
+					}
+					_series.push({
+						name: vm.staminaName[i],
+						type: 'line',
+						data: _val
+					});
+				}
+				document.getElementById('biao1').setAttribute("_echarts_instance_", "");
+				document.getElementById('biao1').innerHTML = '';
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('biao1'));
+
+				// 指定图表的配置项和数据
+				var option = {
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: { // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					legend: {
+						data: vm.staminaName
+					},
+					grid: {
+						left: '10px',
+						right: '50px',
+						bottom: '10px',
+						containLabel: true
+					},
+					xAxis: {
+						type: 'category',
+						boundaryGap: false,
+						data: _dateList
+					},
+					yAxis: {
+						type: 'value',
+						axisLabel: {
+							formatter: '{value}'
+						}
+
+					},
+					series: _series
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+			} catch (e) {
+				//TODO handle the exception
+			}
+		},
+		getLeiDa1: function getLeiDa1() {
+			var _indicator = [];
+			if (vm.xuanze[0].is) {
+				_indicator.push({
+					name: 'BMI', //BMI Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[1].is) {
+				_indicator.push({
+					name: '坐位体前屈', //Sit Forward Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[2].is) {
+				_indicator.push({
+					name: '30m冲刺', //ThirtyMeterDashScore
+					max: 10
+				});
+			}
+			if (vm.xuanze[3].is) {
+				_indicator.push({
+					name: '垂直纵跳', //VerticalJumpScore
+					max: 10
+				});
+			}
+			if (vm.xuanze[4].is) {
+				_indicator.push({
+					name: '深蹲相对力量', //Relative Squat Max Strength Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[5].is) {
+				_indicator.push({
+					name: '卧推相对力量', //Relative Lying Push Max Strength Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[6].is) {
+				_indicator.push({
+					name: '引体向上次', //Pull Up Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[7].is) {
+				_indicator.push({
+					name: '腹肌耐力', //Abdominal Endurance Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[8].is) {
+				_indicator.push({
+					name: '背肌耐力', //Back Muscle Endurance Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[9].is) {
+				_indicator.push({
+					name: '3000m', //Three Km Score
+					max: 10
+				});
+			}
+			if (vm.xuanze[10].is) {
+				_indicator.push({
+					name: '2000m测功仪', //Three Km Score
+					max: 10
+				});
+			}
+			vm.indicator = _indicator;
+
+			function api() {
+				return new Promise(function (resolve, reject) {
+					var _d = '';
+					_d += 'sportuserid=' + (vm.sport !== '' ? vm.sportList[vm.sport].UserId : '');
+					var _data = {};
+					if (vm.xuanze[0].is) {
+						_data.BMIScore = 0;
+					}
+					if (vm.xuanze[1].is) {
+						_data.SitForwardScore = 0;
+					}
+					if (vm.xuanze[2].is) {
+						_data.ThirtyMeterDashScore = 0;
+					}
+					if (vm.xuanze[3].is) {
+						_data.VerticalJumpScore = 0;
+					}
+					if (vm.xuanze[4].is) {
+						_data.RelativeSquatMaxStrengthScore = 0;
+					}
+					if (vm.xuanze[5].is) {
+						_data.RelativeLyingPushMaxStrengthScore = 0;
+					}
+					if (vm.xuanze[6].is) {
+						_data.PullUpScore = 0;
+					}
+					if (vm.xuanze[7].is) {
+						_data.AbdominalEnduranceScore = 0;
+					}
+					if (vm.xuanze[8].is) {
+						_data.BackMuscleEnduranceScore = 0;
+					}
+					if (vm.xuanze[9].is) {
+						_data.ThreeKmScore = 0;
+					}
+					if (vm.xuanze[10].is) {
+						_data.TwoKmDynamometer = 0;
+					}
+
+					vm.$http.post(myPublic.publicUrl + '/API/Test/BasicPhysicalRadarChart?' + _d, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							resolve(result.body.Data);
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							resolve(_data);
+						}
+						console.log(error);
+					});
+				});
+			}
+			api().then(function (res) {
+				var _h = [];
+				var _all = [];
+				var _value = [];
+				if (vm.xuanze[0].is) {
+					_h.push(vm.jichuLeiDaHide.BMIScore);
+					_all.push(vm.jichuLeiDaAll.BMIScore);
+					_value.push(res.BMIScore);
+				}
+				if (vm.xuanze[1].is) {
+					_h.push(vm.jichuLeiDaHide.SitForwardScore);
+					_all.push(vm.jichuLeiDaAll.SitForwardScore);
+					_value.push(res.SitForwardScore);
+				}
+				if (vm.xuanze[2].is) {
+					_h.push(vm.jichuLeiDaHide.ThirtyMeterDashScore);
+					_all.push(vm.jichuLeiDaAll.ThirtyMeterDashScore);
+					_value.push(res.ThirtyMeterDashScore);
+				}
+				if (vm.xuanze[3].is) {
+					_h.push(vm.jichuLeiDaHide.VerticalJumpScore);
+					_all.push(vm.jichuLeiDaAll.VerticalJumpScore);
+					_value.push(res.VerticalJumpScore);
+				}
+				if (vm.xuanze[4].is) {
+					_h.push(vm.jichuLeiDaHide.RelativeSquatMaxStrengthScore);
+					_all.push(vm.jichuLeiDaAll.RelativeSquatMaxStrengthScore);
+					_value.push(res.RelativeSquatMaxStrengthScore);
+				}
+				if (vm.xuanze[5].is) {
+					_h.push(vm.jichuLeiDaHide.RelativeLyingPushMaxStrengthScore);
+					_all.push(vm.jichuLeiDaAll.RelativeLyingPushMaxStrengthScore);
+					_value.push(res.RelativeLyingPushMaxStrengthScore);
+				}
+				if (vm.xuanze[6].is) {
+
+					_h.push(vm.jichuLeiDaHide.PullUpScore);
+					_all.push(vm.jichuLeiDaAll.PullUpScore);
+					_value.push(res.PullUpScore);
+				}
+				if (vm.xuanze[7].is) {
+
+					_h.push(vm.jichuLeiDaHide.AbdominalEnduranceScore);
+					_all.push(vm.jichuLeiDaAll.AbdominalEnduranceScore);
+					_value.push(res.AbdominalEnduranceScore);
+				}
+				if (vm.xuanze[8].is) {
+					_h.push(vm.jichuLeiDaHide.BackMuscleEnduranceScore);
+					_all.push(vm.jichuLeiDaAll.BackMuscleEnduranceScore);
+					_value.push(res.BackMuscleEnduranceScore);
+				}
+				if (vm.xuanze[9].is) {
+					_h.push(vm.jichuLeiDaHide.ThreeKmScore);
+					_all.push(vm.jichuLeiDaAll.ThreeKmScore);
+					_value.push(res.ThreeKmScore);
+				}
+				if (vm.xuanze[10].is) {
+					_h.push(vm.jichuLeiDaHide.TwoKmDynamometer);
+					_all.push(vm.jichuLeiDaAll.TwoKmDynamometer);
+					_value.push('0');
+				}
+
+				vm.LeiDaSeries = [{
+					name: '基础体能',
+					type: 'radar',
+					// areaStyle: {normal: {}},
+					data: [{
+						value: _h,
+						name: '国际高水平'
+					}, {
+						value: _all,
+						name: '队内平均值'
+					}, {
+						value: _value,
+						name: '当前队员'
+					}]
+				}];
+
+				vm.$nextTick(function () {
+					// vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					vm.setBiaoRadar();
+				});
+			});
+		},
+		getLeiDa3: function getLeiDa3() {
+			vm.indicator = [{
+				name: '左45°s',
+				max: 10
+			}, {
+				name: '右45°s',
+				max: 10
+			}, {
+				name: '左135°s',
+				max: 10
+			}, {
+				name: '右135°s',
+				max: 10
+			}, {
+				name: '左90°s',
+				max: 10
+			}, {
+				name: '右90°s',
+				max: 10
+			}, {
+				name: '0°s',
+				max: 10
+			}, {
+				name: '180°s',
+				max: 10
+			}, {
+				name: '上肢',
+				max: 10
+			}, {
+				name: '下肢',
+				max: 10
+			}];
+
+			function api() {
+				return new Promise(function (resolve, reject) {
+					var _d = '';
+					_d += 'sportuserid=' + (vm.sport !== '' ? vm.sportList[vm.sport].UserId : '');
+					var _data = {
+						Left45Score: 0,
+						Right45Score: 0,
+						Left135Score: 0,
+						Right135Score: 0,
+						Left90Score: 0,
+						Right90Score: 0,
+						ZeroScore: 0,
+						OneHundredEightyScore: 0,
+						UpperLimbRatioScore: 0,
+						LowerLimbRatioScore: 0
+					};
+					vm.$http.post(myPublic.publicUrl + '/API/Test/TrunkRadarChart?' + _d, {}).then(function (result) {
+						if (result.body.StateCode == 0) {
+							resolve(result.body.Data);
+						}
+					})["catch"](function (error) {
+						if (error.status == 500) {
+							resolve(_data);
+						}
+						console.log(error);
+					});
+				});
+			}
+			api().then(function (res) {
+				var _h = [vm.wendingLeiDaHide.Left45Score, vm.wendingLeiDaHide.Right45Score, vm.wendingLeiDaHide.Left135Score, vm.wendingLeiDaHide.Right135Score, vm.wendingLeiDaHide.Left90Score, vm.wendingLeiDaHide.Right90Score, vm.wendingLeiDaHide.ZeroScore, vm.wendingLeiDaHide.OneHundredEightyScore, vm.wendingLeiDaHide.UpperLimbRatioScore, vm.wendingLeiDaHide.LowerLimbRatioScore];
+				var _all = [vm.wendingLeiDaAll.Left45Score, vm.wendingLeiDaAll.Right45Score, vm.wendingLeiDaAll.Left135Score, vm.wendingLeiDaAll.Right135Score, vm.wendingLeiDaAll.Left90Score, vm.wendingLeiDaAll.Right90Score, vm.wendingLeiDaAll.ZeroScore, vm.wendingLeiDaAll.OneHundredEightyScore, vm.wendingLeiDaAll.UpperLimbRatioScore, vm.wendingLeiDaAll.LowerLimbRatioScore];
+				vm.LeiDaSeries = [{
+					name: '稳定和均衡',
+					type: 'radar',
+					// areaStyle: {normal: {}},
+					data: [{
+						value: _h,
+						name: '国际高水平'
+					}, {
+						value: _all,
+						name: '队内平均值'
+					}, {
+						value: [res.Left45Score, res.Right45Score, res.Left135Score, res.Right135Score, res.Left90Score, res.Right90Score, res.ZeroScore, res.OneHundredEightyScore, res.UpperLimbRatioScore, res.LowerLimbRatioScore],
+						name: '当前队员'
+					}]
+				}];
+
+				vm.LeiDaSeries = [{
+					name: '基础体能',
+					type: 'radar',
+					// areaStyle: {normal: {}},
+					data: [{
+						value: _h,
+						name: '国际高水平'
+					}, {
+						value: _all,
+						name: '队内平均值'
+					}, {
+						value: [res.BMIScore, res.SitForwardScore, res.ThirtyMeterDashScore, res.VerticalJumpScore, res.RelativeSquatMaxStrengthScore, res.RelativeLyingPushMaxStrengthScore, res.PullUpScore, res.AbdominalEnduranceScore, res.BackMuscleEnduranceScore, res.ThreeKmScore],
+						name: '当前队员'
+					}]
+				}];
+
+				vm.$nextTick(function () {
+					// vm.setBiaoAxis(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					vm.setBiaoRadar();
+				});
+			});
+		},
+		setBiaoRadar: function setBiaoRadar() {
+			try {
+				// vm.getInfo();
+
+				document.getElementById('biao2').setAttribute("_echarts_instance_", "");
+				document.getElementById('biao2').innerHTML = '';
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('biao2'));
+				// 指定图表的配置项和数据
+				var option = {
+					title: {
+						text: '基础雷达图'
+					},
+					tooltip: {},
+					legend: {
+						data: ['国际高水平', '队内平均值', '当前队员']
+					},
+					radar: {
+						// shape: 'circle',
+						name: {
+							textStyle: {
+								color: '#fff',
+								backgroundColor: '#999',
+								borderRadius: 3,
+								padding: [3, 5]
+							}
+						},
+						indicator: vm.indicator
+					},
+					series: vm.LeiDaSeries
+				};
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+			} catch (e) {
+				//TODO handle the exception
+			}
+		},
+		backWorkout: function backWorkout(num) {
+			window.bus.$emit('workout', num);
+		}
+	},
+	beforeCreate: function beforeCreate() {
+		vm = this;
+	},
+	mounted: function mounted() {
+		vm.start();
+		vm.getOnr = {};
+		window.onresize = function () {
+			clearTimeout(vm.getOnr);
+			vm.getOnr = setTimeout(function () {
+				vm.start();
+			}, 200);
+		};
+	}
+};
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _pingFen = __webpack_require__(72);
+
+var _pingFen2 = _interopRequireDefault(_pingFen);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var vm;
+exports["default"] = {
+	props: ["isGetList", "sportList", "sportIndex"],
+	data: function data() {
+		return {
+			getOnr: {},
+			staminaList: [],
+			staminaName: [],
+			staminaDate: [],
+			sport: undefined,
+			showPingFen: true
+		};
+	},
+	//公共模板
+	components: {
+		pingFen: _pingFen2["default"]
+	},
+	watch: {
+		isGetList: function isGetList(newVal, oldVal) {
+			vm.start();
+		}
+	},
+	//计算属性
+	computed: {},
+	methods: {
+		start: function start() {
+			myPublic.tableHeader('.table-box');
+			vm.sport = vm.sportIndex;
+			vm.getList();
+		},
+		getList: function getList() {
+			var _d = '';
+			_d += 'sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&pagesize=9999&pageindex=1';
+
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainResult?' + _d, {
+				headers: {
+					token: window.localStorage.getItem('Sport_Access_Token')
+				}
+			}).then(function (result) {
+				if (result.body.StateCode == 0) {
+					var _staminaName = [];
+					var _staminaDate = [];
+					var _l = [];
+					var _staminaList = [];
+					if (result.body.Data) {
+						for (var i = 0; i < result.body.Data.length; i++) {
+							if (_staminaName.indexOf(result.body.Data[i].TypeName) < 0) {
+								_staminaName.push(result.body.Data[i].TypeName);
+							}
+							if (_staminaDate.indexOf(result.body.Data[i].TestDate) < 0) {
+								_staminaDate.push(result.body.Data[i].TestDate);
+								_l.push([result.body.Data[i].Value]);
+							} else {
+								_l[_staminaDate.indexOf(result.body.Data[i].TestDate)].push(result.body.Data[i].Value);
+							}
+						}
+						for (var i = 0; i < _staminaDate.length; i++) {
+							_staminaList.push({
+								TestDate: _staminaDate[i],
+								valueList: _l[i]
+							});
+						}
+					}
+					vm.staminaName = _staminaName;
+					vm.staminaDate = _staminaDate;
+					vm.staminaList = _staminaList;
+					vm.$nextTick(function () {
+						vm.setBiao(myPublic.copys(vm.staminaDate), myPublic.copys(vm.staminaList));
+					});
+				}
+			})["catch"](function (error) {
+				console.log(error);
+			});
 		},
 		setBiao: function setBiao(_dateList, _list) {
 			var _series = [];
@@ -20652,7 +24542,6 @@ exports["default"] = {
 				_series.push({
 					name: vm.staminaName[i],
 					type: 'line',
-					smooth: true,
 					data: _val
 				});
 			}
@@ -20695,6 +24584,14 @@ exports["default"] = {
 
 			// 使用刚指定的配置项和数据显示图表。
 			myChart.setOption(option);
+		},
+		backWorkout: function backWorkout(num) {
+			window.bus.$emit('workout', num);
+		},
+		workoutAdd: function workoutAdd() {
+			vm.$router.push({
+				path: '/workoutAdd'
+			});
 		}
 	},
 	beforeCreate: function beforeCreate() {
@@ -20713,7 +24610,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 199 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20722,6 +24619,60 @@ exports["default"] = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _childNum = __webpack_require__(484);
+
+var _childNum2 = _interopRequireDefault(_childNum);
+
+var _childNum3 = __webpack_require__(485);
+
+var _childNum4 = _interopRequireDefault(_childNum3);
+
+__webpack_require__(139);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20740,26 +24691,168 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-var vm;
+var vm; //基础组件
+//基础组件
 exports["default"] = {
-	props: ['staminaList', 'staminaName'],
+	//变量
 	data: function data() {
-		return {};
+		return {
+			userType: '', //用户类型
+			sex: '',
+			childNum: 0,
+			isGetList: true,
+
+			trainFirse: '',
+			trainId: '',
+			sportIndex: '',
+
+			sportList: [],
+			zhuanxiangList: [],
+			userXuanZe: [] //导出用户项
+
+		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		topMenu: _menu2["default"],
+		jichu: _childNum2["default"],
+		zhuanxiang: _childNum4["default"]
 	},
 	watch: {
-		staminaList: function staminaList() {
-			vm.$forceUpdate();
+		trainId: function trainId(newVal, oldVal) {
+			vm.getSport();
+		},
+		sex: function sex(newVal, oldVal) {
+			vm.getSport();
 		}
 	},
+	beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+		if (from.fullPath == '/workoutAdd') {
+			window.localStorage.setItem('workoutFrom', '0');
+		} else {
+			window.localStorage.setItem('workoutFrom', '1');
+		}
+		next();
+	},
+
 	//计算属性
 	computed: {},
 	methods: {
 		start: function start() {
-			myPublic.tableHeader('.table-box');
+			// myPublic.alertResult('请选择一位运动员');
+			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
+			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+			vm.setTimeInp();
+			vm.userType = window.localStorage.getItem('Sport_userType');
+			if (vm.userType == '分队教练') {
+				vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
+			}
+			window.bus.$on('workout', function (val) {
+				vm.childNum = val;
+				vm.isGetList = !vm.isGetList;
+			});
+			vm.GetAllTrain().then(function () {
+				vm.getSport().then(function () {
+					if (window.localStorage.getItem('workoutFrom') == '0') {
+						vm.childNum = 2;
+					} else {
+						vm.childNum = 1;
+					}
+				});
+			});
+		},
+		//获取训练专项
+		GetAllTrain: function GetAllTrain() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+					params: {
+						userName: ''
+					}
+				}).then(function (result) {
+					if (result.body.StateCode == 0) {
+						vm.zhuanxiangList = result.body.Data;
+						vm.$nextTick(function () {
+							var _id = JSON.parse(window.localStorage.getItem('user')).TrainId;
+							for (var i = 0; i < result.body.Data.length; i++) {
+								if (result.body.Data[i].Id == _id) {
+
+									vm.trainFirse = i;
+									break;
+								}
+							}
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+					reject();
+				});
+			});
+		},
+		//获取远动员列表
+		getSport: function getSport() {
+			return new Promise(function (resolve, reject) {
+				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + vm.trainId + '&sex=' + vm.sex, {}).then(function (result) {
+
+					if (result.body.StateCode == 0) {
+						vm.sportList = result.body.Data;
+						for (var i = 0; i < result.body.Data.length; i++) {
+							vm.userXuanZe.push(result.body.Data[i].UserId);
+						}
+						// if (result.body.Data && result.body.Data.length > 0) {
+						// 	vm.sportIndex = 0;
+						// }
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
+					}
+					resolve();
+				})["catch"](function (error) {
+					console.log(error);
+				});
+			});
+		},
+		setTimeInp: function setTimeInp() {
+			document.getElementById('starttime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date2 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('starttime').value = document.getElementById('endtime').value;
+			});
+			document.getElementById('endtime-section').addEventListener('blur', function () {
+				var _date1 = document.getElementById('starttime').value;
+				var _date2 = document.getElementById('endtime').value;
+				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
+				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_isDate) {
+					document.getElementById('endtime').value = _thisDate;
+					return;
+				}
+				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+				if (_date1 == '' || isDate) {
+					return;
+				}
+				myPublic.alertMy('开始时间不能大于结束时间');
+				document.getElementById('endtime').value = document.getElementById('starttime').value;
+			});
+		},
+		workoutAdd: function workoutAdd() {
+			vm.$router.push({
+				path: '/workoutAdd'
+			});
 		}
 	},
 	beforeCreate: function beforeCreate() {
 		vm = this;
+	},
+	beforeDestroy: function beforeDestroy() {
+		window.bus.$off('workout');
 	},
 	mounted: function mounted() {
 		vm.start();
@@ -20767,7 +24860,7 @@ exports["default"] = {
 };
 
 /***/ }),
-/* 200 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20776,6 +24869,30 @@ exports["default"] = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _header = __webpack_require__(11);
+
+var _header2 = _interopRequireDefault(_header);
+
+var _menu = __webpack_require__(13);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+__webpack_require__(139);
+
+function _interopRequireDefault(obj) {
+	return obj && obj.__esModule ? obj : { "default": obj };
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20826,17 +24943,24 @@ Object.defineProperty(exports, "__esModule", {
 
 var vm;
 exports["default"] = {
+	//变量
 	data: function data() {
 		return {
 			url: '',
 			trainList: [], //训练项目
 			sportList: [], //运动员
-			sportIndex: 0
+			sportIndex: 0,
+			sex: ''
 		};
+	},
+	//公共模板
+	components: {
+		headerComponent: _header2["default"],
+		topMenu: _menu2["default"]
 	},
 	watch: {
 		sportIndex: function sportIndex(newVal, oldVal) {
-			vm.getSportValue(newVal);
+			vm.getSportValue();
 		}
 	},
 	//计算属性
@@ -20845,11 +24969,14 @@ exports["default"] = {
 		start: function start() {
 			document.getElementById('staminaTime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 			vm.url = myPublic.publicUrl;
+			if (vm.userType == '分队教练') {
+				vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
+			}
 			vm.getSport();
 		},
 		//查询体能测试项目
 		getSportItem: function getSportItem() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetTrainName', {
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainNames?sex=' + vm.sex, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
@@ -20862,7 +24989,7 @@ exports["default"] = {
 					}
 					vm.trainList = _l;
 
-					vm.getSportValue(0);
+					vm.getSportValue();
 				} else {
 					vm.$router.push({
 						path: '/login'
@@ -20873,7 +25000,7 @@ exports["default"] = {
 			});
 		},
 		getSportValue: function getSportValue(i) {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetNewTrainResult?sportuserid=' + vm.sportList[i].UserId + '&date=' + document.getElementById('staminaTime').value, {
+			vm.$http.get(myPublic.publicUrl + '/API/Test/GetNewTrainResult?sportuserid=' + vm.sportList[vm.sportIndex].UserId + '&date=' + document.getElementById('staminaTime').value, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
@@ -20896,11 +25023,7 @@ exports["default"] = {
 		},
 		//查询运动员
 		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
+			vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + '' + '&sex=' + vm.sex, {}).then(function (result) {
 				if (result.body.StateCode == 0) {
 					vm.sportList = result.body.Data;
 					if (result.body.Data && result.body.Data.length > 0) {
@@ -20933,7 +25056,7 @@ exports["default"] = {
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
 					myPublic.alertResult(result.body.Message);
-					vm.closeChild(1);
+					// vm.closeChild(1);
 				}
 			})["catch"](function (error) {
 				console.log(error);
@@ -20946,613 +25069,34 @@ exports["default"] = {
 	beforeCreate: function beforeCreate() {
 		vm = this;
 	},
+	beforeDestroy: function beforeDestroy() {},
 	mounted: function mounted() {
 		vm.start();
 	}
 };
 
 /***/ }),
-/* 201 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-var _menu = __webpack_require__(23);
-
-var _menu2 = _interopRequireDefault(_menu);
-
-var _childNum = __webpack_require__(470);
-
-var _childNum2 = _interopRequireDefault(_childNum);
-
-var _childNum3 = __webpack_require__(471);
-
-var _childNum4 = _interopRequireDefault(_childNum3);
-
-var _childNum5 = __webpack_require__(148);
-
-var _childNum6 = _interopRequireDefault(_childNum5);
-
-__webpack_require__(136);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			allDaoChu: ['1'],
-			allDaoChuNext: [],
-			userXuanZe: [], //导出用户名
-			daochuNum: 1,
-			childNum: 1,
-			daochu: false,
-			daochuList: [],
-			trainAllList: [], //所有训练项目
-			trainList: [], //训练项
-			staminaList: [],
-			staminaName: [],
-			staminaDate: [],
-			sportList: [],
-			sportIndex: 0
-		};
-	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"],
-		childComponentFirst: _childNum2["default"],
-		childComponentSecond: _childNum4["default"],
-		childComponentThird: _childNum6["default"],
-		topMenu: _menu2["default"]
-	},
-	watch: {
-		sportIndex: function sportIndex(newVal, oldVal) {
-			window.sportIndex = newVal;
-			vm.getList();
-		},
-		allDaoChu: function allDaoChu(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.getSport();
-			} else {
-				vm.userXuanZe = [];
-			}
-		},
-		allDaoChuNext: function allDaoChuNext(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.trainList;
-				for (var i = 0; i < vm.trainAllList.length; i++) {
-					vm.trainList.push(vm.trainAllList[i][0].TrainId);
-					vm.trainList.push(vm.trainAllList[i][1].TrainId);
-				}
-			} else {
-				vm.trainList = [];
-			}
-		}
-	},
-	//计算属性
-	computed: {
-		daochuUrl: function daochuUrl() {
-			var _valueList = vm.trainList.join(',');
-			var data = '';
-			data += "starttime=" + document.getElementById('starttime').value;
-			data += "&endtime=" + document.getElementById('endtime').value;
-			data += "&userid=" + vm.userXuanZe.join(',');
-			data += "&projectValue=" + _valueList;
-			return myPublic.publicUrl + '/API/Excelreport/TrainingPeopleExport?' + data;
-		}
-	},
-	methods: {
-		start: function start() {
-			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
-			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-			window.bus.$on('workout', function (val) {
-				vm.childNum = val;
-				vm.getList();
-			});
-			vm.getSport();
-			vm.setTimeInp();
-			vm.getSportItem();
-		},
-		getList: function getList() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainResult', {
-				params: {
-					sportuserid: vm.sportList[vm.sportIndex].UserId,
-					starttime: document.getElementById('starttime').value,
-					endtime: document.getElementById('endtime').value,
-					pagesize: 999,
-					pageindex: 1
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					var _list = result.body.Data;
-					var itemDate = [];
-					var itemName = [];
-					var itemList = [];
-					var _val = [];
-					for (var i = 0; i < _list.length; i++) {
-						if (itemName.indexOf(_list[i].TypeName) < 0) {
-							itemName.push(_list[i].TypeName);
-							_val.push(0);
-						}
-					}
-
-					for (var i = 0; i < _list.length; i++) {
-						if (itemDate.indexOf(_list[i].TestDate) >= 0) {
-							//包含
-							itemList[itemDate.indexOf(_list[i].TestDate)].valueList[itemName.indexOf(_list[i].TypeName)] = _list[i].Value;
-						} else {
-							itemDate.push(_list[i].TestDate);
-							itemList.push({
-								TestDate: _list[i].TestDate,
-								valueList: _val.concat()
-							});
-							itemList[itemList.length - 1].valueList[itemName.indexOf(_list[i].TypeName)] = _list[i].Value;
-						}
-					}
-					vm.staminaName = itemName;
-					vm.staminaDate = itemDate;
-					vm.staminaList = itemList;
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		//查询体能测试项目
-		getSportItem: function getSportItem() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainNames', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.trainAllList = [];
-					for (var i = 0; i < result.body.Data.length; i++) {
-						if (i % 2 == 0) {
-							vm.trainAllList.push([result.body.Data[i]]);
-						} else {
-							vm.trainAllList[vm.trainAllList.length - 1].push(result.body.Data[i]);
-						}
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		//获取远动员列表
-		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.sportList = result.body.Data;
-					for (var i = 0; i < result.body.Data.length; i++) {
-						vm.userXuanZe.push(result.body.Data[i].UserId);
-					}
-					if (result.body.Data && result.body.Data.length > 0) {
-						vm.sportIndex = window.sportIndex ? window.sportIndex : 0;
-						vm.getList();
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		setTimeInp: function setTimeInp() {
-			document.getElementById('starttime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date2 == '' || isDate) {
-					vm.getList();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('starttime').value = document.getElementById('endtime').value;
-				vm.getList();
-			});
-			document.getElementById('endtime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_isDate) {
-					document.getElementById('endtime').value = _thisDate;
-					vm.getList();
-					return;
-				}
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date1 == '' || isDate) {
-					vm.getList();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('endtime').value = document.getElementById('starttime').value;
-				vm.getList();
-			});
-		},
-		workoutAdd: function workoutAdd() {
-			vm.$router.push({
-				path: '/workoutAdd'
-			});
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	beforeDestroy: function beforeDestroy() {
-		window.bus.$off('workout');
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 202 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _header = __webpack_require__(12);
-
-var _header2 = _interopRequireDefault(_header);
-
-var _menu = __webpack_require__(23);
-
-var _menu2 = _interopRequireDefault(_menu);
-
-var _childNum = __webpack_require__(148);
-
-var _childNum2 = _interopRequireDefault(_childNum);
-
-__webpack_require__(136);
-
-function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { "default": obj };
-}
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var vm;
-exports["default"] = {
-	//变量
-	data: function data() {
-		return {
-			allDaoChu: ['1'],
-			userXuanZe: [], //导出用户名
-			daochuNum: 1,
-			childNum: 3,
-			daochu: false,
-			daochuList: [],
-			trainAllList: [], //所有训练项目
-			trainList: [], //训练项
-			staminaList: [],
-			staminaName: [],
-			staminaDate: [],
-			sportList: [],
-			sportIndex: 0
-		};
-	},
-	//公共模板
-	components: {
-		headerComponent: _header2["default"],
-		childComponentThird: _childNum2["default"],
-		topMenu: _menu2["default"]
-	},
-	watch: {
-		sportIndex: function sportIndex(newVal, oldVal) {
-			window.sportIndex = newVal;
-			vm.getList();
-		},
-		allDaoChu: function allDaoChu(newVal, oldVal) {
-			if (newVal.length > 0) {
-				vm.getSport();
-			} else {
-				vm.userXuanZe = [];
-			}
-		}
-	},
-	//计算属性
-	computed: {
-		daochuUrl: function daochuUrl() {
-			var _valueList = vm.trainList.join(',');
-			var data = '';
-			data += "starttime=" + document.getElementById('starttime').value;
-			data += "&endtime=" + document.getElementById('endtime').value;
-			data += "&userid=" + vm.userXuanZe.join(',');
-			data += "&projectValue=" + _valueList;
-			return myPublic.publicUrl + '/API/Excelreport/TrainingPeopleExport?' + data;
-		}
-	},
-	methods: {
-		start: function start() {
-			document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
-			document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-			window.bus.$on('workout', function (val) {
-				vm.childNum = val;
-				vm.getList();
-			});
-			vm.getSport();
-			vm.setTimeInp();
-			vm.getSportItem();
-		},
-		getList: function getList() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainResult', {
-				params: {
-					sportuserid: vm.sportList[vm.sportIndex].UserId,
-					starttime: document.getElementById('starttime').value,
-					endtime: document.getElementById('endtime').value,
-					pagesize: 999,
-					pageindex: 1
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					var _list = result.body.Data;
-					var itemDate = [];
-					var itemName = [];
-					var itemList = [];
-					var _val = [];
-					for (var i = 0; i < _list.length; i++) {
-						if (itemName.indexOf(_list[i].TypeName) < 0) {
-							itemName.push(_list[i].TypeName);
-							_val.push(0);
-						}
-					}
-
-					for (var i = 0; i < _list.length; i++) {
-						if (itemDate.indexOf(_list[i].TestDate) >= 0) {
-							//包含
-							itemList[itemDate.indexOf(_list[i].TestDate)].valueList[itemName.indexOf(_list[i].TypeName)] = _list[i].Value;
-						} else {
-							itemDate.push(_list[i].TestDate);
-							itemList.push({
-								TestDate: _list[i].TestDate,
-								valueList: _val.concat()
-							});
-							itemList[itemList.length - 1].valueList[itemName.indexOf(_list[i].TypeName)] = _list[i].Value;
-						}
-					}
-					vm.staminaName = itemName;
-					vm.staminaDate = itemDate;
-					vm.staminaList = itemList;
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		//查询体能测试项目
-		getSportItem: function getSportItem() {
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetTrainName', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.trainAllList = [];
-					for (var i = 0; i < result.body.Data.length; i++) {
-						if (i % 2 == 0) {
-							vm.trainAllList.push([result.body.Data[i]]);
-						} else {
-							vm.trainAllList[vm.trainAllList.length - 1].push(result.body.Data[i]);
-						}
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		//获取远动员列表
-		getSport: function getSport() {
-			vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-				headers: {
-					token: window.localStorage.getItem('Sport_Access_Token')
-				}
-			}).then(function (result) {
-				if (result.body.StateCode == 0) {
-					vm.sportList = result.body.Data;
-					for (var i = 0; i < result.body.Data.length; i++) {
-						vm.userXuanZe.push(result.body.Data[i].UserId);
-					}
-					if (result.body.Data && result.body.Data.length > 0) {
-						vm.sportIndex = window.sportIndex ? window.sportIndex : 0;
-						vm.getList();
-					}
-				} else {
-					vm.$router.push({
-						path: '/login'
-					});
-				}
-			})["catch"](function (error) {
-				console.log(error);
-			});
-		},
-		setTimeInp: function setTimeInp() {
-			document.getElementById('starttime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date2 == '' || isDate) {
-					vm.getList();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('starttime').value = document.getElementById('endtime').value;
-				vm.getList();
-			});
-			document.getElementById('endtime-section').addEventListener('blur', function () {
-				var _date1 = document.getElementById('starttime').value;
-				var _date2 = document.getElementById('endtime').value;
-				var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-				var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_isDate) {
-					document.getElementById('endtime').value = _thisDate;
-					vm.getList();
-					return;
-				}
-				var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-				if (_date1 == '' || isDate) {
-					vm.getList();
-					return;
-				}
-				myPublic.alertMy('开始时间不能大于结束时间');
-				document.getElementById('endtime').value = document.getElementById('starttime').value;
-				vm.getList();
-			});
-		}
-	},
-	beforeCreate: function beforeCreate() {
-		vm = this;
-	},
-	beforeDestroy: function beforeDestroy() {
-		window.bus.$off('workout');
-	},
-	mounted: function mounted() {
-		vm.start();
-	}
-};
-
-/***/ }),
-/* 203 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(153);
+__webpack_require__(164);
 
 var _vue = __webpack_require__(101);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueResource = __webpack_require__(158);
+var _vueResource = __webpack_require__(169);
 
 var _vueResource2 = _interopRequireDefault(_vueResource);
 
-var _router = __webpack_require__(152);
+var _router = __webpack_require__(163);
 
 var _router2 = _interopRequireDefault(_router);
 
-var _app = __webpack_require__(157);
+var _app = __webpack_require__(168);
 
 var _app2 = _interopRequireDefault(_app);
 
@@ -21578,8 +25122,8 @@ window.appp = new _vue2["default"]({
 });
 
 /***/ }),
-/* 204 */,
-/* 205 */
+/* 220 */,
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -22322,19 +25866,19 @@ window.appp = new _vue2["default"]({
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(100)))
 
 /***/ }),
-/* 206 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(213);
+__webpack_require__(229);
 module.exports = __webpack_require__(25).RegExp.escape;
 
 
 /***/ }),
-/* 207 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(5);
-var isArray = __webpack_require__(61);
+var isArray = __webpack_require__(62);
 var SPECIES = __webpack_require__(6)('species');
 
 module.exports = function (original) {
@@ -22352,7 +25896,7 @@ module.exports = function (original) {
 
 
 /***/ }),
-/* 208 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22385,7 +25929,7 @@ module.exports = (fails(function () {
 
 
 /***/ }),
-/* 209 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22401,13 +25945,13 @@ module.exports = function (hint) {
 
 
 /***/ }),
-/* 210 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(39);
-var gOPS = __webpack_require__(65);
-var pIE = __webpack_require__(55);
+var getKeys = __webpack_require__(42);
+var gOPS = __webpack_require__(66);
+var pIE = __webpack_require__(56);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -22422,7 +25966,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 211 */
+/* 227 */
 /***/ (function(module, exports) {
 
 module.exports = function (regExp, replace) {
@@ -22436,7 +25980,7 @@ module.exports = function (regExp, replace) {
 
 
 /***/ }),
-/* 212 */
+/* 228 */
 /***/ (function(module, exports) {
 
 // 7.2.9 SameValue(x, y)
@@ -22447,18 +25991,18 @@ module.exports = Object.is || function is(x, y) {
 
 
 /***/ }),
-/* 213 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/benjamingr/RexExp.escape
 var $export = __webpack_require__(0);
-var $re = __webpack_require__(211)(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+var $re = __webpack_require__(227)(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 
 $export($export.S, 'RegExp', { escape: function escape(it) { return $re(it); } });
 
 
 /***/ }),
-/* 214 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
@@ -22470,7 +26014,7 @@ __webpack_require__(32)('copyWithin');
 
 
 /***/ }),
-/* 215 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22478,7 +26022,7 @@ __webpack_require__(32)('copyWithin');
 var $export = __webpack_require__(0);
 var $every = __webpack_require__(24)(4);
 
-$export($export.P + $export.F * !__webpack_require__(22)([].every, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(23)([].every, true), 'Array', {
   // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
   every: function every(callbackfn /* , thisArg */) {
     return $every(this, callbackfn, arguments[1]);
@@ -22487,19 +26031,19 @@ $export($export.P + $export.F * !__webpack_require__(22)([].every, true), 'Array
 
 
 /***/ }),
-/* 216 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 var $export = __webpack_require__(0);
 
-$export($export.P, 'Array', { fill: __webpack_require__(72) });
+$export($export.P, 'Array', { fill: __webpack_require__(73) });
 
 __webpack_require__(32)('fill');
 
 
 /***/ }),
-/* 217 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22507,7 +26051,7 @@ __webpack_require__(32)('fill');
 var $export = __webpack_require__(0);
 var $filter = __webpack_require__(24)(2);
 
-$export($export.P + $export.F * !__webpack_require__(22)([].filter, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(23)([].filter, true), 'Array', {
   // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
   filter: function filter(callbackfn /* , thisArg */) {
     return $filter(this, callbackfn, arguments[1]);
@@ -22516,7 +26060,7 @@ $export($export.P + $export.F * !__webpack_require__(22)([].filter, true), 'Arra
 
 
 /***/ }),
-/* 218 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22537,7 +26081,7 @@ __webpack_require__(32)(KEY);
 
 
 /***/ }),
-/* 219 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22558,14 +26102,14 @@ __webpack_require__(32)(KEY);
 
 
 /***/ }),
-/* 220 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
 var $forEach = __webpack_require__(24)(0);
-var STRICT = __webpack_require__(22)([].forEach, true);
+var STRICT = __webpack_require__(23)([].forEach, true);
 
 $export($export.P + $export.F * !STRICT, 'Array', {
   // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
@@ -22576,21 +26120,21 @@ $export($export.P + $export.F * !STRICT, 'Array', {
 
 
 /***/ }),
-/* 221 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ctx = __webpack_require__(21);
+var ctx = __webpack_require__(22);
 var $export = __webpack_require__(0);
 var toObject = __webpack_require__(10);
 var call = __webpack_require__(114);
-var isArrayIter = __webpack_require__(80);
+var isArrayIter = __webpack_require__(81);
 var toLength = __webpack_require__(9);
-var createProperty = __webpack_require__(74);
-var getIterFn = __webpack_require__(96);
+var createProperty = __webpack_require__(75);
+var getIterFn = __webpack_require__(97);
 
-$export($export.S + $export.F * !__webpack_require__(63)(function (iter) { Array.from(iter); }), 'Array', {
+$export($export.S + $export.F * !__webpack_require__(64)(function (iter) { Array.from(iter); }), 'Array', {
   // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
   from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
     var O = toObject(arrayLike);
@@ -22620,17 +26164,17 @@ $export($export.S + $export.F * !__webpack_require__(63)(function (iter) { Array
 
 
 /***/ }),
-/* 222 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var $indexOf = __webpack_require__(57)(false);
+var $indexOf = __webpack_require__(58)(false);
 var $native = [].indexOf;
 var NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(22)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(23)($native)), 'Array', {
   // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
   indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
     return NEGATIVE_ZERO
@@ -22642,28 +26186,28 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(22)($nati
 
 
 /***/ }),
-/* 223 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
 var $export = __webpack_require__(0);
 
-$export($export.S, 'Array', { isArray: __webpack_require__(61) });
+$export($export.S, 'Array', { isArray: __webpack_require__(62) });
 
 
 /***/ }),
-/* 224 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 22.1.3.13 Array.prototype.join(separator)
 var $export = __webpack_require__(0);
-var toIObject = __webpack_require__(19);
+var toIObject = __webpack_require__(20);
 var arrayJoin = [].join;
 
 // fallback for not array-like strings
-$export($export.P + $export.F * (__webpack_require__(54) != Object || !__webpack_require__(22)(arrayJoin)), 'Array', {
+$export($export.P + $export.F * (__webpack_require__(55) != Object || !__webpack_require__(23)(arrayJoin)), 'Array', {
   join: function join(separator) {
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
@@ -22671,19 +26215,19 @@ $export($export.P + $export.F * (__webpack_require__(54) != Object || !__webpack
 
 
 /***/ }),
-/* 225 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var toIObject = __webpack_require__(19);
+var toIObject = __webpack_require__(20);
 var toInteger = __webpack_require__(28);
 var toLength = __webpack_require__(9);
 var $native = [].lastIndexOf;
 var NEGATIVE_ZERO = !!$native && 1 / [1].lastIndexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(22)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(23)($native)), 'Array', {
   // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])
   lastIndexOf: function lastIndexOf(searchElement /* , fromIndex = @[*-1] */) {
     // convert -0 to +0
@@ -22700,7 +26244,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(22)($nati
 
 
 /***/ }),
-/* 226 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22708,7 +26252,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(22)($nati
 var $export = __webpack_require__(0);
 var $map = __webpack_require__(24)(1);
 
-$export($export.P + $export.F * !__webpack_require__(22)([].map, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(23)([].map, true), 'Array', {
   // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
   map: function map(callbackfn /* , thisArg */) {
     return $map(this, callbackfn, arguments[1]);
@@ -22717,13 +26261,13 @@ $export($export.P + $export.F * !__webpack_require__(22)([].map, true), 'Array',
 
 
 /***/ }),
-/* 227 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var createProperty = __webpack_require__(74);
+var createProperty = __webpack_require__(75);
 
 // WebKit Array.of isn't generic
 $export($export.S + $export.F * __webpack_require__(4)(function () {
@@ -22743,7 +26287,7 @@ $export($export.S + $export.F * __webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 228 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22751,7 +26295,7 @@ $export($export.S + $export.F * __webpack_require__(4)(function () {
 var $export = __webpack_require__(0);
 var $reduce = __webpack_require__(105);
 
-$export($export.P + $export.F * !__webpack_require__(22)([].reduceRight, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(23)([].reduceRight, true), 'Array', {
   // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
   reduceRight: function reduceRight(callbackfn /* , initialValue */) {
     return $reduce(this, callbackfn, arguments.length, arguments[1], true);
@@ -22760,7 +26304,7 @@ $export($export.P + $export.F * !__webpack_require__(22)([].reduceRight, true), 
 
 
 /***/ }),
-/* 229 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22768,7 +26312,7 @@ $export($export.P + $export.F * !__webpack_require__(22)([].reduceRight, true), 
 var $export = __webpack_require__(0);
 var $reduce = __webpack_require__(105);
 
-$export($export.P + $export.F * !__webpack_require__(22)([].reduce, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(23)([].reduce, true), 'Array', {
   // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
   reduce: function reduce(callbackfn /* , initialValue */) {
     return $reduce(this, callbackfn, arguments.length, arguments[1], false);
@@ -22777,15 +26321,15 @@ $export($export.P + $export.F * !__webpack_require__(22)([].reduce, true), 'Arra
 
 
 /***/ }),
-/* 230 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var html = __webpack_require__(78);
-var cof = __webpack_require__(20);
-var toAbsoluteIndex = __webpack_require__(43);
+var html = __webpack_require__(79);
+var cof = __webpack_require__(21);
+var toAbsoluteIndex = __webpack_require__(46);
 var toLength = __webpack_require__(9);
 var arraySlice = [].slice;
 
@@ -22812,7 +26356,7 @@ $export($export.P + $export.F * __webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 231 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22820,7 +26364,7 @@ $export($export.P + $export.F * __webpack_require__(4)(function () {
 var $export = __webpack_require__(0);
 var $some = __webpack_require__(24)(3);
 
-$export($export.P + $export.F * !__webpack_require__(22)([].some, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(23)([].some, true), 'Array', {
   // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
   some: function some(callbackfn /* , thisArg */) {
     return $some(this, callbackfn, arguments[1]);
@@ -22829,13 +26373,13 @@ $export($export.P + $export.F * !__webpack_require__(22)([].some, true), 'Array'
 
 
 /***/ }),
-/* 232 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var toObject = __webpack_require__(10);
 var fails = __webpack_require__(4);
 var $sort = [].sort;
@@ -22848,7 +26392,7 @@ $export($export.P + $export.F * (fails(function () {
   // V8 bug
   test.sort(null);
   // Old WebKit
-}) || !__webpack_require__(22)($sort)), 'Array', {
+}) || !__webpack_require__(23)($sort)), 'Array', {
   // 22.1.3.25 Array.prototype.sort(comparefn)
   sort: function sort(comparefn) {
     return comparefn === undefined
@@ -22859,14 +26403,14 @@ $export($export.P + $export.F * (fails(function () {
 
 
 /***/ }),
-/* 233 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(42)('Array');
+__webpack_require__(45)('Array');
 
 
 /***/ }),
-/* 234 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.3.3.1 / 15.9.4.4 Date.now()
@@ -22876,12 +26420,12 @@ $export($export.S, 'Date', { now: function () { return new Date().getTime(); } }
 
 
 /***/ }),
-/* 235 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.3.4.36 / 15.9.5.43 Date.prototype.toISOString()
 var $export = __webpack_require__(0);
-var toISOString = __webpack_require__(208);
+var toISOString = __webpack_require__(224);
 
 // PhantomJS / old WebKit has a broken implementations
 $export($export.P + $export.F * (Date.prototype.toISOString !== toISOString), 'Date', {
@@ -22890,7 +26434,7 @@ $export($export.P + $export.F * (Date.prototype.toISOString !== toISOString), 'D
 
 
 /***/ }),
-/* 236 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22913,17 +26457,17 @@ $export($export.P + $export.F * __webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 237 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var TO_PRIMITIVE = __webpack_require__(6)('toPrimitive');
 var proto = Date.prototype;
 
-if (!(TO_PRIMITIVE in proto)) __webpack_require__(14)(proto, TO_PRIMITIVE, __webpack_require__(209));
+if (!(TO_PRIMITIVE in proto)) __webpack_require__(15)(proto, TO_PRIMITIVE, __webpack_require__(225));
 
 
 /***/ }),
-/* 238 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var DateProto = Date.prototype;
@@ -22932,7 +26476,7 @@ var TO_STRING = 'toString';
 var $toString = DateProto[TO_STRING];
 var getTime = DateProto.getTime;
 if (new Date(NaN) + '' != INVALID_DATE) {
-  __webpack_require__(15)(DateProto, TO_STRING, function toString() {
+  __webpack_require__(16)(DateProto, TO_STRING, function toString() {
     var value = getTime.call(this);
     // eslint-disable-next-line no-self-compare
     return value === value ? $toString.call(this) : INVALID_DATE;
@@ -22941,7 +26485,7 @@ if (new Date(NaN) + '' != INVALID_DATE) {
 
 
 /***/ }),
-/* 239 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.2.3.2 / 15.3.4.5 Function.prototype.bind(thisArg, args...)
@@ -22951,13 +26495,13 @@ $export($export.P, 'Function', { bind: __webpack_require__(106) });
 
 
 /***/ }),
-/* 240 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var isObject = __webpack_require__(5);
-var getPrototypeOf = __webpack_require__(18);
+var getPrototypeOf = __webpack_require__(19);
 var HAS_INSTANCE = __webpack_require__(6)('hasInstance');
 var FunctionProto = Function.prototype;
 // 19.2.3.6 Function.prototype[@@hasInstance](V)
@@ -22971,7 +26515,7 @@ if (!(HAS_INSTANCE in FunctionProto)) __webpack_require__(8).f(FunctionProto, HA
 
 
 /***/ }),
-/* 241 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(8).f;
@@ -22993,7 +26537,7 @@ NAME in FProto || __webpack_require__(7) && dP(FProto, NAME, {
 
 
 /***/ }),
-/* 242 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.3 Math.acosh(x)
@@ -23017,7 +26561,7 @@ $export($export.S + $export.F * !($acosh
 
 
 /***/ }),
-/* 243 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.5 Math.asinh(x)
@@ -23033,7 +26577,7 @@ $export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', { asinh:
 
 
 /***/ }),
-/* 244 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.7 Math.atanh(x)
@@ -23049,12 +26593,12 @@ $export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 
 
 /***/ }),
-/* 245 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.9 Math.cbrt(x)
 var $export = __webpack_require__(0);
-var sign = __webpack_require__(84);
+var sign = __webpack_require__(85);
 
 $export($export.S, 'Math', {
   cbrt: function cbrt(x) {
@@ -23064,7 +26608,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 246 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.11 Math.clz32(x)
@@ -23078,7 +26622,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 247 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.12 Math.cosh(x)
@@ -23093,18 +26637,18 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 248 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.14 Math.expm1(x)
 var $export = __webpack_require__(0);
-var $expm1 = __webpack_require__(83);
+var $expm1 = __webpack_require__(84);
 
 $export($export.S + $export.F * ($expm1 != Math.expm1), 'Math', { expm1: $expm1 });
 
 
 /***/ }),
-/* 249 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.16 Math.fround(x)
@@ -23114,7 +26658,7 @@ $export($export.S, 'Math', { fround: __webpack_require__(116) });
 
 
 /***/ }),
-/* 250 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.17 Math.hypot([value1[, value2[, … ]]])
@@ -23145,7 +26689,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 251 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.18 Math.imul(x, y)
@@ -23168,7 +26712,7 @@ $export($export.S + $export.F * __webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 252 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.21 Math.log10(x)
@@ -23182,7 +26726,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 253 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.20 Math.log1p(x)
@@ -23192,7 +26736,7 @@ $export($export.S, 'Math', { log1p: __webpack_require__(117) });
 
 
 /***/ }),
-/* 254 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.22 Math.log2(x)
@@ -23206,22 +26750,22 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 255 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.28 Math.sign(x)
 var $export = __webpack_require__(0);
 
-$export($export.S, 'Math', { sign: __webpack_require__(84) });
+$export($export.S, 'Math', { sign: __webpack_require__(85) });
 
 
 /***/ }),
-/* 256 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.30 Math.sinh(x)
 var $export = __webpack_require__(0);
-var expm1 = __webpack_require__(83);
+var expm1 = __webpack_require__(84);
 var exp = Math.exp;
 
 // V8 near Chromium 38 has a problem with very small numbers
@@ -23237,12 +26781,12 @@ $export($export.S + $export.F * __webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 257 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.33 Math.tanh(x)
 var $export = __webpack_require__(0);
-var expm1 = __webpack_require__(83);
+var expm1 = __webpack_require__(84);
 var exp = Math.exp;
 
 $export($export.S, 'Math', {
@@ -23255,7 +26799,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 258 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.34 Math.trunc(x)
@@ -23269,27 +26813,27 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 259 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var global = __webpack_require__(3);
-var has = __webpack_require__(13);
-var cof = __webpack_require__(20);
-var inheritIfRequired = __webpack_require__(79);
+var has = __webpack_require__(14);
+var cof = __webpack_require__(21);
+var inheritIfRequired = __webpack_require__(80);
 var toPrimitive = __webpack_require__(29);
 var fails = __webpack_require__(4);
-var gOPN = __webpack_require__(38).f;
-var gOPD = __webpack_require__(17).f;
+var gOPN = __webpack_require__(41).f;
+var gOPD = __webpack_require__(18).f;
 var dP = __webpack_require__(8).f;
-var $trim = __webpack_require__(50).trim;
+var $trim = __webpack_require__(51).trim;
 var NUMBER = 'Number';
 var $Number = global[NUMBER];
 var Base = $Number;
 var proto = $Number.prototype;
 // Opera ~12 has broken Object#toString
-var BROKEN_COF = cof(__webpack_require__(37)(proto)) == NUMBER;
+var BROKEN_COF = cof(__webpack_require__(40)(proto)) == NUMBER;
 var TRIM = 'trim' in String.prototype;
 
 // 7.1.3 ToNumber(argument)
@@ -23340,12 +26884,12 @@ if (!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')) {
   }
   $Number.prototype = proto;
   proto.constructor = $Number;
-  __webpack_require__(15)(global, NUMBER, $Number);
+  __webpack_require__(16)(global, NUMBER, $Number);
 }
 
 
 /***/ }),
-/* 260 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.1 Number.EPSILON
@@ -23355,7 +26899,7 @@ $export($export.S, 'Number', { EPSILON: Math.pow(2, -52) });
 
 
 /***/ }),
-/* 261 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.2 Number.isFinite(number)
@@ -23370,7 +26914,7 @@ $export($export.S, 'Number', {
 
 
 /***/ }),
-/* 262 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.3 Number.isInteger(number)
@@ -23380,7 +26924,7 @@ $export($export.S, 'Number', { isInteger: __webpack_require__(113) });
 
 
 /***/ }),
-/* 263 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.4 Number.isNaN(number)
@@ -23395,7 +26939,7 @@ $export($export.S, 'Number', {
 
 
 /***/ }),
-/* 264 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.5 Number.isSafeInteger(number)
@@ -23411,7 +26955,7 @@ $export($export.S, 'Number', {
 
 
 /***/ }),
-/* 265 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.6 Number.MAX_SAFE_INTEGER
@@ -23421,7 +26965,7 @@ $export($export.S, 'Number', { MAX_SAFE_INTEGER: 0x1fffffffffffff });
 
 
 /***/ }),
-/* 266 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.10 Number.MIN_SAFE_INTEGER
@@ -23431,7 +26975,7 @@ $export($export.S, 'Number', { MIN_SAFE_INTEGER: -0x1fffffffffffff });
 
 
 /***/ }),
-/* 267 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -23441,7 +26985,7 @@ $export($export.S + $export.F * (Number.parseFloat != $parseFloat), 'Number', { 
 
 
 /***/ }),
-/* 268 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -23451,7 +26995,7 @@ $export($export.S + $export.F * (Number.parseInt != $parseInt), 'Number', { pars
 
 
 /***/ }),
-/* 269 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23459,7 +27003,7 @@ $export($export.S + $export.F * (Number.parseInt != $parseInt), 'Number', { pars
 var $export = __webpack_require__(0);
 var toInteger = __webpack_require__(28);
 var aNumberValue = __webpack_require__(102);
-var repeat = __webpack_require__(91);
+var repeat = __webpack_require__(92);
 var $toFixed = 1.0.toFixed;
 var floor = Math.floor;
 var data = [0, 0, 0, 0, 0, 0];
@@ -23572,7 +27116,7 @@ $export($export.P + $export.F * (!!$toFixed && (
 
 
 /***/ }),
-/* 270 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23597,7 +27141,7 @@ $export($export.P + $export.F * ($fails(function () {
 
 
 /***/ }),
-/* 271 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
@@ -23607,16 +27151,16 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(119) });
 
 
 /***/ }),
-/* 272 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', { create: __webpack_require__(37) });
+$export($export.S, 'Object', { create: __webpack_require__(40) });
 
 
 /***/ }),
-/* 273 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -23625,7 +27169,7 @@ $export($export.S + $export.F * !__webpack_require__(7), 'Object', { definePrope
 
 
 /***/ }),
-/* 274 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -23634,7 +27178,7 @@ $export($export.S + $export.F * !__webpack_require__(7), 'Object', { definePrope
 
 
 /***/ }),
-/* 275 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.5 Object.freeze(O)
@@ -23649,12 +27193,12 @@ __webpack_require__(27)('freeze', function ($freeze) {
 
 
 /***/ }),
-/* 276 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-var toIObject = __webpack_require__(19);
-var $getOwnPropertyDescriptor = __webpack_require__(17).f;
+var toIObject = __webpack_require__(20);
+var $getOwnPropertyDescriptor = __webpack_require__(18).f;
 
 __webpack_require__(27)('getOwnPropertyDescriptor', function () {
   return function getOwnPropertyDescriptor(it, key) {
@@ -23664,7 +27208,7 @@ __webpack_require__(27)('getOwnPropertyDescriptor', function () {
 
 
 /***/ }),
-/* 277 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.7 Object.getOwnPropertyNames(O)
@@ -23674,12 +27218,12 @@ __webpack_require__(27)('getOwnPropertyNames', function () {
 
 
 /***/ }),
-/* 278 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 Object.getPrototypeOf(O)
 var toObject = __webpack_require__(10);
-var $getPrototypeOf = __webpack_require__(18);
+var $getPrototypeOf = __webpack_require__(19);
 
 __webpack_require__(27)('getPrototypeOf', function () {
   return function getPrototypeOf(it) {
@@ -23689,7 +27233,7 @@ __webpack_require__(27)('getPrototypeOf', function () {
 
 
 /***/ }),
-/* 279 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.11 Object.isExtensible(O)
@@ -23703,7 +27247,7 @@ __webpack_require__(27)('isExtensible', function ($isExtensible) {
 
 
 /***/ }),
-/* 280 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.12 Object.isFrozen(O)
@@ -23717,7 +27261,7 @@ __webpack_require__(27)('isFrozen', function ($isFrozen) {
 
 
 /***/ }),
-/* 281 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.13 Object.isSealed(O)
@@ -23731,21 +27275,21 @@ __webpack_require__(27)('isSealed', function ($isSealed) {
 
 
 /***/ }),
-/* 282 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.10 Object.is(value1, value2)
 var $export = __webpack_require__(0);
-$export($export.S, 'Object', { is: __webpack_require__(212) });
+$export($export.S, 'Object', { is: __webpack_require__(228) });
 
 
 /***/ }),
-/* 283 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 Object.keys(O)
 var toObject = __webpack_require__(10);
-var $keys = __webpack_require__(39);
+var $keys = __webpack_require__(42);
 
 __webpack_require__(27)('keys', function () {
   return function keys(it) {
@@ -23755,7 +27299,7 @@ __webpack_require__(27)('keys', function () {
 
 
 /***/ }),
-/* 284 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.15 Object.preventExtensions(O)
@@ -23770,7 +27314,7 @@ __webpack_require__(27)('preventExtensions', function ($preventExtensions) {
 
 
 /***/ }),
-/* 285 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.17 Object.seal(O)
@@ -23785,33 +27329,33 @@ __webpack_require__(27)('seal', function ($seal) {
 
 
 /***/ }),
-/* 286 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $export = __webpack_require__(0);
-$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(87).set });
+$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(88).set });
 
 
 /***/ }),
-/* 287 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 19.1.3.6 Object.prototype.toString()
-var classof = __webpack_require__(53);
+var classof = __webpack_require__(54);
 var test = {};
 test[__webpack_require__(6)('toStringTag')] = 'z';
 if (test + '' != '[object z]') {
-  __webpack_require__(15)(Object.prototype, 'toString', function toString() {
+  __webpack_require__(16)(Object.prototype, 'toString', function toString() {
     return '[object ' + classof(this) + ']';
   }, true);
 }
 
 
 /***/ }),
-/* 288 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -23821,7 +27365,7 @@ $export($export.G + $export.F * (parseFloat != $parseFloat), { parseFloat: $pars
 
 
 /***/ }),
-/* 289 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
@@ -23831,24 +27375,24 @@ $export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt }
 
 
 /***/ }),
-/* 290 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(36);
+var LIBRARY = __webpack_require__(39);
 var global = __webpack_require__(3);
-var ctx = __webpack_require__(21);
-var classof = __webpack_require__(53);
+var ctx = __webpack_require__(22);
+var classof = __webpack_require__(54);
 var $export = __webpack_require__(0);
 var isObject = __webpack_require__(5);
-var aFunction = __webpack_require__(11);
-var anInstance = __webpack_require__(34);
-var forOf = __webpack_require__(35);
-var speciesConstructor = __webpack_require__(69);
-var task = __webpack_require__(93).set;
-var microtask = __webpack_require__(85)();
-var newPromiseCapabilityModule = __webpack_require__(86);
+var aFunction = __webpack_require__(12);
+var anInstance = __webpack_require__(37);
+var forOf = __webpack_require__(38);
+var speciesConstructor = __webpack_require__(70);
+var task = __webpack_require__(94).set;
+var microtask = __webpack_require__(86)();
+var newPromiseCapabilityModule = __webpack_require__(87);
 var perform = __webpack_require__(127);
 var promiseResolve = __webpack_require__(128);
 var PROMISE = 'Promise';
@@ -24020,7 +27564,7 @@ if (!USE_NATIVE) {
     this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
     this._n = false;          // <- notify
   };
-  Internal.prototype = __webpack_require__(41)($Promise.prototype, {
+  Internal.prototype = __webpack_require__(44)($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected) {
       var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
@@ -24051,8 +27595,8 @@ if (!USE_NATIVE) {
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
-__webpack_require__(49)($Promise, PROMISE);
-__webpack_require__(42)(PROMISE);
+__webpack_require__(50)($Promise, PROMISE);
+__webpack_require__(45)(PROMISE);
 Wrapper = __webpack_require__(25)[PROMISE];
 
 // statics
@@ -24071,7 +27615,7 @@ $export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
     return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
   }
 });
-$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(63)(function (iter) {
+$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(64)(function (iter) {
   $Promise.all(iter)['catch'](empty);
 })), PROMISE, {
   // 25.4.4.1 Promise.all(iterable)
@@ -24118,12 +27662,12 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(63)(function
 
 
 /***/ }),
-/* 291 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
 var $export = __webpack_require__(0);
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var anObject = __webpack_require__(2);
 var rApply = (__webpack_require__(3).Reflect || {}).apply;
 var fApply = Function.apply;
@@ -24140,13 +27684,13 @@ $export($export.S + $export.F * !__webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 292 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
 var $export = __webpack_require__(0);
-var create = __webpack_require__(37);
-var aFunction = __webpack_require__(11);
+var create = __webpack_require__(40);
+var aFunction = __webpack_require__(12);
 var anObject = __webpack_require__(2);
 var isObject = __webpack_require__(5);
 var fails = __webpack_require__(4);
@@ -24193,7 +27737,7 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
 
 
 /***/ }),
-/* 293 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
@@ -24222,12 +27766,12 @@ $export($export.S + $export.F * __webpack_require__(4)(function () {
 
 
 /***/ }),
-/* 294 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
 var $export = __webpack_require__(0);
-var gOPD = __webpack_require__(17).f;
+var gOPD = __webpack_require__(18).f;
 var anObject = __webpack_require__(2);
 
 $export($export.S, 'Reflect', {
@@ -24239,7 +27783,7 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 295 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24254,7 +27798,7 @@ var Enumerate = function (iterated) {
   var key;
   for (key in iterated) keys.push(key);
 };
-__webpack_require__(81)(Enumerate, 'Object', function () {
+__webpack_require__(82)(Enumerate, 'Object', function () {
   var that = this;
   var keys = that._k;
   var key;
@@ -24272,11 +27816,11 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 296 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
-var gOPD = __webpack_require__(17);
+var gOPD = __webpack_require__(18);
 var $export = __webpack_require__(0);
 var anObject = __webpack_require__(2);
 
@@ -24288,12 +27832,12 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 297 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.8 Reflect.getPrototypeOf(target)
 var $export = __webpack_require__(0);
-var getProto = __webpack_require__(18);
+var getProto = __webpack_require__(19);
 var anObject = __webpack_require__(2);
 
 $export($export.S, 'Reflect', {
@@ -24304,13 +27848,13 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 298 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
-var gOPD = __webpack_require__(17);
-var getPrototypeOf = __webpack_require__(18);
-var has = __webpack_require__(13);
+var gOPD = __webpack_require__(18);
+var getPrototypeOf = __webpack_require__(19);
+var has = __webpack_require__(14);
 var $export = __webpack_require__(0);
 var isObject = __webpack_require__(5);
 var anObject = __webpack_require__(2);
@@ -24331,7 +27875,7 @@ $export($export.S, 'Reflect', { get: get });
 
 
 /***/ }),
-/* 299 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.9 Reflect.has(target, propertyKey)
@@ -24345,7 +27889,7 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 300 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.10 Reflect.isExtensible(target)
@@ -24362,7 +27906,7 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 301 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.11 Reflect.ownKeys(target)
@@ -24372,7 +27916,7 @@ $export($export.S, 'Reflect', { ownKeys: __webpack_require__(124) });
 
 
 /***/ }),
-/* 302 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.12 Reflect.preventExtensions(target)
@@ -24394,12 +27938,12 @@ $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 303 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.14 Reflect.setPrototypeOf(target, proto)
 var $export = __webpack_require__(0);
-var setProto = __webpack_require__(87);
+var setProto = __webpack_require__(88);
 
 if (setProto) $export($export.S, 'Reflect', {
   setPrototypeOf: function setPrototypeOf(target, proto) {
@@ -24415,16 +27959,16 @@ if (setProto) $export($export.S, 'Reflect', {
 
 
 /***/ }),
-/* 304 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
 var dP = __webpack_require__(8);
-var gOPD = __webpack_require__(17);
-var getPrototypeOf = __webpack_require__(18);
-var has = __webpack_require__(13);
+var gOPD = __webpack_require__(18);
+var getPrototypeOf = __webpack_require__(19);
+var has = __webpack_require__(14);
 var $export = __webpack_require__(0);
-var createDesc = __webpack_require__(40);
+var createDesc = __webpack_require__(43);
 var anObject = __webpack_require__(2);
 var isObject = __webpack_require__(5);
 
@@ -24452,15 +27996,15 @@ $export($export.S, 'Reflect', { set: set });
 
 
 /***/ }),
-/* 305 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(3);
-var inheritIfRequired = __webpack_require__(79);
+var inheritIfRequired = __webpack_require__(80);
 var dP = __webpack_require__(8).f;
-var gOPN = __webpack_require__(38).f;
-var isRegExp = __webpack_require__(62);
-var $flags = __webpack_require__(60);
+var gOPN = __webpack_require__(41).f;
+var isRegExp = __webpack_require__(63);
+var $flags = __webpack_require__(61);
 var $RegExp = global.RegExp;
 var Base = $RegExp;
 var proto = $RegExp.prototype;
@@ -24494,18 +28038,18 @@ if (__webpack_require__(7) && (!CORRECT_NEW || __webpack_require__(4)(function (
   for (var keys = gOPN(Base), i = 0; keys.length > i;) proxy(keys[i++]);
   proto.constructor = $RegExp;
   $RegExp.prototype = proto;
-  __webpack_require__(15)(global, 'RegExp', $RegExp);
+  __webpack_require__(16)(global, 'RegExp', $RegExp);
 }
 
-__webpack_require__(42)('RegExp');
+__webpack_require__(45)('RegExp');
 
 
 /***/ }),
-/* 306 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@match logic
-__webpack_require__(59)('match', 1, function (defined, MATCH, $match) {
+__webpack_require__(60)('match', 1, function (defined, MATCH, $match) {
   // 21.1.3.11 String.prototype.match(regexp)
   return [function match(regexp) {
     'use strict';
@@ -24517,11 +28061,11 @@ __webpack_require__(59)('match', 1, function (defined, MATCH, $match) {
 
 
 /***/ }),
-/* 307 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@replace logic
-__webpack_require__(59)('replace', 2, function (defined, REPLACE, $replace) {
+__webpack_require__(60)('replace', 2, function (defined, REPLACE, $replace) {
   // 21.1.3.14 String.prototype.replace(searchValue, replaceValue)
   return [function replace(searchValue, replaceValue) {
     'use strict';
@@ -24535,11 +28079,11 @@ __webpack_require__(59)('replace', 2, function (defined, REPLACE, $replace) {
 
 
 /***/ }),
-/* 308 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@search logic
-__webpack_require__(59)('search', 1, function (defined, SEARCH, $search) {
+__webpack_require__(60)('search', 1, function (defined, SEARCH, $search) {
   // 21.1.3.15 String.prototype.search(regexp)
   return [function search(regexp) {
     'use strict';
@@ -24551,13 +28095,13 @@ __webpack_require__(59)('search', 1, function (defined, SEARCH, $search) {
 
 
 /***/ }),
-/* 309 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@split logic
-__webpack_require__(59)('split', 2, function (defined, SPLIT, $split) {
+__webpack_require__(60)('split', 2, function (defined, SPLIT, $split) {
   'use strict';
-  var isRegExp = __webpack_require__(62);
+  var isRegExp = __webpack_require__(63);
   var _split = $split;
   var $push = [].push;
   var $SPLIT = 'split';
@@ -24628,20 +28172,20 @@ __webpack_require__(59)('split', 2, function (defined, SPLIT, $split) {
 
 
 /***/ }),
-/* 310 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 __webpack_require__(133);
 var anObject = __webpack_require__(2);
-var $flags = __webpack_require__(60);
+var $flags = __webpack_require__(61);
 var DESCRIPTORS = __webpack_require__(7);
 var TO_STRING = 'toString';
 var $toString = /./[TO_STRING];
 
 var define = function (fn) {
-  __webpack_require__(15)(RegExp.prototype, TO_STRING, fn, true);
+  __webpack_require__(16)(RegExp.prototype, TO_STRING, fn, true);
 };
 
 // 21.2.5.14 RegExp.prototype.toString()
@@ -24660,13 +28204,13 @@ if (__webpack_require__(4)(function () { return $toString.call({ source: 'a', fl
 
 
 /***/ }),
-/* 311 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.2 String.prototype.anchor(name)
-__webpack_require__(16)('anchor', function (createHTML) {
+__webpack_require__(17)('anchor', function (createHTML) {
   return function anchor(name) {
     return createHTML(this, 'a', 'name', name);
   };
@@ -24674,13 +28218,13 @@ __webpack_require__(16)('anchor', function (createHTML) {
 
 
 /***/ }),
-/* 312 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.3 String.prototype.big()
-__webpack_require__(16)('big', function (createHTML) {
+__webpack_require__(17)('big', function (createHTML) {
   return function big() {
     return createHTML(this, 'big', '', '');
   };
@@ -24688,13 +28232,13 @@ __webpack_require__(16)('big', function (createHTML) {
 
 
 /***/ }),
-/* 313 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.4 String.prototype.blink()
-__webpack_require__(16)('blink', function (createHTML) {
+__webpack_require__(17)('blink', function (createHTML) {
   return function blink() {
     return createHTML(this, 'blink', '', '');
   };
@@ -24702,13 +28246,13 @@ __webpack_require__(16)('blink', function (createHTML) {
 
 
 /***/ }),
-/* 314 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.5 String.prototype.bold()
-__webpack_require__(16)('bold', function (createHTML) {
+__webpack_require__(17)('bold', function (createHTML) {
   return function bold() {
     return createHTML(this, 'b', '', '');
   };
@@ -24716,13 +28260,13 @@ __webpack_require__(16)('bold', function (createHTML) {
 
 
 /***/ }),
-/* 315 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var $at = __webpack_require__(89)(false);
+var $at = __webpack_require__(90)(false);
 $export($export.P, 'String', {
   // 21.1.3.3 String.prototype.codePointAt(pos)
   codePointAt: function codePointAt(pos) {
@@ -24732,7 +28276,7 @@ $export($export.P, 'String', {
 
 
 /***/ }),
-/* 316 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24740,11 +28284,11 @@ $export($export.P, 'String', {
 
 var $export = __webpack_require__(0);
 var toLength = __webpack_require__(9);
-var context = __webpack_require__(90);
+var context = __webpack_require__(91);
 var ENDS_WITH = 'endsWith';
 var $endsWith = ''[ENDS_WITH];
 
-$export($export.P + $export.F * __webpack_require__(77)(ENDS_WITH), 'String', {
+$export($export.P + $export.F * __webpack_require__(78)(ENDS_WITH), 'String', {
   endsWith: function endsWith(searchString /* , endPosition = @length */) {
     var that = context(this, searchString, ENDS_WITH);
     var endPosition = arguments.length > 1 ? arguments[1] : undefined;
@@ -24759,13 +28303,13 @@ $export($export.P + $export.F * __webpack_require__(77)(ENDS_WITH), 'String', {
 
 
 /***/ }),
-/* 317 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.6 String.prototype.fixed()
-__webpack_require__(16)('fixed', function (createHTML) {
+__webpack_require__(17)('fixed', function (createHTML) {
   return function fixed() {
     return createHTML(this, 'tt', '', '');
   };
@@ -24773,13 +28317,13 @@ __webpack_require__(16)('fixed', function (createHTML) {
 
 
 /***/ }),
-/* 318 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.7 String.prototype.fontcolor(color)
-__webpack_require__(16)('fontcolor', function (createHTML) {
+__webpack_require__(17)('fontcolor', function (createHTML) {
   return function fontcolor(color) {
     return createHTML(this, 'font', 'color', color);
   };
@@ -24787,13 +28331,13 @@ __webpack_require__(16)('fontcolor', function (createHTML) {
 
 
 /***/ }),
-/* 319 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.8 String.prototype.fontsize(size)
-__webpack_require__(16)('fontsize', function (createHTML) {
+__webpack_require__(17)('fontsize', function (createHTML) {
   return function fontsize(size) {
     return createHTML(this, 'font', 'size', size);
   };
@@ -24801,11 +28345,11 @@ __webpack_require__(16)('fontsize', function (createHTML) {
 
 
 /***/ }),
-/* 320 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
-var toAbsoluteIndex = __webpack_require__(43);
+var toAbsoluteIndex = __webpack_require__(46);
 var fromCharCode = String.fromCharCode;
 var $fromCodePoint = String.fromCodePoint;
 
@@ -24830,17 +28374,17 @@ $export($export.S + $export.F * (!!$fromCodePoint && $fromCodePoint.length != 1)
 
 
 /***/ }),
-/* 321 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // 21.1.3.7 String.prototype.includes(searchString, position = 0)
 
 var $export = __webpack_require__(0);
-var context = __webpack_require__(90);
+var context = __webpack_require__(91);
 var INCLUDES = 'includes';
 
-$export($export.P + $export.F * __webpack_require__(77)(INCLUDES), 'String', {
+$export($export.P + $export.F * __webpack_require__(78)(INCLUDES), 'String', {
   includes: function includes(searchString /* , position = 0 */) {
     return !!~context(this, searchString, INCLUDES)
       .indexOf(searchString, arguments.length > 1 ? arguments[1] : undefined);
@@ -24849,13 +28393,13 @@ $export($export.P + $export.F * __webpack_require__(77)(INCLUDES), 'String', {
 
 
 /***/ }),
-/* 322 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.9 String.prototype.italics()
-__webpack_require__(16)('italics', function (createHTML) {
+__webpack_require__(17)('italics', function (createHTML) {
   return function italics() {
     return createHTML(this, 'i', '', '');
   };
@@ -24863,15 +28407,15 @@ __webpack_require__(16)('italics', function (createHTML) {
 
 
 /***/ }),
-/* 323 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var $at = __webpack_require__(89)(true);
+var $at = __webpack_require__(90)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(82)(String, 'String', function (iterated) {
+__webpack_require__(83)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
   this._i = 0;                // next index
 // 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -24887,13 +28431,13 @@ __webpack_require__(82)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 324 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.10 String.prototype.link(url)
-__webpack_require__(16)('link', function (createHTML) {
+__webpack_require__(17)('link', function (createHTML) {
   return function link(url) {
     return createHTML(this, 'a', 'href', url);
   };
@@ -24901,11 +28445,11 @@ __webpack_require__(16)('link', function (createHTML) {
 
 
 /***/ }),
-/* 325 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
-var toIObject = __webpack_require__(19);
+var toIObject = __webpack_require__(20);
 var toLength = __webpack_require__(9);
 
 $export($export.S, 'String', {
@@ -24925,25 +28469,25 @@ $export($export.S, 'String', {
 
 
 /***/ }),
-/* 326 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
 
 $export($export.P, 'String', {
   // 21.1.3.13 String.prototype.repeat(count)
-  repeat: __webpack_require__(91)
+  repeat: __webpack_require__(92)
 });
 
 
 /***/ }),
-/* 327 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.11 String.prototype.small()
-__webpack_require__(16)('small', function (createHTML) {
+__webpack_require__(17)('small', function (createHTML) {
   return function small() {
     return createHTML(this, 'small', '', '');
   };
@@ -24951,7 +28495,7 @@ __webpack_require__(16)('small', function (createHTML) {
 
 
 /***/ }),
-/* 328 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24959,11 +28503,11 @@ __webpack_require__(16)('small', function (createHTML) {
 
 var $export = __webpack_require__(0);
 var toLength = __webpack_require__(9);
-var context = __webpack_require__(90);
+var context = __webpack_require__(91);
 var STARTS_WITH = 'startsWith';
 var $startsWith = ''[STARTS_WITH];
 
-$export($export.P + $export.F * __webpack_require__(77)(STARTS_WITH), 'String', {
+$export($export.P + $export.F * __webpack_require__(78)(STARTS_WITH), 'String', {
   startsWith: function startsWith(searchString /* , position = 0 */) {
     var that = context(this, searchString, STARTS_WITH);
     var index = toLength(Math.min(arguments.length > 1 ? arguments[1] : undefined, that.length));
@@ -24976,13 +28520,13 @@ $export($export.P + $export.F * __webpack_require__(77)(STARTS_WITH), 'String', 
 
 
 /***/ }),
-/* 329 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.12 String.prototype.strike()
-__webpack_require__(16)('strike', function (createHTML) {
+__webpack_require__(17)('strike', function (createHTML) {
   return function strike() {
     return createHTML(this, 'strike', '', '');
   };
@@ -24990,13 +28534,13 @@ __webpack_require__(16)('strike', function (createHTML) {
 
 
 /***/ }),
-/* 330 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.13 String.prototype.sub()
-__webpack_require__(16)('sub', function (createHTML) {
+__webpack_require__(17)('sub', function (createHTML) {
   return function sub() {
     return createHTML(this, 'sub', '', '');
   };
@@ -25004,13 +28548,13 @@ __webpack_require__(16)('sub', function (createHTML) {
 
 
 /***/ }),
-/* 331 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.14 String.prototype.sup()
-__webpack_require__(16)('sup', function (createHTML) {
+__webpack_require__(17)('sup', function (createHTML) {
   return function sup() {
     return createHTML(this, 'sup', '', '');
   };
@@ -25018,13 +28562,13 @@ __webpack_require__(16)('sup', function (createHTML) {
 
 
 /***/ }),
-/* 332 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 21.1.3.25 String.prototype.trim()
-__webpack_require__(50)('trim', function ($trim) {
+__webpack_require__(51)('trim', function ($trim) {
   return function trim() {
     return $trim(this, 3);
   };
@@ -25032,36 +28576,36 @@ __webpack_require__(50)('trim', function ($trim) {
 
 
 /***/ }),
-/* 333 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // ECMAScript 6 symbols shim
 var global = __webpack_require__(3);
-var has = __webpack_require__(13);
+var has = __webpack_require__(14);
 var DESCRIPTORS = __webpack_require__(7);
 var $export = __webpack_require__(0);
-var redefine = __webpack_require__(15);
+var redefine = __webpack_require__(16);
 var META = __webpack_require__(33).KEY;
 var $fails = __webpack_require__(4);
-var shared = __webpack_require__(68);
-var setToStringTag = __webpack_require__(49);
-var uid = __webpack_require__(44);
+var shared = __webpack_require__(69);
+var setToStringTag = __webpack_require__(50);
+var uid = __webpack_require__(47);
 var wks = __webpack_require__(6);
 var wksExt = __webpack_require__(131);
-var wksDefine = __webpack_require__(95);
-var enumKeys = __webpack_require__(210);
-var isArray = __webpack_require__(61);
+var wksDefine = __webpack_require__(96);
+var enumKeys = __webpack_require__(226);
+var isArray = __webpack_require__(62);
 var anObject = __webpack_require__(2);
-var toIObject = __webpack_require__(19);
+var toIObject = __webpack_require__(20);
 var toPrimitive = __webpack_require__(29);
-var createDesc = __webpack_require__(40);
-var _create = __webpack_require__(37);
+var createDesc = __webpack_require__(43);
+var _create = __webpack_require__(40);
 var gOPNExt = __webpack_require__(121);
-var $GOPD = __webpack_require__(17);
+var $GOPD = __webpack_require__(18);
 var $DP = __webpack_require__(8);
-var $keys = __webpack_require__(39);
+var $keys = __webpack_require__(42);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
 var gOPN = gOPNExt.f;
@@ -25184,11 +28728,11 @@ if (!USE_NATIVE) {
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
-  __webpack_require__(38).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(55).f = $propertyIsEnumerable;
-  __webpack_require__(65).f = $getOwnPropertySymbols;
+  __webpack_require__(41).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(56).f = $propertyIsEnumerable;
+  __webpack_require__(66).f = $getOwnPropertySymbols;
 
-  if (DESCRIPTORS && !__webpack_require__(36)) {
+  if (DESCRIPTORS && !__webpack_require__(39)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -25263,7 +28807,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(14)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(15)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -25273,20 +28817,20 @@ setToStringTag(global.JSON, 'JSON', true);
 
 
 /***/ }),
-/* 334 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
-var $typed = __webpack_require__(70);
-var buffer = __webpack_require__(94);
+var $typed = __webpack_require__(71);
+var buffer = __webpack_require__(95);
 var anObject = __webpack_require__(2);
-var toAbsoluteIndex = __webpack_require__(43);
+var toAbsoluteIndex = __webpack_require__(46);
 var toLength = __webpack_require__(9);
 var isObject = __webpack_require__(5);
 var ArrayBuffer = __webpack_require__(3).ArrayBuffer;
-var speciesConstructor = __webpack_require__(69);
+var speciesConstructor = __webpack_require__(70);
 var $ArrayBuffer = buffer.ArrayBuffer;
 var $DataView = buffer.DataView;
 var $isView = $typed.ABV && ArrayBuffer.isView;
@@ -25322,21 +28866,21 @@ $export($export.P + $export.U + $export.F * __webpack_require__(4)(function () {
   }
 });
 
-__webpack_require__(42)(ARRAY_BUFFER);
+__webpack_require__(45)(ARRAY_BUFFER);
 
 
 /***/ }),
-/* 335 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
-$export($export.G + $export.W + $export.F * !__webpack_require__(70).ABV, {
-  DataView: __webpack_require__(94).DataView
+$export($export.G + $export.W + $export.F * !__webpack_require__(71).ABV, {
+  DataView: __webpack_require__(95).DataView
 });
 
 
 /***/ }),
-/* 336 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Float32', 4, function (init) {
@@ -25347,7 +28891,7 @@ __webpack_require__(31)('Float32', 4, function (init) {
 
 
 /***/ }),
-/* 337 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Float64', 8, function (init) {
@@ -25358,7 +28902,7 @@ __webpack_require__(31)('Float64', 8, function (init) {
 
 
 /***/ }),
-/* 338 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Int16', 2, function (init) {
@@ -25369,7 +28913,7 @@ __webpack_require__(31)('Int16', 2, function (init) {
 
 
 /***/ }),
-/* 339 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Int32', 4, function (init) {
@@ -25380,7 +28924,7 @@ __webpack_require__(31)('Int32', 4, function (init) {
 
 
 /***/ }),
-/* 340 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Int8', 1, function (init) {
@@ -25391,7 +28935,7 @@ __webpack_require__(31)('Int8', 1, function (init) {
 
 
 /***/ }),
-/* 341 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Uint16', 2, function (init) {
@@ -25402,7 +28946,7 @@ __webpack_require__(31)('Uint16', 2, function (init) {
 
 
 /***/ }),
-/* 342 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Uint32', 4, function (init) {
@@ -25413,7 +28957,7 @@ __webpack_require__(31)('Uint32', 4, function (init) {
 
 
 /***/ }),
-/* 343 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Uint8', 1, function (init) {
@@ -25424,7 +28968,7 @@ __webpack_require__(31)('Uint8', 1, function (init) {
 
 
 /***/ }),
-/* 344 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31)('Uint8', 1, function (init) {
@@ -25435,17 +28979,17 @@ __webpack_require__(31)('Uint8', 1, function (init) {
 
 
 /***/ }),
-/* 345 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var weak = __webpack_require__(109);
-var validate = __webpack_require__(51);
+var validate = __webpack_require__(52);
 var WEAK_SET = 'WeakSet';
 
 // 23.4 WeakSet Objects
-__webpack_require__(58)(WEAK_SET, function (get) {
+__webpack_require__(59)(WEAK_SET, function (get) {
   return function WeakSet() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
   // 23.4.3.1 WeakSet.prototype.add(value)
@@ -25456,7 +29000,7 @@ __webpack_require__(58)(WEAK_SET, function (get) {
 
 
 /***/ }),
-/* 346 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25466,8 +29010,8 @@ var $export = __webpack_require__(0);
 var flattenIntoArray = __webpack_require__(110);
 var toObject = __webpack_require__(10);
 var toLength = __webpack_require__(9);
-var aFunction = __webpack_require__(11);
-var arraySpeciesCreate = __webpack_require__(73);
+var aFunction = __webpack_require__(12);
+var arraySpeciesCreate = __webpack_require__(74);
 
 $export($export.P, 'Array', {
   flatMap: function flatMap(callbackfn /* , thisArg */) {
@@ -25485,7 +29029,7 @@ __webpack_require__(32)('flatMap');
 
 
 /***/ }),
-/* 347 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25496,7 +29040,7 @@ var flattenIntoArray = __webpack_require__(110);
 var toObject = __webpack_require__(10);
 var toLength = __webpack_require__(9);
 var toInteger = __webpack_require__(28);
-var arraySpeciesCreate = __webpack_require__(73);
+var arraySpeciesCreate = __webpack_require__(74);
 
 $export($export.P, 'Array', {
   flatten: function flatten(/* depthArg = 1 */) {
@@ -25513,14 +29057,14 @@ __webpack_require__(32)('flatten');
 
 
 /***/ }),
-/* 348 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/Array.prototype.includes
 var $export = __webpack_require__(0);
-var $includes = __webpack_require__(57)(true);
+var $includes = __webpack_require__(58)(true);
 
 $export($export.P, 'Array', {
   includes: function includes(el /* , fromIndex = 0 */) {
@@ -25532,14 +29076,14 @@ __webpack_require__(32)('includes');
 
 
 /***/ }),
-/* 349 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-09/sept-25.md#510-globalasap-for-enqueuing-a-microtask
 var $export = __webpack_require__(0);
-var microtask = __webpack_require__(85)();
+var microtask = __webpack_require__(86)();
 var process = __webpack_require__(3).process;
-var isNode = __webpack_require__(20)(process) == 'process';
+var isNode = __webpack_require__(21)(process) == 'process';
 
 $export($export.G, {
   asap: function asap(fn) {
@@ -25550,12 +29094,12 @@ $export($export.G, {
 
 
 /***/ }),
-/* 350 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/ljharb/proposal-is-error
 var $export = __webpack_require__(0);
-var cof = __webpack_require__(20);
+var cof = __webpack_require__(21);
 
 $export($export.S, 'Error', {
   isError: function isError(it) {
@@ -25565,7 +29109,7 @@ $export($export.S, 'Error', {
 
 
 /***/ }),
-/* 351 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-global
@@ -25575,23 +29119,23 @@ $export($export.G, { global: __webpack_require__(3) });
 
 
 /***/ }),
-/* 352 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://tc39.github.io/proposal-setmap-offrom/#sec-map.from
-__webpack_require__(66)('Map');
-
-
-/***/ }),
-/* 353 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// https://tc39.github.io/proposal-setmap-offrom/#sec-map.of
 __webpack_require__(67)('Map');
 
 
 /***/ }),
-/* 354 */
+/* 369 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://tc39.github.io/proposal-setmap-offrom/#sec-map.of
+__webpack_require__(68)('Map');
+
+
+/***/ }),
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
@@ -25601,7 +29145,7 @@ $export($export.P + $export.R, 'Map', { toJSON: __webpack_require__(108)('Map') 
 
 
 /***/ }),
-/* 355 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25615,7 +29159,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 356 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25625,7 +29169,7 @@ $export($export.S, 'Math', { DEG_PER_RAD: Math.PI / 180 });
 
 
 /***/ }),
-/* 357 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25640,7 +29184,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 358 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25656,7 +29200,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 359 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -25673,7 +29217,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 360 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -25695,7 +29239,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 361 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -25712,7 +29256,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 362 */
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25722,7 +29266,7 @@ $export($export.S, 'Math', { RAD_PER_DEG: 180 / Math.PI });
 
 
 /***/ }),
-/* 363 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25737,7 +29281,7 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 364 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://rwaldron.github.io/proposal-math-extensions/
@@ -25747,7 +29291,7 @@ $export($export.S, 'Math', { scale: __webpack_require__(118) });
 
 
 /***/ }),
-/* 365 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // http://jfbastien.github.io/papers/Math.signbit.html
@@ -25760,7 +29304,7 @@ $export($export.S, 'Math', { signbit: function signbit(x) {
 
 
 /***/ }),
-/* 366 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -25782,18 +29326,18 @@ $export($export.S, 'Math', {
 
 
 /***/ }),
-/* 367 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
 var toObject = __webpack_require__(10);
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var $defineProperty = __webpack_require__(8);
 
 // B.2.2.2 Object.prototype.__defineGetter__(P, getter)
-__webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object', {
+__webpack_require__(7) && $export($export.P + __webpack_require__(65), 'Object', {
   __defineGetter__: function __defineGetter__(P, getter) {
     $defineProperty.f(toObject(this), P, { get: aFunction(getter), enumerable: true, configurable: true });
   }
@@ -25801,18 +29345,18 @@ __webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object',
 
 
 /***/ }),
-/* 368 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(0);
 var toObject = __webpack_require__(10);
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var $defineProperty = __webpack_require__(8);
 
 // B.2.2.3 Object.prototype.__defineSetter__(P, setter)
-__webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object', {
+__webpack_require__(7) && $export($export.P + __webpack_require__(65), 'Object', {
   __defineSetter__: function __defineSetter__(P, setter) {
     $defineProperty.f(toObject(this), P, { set: aFunction(setter), enumerable: true, configurable: true });
   }
@@ -25820,7 +29364,7 @@ __webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object',
 
 
 /***/ }),
-/* 369 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
@@ -25835,15 +29379,15 @@ $export($export.S, 'Object', {
 
 
 /***/ }),
-/* 370 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-getownpropertydescriptors
 var $export = __webpack_require__(0);
 var ownKeys = __webpack_require__(124);
-var toIObject = __webpack_require__(19);
-var gOPD = __webpack_require__(17);
-var createProperty = __webpack_require__(74);
+var toIObject = __webpack_require__(20);
+var gOPD = __webpack_require__(18);
+var createProperty = __webpack_require__(75);
 
 $export($export.S, 'Object', {
   getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
@@ -25863,7 +29407,7 @@ $export($export.S, 'Object', {
 
 
 /***/ }),
-/* 371 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25871,11 +29415,11 @@ $export($export.S, 'Object', {
 var $export = __webpack_require__(0);
 var toObject = __webpack_require__(10);
 var toPrimitive = __webpack_require__(29);
-var getPrototypeOf = __webpack_require__(18);
-var getOwnPropertyDescriptor = __webpack_require__(17).f;
+var getPrototypeOf = __webpack_require__(19);
+var getOwnPropertyDescriptor = __webpack_require__(18).f;
 
 // B.2.2.4 Object.prototype.__lookupGetter__(P)
-__webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object', {
+__webpack_require__(7) && $export($export.P + __webpack_require__(65), 'Object', {
   __lookupGetter__: function __lookupGetter__(P) {
     var O = toObject(this);
     var K = toPrimitive(P, true);
@@ -25888,7 +29432,7 @@ __webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object',
 
 
 /***/ }),
-/* 372 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25896,11 +29440,11 @@ __webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object',
 var $export = __webpack_require__(0);
 var toObject = __webpack_require__(10);
 var toPrimitive = __webpack_require__(29);
-var getPrototypeOf = __webpack_require__(18);
-var getOwnPropertyDescriptor = __webpack_require__(17).f;
+var getPrototypeOf = __webpack_require__(19);
+var getOwnPropertyDescriptor = __webpack_require__(18).f;
 
 // B.2.2.5 Object.prototype.__lookupSetter__(P)
-__webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object', {
+__webpack_require__(7) && $export($export.P + __webpack_require__(65), 'Object', {
   __lookupSetter__: function __lookupSetter__(P) {
     var O = toObject(this);
     var K = toPrimitive(P, true);
@@ -25913,7 +29457,7 @@ __webpack_require__(7) && $export($export.P + __webpack_require__(64), 'Object',
 
 
 /***/ }),
-/* 373 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
@@ -25928,7 +29472,7 @@ $export($export.S, 'Object', {
 
 
 /***/ }),
-/* 374 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25937,14 +29481,14 @@ $export($export.S, 'Object', {
 var $export = __webpack_require__(0);
 var global = __webpack_require__(3);
 var core = __webpack_require__(25);
-var microtask = __webpack_require__(85)();
+var microtask = __webpack_require__(86)();
 var OBSERVABLE = __webpack_require__(6)('observable');
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var anObject = __webpack_require__(2);
-var anInstance = __webpack_require__(34);
-var redefineAll = __webpack_require__(41);
-var hide = __webpack_require__(14);
-var forOf = __webpack_require__(35);
+var anInstance = __webpack_require__(37);
+var redefineAll = __webpack_require__(44);
+var hide = __webpack_require__(15);
+var forOf = __webpack_require__(38);
 var RETURN = forOf.RETURN;
 
 var getMethod = function (fn) {
@@ -26130,11 +29674,11 @@ hide($Observable.prototype, OBSERVABLE, function () { return this; });
 
 $export($export.G, { Observable: $Observable });
 
-__webpack_require__(42)('Observable');
+__webpack_require__(45)('Observable');
 
 
 /***/ }),
-/* 375 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26143,7 +29687,7 @@ __webpack_require__(42)('Observable');
 var $export = __webpack_require__(0);
 var core = __webpack_require__(25);
 var global = __webpack_require__(3);
-var speciesConstructor = __webpack_require__(69);
+var speciesConstructor = __webpack_require__(70);
 var promiseResolve = __webpack_require__(128);
 
 $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
@@ -26161,14 +29705,14 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 
 
 /***/ }),
-/* 376 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/proposal-promise-try
 var $export = __webpack_require__(0);
-var newPromiseCapability = __webpack_require__(86);
+var newPromiseCapability = __webpack_require__(87);
 var perform = __webpack_require__(127);
 
 $export($export.S, 'Promise', { 'try': function (callbackfn) {
@@ -26180,7 +29724,7 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 
 
 /***/ }),
-/* 377 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
@@ -26194,7 +29738,7 @@ metadata.exp({ defineMetadata: function defineMetadata(metadataKey, metadataValu
 
 
 /***/ }),
-/* 378 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
@@ -26215,14 +29759,14 @@ metadata.exp({ deleteMetadata: function deleteMetadata(metadataKey, target /* , 
 
 
 /***/ }),
-/* 379 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Set = __webpack_require__(134);
 var from = __webpack_require__(104);
 var metadata = __webpack_require__(30);
 var anObject = __webpack_require__(2);
-var getPrototypeOf = __webpack_require__(18);
+var getPrototypeOf = __webpack_require__(19);
 var ordinaryOwnMetadataKeys = metadata.keys;
 var toMetaKey = metadata.key;
 
@@ -26240,12 +29784,12 @@ metadata.exp({ getMetadataKeys: function getMetadataKeys(target /* , targetKey *
 
 
 /***/ }),
-/* 380 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
 var anObject = __webpack_require__(2);
-var getPrototypeOf = __webpack_require__(18);
+var getPrototypeOf = __webpack_require__(19);
 var ordinaryHasOwnMetadata = metadata.has;
 var ordinaryGetOwnMetadata = metadata.get;
 var toMetaKey = metadata.key;
@@ -26263,7 +29807,7 @@ metadata.exp({ getMetadata: function getMetadata(metadataKey, target /* , target
 
 
 /***/ }),
-/* 381 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
@@ -26277,7 +29821,7 @@ metadata.exp({ getOwnMetadataKeys: function getOwnMetadataKeys(target /* , targe
 
 
 /***/ }),
-/* 382 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
@@ -26292,12 +29836,12 @@ metadata.exp({ getOwnMetadata: function getOwnMetadata(metadataKey, target /* , 
 
 
 /***/ }),
-/* 383 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
 var anObject = __webpack_require__(2);
-var getPrototypeOf = __webpack_require__(18);
+var getPrototypeOf = __webpack_require__(19);
 var ordinaryHasOwnMetadata = metadata.has;
 var toMetaKey = metadata.key;
 
@@ -26314,7 +29858,7 @@ metadata.exp({ hasMetadata: function hasMetadata(metadataKey, target /* , target
 
 
 /***/ }),
-/* 384 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var metadata = __webpack_require__(30);
@@ -26329,12 +29873,12 @@ metadata.exp({ hasOwnMetadata: function hasOwnMetadata(metadataKey, target /* , 
 
 
 /***/ }),
-/* 385 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $metadata = __webpack_require__(30);
 var anObject = __webpack_require__(2);
-var aFunction = __webpack_require__(11);
+var aFunction = __webpack_require__(12);
 var toMetaKey = $metadata.key;
 var ordinaryDefineOwnMetadata = $metadata.set;
 
@@ -26350,23 +29894,23 @@ $metadata.exp({ metadata: function metadata(metadataKey, metadataValue) {
 
 
 /***/ }),
-/* 386 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://tc39.github.io/proposal-setmap-offrom/#sec-set.from
-__webpack_require__(66)('Set');
-
-
-/***/ }),
-/* 387 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
 __webpack_require__(67)('Set');
 
 
 /***/ }),
-/* 388 */
+/* 403 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
+__webpack_require__(68)('Set');
+
+
+/***/ }),
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
@@ -26376,14 +29920,14 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(108)('Set') 
 
 
 /***/ }),
-/* 389 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/mathiasbynens/String.prototype.at
 var $export = __webpack_require__(0);
-var $at = __webpack_require__(89)(true);
+var $at = __webpack_require__(90)(true);
 
 $export($export.P, 'String', {
   at: function at(pos) {
@@ -26393,7 +29937,7 @@ $export($export.P, 'String', {
 
 
 /***/ }),
-/* 390 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26402,8 +29946,8 @@ $export($export.P, 'String', {
 var $export = __webpack_require__(0);
 var defined = __webpack_require__(26);
 var toLength = __webpack_require__(9);
-var isRegExp = __webpack_require__(62);
-var getFlags = __webpack_require__(60);
+var isRegExp = __webpack_require__(63);
+var getFlags = __webpack_require__(61);
 var RegExpProto = RegExp.prototype;
 
 var $RegExpStringIterator = function (regexp, string) {
@@ -26411,7 +29955,7 @@ var $RegExpStringIterator = function (regexp, string) {
   this._s = string;
 };
 
-__webpack_require__(81)($RegExpStringIterator, 'RegExp String', function next() {
+__webpack_require__(82)($RegExpStringIterator, 'RegExp String', function next() {
   var match = this._r.exec(this._s);
   return { value: match, done: match === null };
 });
@@ -26430,7 +29974,7 @@ $export($export.P, 'String', {
 
 
 /***/ }),
-/* 391 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26447,7 +29991,7 @@ $export($export.P, 'String', {
 
 
 /***/ }),
-/* 392 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26464,13 +30008,13 @@ $export($export.P, 'String', {
 
 
 /***/ }),
-/* 393 */
+/* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/sebmarkbage/ecmascript-string-left-right-trim
-__webpack_require__(50)('trimLeft', function ($trim) {
+__webpack_require__(51)('trimLeft', function ($trim) {
   return function trimLeft() {
     return $trim(this, 1);
   };
@@ -26478,13 +30022,13 @@ __webpack_require__(50)('trimLeft', function ($trim) {
 
 
 /***/ }),
-/* 394 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/sebmarkbage/ecmascript-string-left-right-trim
-__webpack_require__(50)('trimRight', function ($trim) {
+__webpack_require__(51)('trimRight', function ($trim) {
   return function trimRight() {
     return $trim(this, 2);
   };
@@ -26492,21 +30036,21 @@ __webpack_require__(50)('trimRight', function ($trim) {
 
 
 /***/ }),
-/* 395 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(95)('asyncIterator');
+__webpack_require__(96)('asyncIterator');
 
 
 /***/ }),
-/* 396 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(95)('observable');
+__webpack_require__(96)('observable');
 
 
 /***/ }),
-/* 397 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-global
@@ -26516,47 +30060,47 @@ $export($export.S, 'System', { global: __webpack_require__(3) });
 
 
 /***/ }),
-/* 398 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://tc39.github.io/proposal-setmap-offrom/#sec-weakmap.from
-__webpack_require__(66)('WeakMap');
-
-
-/***/ }),
-/* 399 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// https://tc39.github.io/proposal-setmap-offrom/#sec-weakmap.of
 __webpack_require__(67)('WeakMap');
 
 
 /***/ }),
-/* 400 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// https://tc39.github.io/proposal-setmap-offrom/#sec-weakset.from
-__webpack_require__(66)('WeakSet');
+// https://tc39.github.io/proposal-setmap-offrom/#sec-weakmap.of
+__webpack_require__(68)('WeakMap');
 
 
 /***/ }),
-/* 401 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// https://tc39.github.io/proposal-setmap-offrom/#sec-weakset.of
+// https://tc39.github.io/proposal-setmap-offrom/#sec-weakset.from
 __webpack_require__(67)('WeakSet');
 
 
 /***/ }),
-/* 402 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $iterators = __webpack_require__(97);
-var getKeys = __webpack_require__(39);
-var redefine = __webpack_require__(15);
+// https://tc39.github.io/proposal-setmap-offrom/#sec-weakset.of
+__webpack_require__(68)('WeakSet');
+
+
+/***/ }),
+/* 418 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $iterators = __webpack_require__(98);
+var getKeys = __webpack_require__(42);
+var redefine = __webpack_require__(16);
 var global = __webpack_require__(3);
-var hide = __webpack_require__(14);
-var Iterators = __webpack_require__(48);
+var hide = __webpack_require__(15);
+var Iterators = __webpack_require__(49);
 var wks = __webpack_require__(6);
 var ITERATOR = wks('iterator');
 var TO_STRING_TAG = wks('toStringTag');
@@ -26612,11 +30156,11 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
 
 
 /***/ }),
-/* 403 */
+/* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(0);
-var $task = __webpack_require__(93);
+var $task = __webpack_require__(94);
 $export($export.G + $export.B, {
   setImmediate: $task.set,
   clearImmediate: $task.clear
@@ -26624,7 +30168,7 @@ $export($export.G + $export.B, {
 
 
 /***/ }),
-/* 404 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // ie9- setTimeout & setInterval additional parameters fix
@@ -26650,35 +30194,46 @@ $export($export.G + $export.B + $export.F * MSIE, {
 
 
 /***/ }),
-/* 405 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(333);
-__webpack_require__(272);
-__webpack_require__(274);
-__webpack_require__(273);
-__webpack_require__(276);
-__webpack_require__(278);
-__webpack_require__(283);
-__webpack_require__(277);
+__webpack_require__(349);
+__webpack_require__(288);
+__webpack_require__(290);
+__webpack_require__(289);
+__webpack_require__(292);
+__webpack_require__(294);
+__webpack_require__(299);
+__webpack_require__(293);
+__webpack_require__(291);
+__webpack_require__(301);
+__webpack_require__(300);
+__webpack_require__(296);
+__webpack_require__(297);
+__webpack_require__(295);
+__webpack_require__(287);
+__webpack_require__(298);
+__webpack_require__(302);
+__webpack_require__(303);
+__webpack_require__(255);
+__webpack_require__(257);
+__webpack_require__(256);
+__webpack_require__(305);
+__webpack_require__(304);
 __webpack_require__(275);
 __webpack_require__(285);
-__webpack_require__(284);
+__webpack_require__(286);
+__webpack_require__(276);
+__webpack_require__(277);
+__webpack_require__(278);
+__webpack_require__(279);
 __webpack_require__(280);
 __webpack_require__(281);
-__webpack_require__(279);
-__webpack_require__(271);
 __webpack_require__(282);
-__webpack_require__(286);
-__webpack_require__(287);
-__webpack_require__(239);
-__webpack_require__(241);
-__webpack_require__(240);
-__webpack_require__(289);
-__webpack_require__(288);
+__webpack_require__(283);
+__webpack_require__(284);
+__webpack_require__(258);
 __webpack_require__(259);
-__webpack_require__(269);
-__webpack_require__(270);
 __webpack_require__(260);
 __webpack_require__(261);
 __webpack_require__(262);
@@ -26688,231 +30243,234 @@ __webpack_require__(265);
 __webpack_require__(266);
 __webpack_require__(267);
 __webpack_require__(268);
-__webpack_require__(242);
-__webpack_require__(243);
-__webpack_require__(244);
-__webpack_require__(245);
-__webpack_require__(246);
-__webpack_require__(247);
-__webpack_require__(248);
-__webpack_require__(249);
-__webpack_require__(250);
-__webpack_require__(251);
-__webpack_require__(252);
-__webpack_require__(253);
-__webpack_require__(254);
-__webpack_require__(255);
-__webpack_require__(256);
-__webpack_require__(257);
-__webpack_require__(258);
-__webpack_require__(320);
-__webpack_require__(325);
+__webpack_require__(269);
+__webpack_require__(270);
+__webpack_require__(271);
+__webpack_require__(272);
+__webpack_require__(273);
+__webpack_require__(274);
+__webpack_require__(336);
+__webpack_require__(341);
+__webpack_require__(348);
+__webpack_require__(339);
+__webpack_require__(331);
 __webpack_require__(332);
-__webpack_require__(323);
-__webpack_require__(315);
-__webpack_require__(316);
-__webpack_require__(321);
-__webpack_require__(326);
-__webpack_require__(328);
-__webpack_require__(311);
-__webpack_require__(312);
-__webpack_require__(313);
-__webpack_require__(314);
-__webpack_require__(317);
-__webpack_require__(318);
-__webpack_require__(319);
-__webpack_require__(322);
-__webpack_require__(324);
+__webpack_require__(337);
+__webpack_require__(342);
+__webpack_require__(344);
 __webpack_require__(327);
+__webpack_require__(328);
 __webpack_require__(329);
 __webpack_require__(330);
-__webpack_require__(331);
-__webpack_require__(234);
-__webpack_require__(236);
-__webpack_require__(235);
-__webpack_require__(238);
+__webpack_require__(333);
+__webpack_require__(334);
+__webpack_require__(335);
+__webpack_require__(338);
+__webpack_require__(340);
+__webpack_require__(343);
+__webpack_require__(345);
+__webpack_require__(346);
+__webpack_require__(347);
+__webpack_require__(250);
+__webpack_require__(252);
+__webpack_require__(251);
+__webpack_require__(254);
+__webpack_require__(253);
+__webpack_require__(239);
 __webpack_require__(237);
-__webpack_require__(223);
-__webpack_require__(221);
-__webpack_require__(227);
-__webpack_require__(224);
+__webpack_require__(243);
+__webpack_require__(240);
+__webpack_require__(246);
+__webpack_require__(248);
+__webpack_require__(236);
+__webpack_require__(242);
+__webpack_require__(233);
+__webpack_require__(247);
+__webpack_require__(231);
+__webpack_require__(245);
+__webpack_require__(244);
+__webpack_require__(238);
+__webpack_require__(241);
 __webpack_require__(230);
 __webpack_require__(232);
-__webpack_require__(220);
-__webpack_require__(226);
-__webpack_require__(217);
-__webpack_require__(231);
-__webpack_require__(215);
-__webpack_require__(229);
-__webpack_require__(228);
-__webpack_require__(222);
-__webpack_require__(225);
-__webpack_require__(214);
-__webpack_require__(216);
-__webpack_require__(219);
-__webpack_require__(218);
-__webpack_require__(233);
-__webpack_require__(97);
-__webpack_require__(305);
-__webpack_require__(310);
+__webpack_require__(235);
+__webpack_require__(234);
+__webpack_require__(249);
+__webpack_require__(98);
+__webpack_require__(321);
+__webpack_require__(326);
 __webpack_require__(133);
+__webpack_require__(322);
+__webpack_require__(323);
+__webpack_require__(324);
+__webpack_require__(325);
 __webpack_require__(306);
-__webpack_require__(307);
-__webpack_require__(308);
-__webpack_require__(309);
-__webpack_require__(290);
 __webpack_require__(132);
 __webpack_require__(134);
 __webpack_require__(135);
-__webpack_require__(345);
-__webpack_require__(334);
-__webpack_require__(335);
-__webpack_require__(340);
-__webpack_require__(343);
-__webpack_require__(344);
-__webpack_require__(338);
-__webpack_require__(341);
-__webpack_require__(339);
-__webpack_require__(342);
-__webpack_require__(336);
-__webpack_require__(337);
-__webpack_require__(291);
-__webpack_require__(292);
-__webpack_require__(293);
-__webpack_require__(294);
-__webpack_require__(295);
-__webpack_require__(298);
-__webpack_require__(296);
-__webpack_require__(297);
-__webpack_require__(299);
-__webpack_require__(300);
-__webpack_require__(301);
-__webpack_require__(302);
-__webpack_require__(304);
-__webpack_require__(303);
-__webpack_require__(348);
-__webpack_require__(346);
-__webpack_require__(347);
-__webpack_require__(389);
-__webpack_require__(392);
-__webpack_require__(391);
-__webpack_require__(393);
-__webpack_require__(394);
-__webpack_require__(390);
-__webpack_require__(395);
-__webpack_require__(396);
-__webpack_require__(370);
-__webpack_require__(373);
-__webpack_require__(369);
-__webpack_require__(367);
-__webpack_require__(368);
-__webpack_require__(371);
-__webpack_require__(372);
-__webpack_require__(354);
-__webpack_require__(388);
-__webpack_require__(353);
-__webpack_require__(387);
-__webpack_require__(399);
-__webpack_require__(401);
-__webpack_require__(352);
-__webpack_require__(386);
-__webpack_require__(398);
-__webpack_require__(400);
-__webpack_require__(351);
-__webpack_require__(397);
-__webpack_require__(350);
-__webpack_require__(355);
-__webpack_require__(356);
-__webpack_require__(357);
-__webpack_require__(358);
-__webpack_require__(359);
 __webpack_require__(361);
+__webpack_require__(350);
+__webpack_require__(351);
+__webpack_require__(356);
+__webpack_require__(359);
 __webpack_require__(360);
+__webpack_require__(354);
+__webpack_require__(357);
+__webpack_require__(355);
+__webpack_require__(358);
+__webpack_require__(352);
+__webpack_require__(353);
+__webpack_require__(307);
+__webpack_require__(308);
+__webpack_require__(309);
+__webpack_require__(310);
+__webpack_require__(311);
+__webpack_require__(314);
+__webpack_require__(312);
+__webpack_require__(313);
+__webpack_require__(315);
+__webpack_require__(316);
+__webpack_require__(317);
+__webpack_require__(318);
+__webpack_require__(320);
+__webpack_require__(319);
+__webpack_require__(364);
 __webpack_require__(362);
 __webpack_require__(363);
-__webpack_require__(364);
-__webpack_require__(366);
-__webpack_require__(365);
-__webpack_require__(375);
-__webpack_require__(376);
-__webpack_require__(377);
-__webpack_require__(378);
-__webpack_require__(380);
-__webpack_require__(379);
-__webpack_require__(382);
-__webpack_require__(381);
+__webpack_require__(405);
+__webpack_require__(408);
+__webpack_require__(407);
+__webpack_require__(409);
+__webpack_require__(410);
+__webpack_require__(406);
+__webpack_require__(411);
+__webpack_require__(412);
+__webpack_require__(386);
+__webpack_require__(389);
+__webpack_require__(385);
 __webpack_require__(383);
 __webpack_require__(384);
-__webpack_require__(385);
-__webpack_require__(349);
-__webpack_require__(374);
+__webpack_require__(387);
+__webpack_require__(388);
+__webpack_require__(370);
 __webpack_require__(404);
+__webpack_require__(369);
 __webpack_require__(403);
+__webpack_require__(415);
+__webpack_require__(417);
+__webpack_require__(368);
 __webpack_require__(402);
+__webpack_require__(414);
+__webpack_require__(416);
+__webpack_require__(367);
+__webpack_require__(413);
+__webpack_require__(366);
+__webpack_require__(371);
+__webpack_require__(372);
+__webpack_require__(373);
+__webpack_require__(374);
+__webpack_require__(375);
+__webpack_require__(377);
+__webpack_require__(376);
+__webpack_require__(378);
+__webpack_require__(379);
+__webpack_require__(380);
+__webpack_require__(382);
+__webpack_require__(381);
+__webpack_require__(391);
+__webpack_require__(392);
+__webpack_require__(393);
+__webpack_require__(394);
+__webpack_require__(396);
+__webpack_require__(395);
+__webpack_require__(398);
+__webpack_require__(397);
+__webpack_require__(399);
+__webpack_require__(400);
+__webpack_require__(401);
+__webpack_require__(365);
+__webpack_require__(390);
+__webpack_require__(420);
+__webpack_require__(419);
+__webpack_require__(418);
 module.exports = __webpack_require__(25);
 
 
 /***/ }),
-/* 406 */
+/* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"yunDongYuan.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"yunDongYuan.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 407 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"menu.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"menu.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 408 */
+/* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"choiceRegister.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"person-band.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 409 */
+/* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"jiaoLian.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"choiceRegister.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 410 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"jiaoLian.vue","sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+/* 427 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
@@ -26923,10 +30481,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 411 */
+/* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
@@ -26937,206 +30495,143 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 412 */
+/* 429 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(45)(true);
+exports = module.exports = __webpack_require__(34)(true);
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"person-info.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"person-info.vue","sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
-/* 413 */
+/* 430 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 414 */
+/* 431 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 415 */
+/* 432 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 416 */
+/* 433 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 417 */
+/* 434 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 418 */
+/* 435 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 419 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 420 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 421 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 422 */,
-/* 423 */
+/* 436 */,
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/menu-1.png";
 
 /***/ }),
-/* 424 */
+/* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/menu-7.png";
 
 /***/ }),
-/* 425 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/menu-current-1.png";
 
 /***/ }),
-/* 426 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/menu-current-7.png";
 
 /***/ }),
-/* 427 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/pc-login.png";
 
 /***/ }),
-/* 428 */
+/* 442 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/person-band.png";
+
+/***/ }),
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/person-info.png";
 
 /***/ }),
-/* 429 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/phone-login.png";
 
 /***/ }),
-/* 430 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/technology-1.jpg";
 
 /***/ }),
-/* 431 */
+/* 446 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/technology-3.jpg";
 
 /***/ }),
-/* 432 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/technology-4.jpg";
 
 /***/ }),
-/* 433 */
+/* 448 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/technology-5.jpg";
 
 /***/ }),
-/* 434 */
+/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/technology-6.jpg";
 
 /***/ }),
-/* 435 */
+/* 450 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f8f480f2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_shengli_vue__ = __webpack_require__(517);
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_shengli_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f8f480f2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_shengli_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "yundongyuan\\ClientApp\\components\\shengli.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] shengli.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f8f480f2", Component.options)
-  } else {
-    hotAPI.reload("data-v-f8f480f2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 436 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_index_vue__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_index_vue__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_68cd4ef6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allSubjective_index_vue__ = __webpack_require__(496);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_68cd4ef6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allSubjective_index_vue__ = __webpack_require__(511);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27180,14 +30675,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 437 */
+/* 451 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_vue__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_vue__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allSubjective_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7e4be440_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allSubjective_vue__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7e4be440_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allSubjective_vue__ = __webpack_require__(522);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27231,14 +30726,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 438 */
+/* 452 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2de5e8ba_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(480);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2de5e8ba_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(494);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27282,14 +30777,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 439 */
+/* 453 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2df4003b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2df4003b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(495);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27333,14 +30828,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 440 */
+/* 454 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e0217bc_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__ = __webpack_require__(482);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e0217bc_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__ = __webpack_require__(496);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27384,14 +30879,65 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 441 */
+/* 455 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_composition_vue__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allComposition_vue__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allComposition_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allComposition_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7d13624b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allComposition_vue__ = __webpack_require__(521);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allComposition_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7d13624b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allComposition_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\views\\body\\allComposition.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] allComposition.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7d13624b", Component.options)
+  } else {
+    hotAPI.reload("data-v-7d13624b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 456 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_composition_vue__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_composition_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_composition_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_84d426d0_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_composition_vue__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_84d426d0_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_composition_vue__ = __webpack_require__(524);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27435,18 +30981,18 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 442 */
+/* 457 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_choiceRegister_vue__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_choiceRegister_vue__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_choiceRegister_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_choiceRegister_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d4062c8_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_choiceRegister_vue__ = __webpack_require__(494);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d4062c8_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_choiceRegister_vue__ = __webpack_require__(509);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(521)
+  __webpack_require__(541)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27490,14 +31036,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 443 */
+/* 458 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_forget_vue__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_forget_vue__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_forget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_forget_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_476124a5_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_forget_vue__ = __webpack_require__(488);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_476124a5_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_forget_vue__ = __webpack_require__(503);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27541,14 +31087,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 444 */
+/* 459 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5fa17fca_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(495);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5fa17fca_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(510);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27592,14 +31138,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 445 */
+/* 460 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_login_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_294922e1_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_294922e1_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_login_vue__ = __webpack_require__(491);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27643,14 +31189,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 446 */
+/* 461 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_policy_vue__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_policy_vue__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_policy_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_policy_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6cbc852c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_policy_vue__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6cbc852c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_policy_vue__ = __webpack_require__(512);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27694,14 +31240,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 447 */
+/* 462 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_register_vue__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_register_vue__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3442fe5b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_register_vue__ = __webpack_require__(485);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3442fe5b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_register_vue__ = __webpack_require__(499);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27745,18 +31291,18 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 448 */
+/* 463 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_jiaoLian_vue__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_jiaoLian_vue__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_jiaoLian_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_jiaoLian_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f45ba1b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_jiaoLian_vue__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f45ba1b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_jiaoLian_vue__ = __webpack_require__(514);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(522)
+  __webpack_require__(542)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27800,18 +31346,18 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 449 */
+/* 464 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_yunDongYuan_vue__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_yunDongYuan_vue__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_yunDongYuan_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_yunDongYuan_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ba5e72b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_yunDongYuan_vue__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ba5e72b_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_yunDongYuan_vue__ = __webpack_require__(492);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(519)
+  __webpack_require__(538)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27855,14 +31401,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 450 */
+/* 465 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_technology_vue__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_technology_vue__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_technology_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_technology_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e8bd044_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_technology_vue__ = __webpack_require__(483);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2e8bd044_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_technology_vue__ = __webpack_require__(497);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27906,14 +31452,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 451 */
+/* 466 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_sportInjury_vue__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_sportInjury_vue__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_sportInjury_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_sportInjury_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8ce444e4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_sportInjury_vue__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8ce444e4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_sportInjury_vue__ = __webpack_require__(525);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -27957,14 +31503,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 452 */
+/* 467 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_trainInjury_vue__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_trainInjury_vue__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_trainInjury_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_trainInjury_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_095f7f22_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_trainInjury_vue__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_095f7f22_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_trainInjury_vue__ = __webpack_require__(488);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28008,14 +31554,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 453 */
+/* 468 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_mixedAbility_vue__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_mixedAbility_vue__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_mixedAbility_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_mixedAbility_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_adaffe78_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_mixedAbility_vue__ = __webpack_require__(511);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_adaffe78_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_mixedAbility_vue__ = __webpack_require__(529);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28059,18 +31605,18 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 454 */
+/* 469 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_ability_vue__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_ability_vue__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_ability_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_ability_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8ede093e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_ability_vue__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_8ede093e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_ability_vue__ = __webpack_require__(526);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(524)
+  __webpack_require__(544)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28114,18 +31660,73 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 455 */
+/* 470 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_info_vue__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_info_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_958097f2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_info_vue__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_band_vue__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_band_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_band_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b723a0e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_band_vue__ = __webpack_require__(502);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(525)
+  __webpack_require__(540)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_band_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b723a0e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_band_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\views\\person\\person-band.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] person-band.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3b723a0e", Component.options)
+  } else {
+    hotAPI.reload("data-v-3b723a0e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 471 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_info_vue__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_info_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_info_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_958097f2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_info_vue__ = __webpack_require__(527);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(545)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28169,14 +31770,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 456 */
+/* 472 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_vue__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_vue__ = __webpack_require__(200);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_person_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77538584_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_vue__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_77538584_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_person_vue__ = __webpack_require__(519);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28220,14 +31821,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 457 */
+/* 473 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(185);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da27e640_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allConstituents_vue__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allConstituents_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allConstituents_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73f14309_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allConstituents_vue__ = __webpack_require__(518);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28241,15 +31842,15 @@ var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da27e640_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_allConstituents_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_73f14309_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_allConstituents_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\childNum1.vue"
+Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\allConstituents.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] childNum1.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] allConstituents.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -28258,9 +31859,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-da27e640", Component.options)
+    hotAPI.createRecord("data-v-73f14309", Component.options)
   } else {
-    hotAPI.reload("data-v-da27e640", Component.options)
+    hotAPI.reload("data-v-73f14309", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -28271,116 +31872,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 458 */
+/* 474 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da0bb73e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(514);
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_da0bb73e_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\childNum2.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] childNum2.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-da0bb73e", Component.options)
-  } else {
-    hotAPI.reload("data-v-da0bb73e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 459 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d9ef883c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__ = __webpack_require__(513);
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d9ef883c_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "yundongyuan\\ClientApp\\views\\physiology\\childNum3.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] childNum3.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d9ef883c", Component.options)
-  } else {
-    hotAPI.reload("data-v-d9ef883c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 460 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_constituents_vue__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_constituents_vue__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_constituents_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_constituents_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0c1a5a26_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_constituents_vue__ = __webpack_require__(475);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0c1a5a26_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_constituents_vue__ = __webpack_require__(489);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28424,14 +31923,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 461 */
+/* 475 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7068f688_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7068f688_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(517);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28475,14 +31974,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 462 */
+/* 476 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_704cc786_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(502);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_704cc786_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(516);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28526,65 +32025,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 463 */
+/* 477 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_70309884_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__ = __webpack_require__(501);
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-
-/* template */
-
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum3_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_70309884_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum3_vue__["a" /* default */],
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "yundongyuan\\ClientApp\\views\\stamina\\childNum3.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] childNum3.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-70309884", Component.options)
-  } else {
-    hotAPI.reload("data-v-70309884", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
-
-
-/***/ }),
-/* 464 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_stamina_vue__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_stamina_vue__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_stamina_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_stamina_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_18abe478_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_stamina_vue__ = __webpack_require__(476);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_18abe478_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_stamina_vue__ = __webpack_require__(490);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28628,14 +32076,65 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 465 */
+/* 478 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_count_vue__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_staminaAdd_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_staminaAdd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_staminaAdd_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_47b04fed_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_staminaAdd_vue__ = __webpack_require__(504);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_staminaAdd_vue___default.a,
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_47b04fed_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_staminaAdd_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "yundongyuan\\ClientApp\\views\\stamina\\staminaAdd.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] staminaAdd.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-47b04fed", Component.options)
+  } else {
+    hotAPI.reload("data-v-47b04fed", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 479 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_count_vue__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_count_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_count_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_968ccbb4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_count_vue__ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_968ccbb4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_count_vue__ = __webpack_require__(528);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28679,14 +32178,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 466 */
+/* 480 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_index_vue__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_index_vue__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3405d869_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_index_vue__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3405d869_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_index_vue__ = __webpack_require__(498);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28730,14 +32229,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 467 */
+/* 481 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_leida_vue__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_leida_vue__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_leida_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_leida_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4f6ec4a4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_leida_vue__ = __webpack_require__(492);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4f6ec4a4_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_leida_vue__ = __webpack_require__(507);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28781,14 +32280,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 468 */
+/* 482 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_train_vue__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_train_vue__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_train_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_train_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cbe1d2c2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_train_vue__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cbe1d2c2_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_train_vue__ = __webpack_require__(531);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28832,14 +32331,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 469 */
+/* 483 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_vue__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_vue__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_subjective_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5b01c1b8_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_vue__ = __webpack_require__(493);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5b01c1b8_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_subjective_vue__ = __webpack_require__(508);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28883,14 +32382,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 470 */
+/* 484 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum1_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4d740c6a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(489);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4d740c6a_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum1_vue__ = __webpack_require__(505);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28934,14 +32433,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 471 */
+/* 485 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_childNum2_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4d8223eb_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(490);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4d8223eb_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_childNum2_vue__ = __webpack_require__(506);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -28985,14 +32484,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 472 */
+/* 486 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workout_vue__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workout_vue__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workout_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workout_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6e475bc0_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_workout_vue__ = __webpack_require__(498);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6e475bc0_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_workout_vue__ = __webpack_require__(513);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -29036,14 +32535,14 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 473 */
+/* 487 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workoutAdd_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workoutAdd_vue__ = __webpack_require__(218);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workoutAdd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_babel_loader_presets_es2015_node_modules_vue_loader_lib_selector_type_script_index_0_workoutAdd_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2c515e11_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_workoutAdd_vue__ = __webpack_require__(479);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2c515e11_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_workoutAdd_vue__ = __webpack_require__(493);
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -29087,7 +32586,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 474 */
+/* 488 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29124,12 +32623,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }) : _c('img', {
       staticClass: "portrait",
       attrs: {
-        "src": __webpack_require__(46)
+        "src": __webpack_require__(53)
       }
     }), _vm._v(" "), (_vm.sportIndex == index) ? _c('img', {
       staticClass: "right",
       attrs: {
-        "src": __webpack_require__(56)
+        "src": __webpack_require__(57)
       }
     }) : _vm._e(), _vm._v(" "), _c('div', {
       staticClass: "injury-menu-text"
@@ -29229,7 +32728,7 @@ if (false) {
 }
 
 /***/ }),
-/* 475 */
+/* 489 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29248,7 +32747,96 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "margin-right": "20px",
       "float": "right"
     }
-  }, [(_vm.userType == '教练') ? _c('select', {
+  }, [(_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部大项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainId),
+      expression: "trainId"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainId = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部小项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 6 && _vm.trainFirse !== '' && item.SystemId.substr(0, 3) == _vm.zhuanxiangList[_vm.trainFirse].SystemId) ? _c('option', {
+      domProps: {
+        "value": item.Id
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员' && _vm.userType != '分队教练') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sex),
+      expression: "sex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部性别-")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "男"
+    }
+  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "女"
+    }
+  }, [_vm._v("女")])]) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员') ? _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -29267,20 +32855,31 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.sportIndex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.sportList), function(item, index) {
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部运动员-")]), _vm._v(" "), _vm._l((_vm.sportList), function(item, index) {
     return _c('option', {
       domProps: {
         "value": index
       }
     }, [_vm._v(_vm._s(item.FullName))])
-  })) : _vm._e(), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), (_vm.userType == '教练') ? _c('button', {
+  })], 2) : _vm._e(), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), (_vm.userType == '教练') ? _c('button', {
     staticClass: "daochu",
     on: {
       "click": function($event) {
         _vm.daochu = true
       }
     }
-  }, [_vm._v("导出")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v("导出")]) : _vm._e(), _vm._v(" "), _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.getPhyConstituents()
+      }
+    }
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
     staticStyle: {
       "clear": "both"
     }
@@ -29334,7 +32933,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "cursor": "pointer"
     },
     attrs: {
-      "src": __webpack_require__(99)
+      "src": __webpack_require__(35)
     },
     on: {
       "click": function($event) {
@@ -29377,7 +32976,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('img', {
     staticClass: "close-img",
     attrs: {
-      "src": __webpack_require__(71)
+      "src": __webpack_require__(48)
     },
     on: {
       "click": function($event) {
@@ -29917,7 +33516,7 @@ if (false) {
 }
 
 /***/ }),
-/* 476 */
+/* 490 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29933,67 +33532,29 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('div', {
     staticStyle: {
       "margin-right": "20px",
-      "float": "right",
-      "overflow": "hidden"
-    },
-    style: ({
-      'height': (_vm.childNum == 1 || _vm.childNum == 2) ? '39px' : '0px',
-      'margin-bottom': (_vm.childNum == 1 || _vm.childNum == 2) ? '20px' : '0px'
-    })
-  }, [_vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c('div', {
+      "margin-bottom": "20px",
+      "float": "right"
+    }
+  }, [_vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.isGetList = !_vm.isGetList;
+      }
+    }
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
     staticStyle: {
       "clear": "both"
     }
-  }), _vm._v(" "), (_vm.childNum == 1 || _vm.childNum == 2) ? _c('section', {}, [_c('div', {
-    staticClass: "body-item"
-  }, [_c('div', {
-    staticClass: "title"
-  }, [_c('ul', {
-    staticClass: "title-tab"
-  }, [_c('li', {
-    staticClass: "item",
-    "class": {
-      'current': _vm.childNum == 1
-    },
-    on: {
-      "click": function($event) {
-        _vm.childNum = 1
-      }
-    }
-  }, [_vm._v("折线图")]), _vm._v(" "), _c('li', {
-    staticClass: "item",
-    "class": {
-      'current': _vm.childNum == 2
-    },
-    on: {
-      "click": function($event) {
-        _vm.childNum = 2
-      }
-    }
-  }, [_vm._v("数据表")])]), _vm._v(" "), _c('div', [_c('span', [_vm._v("体能测试数据")]), _c('img', {
-    staticClass: "workout-add",
+  }), _vm._v(" "), (_vm.childNum == 1) ? _c('section', [_c('jichu', {
     attrs: {
-      "src": __webpack_require__(138)
-    },
-    on: {
-      "click": function($event) {
-        _vm.childNum = 3
-      }
+      "is-get-list": _vm.isGetList
     }
-  })])]), _vm._v(" "), _c('section', [_c('div', {
-    staticClass: "table-box"
-  }, [(_vm.childNum == 1) ? _c('child-component-first', {
+  })], 1) : _vm._e(), _vm._v(" "), (_vm.childNum == 2) ? _c('section', [_c('zhuanxiang', {
     attrs: {
-      "stamina-list": _vm.staminaList,
-      "stamina-name": _vm.staminaName,
-      "stamina-date": _vm.staminaDate
+      "is-get-list": _vm.isGetList
     }
-  }) : _vm._e(), _vm._v(" "), (_vm.childNum == 2) ? _c('child-component-second', {
-    attrs: {
-      "stamina-list": _vm.staminaList,
-      "stamina-name": _vm.staminaName
-    }
-  }) : _vm._e()], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.childNum == 3) ? _c('child-component-third') : _vm._e()], 1)], 1)], 1)
+  })], 1) : _vm._e()])], 1)], 1)
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
@@ -30048,7 +33609,7 @@ if (false) {
 }
 
 /***/ }),
-/* 477 */
+/* 491 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30062,7 +33623,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [(_vm.loginType) ? _c('img', {
     staticClass: "login-type",
     attrs: {
-      "src": __webpack_require__(427)
+      "src": __webpack_require__(441)
     },
     on: {
       "click": function($event) {
@@ -30072,7 +33633,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }) : _c('img', {
     staticClass: "login-type",
     attrs: {
-      "src": __webpack_require__(429)
+      "src": __webpack_require__(444)
     },
     on: {
       "click": function($event) {
@@ -30275,7 +33836,7 @@ if (false) {
 }
 
 /***/ }),
-/* 478 */
+/* 492 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30336,7 +33897,117 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     domProps: {
       "innerHTML": _vm._s(_vm.isName)
     }
-  })]), _vm._v(" "), _c('li', [_vm._m(2), _vm._v(" "), _c('section', [_c('div', {
+  })]), _vm._v(" "), _c('li', [_c('label', [_vm._v("籍贯：")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.nativePlace),
+      expression: "nativePlace"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "籍贯"
+    },
+    domProps: {
+      "value": (_vm.nativePlace)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.nativePlace = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('li', [_c('label', [_vm._v("民族：")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.nation),
+      expression: "nation"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "民族"
+    },
+    domProps: {
+      "value": (_vm.nation)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.nation = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('li', [_c('label', [_vm._v("血型：")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.bloodType),
+      expression: "bloodType"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "血型"
+    },
+    domProps: {
+      "value": (_vm.bloodType)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.bloodType = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('li', [_c('label', [_vm._v("身高：")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.height),
+      expression: "height"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "身高"
+    },
+    domProps: {
+      "value": (_vm.height)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.height = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('li', [_c('label', [_vm._v("体重：")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.weight),
+      expression: "weight"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "体重"
+    },
+    domProps: {
+      "value": (_vm.weight)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.weight = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('li', [_vm._m(2), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "inp"
   }, [_c('input', {
     directives: [{
@@ -30502,7 +34173,68 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticStyle: {
       "clear": "both"
     }
-  })])]), _vm._v(" "), _c('li', [_c('label', [_vm._v("运动员等级：")]), _vm._v(" "), _c('section', [_c('div', {
+  })])]), _vm._v(" "), _c('li', [_vm._m(6), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.mobile),
+      expression: "mobile"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "手机号"
+    },
+    domProps: {
+      "value": (_vm.mobile)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.mobile = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('p', {
+    staticClass: "is",
+    domProps: {
+      "innerHTML": _vm._s(_vm.isMobile)
+    }
+  })]), _vm._v(" "), _c('li', [_vm._m(7), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('div', {
+    staticClass: "get-code",
+    on: {
+      "click": function($event) {
+        _vm.getCode()
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.getCodeText))]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.code),
+      expression: "code"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "验证码"
+    },
+    domProps: {
+      "value": (_vm.code)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.code = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('p', {
+    staticClass: "is",
+    domProps: {
+      "innerHTML": _vm._s(_vm.isCode)
+    }
+  })]), _vm._v(" "), _c('li', [_c('label', [_vm._v("运动员等级：")]), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "inp"
   }, [_c('select', {
     directives: [{
@@ -30523,10 +34255,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }
   }, [_c('option', {
-    attrs: {
-      "value": ""
-    }
-  }, [_vm._v("-等级-")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "0"
     }
@@ -30550,51 +34278,46 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "5"
     }
-  }, [_vm._v("其他")])])])])]), _vm._v(" "), _vm._l((_vm.trainChildList), function(tCListItem, tCListIndex) {
+  }, [_vm._v("其他")])])])])]), _vm._v(" "), _c('li', [_vm._m(8), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    on: {
+      "change": [function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }, function($event) {
+        _vm.trainChildList = ['']
+      }]
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-运动项目-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return _c('option', {
+      domProps: {
+        "value": item.SystemId
+      }
+    }, [_vm._v(_vm._s(item.Name))])
+  })], 2)])])]), _vm._v(" "), _vm._l((_vm.trainChildList), function(tCListItem, tCListIndex) {
     return _c('li', {
       style: ({
         'margin-top': tCListIndex == 0 ? '0px' : '-20px'
       })
     }, [_c('label', [(tCListIndex == 0) ? _c('span', [_c('span', {
       staticClass: "red-text"
-    }, [_vm._v("*")]), _vm._v("运动项目：")]) : _vm._e()]), _vm._v(" "), _c('section', {
-      staticClass: "register-zhuanxiang"
-    }, [_c('div', {
-      staticClass: "inp",
-      staticStyle: {
-        "margin-right": "10px"
-      }
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainFirse[tCListIndex]),
-        expression: "trainFirse[tCListIndex]"
-      }],
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.trainFirse, tCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.trainChildList[tCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
-      domProps: {
-        "value": ','
-      }
-    }, [_vm._v("-运动项目-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
-      return _c('option', {
-        domProps: {
-          "value": item.Id + ',' + item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))])
-    })], 2)]), _vm._v(" "), _c('div', {
+    }, [_vm._v("*")]), _vm._v("运动专项：")]) : _vm._e()]), _vm._v(" "), _c('section', [_c('div', {
       staticClass: "inp"
     }, [_c('select', {
       directives: [{
@@ -30619,19 +34342,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "value": ""
       }
     }, [_vm._v("-专项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangChileList), function(item, index) {
-      return (item.SystemId.substr(0, 3) == _vm.trainFirse[tCListIndex].split(',')[1]) ? _c('option', {
+      return (item.SystemId.substr(0, 3) == _vm.trainFirse) ? _c('option', {
         domProps: {
           "value": item.Id
         }
       }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2)]), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "clear": "both"
-      }
-    })]), _vm._v(" "), (_vm.trainChildList[tCListIndex]) ? _c('img', {
+    })], 2)])]), _vm._v(" "), (_vm.trainChildList[tCListIndex]) ? _c('img', {
       staticClass: "cuo",
       attrs: {
-        "src": __webpack_require__(52)
+        "src": __webpack_require__(143)
       },
       on: {
         "click": function($event) {
@@ -30644,7 +34363,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "innerHTML": _vm._s(_vm.isTrainChild)
       }
     }) : _vm._e()])
-  }), _vm._v(" "), _c('li', [_vm._m(6), _vm._v(" "), _c('section', [_c('div', {
+  }), _vm._v(" "), _c('li', [_vm._m(9), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "inp"
   }, [_c('select', {
     directives: [{
@@ -30722,6 +34441,18 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
 },function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', [_c('span', {
     staticClass: "red-text"
+  }, [_vm._v("*")]), _vm._v("手机号：")])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', [_c('span', {
+    staticClass: "red-text"
+  }, [_vm._v("*")]), _vm._v("验证码：")])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', [_c('span', {
+    staticClass: "red-text"
+  }, [_vm._v("*")]), _vm._v("运动项目：")])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', [_c('span', {
+    staticClass: "red-text"
   }, [_vm._v("*")]), _vm._v("训练开始时间：")])
 }]
 render._withStripped = true
@@ -30735,7 +34466,7 @@ if (false) {
 }
 
 /***/ }),
-/* 479 */
+/* 493 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30756,7 +34487,127 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticStyle: {
       "clear": "both"
     }
-  }), _vm._v(" "), (_vm.childNum == 3) ? _c('child-component-third') : _vm._e()], 1)], 1)], 1)
+  }), _vm._v(" "), _c('section', {
+    staticStyle: {
+      "height": "100%",
+      "min-width": "1172px"
+    }
+  }, [_c('div', {
+    staticClass: "injury-menu"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_vm._v("运动员")]), _vm._v(" "), _c('section', [_c('ul', {
+    staticClass: "injury-menu-list"
+  }, _vm._l((_vm.sportList), function(item, index) {
+    return _c('li', {
+      style: ({
+        'background-color': _vm.sportIndex == index ? '#fafafa' : '#FFFFFF'
+      }),
+      on: {
+        "click": function($event) {
+          _vm.sportIndex = index
+        }
+      }
+    }, [(item.Img) ? _c('img', {
+      staticClass: "portrait",
+      attrs: {
+        "src": _vm.url + item.Img
+      }
+    }) : _c('img', {
+      staticClass: "portrait",
+      attrs: {
+        "src": __webpack_require__(53)
+      }
+    }), _vm._v(" "), (_vm.sportIndex == index) ? _c('img', {
+      staticClass: "right",
+      attrs: {
+        "src": __webpack_require__(57)
+      }
+    }) : _vm._e(), _vm._v(" "), _c('div', {
+      staticClass: "injury-menu-text"
+    }, [_c('p', [_vm._v(_vm._s(item.FullName))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.TrainName))])])])
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "injury-main"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_vm._v("体能训练")]), _vm._v(" "), _c('div', {
+    staticClass: "box"
+  }, [_c('div', {
+    staticClass: "workout-inp"
+  }, [_c('div', {
+    staticClass: "top"
+  }, [_c('span', [_vm._v("时间")]), _vm._v(" "), _c('section', {
+    staticClass: "mydate-box"
+  }, [_c('input', {
+    staticClass: "form_datetime",
+    attrs: {
+      "onclick": "myDate.getFocus(this)",
+      "id": "staminaTime",
+      "readonly": "readonly",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('section', {
+    staticClass: "calendar",
+    staticStyle: {
+      "right": "20px"
+    },
+    attrs: {
+      "tabindex": "0",
+      "onclick": "myDate.holdBubble()"
+    },
+    on: {
+      "blur": function($event) {
+        _vm.getSportValue(_vm.sportIndex)
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "workout-inp-main"
+  }, [_vm._l((_vm.trainList), function(item, index) {
+    return _c('div', {
+      staticClass: "item"
+    }, [_c('label', [_vm._v(_vm._s(item.Name))]), _vm._v(" "), _c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.trainList[index].Value),
+        expression: "trainList[index].Value"
+      }],
+      attrs: {
+        "type": "text"
+      },
+      domProps: {
+        "value": (_vm.trainList[index].Value)
+      },
+      on: {
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          _vm.trainList[index].Value = $event.target.value
+        }
+      }
+    })])
+  }), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "clear": "both"
+    }
+  })], 2)]), _vm._v(" "), _c('section', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_c('button', {
+    staticClass: "workout-inp-but1",
+    on: {
+      "click": function($event) {
+        _vm.save()
+      }
+    }
+  }, [_vm._v("保存")]), _c('button', {
+    staticClass: "workout-inp-but2",
+    on: {
+      "click": function($event) {
+        _vm.closeChild(1)
+      }
+    }
+  }, [_vm._v("返回")])])])])])])], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -30770,19 +34621,47 @@ if (false) {
 }
 
 /***/ }),
-/* 480 */
+/* 494 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "body-item"
   }, [_c('div', {
     staticClass: "title"
-  }, [_c('div', [_vm._v("主观评价统计")])]), _vm._v(" "), _c('section', [_c('div', {
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.setChildNum(1)
+      }
+    }
+  }, [_vm._v("数据表")]), _vm._v(" "), _c('li', {
+    staticClass: "item current"
+  }, [_vm._v("折线图")])]), _vm._v(" "), _c('div', [_vm._v("主观评价统计")])]), _vm._v(" "), _c('section', [_c('div', {
+    staticStyle: {
+      "margin": "0px 10px 20px 10px",
+      "float": "right",
+      "color": "#ba2538",
+      "cursor": "pointer",
+      "line-height": "20px"
+    },
+    on: {
+      "click": function($event) {
+        _vm.showPingFen()
+      }
+    }
+  }, [_vm._v("评分标准")]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "clear": "both"
+    }
+  }), _vm._v(" "), _vm._m(0)])])
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "table-box",
     staticStyle: {
       "height": "380px"
@@ -30796,7 +34675,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     attrs: {
       "id": "child1"
     }
-  })])])])
+  })])
 }]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -30809,7 +34688,7 @@ if (false) {
 }
 
 /***/ }),
-/* 481 */
+/* 495 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30821,7 +34700,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "body-item"
   }, [_c('div', {
     staticClass: "title"
-  }, [_c('div', [_vm._v("训练强度")])]), _vm._v(" "), _c('section', [_c('div', {
+  }, [_c('div', [_vm._v("训练负荷")])]), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "table-box",
     staticStyle: {
       "height": "380px"
@@ -30848,7 +34727,7 @@ if (false) {
 }
 
 /***/ }),
-/* 482 */
+/* 496 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30864,7 +34743,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "wen"
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(99)
+      "src": __webpack_require__(35)
     }
   }), _vm._v(" "), _c('p', [_vm._v("雷达图结果为选择时间范围内的平均值")])]), _vm._v(" "), _c('div', [_vm._v("主观评价雷达图")])]), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "table-box",
@@ -30893,7 +34772,7 @@ if (false) {
 }
 
 /***/ }),
-/* 483 */
+/* 497 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30913,7 +34792,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "header-logo"
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(98)
+      "src": __webpack_require__(99)
     }
   }), _vm._v("运动员训练监控与评价系统")])])]), _vm._v(" "), _c('section', {
     staticClass: "register"
@@ -30927,7 +34806,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     }
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(430)
+      "src": __webpack_require__(445)
     }
   })])]), _vm._v(" "), _c('section', {
     staticClass: "policy-item"
@@ -30937,7 +34816,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     }
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(431)
+      "src": __webpack_require__(446)
     }
   })]), _vm._v(" "), _c('p', [_vm._v("2、可用于记录日常体能训练及测试；")]), _vm._v(" "), _c('div', {
     staticStyle: {
@@ -30945,7 +34824,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     }
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(432)
+      "src": __webpack_require__(447)
     }
   })]), _vm._v(" "), _c('p', [_vm._v("3、用户可以创建个性化的记录指标；")]), _vm._v(" "), _c('div', {
     staticStyle: {
@@ -30953,11 +34832,11 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     }
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(433)
+      "src": __webpack_require__(448)
     }
   }), _vm._v(" "), _c('img', {
     attrs: {
-      "src": __webpack_require__(434)
+      "src": __webpack_require__(449)
     }
   })])]), _vm._v(" "), _c('section', {
     staticClass: "policy-item"
@@ -30974,14 +34853,27 @@ if (false) {
 }
 
 /***/ }),
-/* 484 */
+/* 498 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "body-item"
-  }, [_vm._m(0), _vm._v(" "), _c('section', [_c('div', {
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item current"
+  }, [_vm._v("数据表")]), _vm._v(" "), _c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.setChildNum(2)
+      }
+    }
+  }, [_vm._v("折线图")])]), _vm._v(" "), _c('div', [_vm._v("主观评价指标")])]), _vm._v(" "), _c('section', [_c('div', {
     staticStyle: {
       "margin": "0px 10px 20px 10px",
       "float": "right",
@@ -31003,14 +34895,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "table-header"
     }
-  }, [_c('table', [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.bodyList), function(item) {
+  }, [_c('table', [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.bodyList), function(item) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(item.DateSign))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.MorPulse))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.Weight))]), _vm._v(" "), _c('td', [(item.SleepDuration >= 8) ? _c('span', {
       staticClass: "shuiping1"
     }) : _vm._e(), (item.SleepDuration >= 5 && item.SleepDuration <= 7) ? _c('span', {
       staticClass: "shuiping2"
     }) : _vm._e(), (item.SleepDuration >= 0 && item.SleepDuration <= 4) ? _c('span', {
       staticClass: "shuiping3"
-    }) : _vm._e(), _vm._v(_vm._s(item.SleepDuration))]), _vm._v(" "), _c('td', [(item.SleepQuality >= 8) ? _c('span', {
+    }) : _vm._e(), _vm._v(_vm._s(parseInt(item.SleepDuration)))]), _vm._v(" "), _c('td', [(item.SleepQuality >= 8) ? _c('span', {
       staticClass: "shuiping1"
     }) : _vm._e(), (item.SleepQuality >= 5 && item.SleepQuality <= 7) ? _c('span', {
       staticClass: "shuiping2"
@@ -31056,11 +34948,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }))])])])])
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "title"
-  }, [_c('div', [_vm._v("主观评价指标")])])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("提交时间")]), _vm._v(" "), _c('th', [_vm._v("晨脉")]), _vm._v(" "), _c('th', [_vm._v("体重")]), _vm._v(" "), _c('th', [_vm._v("睡眠时间")]), _vm._v(" "), _c('th', [_vm._v("睡眠质量")]), _vm._v(" "), _c('th', [_vm._v("饮食欲望")]), _vm._v(" "), _c('th', [_vm._v("肌肉酸痛评价")]), _vm._v(" "), _c('th', [_vm._v("伤病疼痛评价")]), _vm._v(" "), _c('th', [_vm._v("自我训练状态评价")]), _vm._v(" "), _c('th', [_vm._v("RPE")]), _vm._v(" "), _c('th', [_vm._v("训练强度")]), _vm._v(" "), _c('th', [_vm._v("教练评价")])])])
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("提交时间")]), _vm._v(" "), _c('th', [_vm._v("晨脉")]), _vm._v(" "), _c('th', [_vm._v("体重")]), _vm._v(" "), _c('th', [_vm._v("睡眠时间")]), _vm._v(" "), _c('th', [_vm._v("睡眠质量")]), _vm._v(" "), _c('th', [_vm._v("饮食欲望")]), _vm._v(" "), _c('th', [_vm._v("肌肉酸痛评价")]), _vm._v(" "), _c('th', [_vm._v("伤病疼痛评价")]), _vm._v(" "), _c('th', [_vm._v("自我训练状态评价")]), _vm._v(" "), _c('th', [_vm._v("RPE")]), _vm._v(" "), _c('th', [_vm._v("训练负荷")]), _vm._v(" "), _c('th', [_vm._v("教练评价")])])])
 }]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -31073,7 +34961,7 @@ if (false) {
 }
 
 /***/ }),
-/* 485 */
+/* 499 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31139,7 +35027,7 @@ if (false) {
 }
 
 /***/ }),
-/* 486 */
+/* 500 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31162,11 +35050,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 1) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(425)
+      "src": __webpack_require__(439)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(423)
+      "src": __webpack_require__(437)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31182,11 +35070,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 2) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(143)
+      "src": __webpack_require__(149)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(139)
+      "src": __webpack_require__(145)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31202,11 +35090,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 3) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(144)
+      "src": __webpack_require__(150)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(140)
+      "src": __webpack_require__(146)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31222,11 +35110,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 4) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(145)
+      "src": __webpack_require__(151)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(141)
+      "src": __webpack_require__(147)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31242,11 +35130,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 5) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(146)
+      "src": __webpack_require__(152)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(142)
+      "src": __webpack_require__(148)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31267,11 +35155,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 7) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(426)
+      "src": __webpack_require__(440)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(424)
+      "src": __webpack_require__(438)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31282,16 +35170,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "top-menu-item",
     on: {
       "click": function($event) {
-        _vm.goUrl('/phyConstituents')
+        _vm.goUrl('/allConstituents')
       }
     }
-  }, [(_vm.menu == 3) ? _c('img', {
+  }, [(_vm.menu == 12) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(144)
+      "src": __webpack_require__(150)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(140)
+      "src": __webpack_require__(146)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31307,11 +35195,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 8) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(143)
+      "src": __webpack_require__(149)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(139)
+      "src": __webpack_require__(145)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31322,16 +35210,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "top-menu-item",
     on: {
       "click": function($event) {
-        _vm.goUrl('/bodyComposition')
+        _vm.goUrl('/allComposition')
       }
     }
-  }, [(_vm.menu == 4) ? _c('img', {
+  }, [(_vm.menu == 11) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(145)
+      "src": __webpack_require__(151)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(141)
+      "src": __webpack_require__(147)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31347,11 +35235,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [(_vm.menu == 10) ? _c('img', {
     attrs: {
-      "src": __webpack_require__(146)
+      "src": __webpack_require__(152)
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(142)
+      "src": __webpack_require__(148)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "text",
@@ -31386,7 +35274,7 @@ if (false) {
 }
 
 /***/ }),
-/* 487 */
+/* 501 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31473,7 +35361,146 @@ if (false) {
 }
 
 /***/ }),
-/* 488 */
+/* 502 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "person-info-content"
+  }, [_c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("手机号：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.user.mobile),
+      expression: "user.mobile"
+    }],
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.user.mobile)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.user.mobile = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("验证码：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_c('div', {
+    staticClass: "get-code",
+    on: {
+      "click": function($event) {
+        _vm.getCode()
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.getCodeText))]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.user.code),
+      expression: "user.code"
+    }],
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.user.code)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.user.code = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("新手机号：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.user.mobileNew),
+      expression: "user.mobileNew"
+    }],
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.user.mobileNew)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.user.mobileNew = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("验证码：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_c('div', {
+    staticClass: "get-code",
+    on: {
+      "click": function($event) {
+        _vm.getCodeNew()
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.getCodeTextNew))]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.user.codeNew),
+      expression: "user.codeNew"
+    }],
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.user.codeNew)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.user.codeNew = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "text-align": "center",
+      "margin-bottom": "50px"
+    }
+  }, [_c('button', {
+    staticClass: "person-but1",
+    on: {
+      "click": function($event) {
+        _vm.save()
+      }
+    }
+  }, [_vm._v("绑定")])])])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3b723a0e", esExports)
+  }
+}
+
+/***/ }),
+/* 503 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31652,69 +35679,28 @@ if (false) {
 }
 
 /***/ }),
-/* 489 */
+/* 504 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticStyle: {
-      "width": "100%",
-      "height": "100%",
-      "overflow": "hidden"
-    },
     attrs: {
-      "id": "biao"
+      "id": "stamina"
     }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4d740c6a", esExports)
-  }
-}
-
-/***/ }),
-/* 490 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('table', [_c('thead', [_c('tr', [_c('th', {
+  }, [_c('header-component'), _vm._v(" "), _c('section', {
+    staticClass: "content"
+  }, [_c('top-menu', {
     staticStyle: {
-      "min-width": "100px"
+      "min-width": "1172px"
     }
-  }, [_vm._v("时间")]), _vm._v(" "), _vm._l((_vm.staminaName), function(item, index) {
-    return _c('th', [_vm._v(_vm._s(item))])
-  })], 2)]), _vm._v(" "), _c('tbody', _vm._l((_vm.staminaList), function(item, index) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(item.TestDate))]), _vm._v(" "), _vm._l((item.valueList), function(val) {
-      return _c('td', [_vm._v(_vm._s(val))])
-    })], 2)
-  }))])
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4d8223eb", esExports)
-  }
-}
-
-/***/ }),
-/* 491 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
+  }), _vm._v(" "), _c('div', {
+    staticClass: "index-content"
+  }, [_c('div', {
+    staticStyle: {
+      "clear": "both"
+    }
+  }), _vm._v(" "), _c('section', {
     staticStyle: {
       "height": "100%",
       "min-width": "1172px"
@@ -31725,35 +35711,24 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "title"
   }, [_vm._v("运动员")]), _vm._v(" "), _c('section', [_c('ul', {
     staticClass: "injury-menu-list"
-  }, _vm._l((_vm.sportList), function(item, index) {
-    return _c('li', {
-      style: ({
-        'background-color': _vm.sportIndex == index ? '#fafafa' : '#FFFFFF'
-      }),
-      on: {
-        "click": function($event) {
-          _vm.sportIndex = index
-        }
-      }
-    }, [(item.Img) ? _c('img', {
-      staticClass: "portrait",
-      attrs: {
-        "src": _vm.url + item.Img
-      }
-    }) : _c('img', {
-      staticClass: "portrait",
-      attrs: {
-        "src": __webpack_require__(46)
-      }
-    }), _vm._v(" "), (_vm.sportIndex == index) ? _c('img', {
-      staticClass: "right",
-      attrs: {
-        "src": __webpack_require__(56)
-      }
-    }) : _vm._e(), _vm._v(" "), _c('div', {
-      staticClass: "injury-menu-text"
-    }, [_c('p', [_vm._v(_vm._s(item.FullName))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.TrainName))])])])
-  }))])]), _vm._v(" "), _c('div', {
+  }, [_c('li', [(_vm.picture) ? _c('img', {
+    staticClass: "portrait",
+    attrs: {
+      "src": _vm.picture
+    }
+  }) : _c('img', {
+    staticClass: "portrait",
+    attrs: {
+      "src": __webpack_require__(53)
+    }
+  }), _vm._v(" "), _c('img', {
+    staticClass: "right",
+    attrs: {
+      "src": __webpack_require__(57)
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "injury-menu-text"
+  }, [_c('p', [_vm._v(_vm._s(_vm.user.FullName))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.user.TrainName))])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "injury-main"
   }, [_c('div', {
     staticClass: "title"
@@ -31784,7 +35759,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     },
     on: {
       "blur": function($event) {
-        _vm.getSportValue(_vm.sportIndex)
+        _vm.getSportValue()
       }
     }
   })])]), _vm._v(" "), _c('div', {
@@ -31834,7 +35809,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.closeChild(1)
       }
     }
-  }, [_vm._v("取消")])])])])])
+  }, [_vm._v("返回")])])])])])])], 1)], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -31843,12 +35818,344 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4d903b6c", esExports)
+     require("vue-hot-reload-api").rerender("data-v-47b04fed", esExports)
   }
 }
 
 /***/ }),
-/* 492 */
+/* 505 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [(_vm.isEdit) ? _c('div', {
+    staticClass: "edit-mask"
+  }, [_c('div', {
+    staticClass: "is-edit"
+  }, [_c('div', {
+    staticClass: "header"
+  }, [_vm._v("选择"), _c('img', {
+    staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "float": "right",
+      "margin-top": "2px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(48)
+    },
+    on: {
+      "click": function($event) {
+        _vm.isEdit = false
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "body"
+  }, _vm._l((_vm.xuanze), function(item, index) {
+    return _c('div', {
+      staticClass: "item",
+      "class": {
+        'current': item.is
+      },
+      on: {
+        "click": function($event) {
+          _vm.setXuanze(index)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "code"
+    }, [(item.is) ? _c('img', {
+      attrs: {
+        "src": __webpack_require__(142)
+      }
+    }) : _vm._e()]), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.name))])])
+  }))])]) : _vm._e(), _vm._v(" "), _c('section', {
+    staticClass: "shengli-main",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '40%')
+    })
+  }, [_c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item current"
+  }, [_vm._v("基础体能数据")]), _vm._v(" "), _c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.backWorkout(2)
+      }
+    }
+  }, [_vm._v("专项体能数据")])]), _vm._v(" "), _c('div', [_c('span', [_vm._v("体能训练记录指标")]), _c('img', {
+    staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "margin": "18px 10px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(35)
+    },
+    on: {
+      "click": function($event) {
+        _vm.showPingFen = !_vm.showPingFen
+      }
+    }
+  })])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    staticStyle: {
+      "height": "auto",
+      "min-height": "500px"
+    }
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.listType),
+      expression: "listType"
+    }],
+    staticStyle: {
+      "border": "1px solid #bcbcbc",
+      "height": "38px",
+      "width": "220px",
+      "border-radius": "4px",
+      "margin-bottom": "20px"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.listType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "1"
+    }
+  }, [_vm._v("基础体能")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "2"
+    }
+  }, [_vm._v("板块体能")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "3"
+    }
+  }, [_vm._v("稳定和均衡")])]), _vm._v(" "), (_vm.listType == 1) ? _c('img', {
+    staticStyle: {
+      "width": "26px",
+      "height": "26px",
+      "vertical-align": "top",
+      "margin": "6px 10px",
+      "cursor": "pointer",
+      "float": "right"
+    },
+    attrs: {
+      "src": __webpack_require__(144)
+    },
+    on: {
+      "click": function($event) {
+        _vm.isEdit = !_vm.isEdit
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), _c('table', {
+    staticStyle: {
+      "margin-bottom": "50px"
+    }
+  }, [_c('thead', [_c('tr', [_c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("时间")]), _vm._v(" "), _c('th', [_vm._v("运动员")]), _vm._v(" "), _vm._l((_vm.staminaName), function(item, index) {
+    return _c('th', [_vm._v(_vm._s(item))])
+  })], 2)]), _vm._v(" "), _c('tbody', _vm._l((_vm.staminaList), function(item, index) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.TestDate))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].SportName))]), _vm._v(" "), _vm._l((item.valueList), function(val) {
+      return _c('td', [_vm._v(_vm._s(val))])
+    })], 2)
+  }))]), _vm._v(" "), (_vm.sport !== '') ? _c('div', {
+    staticStyle: {
+      "margin-bottom": "50px",
+      "width": "100%",
+      "height": "500px",
+      "overflow": "hidden"
+    },
+    attrs: {
+      "id": "biao1"
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.sport !== '' && (_vm.listType == 1 || _vm.listType == 3)) ? _c('div', {
+    staticStyle: {
+      "width": "100%",
+      "height": "500px",
+      "overflow": "hidden"
+    },
+    attrs: {
+      "id": "biao2"
+    }
+  }) : _vm._e()])])])]), _vm._v(" "), _c('section', {
+    staticClass: "ping-fen",
+    style: ({
+      'width': '60%',
+      'margin-right': (_vm.showPingFen ? '-60%' : '0%')
+    })
+  }, [(_vm.listType == 1) ? _c('ti-neng', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.listType == 2) ? _c('ban-kuai', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.listType == 3) ? _c('qu-gan', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  }) : _vm._e()], 1)])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4d740c6a", esExports)
+  }
+}
+
+/***/ }),
+/* 506 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('section', {
+    staticClass: "shengli-main",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '40%')
+    })
+  }, [_c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.backWorkout(1)
+      }
+    }
+  }, [_vm._v("基础体能数据")]), _vm._v(" "), _c('li', {
+    staticClass: "item current"
+  }, [_vm._v("专项体能数据")])]), _vm._v(" "), _c('div', [_c('span', [_vm._v("体能训练记录指标")]), _c('img', {
+    staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "margin": "18px 10px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(35)
+    },
+    on: {
+      "click": function($event) {
+        _vm.showPingFen = !_vm.showPingFen
+      }
+    }
+  }), _c('img', {
+    staticClass: "workout-add",
+    attrs: {
+      "src": __webpack_require__(141)
+    },
+    on: {
+      "click": function($event) {
+        _vm.workoutAdd()
+      }
+    }
+  })])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    staticStyle: {
+      "height": "auto",
+      "min-height": "500px"
+    }
+  }, [(_vm.sport === '') ? _c('div', {
+    staticStyle: {
+      "line-height": "500px",
+      "text-align": "center",
+      "color": "#999999",
+      "font-size": "20px"
+    }
+  }, [_vm._v("选择一位运动员")]) : _vm._e(), _vm._v(" "), _c('table', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.sport !== ''),
+      expression: "sport !== ''"
+    }],
+    staticStyle: {
+      "margin-bottom": "50px"
+    }
+  }, [_c('thead', [_c('tr', [_c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("时间")]), _vm._v(" "), _vm._l((_vm.staminaName), function(item, index) {
+    return _c('th', [_vm._v(_vm._s(item))])
+  })], 2)]), _vm._v(" "), _c('tbody', _vm._l((_vm.staminaList), function(item, index) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.TestDate))]), _vm._v(" "), _vm._l((item.valueList), function(val) {
+      return _c('td', [_vm._v(_vm._s(val))])
+    })], 2)
+  }))]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.sport !== ''),
+      expression: "sport !== ''"
+    }],
+    staticStyle: {
+      "width": "100%",
+      "height": "500px",
+      "overflow": "hidden"
+    },
+    attrs: {
+      "id": "biao"
+    }
+  })])])])]), _vm._v(" "), _c('section', {
+    staticClass: "ping-fen",
+    style: ({
+      'width': '60%',
+      'margin-right': (_vm.showPingFen ? '-60%' : '0%')
+    })
+  }, [_c('ping-fen', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  })], 1)])
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4d8223eb", esExports)
+  }
+}
+
+/***/ }),
+/* 507 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31864,7 +36171,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "wen"
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(99)
+      "src": __webpack_require__(35)
     }
   }), _vm._v(" "), _c('p', [_vm._v("雷达图结果为选择时间范围内的平均值")])]), _vm._v(" "), _c('div', [_vm._v("主观评价雷达图")])]), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "table-box"
@@ -31890,7 +36197,7 @@ if (false) {
 }
 
 /***/ }),
-/* 493 */
+/* 508 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31907,7 +36214,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticStyle: {
       "clear": "both"
     }
-  }), _vm._v(" "), (_vm.isshow) ? _c('section', {
+  }), _vm._v(" "), (_vm.isshow && _vm.childNum == 1) ? _c('section', {
     staticClass: "ti-cheng-fen",
     style: ({
       'width': (_vm.showPingFen ? '100%' : '60%')
@@ -31916,6 +36223,17 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "shuaxin": _vm.shuaxin,
       "body-list": _vm.bodyList
+    }
+  })], 1) : _vm._e(), _vm._v(" "), (_vm.isshow && _vm.childNum == 2) ? _c('section', {
+    staticClass: "ti-cheng-fen",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '60%')
+    })
+  }, [_c('subjective-count', {
+    attrs: {
+      "shuaxin": _vm.shuaxin,
+      "body-list": _vm.bodyList,
+      "again-biao": _vm.againBiao
     }
   })], 1) : _vm._e(), _vm._v(" "), (_vm.isshow) ? _c('section', {
     staticClass: "ping-fen",
@@ -31929,14 +36247,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })], 1) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "col-hr"
   }), _vm._v(" "), (_vm.isshow) ? _c('section', {
-    staticClass: "tong-ji"
-  }, [_c('subjective-count', {
-    attrs: {
-      "shuaxin": _vm.shuaxin,
-      "body-list": _vm.bodyList,
-      "again-biao": _vm.againBiao
-    }
-  })], 1) : _vm._e(), _vm._v(" "), (_vm.isshow) ? _c('section', {
     staticClass: "tong-jeida"
   }, [_c('subjective-lei-da', {
     attrs: {
@@ -32010,7 +36320,7 @@ if (false) {
 }
 
 /***/ }),
-/* 494 */
+/* 509 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32025,35 +36335,60 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "choice-header"
   }, [_vm._v("选择教练")]), _vm._v(" "), _c('ul', {
     staticClass: "choice-mian"
-  }, [_c('li', [_vm._m(0), _vm._v(" "), _c('section', [_c('div', {
-    staticClass: "inp"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.role),
-      expression: "role"
-    }],
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.role = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+  }, [_vm._l((_vm.role), function(tCListItem, roleIndex) {
+    return _c('li', {
+      style: ({
+        'margin-top': roleIndex == 0 ? '0px' : '-20px'
+      })
+    }, [_c('label', [(roleIndex == 0) ? _c('span', [_c('span', {
+      staticClass: "red-text"
+    }, [_vm._v("*")]), _vm._v("教练员：")]) : _vm._e()]), _vm._v(" "), _c('section', [_c('div', {
+      staticClass: "inp"
+    }, [_c('select', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.role[roleIndex]),
+        expression: "role[roleIndex]"
+      }],
+      on: {
+        "change": function($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+            return o.selected
+          }).map(function(o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val
+          });
+          _vm.$set(_vm.role, roleIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
+        }
       }
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": "运动员"
-    }
-  }, [_vm._v("运动员")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "教练"
-    }
-  }, [_vm._v("教练")])])])])]), _vm._v(" "), _c('li', {
+    }, [_c('option', {
+      attrs: {
+        "value": ""
+      }
+    }, [_vm._v("-教练-")]), _vm._v(" "), _vm._l((_vm.roleList), function(item) {
+      return _c('option', {
+        domProps: {
+          "value": item.Id
+        }
+      }, [_vm._v(_vm._s(item.Name))])
+    })], 2)])]), _vm._v(" "), (_vm.role[roleIndex]) ? _c('img', {
+      staticClass: "cuo",
+      attrs: {
+        "src": __webpack_require__(143)
+      },
+      on: {
+        "click": function($event) {
+          _vm.closeZhuanXiang(roleIndex)
+        }
+      }
+    }) : _vm._e(), _vm._v(" "), (roleIndex == _vm.role.length - 1) ? _c('p', {
+      staticClass: "is",
+      domProps: {
+        "innerHTML": _vm._s(_vm.isRole)
+      }
+    }) : _vm._e()])
+  }), _vm._v(" "), _c('li', {
     staticStyle: {
       "margin": "0px -25px"
     }
@@ -32064,20 +36399,16 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.next()
       }
     }
-  }, [_vm._v("下一步")]), _c('button', {
+  }, [_vm._v("确认教练")]), _c('button', {
     staticClass: "back-but",
     on: {
       "click": function($event) {
         _vm.back()
       }
     }
-  }, [_vm._v("返回")])])])])], 1)
+  }, [_vm._v("返回")])])], 2)])], 1)
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('label', [_c('span', {
-    staticClass: "red-text"
-  }, [_vm._v("*")]), _vm._v("教练员：")])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -32089,7 +36420,7 @@ if (false) {
 }
 
 /***/ }),
-/* 495 */
+/* 510 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32110,14 +36441,27 @@ if (false) {
 }
 
 /***/ }),
-/* 496 */
+/* 511 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "body-item"
-  }, [_vm._m(0), _vm._v(" "), _c('section', [_c('div', {
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item current"
+  }, [_vm._v("数据表")]), _vm._v(" "), _c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.setChildNum(2)
+      }
+    }
+  }, [_vm._v("折线图")])]), _vm._v(" "), _c('div', [_vm._v("主观评价指标")])]), _vm._v(" "), _c('section', [_c('div', {
     staticStyle: {
       "margin": "0px 10px 20px 10px",
       "float": "right",
@@ -32136,7 +36480,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "table-box"
-  }, [_c('table', [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.bodyList), function(item) {
+  }, [_c('table', [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.bodyList), function(item) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(item.DateSign))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.MorPulse))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.Weight))]), _vm._v(" "), _c('td', [(item.SleepDuration >= 8) ? _c('span', {
       staticClass: "shuiping1"
     }) : _vm._e(), (item.SleepDuration >= 5 && item.SleepDuration <= 7) ? _c('span', {
@@ -32189,11 +36533,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }))])])])])
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "title"
-  }, [_c('div', [_vm._v("主观评价指标")])])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("提交时间")]), _vm._v(" "), _c('th', [_vm._v("晨脉")]), _vm._v(" "), _c('th', [_vm._v("体重")]), _vm._v(" "), _c('th', [_vm._v("睡眠时间")]), _vm._v(" "), _c('th', [_vm._v("睡眠质量")]), _vm._v(" "), _c('th', [_vm._v("饮食欲望")]), _vm._v(" "), _c('th', [_vm._v("肌肉酸痛评价")]), _vm._v(" "), _c('th', [_vm._v("伤病疼痛评价")]), _vm._v(" "), _c('th', [_vm._v("自我训练状态评价")]), _vm._v(" "), _c('th', [_vm._v("RPE")]), _vm._v(" "), _c('th', [_vm._v("训练强度")]), _vm._v(" "), _c('th', [_vm._v("教练评价")])])])
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("提交时间")]), _vm._v(" "), _c('th', [_vm._v("晨脉")]), _vm._v(" "), _c('th', [_vm._v("体重")]), _vm._v(" "), _c('th', [_vm._v("睡眠时间")]), _vm._v(" "), _c('th', [_vm._v("睡眠质量")]), _vm._v(" "), _c('th', [_vm._v("饮食欲望")]), _vm._v(" "), _c('th', [_vm._v("肌肉酸痛评价")]), _vm._v(" "), _c('th', [_vm._v("伤病疼痛评价")]), _vm._v(" "), _c('th', [_vm._v("自我训练状态评价")]), _vm._v(" "), _c('th', [_vm._v("RPE")]), _vm._v(" "), _c('th', [_vm._v("训练负荷")]), _vm._v(" "), _c('th', [_vm._v("教练评价")])])])
 }]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -32206,7 +36546,7 @@ if (false) {
 }
 
 /***/ }),
-/* 497 */
+/* 512 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32226,7 +36566,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "header-logo"
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(98)
+      "src": __webpack_require__(99)
     }
   }), _vm._v("运动员训练监控与评价系统")])])]), _vm._v(" "), _c('section', {
     staticClass: "register"
@@ -32251,7 +36591,7 @@ if (false) {
 }
 
 /***/ }),
-/* 498 */
+/* 513 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32267,14 +36607,99 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('div', {
     staticStyle: {
       "margin-right": "20px",
-      "float": "right",
-      "overflow": "hidden"
-    },
-    style: ({
-      'height': (_vm.childNum == 1 || _vm.childNum == 2) ? '39px' : '0px',
-      'margin-bottom': (_vm.childNum == 1 || _vm.childNum == 2) ? '20px' : '0px'
-    })
+      "margin-bottom": "20px",
+      "float": "right"
+    }
   }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部大项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainId),
+      expression: "trainId"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainId = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部小项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 6 && _vm.trainFirse !== '' && item.SystemId.substr(0, 3) == _vm.zhuanxiangList[_vm.trainFirse].SystemId) ? _c('option', {
+      domProps: {
+        "value": item.Id
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2), _vm._v(" "), (_vm.userType != '分队教练') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sex),
+      expression: "sex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部性别-")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "男"
+    }
+  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "女"
+    }
+  }, [_vm._v("女")])]) : _vm._e(), _vm._v(" "), _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -32293,305 +36718,44 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.sportIndex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.sportList), function(item, index) {
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部运动员-")]), _vm._v(" "), _vm._l((_vm.sportList), function(item, index) {
     return _c('option', {
       domProps: {
         "value": index
       }
     }, [_vm._v(_vm._s(item.FullName))])
-  })), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
+  })], 2), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
     staticClass: "daochu",
     on: {
       "click": function($event) {
-        _vm.daochu = true
+        _vm.isGetList = !_vm.isGetList;
       }
     }
-  }, [_vm._v("导出")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
     staticStyle: {
       "clear": "both"
     }
-  }), _vm._v(" "), (_vm.childNum == 1 || _vm.childNum == 2) ? _c('section', {}, [_c('div', {
-    staticClass: "body-item"
-  }, [_c('div', {
-    staticClass: "title"
-  }, [_c('ul', {
-    staticClass: "title-tab"
-  }, [_c('li', {
-    staticClass: "item",
-    "class": {
-      'current': _vm.childNum == 1
-    },
-    on: {
-      "click": function($event) {
-        _vm.childNum = 1
-      }
-    }
-  }, [_vm._v("折线图")]), _vm._v(" "), _c('li', {
-    staticClass: "item",
-    "class": {
-      'current': _vm.childNum == 2
-    },
-    on: {
-      "click": function($event) {
-        _vm.childNum = 2
-      }
-    }
-  }, [_vm._v("数据表")])]), _vm._v(" "), _c('div', [_c('span', [_vm._v("体能训练记录指标")]), _c('img', {
-    staticClass: "workout-add",
+  }), _vm._v(" "), (_vm.childNum == 1) ? _c('section', [_c('jichu', {
     attrs: {
-      "src": __webpack_require__(138)
-    },
-    on: {
-      "click": function($event) {
-        _vm.workoutAdd()
-      }
+      "is-get-list": _vm.isGetList,
+      "zhuanxiang-list": _vm.zhuanxiangList,
+      "train-firse": _vm.trainFirse,
+      "train-id": _vm.trainId,
+      "sport-list": _vm.sportList,
+      "sport-index": _vm.sportIndex,
+      "sex": _vm.sex
     }
-  })])]), _vm._v(" "), _c('section', [_c('div', {
-    staticClass: "table-box"
-  }, [(_vm.childNum == 1) ? _c('child-component-first', {
+  })], 1) : _vm._e(), _vm._v(" "), (_vm.childNum == 2) ? _c('section', [_c('zhuanxiang', {
     attrs: {
-      "stamina-list": _vm.staminaList,
-      "stamina-name": _vm.staminaName,
-      "stamina-date": _vm.staminaDate
+      "is-get-list": _vm.isGetList,
+      "sport-list": _vm.sportList,
+      "sport-index": _vm.sportIndex
     }
-  }) : _vm._e(), _vm._v(" "), (_vm.childNum == 2) ? _c('child-component-second', {
-    attrs: {
-      "stamina-list": _vm.staminaList,
-      "stamina-name": _vm.staminaName
-    }
-  }) : _vm._e()], 1)])])]) : _vm._e(), _vm._v(" "), (_vm.childNum == 3) ? _c('child-component-third') : _vm._e()], 1)], 1), _vm._v(" "), (_vm.daochu) ? _c('div', {
-    staticClass: "mask"
-  }, [_c('div', {
-    staticClass: "daochu-mask"
-  }, [_c('div', {
-    staticClass: "title"
-  }, [_c('img', {
-    staticClass: "close-img",
-    attrs: {
-      "src": __webpack_require__(71)
-    },
-    on: {
-      "click": function($event) {
-        _vm.daochu = false
-      }
-    }
-  }), _vm._v(" "), _c('span', [_vm._v("选择导出项")]), _vm._v(" "), (_vm.daochuNum == 1) ? _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.allDaoChu),
-      expression: "allDaoChu"
-    }],
-    staticStyle: {
-      "margin": "17px 6px 0px 20px",
-      "vertical-align": "top"
-    },
-    attrs: {
-      "value": "1",
-      "type": "checkbox",
-      "name": "alldaochu"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.allDaoChu) ? _vm._i(_vm.allDaoChu, "1") > -1 : (_vm.allDaoChu)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.allDaoChu,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = "1",
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.allDaoChu = $$a.concat([$$v]))
-          } else {
-            $$i > -1 && (_vm.allDaoChu = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.allDaoChu = $$c
-        }
-      }
-    }
-  }) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.allDaoChuNext),
-      expression: "allDaoChuNext"
-    }],
-    staticStyle: {
-      "margin": "17px 6px 0px 20px",
-      "vertical-align": "top"
-    },
-    attrs: {
-      "value": "1",
-      "type": "checkbox",
-      "name": "alldaochunext"
-    },
-    domProps: {
-      "checked": Array.isArray(_vm.allDaoChuNext) ? _vm._i(_vm.allDaoChuNext, "1") > -1 : (_vm.allDaoChuNext)
-    },
-    on: {
-      "__c": function($event) {
-        var $$a = _vm.allDaoChuNext,
-          $$el = $event.target,
-          $$c = $$el.checked ? (true) : (false);
-        if (Array.isArray($$a)) {
-          var $$v = "1",
-            $$i = _vm._i($$a, $$v);
-          if ($$el.checked) {
-            $$i < 0 && (_vm.allDaoChuNext = $$a.concat([$$v]))
-          } else {
-            $$i > -1 && (_vm.allDaoChuNext = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-          }
-        } else {
-          _vm.allDaoChuNext = $$c
-        }
-      }
-    }
-  }) : _vm._e(), _vm._v(" "), _c('span', [_vm._v("全选/全不选")])]), _vm._v(" "), (_vm.daochuNum == 1) ? _c('div', {
-    staticClass: "daochu-table"
-  }, _vm._l((_vm.sportList), function(item) {
-    return _c('div', {
-      staticStyle: {
-        "line-height": "40px",
-        "float": "left",
-        "width": "50%"
-      }
-    }, [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.userXuanZe),
-        expression: "userXuanZe"
-      }],
-      staticStyle: {
-        "margin-left": "6px"
-      },
-      attrs: {
-        "type": "checkbox",
-        "name": "user"
-      },
-      domProps: {
-        "value": item.UserId,
-        "checked": Array.isArray(_vm.userXuanZe) ? _vm._i(_vm.userXuanZe, item.UserId) > -1 : (_vm.userXuanZe)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.userXuanZe,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = item.UserId,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.userXuanZe = $$a.concat([$$v]))
-            } else {
-              $$i > -1 && (_vm.userXuanZe = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.userXuanZe = $$c
-          }
-        }
-      }
-    }), _vm._v(_vm._s(item.FullName))])
-  })) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 1) ? _c('div', {
-    staticClass: "but-box"
-  }, [_c('button', {
-    on: {
-      "click": function($event) {
-        _vm.daochuNum = 2
-      }
-    }
-  }, [_vm._v("下一步")]), _c('button', {
-    on: {
-      "click": function($event) {
-        _vm.daochu = false
-      }
-    }
-  }, [_vm._v("取消")])]) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('div', {
-    staticClass: "daochu-table"
-  }, [_c('table', _vm._l((_vm.trainAllList), function(item, index) {
-    return _c('tr', [_c('td', [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainList),
-        expression: "trainList"
-      }],
-      attrs: {
-        "type": "checkbox",
-        "name": "daochu"
-      },
-      domProps: {
-        "value": item[0].TrainId,
-        "checked": Array.isArray(_vm.trainList) ? _vm._i(_vm.trainList, item[0].TrainId) > -1 : (_vm.trainList)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.trainList,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = item[0].TrainId,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.trainList = $$a.concat([$$v]))
-            } else {
-              $$i > -1 && (_vm.trainList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.trainList = $$c
-          }
-        }
-      }
-    }), _vm._v(_vm._s(item[0].Name))]), _vm._v(" "), (item[1]) ? _c('td', [_c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainList),
-        expression: "trainList"
-      }],
-      attrs: {
-        "type": "checkbox",
-        "name": "daochu"
-      },
-      domProps: {
-        "value": item[1].TrainId,
-        "checked": Array.isArray(_vm.trainList) ? _vm._i(_vm.trainList, item[1].TrainId) > -1 : (_vm.trainList)
-      },
-      on: {
-        "__c": function($event) {
-          var $$a = _vm.trainList,
-            $$el = $event.target,
-            $$c = $$el.checked ? (true) : (false);
-          if (Array.isArray($$a)) {
-            var $$v = item[1].TrainId,
-              $$i = _vm._i($$a, $$v);
-            if ($$el.checked) {
-              $$i < 0 && (_vm.trainList = $$a.concat([$$v]))
-            } else {
-              $$i > -1 && (_vm.trainList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-            }
-          } else {
-            _vm.trainList = $$c
-          }
-        }
-      }
-    }), _vm._v(_vm._s(item[1].Name))]) : _vm._e()])
-  }))]) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('div', {
-    staticClass: "but-box"
-  }, [_c('a', {
-    attrs: {
-      "href": _vm.daochuUrl
-    }
-  }, [_vm._v("确认")]), _c('button', {
-    on: {
-      "click": function($event) {
-        _vm.daochuNum = 1
-      }
-    }
-  }, [_vm._v("上一步")])]) : _vm._e()])]) : _vm._e()], 1)
+  })], 1) : _vm._e()])], 1)], 1)
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
@@ -32646,7 +36810,7 @@ if (false) {
 }
 
 /***/ }),
-/* 499 */
+/* 514 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32789,91 +36953,68 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "女"
     }
-  }, [_vm._v("女")])])])])]), _vm._v(" "), _c('li', [_vm._m(5), _vm._v(" "), _c('section', {
-    staticClass: "register-shengri"
+  }, [_vm._v("女")])])])])]), _vm._v(" "), _c('li', [_vm._m(5), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.mobile),
+      expression: "mobile"
+    }],
+    attrs: {
+      "type": "text",
+      "placeholder": "手机号"
+    },
+    domProps: {
+      "value": (_vm.mobile)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.mobile = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('p', {
+    staticClass: "is",
+    domProps: {
+      "innerHTML": _vm._s(_vm.isMobile)
+    }
+  })]), _vm._v(" "), _c('li', [_vm._m(6), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
   }, [_c('div', {
-    staticClass: "inp"
-  }, [_c('select', {
+    staticClass: "get-code",
+    on: {
+      "click": function($event) {
+        _vm.getCode()
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.getCodeText))]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.year),
-      expression: "year"
+      value: (_vm.code),
+      expression: "code"
     }],
+    attrs: {
+      "type": "text",
+      "placeholder": "验证码"
+    },
+    domProps: {
+      "value": (_vm.code)
+    },
     on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.year = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.code = $event.target.value
       }
     }
-  }, _vm._l((81), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i + 1949
-      }
-    }, [_vm._v(_vm._s(i + 1949))])
-  }))]), _vm._v(" "), _c('span', [_vm._v("年")]), _vm._v(" "), _c('div', {
-    staticClass: "inp"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.month),
-      expression: "month"
-    }],
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.month = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
+  })])]), _vm._v(" "), _c('p', {
+    staticClass: "is",
+    domProps: {
+      "innerHTML": _vm._s(_vm.isCode)
     }
-  }, _vm._l((12), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i
-      }
-    }, [_vm._v(_vm._s(i))])
-  }))]), _vm._v(" "), _c('span', [_vm._v("月")]), _vm._v(" "), _c('div', {
-    staticClass: "inp"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.day),
-      expression: "day"
-    }],
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.day = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.dayLength), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i
-      }
-    }, [_vm._v(_vm._s(i))])
-  }))]), _vm._v(" "), _c('span', [_vm._v("日")]), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "clear": "both"
-    }
-  })])]), _vm._v(" "), _c('li', [_c('label', [_vm._v("运动员等级：")]), _vm._v(" "), _c('section', [_c('div', {
+  })]), _vm._v(" "), _c('li', [_c('label', [_vm._v("运动员等级：")]), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "inp"
   }, [_c('select', {
     directives: [{
@@ -32894,10 +37035,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     }
   }, [_c('option', {
-    attrs: {
-      "value": ""
-    }
-  }, [_vm._v("-等级-")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "0"
     }
@@ -32921,231 +37058,42 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "value": "5"
     }
-  }, [_vm._v("其他")])])])])]), _vm._v(" "), _vm._l((_vm.trainChildList), function(tCListItem, tCListIndex) {
-    return _c('li', {
-      style: ({
-        'margin-top': tCListIndex == 0 ? '0px' : '-20px'
-      })
-    }, [_c('label', [(tCListIndex == 0) ? _c('span', [_c('span', {
-      staticClass: "red-text"
-    }, [_vm._v("*")]), _vm._v("运动项目：")]) : _vm._e()]), _vm._v(" "), _c('section', {
-      staticClass: "register-zhuanxiang"
-    }, [_c('div', {
-      staticClass: "inp",
-      staticStyle: {
-        "margin-right": "10px"
+  }, [_vm._v("其他")])])])])]), _vm._v(" "), _c('li', [_vm._m(7), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "inp"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainFirse[tCListIndex]),
-        expression: "trainFirse[tCListIndex]"
-      }],
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.trainFirse, tCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.trainChildList[tCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-运动项目-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
       domProps: {
-        "value": ','
+        "value": item.Id
       }
-    }, [_vm._v("-运动项目-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
-      return _c('option', {
-        domProps: {
-          "value": item.Id + ',' + item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))])
-    })], 2)]), _vm._v(" "), _c('div', {
-      staticClass: "inp"
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainChildList[tCListIndex]),
-        expression: "trainChildList[tCListIndex]"
-      }],
-      on: {
-        "change": function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.trainChildList, tCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-专项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangChileList), function(item, index) {
-      return (item.SystemId.substr(0, 3) == _vm.trainFirse[tCListIndex].split(',')[1]) ? _c('option', {
-        domProps: {
-          "value": item.Id
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2)]), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "clear": "both"
-      }
-    })]), _vm._v(" "), (_vm.trainChildList[tCListIndex]) ? _c('img', {
-      staticClass: "cuo",
-      attrs: {
-        "src": __webpack_require__(52)
-      },
-      on: {
-        "click": function($event) {
-          _vm.closeZhuanXiang(tCListIndex)
-        }
-      }
-    }) : _vm._e(), _vm._v(" "), (tCListIndex == _vm.trainChildList.length - 1) ? _c('p', {
-      staticClass: "is",
-      domProps: {
-        "innerHTML": _vm._s(_vm.isTrainChild)
-      }
-    }) : _vm._e()])
-  }), _vm._v(" "), _vm._l((_vm.departmentChildLists), function(dCListItem, dCListIndex) {
-    return _c('li', {
-      style: ({
-        'margin-top': dCListIndex == 0 ? '0px' : '-20px'
-      })
-    }, [(dCListIndex == 0) ? _c('label', [_c('span', {
-      staticClass: "red-text"
-    }, [_vm._v("*")]), _vm._v("所属教练：")]) : _vm._e(), _vm._v(" "), _c('section', {
-      staticClass: "register-jiaolian"
-    }, [_c('div', {
-      staticClass: "inp",
-      staticStyle: {
-        "margin-right": "10px"
-      }
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.departmentFirse[dCListIndex]),
-        expression: "departmentFirse[dCListIndex]"
-      }],
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.departmentFirse, dCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.departmentSecond[dCListIndex] = '';
-          _vm.departmentChildLists[dCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-专项-")]), _vm._v(" "), _vm._l((_vm.departmentList), function(item, index) {
-      return _c('option', {
-        domProps: {
-          "value": item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))])
-    })], 2)]), _vm._v(" "), _c('div', {
-      staticClass: "inp",
-      staticStyle: {
-        "margin-right": "10px"
-      }
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.departmentSecond[dCListIndex]),
-        expression: "departmentSecond[dCListIndex]"
-      }],
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.departmentSecond, dCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.departmentChildLists[dCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-教练组-")]), _vm._v(" "), _vm._l((_vm.departmentChildList), function(item, index) {
-      return (item.SystemId.substr(0, 3) == _vm.departmentFirse[dCListIndex] && item.SystemId > 999 && item.SystemId < 1000000) ? _c('option', {
-        domProps: {
-          "value": item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2)]), _vm._v(" "), _c('div', {
-      staticClass: "inp"
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.departmentChildLists[dCListIndex]),
-        expression: "departmentChildLists[dCListIndex]"
-      }],
-      on: {
-        "change": function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.departmentChildLists, dCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-教练员-")]), _vm._v(" "), _vm._l((_vm.departmentChildList), function(item, index) {
-      return (item.SystemId.substr(0, 6) == _vm.departmentSecond[dCListIndex] && item.SystemId > 999999) ? _c('option', {
-        domProps: {
-          "value": item.Id
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2)]), _vm._v(" "), _c('div', {
-      staticStyle: {
-        "clear": "both"
-      }
-    })]), _vm._v(" "), (_vm.departmentChildLists[dCListIndex]) ? _c('img', {
-      staticClass: "cuo",
-      attrs: {
-        "src": __webpack_require__(52)
-      },
-      on: {
-        "click": function($event) {
-          _vm.closeJiaoLian(dCListIndex)
-        }
-      }
-    }) : _vm._e(), _vm._v(" "), (dCListIndex == _vm.departmentChildLists.length - 1) ? _c('p', {
-      staticClass: "is",
-      domProps: {
-        "innerHTML": _vm._s(_vm.isDepartmentChild)
-      }
-    }) : _vm._e()])
-  }), _vm._v(" "), _c('li', [_vm._m(6), _vm._v(" "), _c('section', [_c('div', {
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2)])]), _vm._v(" "), _c('p', {
+    staticClass: "is",
+    domProps: {
+      "innerHTML": _vm._s(_vm.isTrainFirse)
+    }
+  })]), _vm._v(" "), _c('li', [_vm._m(8), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "inp"
   }, [_c('select', {
     directives: [{
@@ -33194,7 +37142,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.login()
       }
     }
-  }, [_vm._v("已有账号")])])], 2)
+  }, [_vm._v("已有账号")])])])
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', [_c('span', {
@@ -33219,7 +37167,15 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
 },function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', [_c('span', {
     staticClass: "red-text"
-  }, [_vm._v("*")]), _vm._v("生日：")])
+  }, [_vm._v("*")]), _vm._v("手机号：")])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', [_c('span', {
+    staticClass: "red-text"
+  }, [_vm._v("*")]), _vm._v("验证码：")])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('label', [_c('span', {
+    staticClass: "red-text"
+  }, [_vm._v("*")]), _vm._v("运动项目：")])
 },function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('label', [_c('span', {
     staticClass: "red-text"
@@ -33236,7 +37192,7 @@ if (false) {
 }
 
 /***/ }),
-/* 500 */
+/* 515 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33284,7 +37240,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(46)
+      "src": __webpack_require__(53)
     },
     on: {
       "click": function($event) {
@@ -33295,14 +37251,14 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "header-menu"
   }, [_c('li', {
     staticClass: "jiao"
-  }), _vm._v(" "), _c('li', {
+  }), _vm._v(" "), (_vm.userType != '系统管理员') ? _c('li', {
     staticClass: "item",
     on: {
       "click": function($event) {
         _vm.goUrl('/person')
       }
     }
-  }, [_c('span', [_vm._v("个人中心")])]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('li', {
+  }, [_c('span', [_vm._v("个人中心")])]) : _vm._e(), _vm._v(" "), (_vm.userType != '系统管理员') ? _c('hr') : _vm._e(), _vm._v(" "), _c('li', {
     staticClass: "item",
     on: {
       "click": function($event) {
@@ -33316,7 +37272,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "header-logo"
   }, [_c('img', {
     attrs: {
-      "src": __webpack_require__(98)
+      "src": __webpack_require__(99)
     }
   }), _vm._v("运动员训练监控与评价系统")])
 }]
@@ -33331,139 +37287,74 @@ if (false) {
 }
 
 /***/ }),
-/* 501 */
+/* 516 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticStyle: {
-      "height": "100%"
-    }
+  return _c('div', [_c('section', {
+    staticClass: "shengli-main",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '40%')
+    })
   }, [_c('div', {
-    staticClass: "injury-menu"
-  }, [_c('div', {
-    staticClass: "title"
-  }, [_vm._v("运动员")]), _vm._v(" "), _c('section', [_c('ul', {
-    staticClass: "injury-menu-list"
-  }, [_c('li', [(_vm.picture) ? _c('img', {
-    staticClass: "portrait",
-    attrs: {
-      "src": _vm.picture
-    }
-  }) : _c('img', {
-    staticClass: "portrait",
-    attrs: {
-      "src": __webpack_require__(46)
-    }
-  }), _vm._v(" "), _c('img', {
-    staticClass: "right",
-    attrs: {
-      "src": __webpack_require__(56)
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "injury-menu-text"
-  }, [_c('p', [_vm._v(_vm._s(_vm.user.FullName))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.user.TrainName))])])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "injury-main"
+    staticClass: "body-item"
   }, [_c('div', {
     staticClass: "title"
-  }, [_vm._v("体能训练")]), _vm._v(" "), _c('div', {
-    staticClass: "box"
-  }, [_c('div', {
-    staticClass: "workout-inp"
-  }, [_c('div', {
-    staticClass: "top"
-  }, [_c('span', [_vm._v("时间")]), _vm._v(" "), _c('section', {
-    staticClass: "mydate-box"
-  }, [_c('input', {
-    staticClass: "form_datetime",
-    attrs: {
-      "onclick": "myDate.getFocus(this)",
-      "id": "staminaTime",
-      "readonly": "readonly",
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('section', {
-    staticClass: "calendar",
-    staticStyle: {
-      "right": "20px"
-    },
-    attrs: {
-      "tabindex": "0",
-      "onclick": "myDate.holdBubble()"
-    },
-    on: {
-      "blur": function($event) {
-        _vm.getSportValue()
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "workout-inp-main"
-  }, [_vm._l((_vm.trainList), function(item, index) {
-    return _c('div', {
-      staticClass: "item"
-    }, [_c('label', [_vm._v(_vm._s(item.Name))]), _vm._v(" "), _c('input', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainList[index].Value),
-        expression: "trainList[index].Value"
-      }],
-      attrs: {
-        "type": "text"
-      },
-      domProps: {
-        "value": (_vm.trainList[index].Value)
-      },
-      on: {
-        "input": function($event) {
-          if ($event.target.composing) { return; }
-          _vm.trainList[index].Value = $event.target.value
-        }
-      }
-    })])
-  }), _vm._v(" "), _c('div', {
-    staticStyle: {
-      "clear": "both"
-    }
-  })], 2)]), _vm._v(" "), _c('section', {
-    staticStyle: {
-      "text-align": "center"
-    }
-  }, [_c('button', {
-    staticClass: "workout-inp-but1",
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item",
     on: {
       "click": function($event) {
-        _vm.save()
+        _vm.backWorkout(1)
       }
     }
-  }, [_vm._v("保存")]), _c('button', {
-    staticClass: "workout-inp-but2",
+  }, [_vm._v("基础体能数据")]), _vm._v(" "), _c('li', {
+    staticClass: "item current"
+  }, [_vm._v("专项体能数据")])]), _vm._v(" "), _c('div', [_c('span', [_vm._v("体能训练记录指标")]), _c('img', {
+    staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "margin": "18px 10px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(35)
+    },
     on: {
       "click": function($event) {
-        _vm.closeChild(1)
+        _vm.showPingFen = !_vm.showPingFen
       }
     }
-  }, [_vm._v("取消")])])])])])
-}
-var staticRenderFns = []
-render._withStripped = true
-var esExports = { render: render, staticRenderFns: staticRenderFns }
-/* harmony default export */ __webpack_exports__["a"] = (esExports);
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-70309884", esExports)
-  }
-}
-
-/***/ }),
-/* 502 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('table', [_c('thead', [_c('tr', [_c('th', {
+  }), _c('img', {
+    staticClass: "workout-add",
+    attrs: {
+      "src": __webpack_require__(141)
+    },
+    on: {
+      "click": function($event) {
+        _vm.workoutAdd()
+      }
+    }
+  })])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    staticStyle: {
+      "height": "auto",
+      "min-height": "500px"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "width": "100%",
+      "height": "500px",
+      "overflow": "hidden",
+      "margin-bottom": "50px"
+    },
+    attrs: {
+      "id": "biao"
+    }
+  }), _vm._v(" "), _c('table', [_c('thead', [_c('tr', [_c('th', {
     staticStyle: {
       "min-width": "100px"
     }
@@ -33473,7 +37364,17 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     return _c('tr', [_c('td', [_vm._v(_vm._s(item.TestDate))]), _vm._v(" "), _vm._l((item.valueList), function(val) {
       return _c('td', [_vm._v(_vm._s(val))])
     })], 2)
-  }))])
+  }))])])])])]), _vm._v(" "), _c('section', {
+    staticClass: "ping-fen",
+    style: ({
+      'width': '60%',
+      'margin-right': (_vm.showPingFen ? '-60%' : '0%')
+    })
+  }, [_c('ping-fen', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  })], 1)])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -33487,21 +37388,202 @@ if (false) {
 }
 
 /***/ }),
-/* 503 */
+/* 517 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  return _c('div', [(_vm.isEdit) ? _c('div', {
+    staticClass: "edit-mask"
+  }, [_c('div', {
+    staticClass: "is-edit"
+  }, [_c('div', {
+    staticClass: "header"
+  }, [_vm._v("选择"), _c('img', {
     staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "float": "right",
+      "margin-top": "2px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(48)
+    },
+    on: {
+      "click": function($event) {
+        _vm.isEdit = false
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "body"
+  }, _vm._l((_vm.xuanze), function(item, index) {
+    return _c('div', {
+      staticClass: "item",
+      "class": {
+        'current': item.is
+      },
+      on: {
+        "click": function($event) {
+          _vm.setXuanze(index)
+        }
+      }
+    }, [_c('div', {
+      staticClass: "code"
+    }, [(item.is) ? _c('img', {
+      attrs: {
+        "src": __webpack_require__(142)
+      }
+    }) : _vm._e()]), _vm._v(" "), _c('p', [_vm._v(_vm._s(item.name))])])
+  }))])]) : _vm._e(), _vm._v(" "), _c('section', {
+    staticClass: "shengli-main",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '40%')
+    })
+  }, [_c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item current"
+  }, [_vm._v("基础体能数据")]), _vm._v(" "), _c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.backWorkout(2)
+      }
+    }
+  }, [_vm._v("专项体能数据")])]), _vm._v(" "), _c('div', [_c('span', [_vm._v("体能训练记录指标")]), _c('img', {
+    staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "margin": "18px 10px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(35)
+    },
+    on: {
+      "click": function($event) {
+        _vm.showPingFen = !_vm.showPingFen
+      }
+    }
+  })])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    staticStyle: {
+      "height": "auto",
+      "min-height": "500px"
+    }
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.listType),
+      expression: "listType"
+    }],
+    staticStyle: {
+      "border": "1px solid #bcbcbc",
+      "height": "38px",
+      "width": "220px",
+      "border-radius": "4px",
+      "margin-bottom": "20px"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.listType = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "1"
+    }
+  }, [_vm._v("基础体能")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "2"
+    }
+  }, [_vm._v("板块体能")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "3"
+    }
+  }, [_vm._v("稳定和均衡")])]), _vm._v(" "), (_vm.listType == 1) ? _c('img', {
+    staticStyle: {
+      "width": "26px",
+      "height": "26px",
+      "vertical-align": "top",
+      "margin": "6px 10px",
+      "cursor": "pointer",
+      "float": "right"
+    },
+    attrs: {
+      "src": __webpack_require__(144)
+    },
+    on: {
+      "click": function($event) {
+        _vm.isEdit = !_vm.isEdit
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "margin-bottom": "50px",
       "width": "100%",
-      "height": "100%",
+      "height": "500px",
       "overflow": "hidden"
     },
     attrs: {
-      "id": "biao"
+      "id": "biao1"
     }
-  })
+  }), _vm._v(" "), _c('table', {
+    staticStyle: {
+      "margin-bottom": "50px"
+    }
+  }, [_c('thead', [_c('tr', [_c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("时间")]), _vm._v(" "), _vm._l((_vm.staminaName), function(item, index) {
+    return _c('th', [_vm._v(_vm._s(item))])
+  })], 2)]), _vm._v(" "), _c('tbody', _vm._l((_vm.staminaList), function(item, index) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.TestDate))]), _vm._v(" "), _vm._l((item.valueList), function(val) {
+      return _c('td', [_vm._v(_vm._s(val))])
+    })], 2)
+  }))]), _vm._v(" "), (_vm.listType == 1 || _vm.listType == 3) ? _c('div', {
+    staticStyle: {
+      "width": "100%",
+      "height": "500px",
+      "overflow": "hidden"
+    },
+    attrs: {
+      "id": "biao2"
+    }
+  }) : _vm._e()])])])]), _vm._v(" "), _c('section', {
+    staticClass: "ping-fen",
+    style: ({
+      'width': '60%',
+      'margin-right': (_vm.showPingFen ? '-60%' : '0%')
+    })
+  }, [(_vm.listType == 1) ? _c('ti-neng', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.listType == 2) ? _c('ban-kuai', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.listType == 3) ? _c('qu-gan', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  }) : _vm._e()], 1)])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -33515,7 +37597,795 @@ if (false) {
 }
 
 /***/ }),
-/* 504 */
+/* 518 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "physiology"
+    }
+  }, [_c('header-component'), _vm._v(" "), _c('section', {
+    staticClass: "content"
+  }, [_c('top-menu'), _vm._v(" "), _c('div', {
+    staticClass: "index-content"
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "20px",
+      "margin-right": "20px",
+      "float": "right"
+    }
+  }, [(_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部大项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainId),
+      expression: "trainId"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainId = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部小项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 6 && _vm.trainFirse !== '' && item.SystemId.substr(0, 3) == _vm.zhuanxiangList[_vm.trainFirse].SystemId) ? _c('option', {
+      domProps: {
+        "value": item.Id
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员' && _vm.userType != '分队教练') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sex),
+      expression: "sex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部性别-")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "男"
+    }
+  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "女"
+    }
+  }, [_vm._v("女")])]) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sportIndex),
+      expression: "sportIndex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sportIndex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部运动员-")]), _vm._v(" "), _vm._l((_vm.sportList), function(item, index) {
+    return _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.FullName))])
+  })], 2) : _vm._e(), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), (_vm.userType == '教练') ? _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.daochu = true
+      }
+    }
+  }, [_vm._v("导出")]) : _vm._e(), _vm._v(" "), _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.getPhyConstituents()
+      }
+    }
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "clear": "both"
+    }
+  }), _vm._v(" "), _c('section', {
+    staticClass: "shengli-main",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '60%')
+    })
+  }, [_c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item",
+    "class": {
+      'current': _vm.childNum == 3
+    },
+    on: {
+      "click": function($event) {
+        _vm.childNum = 3
+      }
+    }
+  }, [_vm._v("数据表")]), _vm._v(" "), _c('li', {
+    staticClass: "item",
+    "class": {
+      'current': _vm.childNum == 2
+    },
+    on: {
+      "click": function($event) {
+        _vm.childNum = 2
+      }
+    }
+  }, [_vm._v("折线图")]), _vm._v(" "), _c('li', {
+    staticClass: "item",
+    "class": {
+      'current': _vm.childNum == 1
+    },
+    on: {
+      "click": function($event) {
+        _vm.childNum = 1
+      }
+    }
+  }, [_vm._v("睾酮/皮质醇")])]), _vm._v(" "), _c('div', [_vm._v("生理生化"), _c('img', {
+    staticStyle: {
+      "width": "20px",
+      "height": "20px",
+      "vertical-align": "top",
+      "margin": "18px 10px",
+      "cursor": "pointer"
+    },
+    attrs: {
+      "src": __webpack_require__(35)
+    },
+    on: {
+      "click": function($event) {
+        _vm.showPingFen = !_vm.showPingFen
+      }
+    }
+  })])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box"
+  }, [(_vm.childNum == 1) ? _c('child-component-first', {
+    attrs: {
+      "again-biao": _vm.againBiao,
+      "show-ping-fen": _vm.showPingFen,
+      "phy-constituents-list": _vm.phyConstituentsList
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.childNum == 2) ? _c('child-component-second', {
+    attrs: {
+      "again-biao": _vm.againBiao,
+      "show-ping-fen": _vm.showPingFen,
+      "phy-constituents-list": _vm.phyConstituentsList
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.childNum == 3) ? _c('child-component-third', {
+    attrs: {
+      "phy-constituents-list": _vm.phyConstituentsList
+    }
+  }) : _vm._e()], 1)])])]), _vm._v(" "), _c('section', {
+    staticClass: "ping-fen",
+    style: ({
+      'margin-right': (_vm.showPingFen ? '-40%' : '0%')
+    })
+  }, [_c('sheng-li', {
+    attrs: {
+      "show-ping-fen": _vm.showPingFen
+    }
+  })], 1)])], 1), _vm._v(" "), (_vm.daochu) ? _c('div', {
+    staticClass: "mask"
+  }, [_c('div', {
+    staticClass: "daochu-mask"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('img', {
+    staticClass: "close-img",
+    attrs: {
+      "src": __webpack_require__(48)
+    },
+    on: {
+      "click": function($event) {
+        _vm.daochu = false
+      }
+    }
+  }), _vm._v(" "), _c('span', [_vm._v("选择导出项")]), _vm._v(" "), (_vm.daochuNum == 1) ? _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.allDaoChu),
+      expression: "allDaoChu"
+    }],
+    staticStyle: {
+      "margin": "17px 6px 0px 20px",
+      "vertical-align": "top"
+    },
+    attrs: {
+      "value": "1",
+      "type": "checkbox",
+      "name": "alldaochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.allDaoChu) ? _vm._i(_vm.allDaoChu, "1") > -1 : (_vm.allDaoChu)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.allDaoChu,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "1",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.allDaoChu = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.allDaoChu = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.allDaoChu = $$c
+        }
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.allDaoChuNext),
+      expression: "allDaoChuNext"
+    }],
+    staticStyle: {
+      "margin": "17px 6px 0px 20px",
+      "vertical-align": "top"
+    },
+    attrs: {
+      "value": "1",
+      "type": "checkbox",
+      "name": "alldaochunext"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.allDaoChuNext) ? _vm._i(_vm.allDaoChuNext, "1") > -1 : (_vm.allDaoChuNext)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.allDaoChuNext,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "1",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.allDaoChuNext = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.allDaoChuNext = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.allDaoChuNext = $$c
+        }
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), _c('span', [_vm._v("全选/全不选")])]), _vm._v(" "), (_vm.daochuNum == 1) ? _c('div', {
+    staticClass: "daochu-table"
+  }, _vm._l((_vm.sportList), function(item) {
+    return _c('div', {
+      staticStyle: {
+        "line-height": "40px",
+        "float": "left",
+        "width": "50%"
+      }
+    }, [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.userXuanZe),
+        expression: "userXuanZe"
+      }],
+      staticStyle: {
+        "margin-left": "6px"
+      },
+      attrs: {
+        "type": "checkbox",
+        "name": "user"
+      },
+      domProps: {
+        "value": item.UserId,
+        "checked": Array.isArray(_vm.userXuanZe) ? _vm._i(_vm.userXuanZe, item.UserId) > -1 : (_vm.userXuanZe)
+      },
+      on: {
+        "__c": function($event) {
+          var $$a = _vm.userXuanZe,
+            $$el = $event.target,
+            $$c = $$el.checked ? (true) : (false);
+          if (Array.isArray($$a)) {
+            var $$v = item.UserId,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.userXuanZe = $$a.concat([$$v]))
+            } else {
+              $$i > -1 && (_vm.userXuanZe = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            }
+          } else {
+            _vm.userXuanZe = $$c
+          }
+        }
+      }
+    }), _vm._v(_vm._s(item.FullName))])
+  })) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 1) ? _c('div', {
+    staticClass: "but-box"
+  }, [_c('button', {
+    on: {
+      "click": function($event) {
+        _vm.daochuNum = 2
+      }
+    }
+  }, [_vm._v("下一步")]), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.daochu = false
+      }
+    }
+  }, [_vm._v("取消")])]) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('div', {
+    staticClass: "daochu-table"
+  }, [_c('table', [_c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Leukocyte,白细胞",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Leukocyte,白细胞") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Leukocyte,白细胞",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("白细胞")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Erythrocyte,红细胞",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Erythrocyte,红细胞") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Erythrocyte,红细胞",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("红细胞")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Hemoglobin,血红蛋白",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Hemoglobin,血红蛋白") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Hemoglobin,血红蛋白",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("血红蛋白")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Neutrophils,中性粒细胞",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Neutrophils,中性粒细胞") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Neutrophils,中性粒细胞",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("中性粒细胞")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Lymphocyte,淋巴细胞",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Lymphocyte,淋巴细胞") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Lymphocyte,淋巴细胞",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("淋巴细胞")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Hematocrit,血球积压",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Hematocrit,血球积压") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Hematocrit,血球积压",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("红细胞积压")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "BloodUrea,血尿素",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "BloodUrea,血尿素") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "BloodUrea,血尿素",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("血尿素")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "CreatineKinase,肌酸激酶",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "CreatineKinase,肌酸激酶") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "CreatineKinase,肌酸激酶",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("肌酸激酶")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Cortisol,皮质醇",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Cortisol,皮质醇") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Cortisol,皮质醇",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("皮质醇")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Testosterone,睾酮",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Testosterone,睾酮") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Testosterone,睾酮",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("睾酮")])])])]) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('div', {
+    staticClass: "but-box"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.daochuUrl
+    }
+  }, [_vm._v("确认")]), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.daochuNum = 1
+      }
+    }
+  }, [_vm._v("上一步")])]) : _vm._e()])]) : _vm._e()], 1)
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "mydate-box"
+  }, [_c('input', {
+    staticClass: "form_datetime",
+    attrs: {
+      "onclick": "myDate.getFocus(this)",
+      "id": "starttime",
+      "readonly": "readonly",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('section', {
+    staticClass: "calendar",
+    attrs: {
+      "id": "starttime-section",
+      "tabindex": "0",
+      "onclick": "myDate.holdBubble()"
+    }
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "mydate-box"
+  }, [_c('input', {
+    staticClass: "form_datetime",
+    attrs: {
+      "onclick": "myDate.getFocus(this)",
+      "id": "endtime",
+      "readonly": "readonly",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('section', {
+    staticClass: "calendar",
+    staticStyle: {
+      "right": "20px"
+    },
+    attrs: {
+      "id": "endtime-section",
+      "tabindex": "0",
+      "onclick": "myDate.holdBubble()"
+    }
+  })])
+}]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-73f14309", esExports)
+  }
+}
+
+/***/ }),
+/* 519 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33546,19 +38416,41 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.chileNum = 1
       }
     }
-  }, [_c('p'), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', {
+  }, [_c('p'), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c('li', {
+    "class": {
+      'current': _vm.chileNum == 2
+    },
+    on: {
+      "click": function($event) {
+        _vm.chileNum = 2
+      }
+    }
+  }, [_c('p'), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c('div', {
     staticClass: "person-content"
   }, [_c('div', {
     staticClass: "title"
-  }, [_vm._v("基本信息")]), _vm._v(" "), (_vm.chileNum == 1) ? _c('person-info') : _vm._e(), _vm._v(" "), (_vm.chileNum == 2) ? _c('person-ability') : _vm._e()], 1)])], 1)], 1)
+  }, [_vm._v("基本信息")]), _vm._v(" "), (_vm.chileNum == 1) ? _c('person-info', {
+    staticClass: "person-content-box"
+  }) : _vm._e(), _vm._v(" "), (_vm.chileNum == 2) ? _c('person-band', {
+    staticClass: "person-content-box"
+  }) : _vm._e(), _vm._v(" "), (_vm.chileNum == 3) ? _c('person-ability', {
+    staticClass: "person-content-box"
+  }) : _vm._e()], 1)])], 1)], 1)
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('img', {
     staticClass: "img",
     attrs: {
-      "src": __webpack_require__(428)
+      "src": __webpack_require__(443)
     }
   }), _c('span', [_vm._v("个人信息")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('img', {
+    staticClass: "img",
+    attrs: {
+      "src": __webpack_require__(442)
+    }
+  }), _c('span', [_vm._v("更改绑定")])])
 }]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -33571,7 +38463,610 @@ if (false) {
 }
 
 /***/ }),
-/* 505 */
+/* 520 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('div', [_vm._v("躯干稳定性和上下肢左右侧力量均衡性参考标准")])]), _vm._v(" "), _c('section', [_c('div', {
+    staticStyle: {
+      "height": "708px !important",
+      "line-height": "30px"
+    }
+  }, [_c('p', [_c('b', [_vm._v(" 一、测试指标：")])]), _vm._v(" "), _c('p', [_vm._v("攀爬时间（秒）、攀爬距离（m）、平均心率、最大心率（实测值）、80%以上最大心率保持时间和总距离。")]), _vm._v(" "), _c('p', [_c('b', [_vm._v("二、得分计算方法：")])]), _vm._v(" "), _c('p', [_vm._v("得分（百分制）=80%以上最大心率保持时间÷（攀爬时间-7）")]), _vm._v(" "), _c('p', [_vm._v("说明：“最大心率”是指使用“220-年龄”推测出的“最大心率”；所有时间单位为“秒”。得分超过100分的按100分计算。")])])])])
+}]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7a2bcffc", esExports)
+  }
+}
+
+/***/ }),
+/* 521 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "body"
+    }
+  }, [_c('header-component'), _vm._v(" "), _c('section', {
+    staticClass: "content"
+  }, [_c('top-menu'), _vm._v(" "), _c('div', {
+    staticClass: "index-content"
+  }, [_c('div', {
+    staticStyle: {
+      "margin-bottom": "20px",
+      "margin-right": "20px",
+      "float": "right"
+    }
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部大项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainId),
+      expression: "trainId"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainId = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部小项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 6 && _vm.trainFirse !== '' && item.SystemId.substr(0, 3) == _vm.zhuanxiangList[_vm.trainFirse].SystemId) ? _c('option', {
+      domProps: {
+        "value": item.Id
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2), _vm._v(" "), (_vm.userType != '分队教练') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sex),
+      expression: "sex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部性别-")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "男"
+    }
+  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "女"
+    }
+  }, [_vm._v("女")])]) : _vm._e(), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sportIndex),
+      expression: "sportIndex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sportIndex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部运动员-")]), _vm._v(" "), _vm._l((_vm.sportList), function(item, index) {
+    return _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.FullName))])
+  })], 2), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.daochu = true
+      }
+    }
+  }, [_vm._v("导出")]), _vm._v(" "), _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.getBodyFatTrend()
+      }
+    }
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "clear": "both"
+    }
+  }), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('section', {
+    staticClass: "body-biao"
+  }, [_c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_vm._v("体成分数据")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    attrs: {
+      "id": "table-header"
+    }
+  }, [_c('table', [_vm._m(3), _vm._v(" "), _c('tbody', _vm._l((_vm.bodyList), function(item, index) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.Testdate))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.TotalMass))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.Muscle))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.Fat))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.BoneMSalt))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.BF))])])
+  }))])])])])])])], 1), _vm._v(" "), (_vm.daochu) ? _c('div', {
+    staticClass: "mask"
+  }, [_c('div', {
+    staticClass: "daochu-mask"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('img', {
+    staticClass: "close-img",
+    attrs: {
+      "src": __webpack_require__(48)
+    },
+    on: {
+      "click": function($event) {
+        _vm.daochu = false
+      }
+    }
+  }), _vm._v(" "), _c('span', [_vm._v("选择导出项")]), _vm._v(" "), (_vm.daochuNum == 1) ? _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.allDaoChu),
+      expression: "allDaoChu"
+    }],
+    staticStyle: {
+      "margin": "17px 6px 0px 20px",
+      "vertical-align": "top"
+    },
+    attrs: {
+      "value": "1",
+      "type": "checkbox",
+      "name": "alldaochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.allDaoChu) ? _vm._i(_vm.allDaoChu, "1") > -1 : (_vm.allDaoChu)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.allDaoChu,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "1",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.allDaoChu = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.allDaoChu = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.allDaoChu = $$c
+        }
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.allDaoChuNext),
+      expression: "allDaoChuNext"
+    }],
+    staticStyle: {
+      "margin": "17px 6px 0px 20px",
+      "vertical-align": "top"
+    },
+    attrs: {
+      "value": "1",
+      "type": "checkbox",
+      "name": "alldaochunext"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.allDaoChuNext) ? _vm._i(_vm.allDaoChuNext, "1") > -1 : (_vm.allDaoChuNext)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.allDaoChuNext,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "1",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.allDaoChuNext = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.allDaoChuNext = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.allDaoChuNext = $$c
+        }
+      }
+    }
+  }) : _vm._e(), _vm._v(" "), _c('span', [_vm._v("全选/全不选")])]), _vm._v(" "), (_vm.daochuNum == 1) ? _c('div', {
+    staticClass: "daochu-table"
+  }, _vm._l((_vm.sportList), function(item) {
+    return _c('div', {
+      staticStyle: {
+        "line-height": "40px",
+        "float": "left",
+        "width": "50%"
+      }
+    }, [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (_vm.userXuanZe),
+        expression: "userXuanZe"
+      }],
+      staticStyle: {
+        "margin-left": "6px"
+      },
+      attrs: {
+        "type": "checkbox",
+        "name": "user"
+      },
+      domProps: {
+        "value": item.UserId,
+        "checked": Array.isArray(_vm.userXuanZe) ? _vm._i(_vm.userXuanZe, item.UserId) > -1 : (_vm.userXuanZe)
+      },
+      on: {
+        "__c": function($event) {
+          var $$a = _vm.userXuanZe,
+            $$el = $event.target,
+            $$c = $$el.checked ? (true) : (false);
+          if (Array.isArray($$a)) {
+            var $$v = item.UserId,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.userXuanZe = $$a.concat([$$v]))
+            } else {
+              $$i > -1 && (_vm.userXuanZe = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+            }
+          } else {
+            _vm.userXuanZe = $$c
+          }
+        }
+      }
+    }), _vm._v(_vm._s(item.FullName))])
+  })) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 1) ? _c('div', {
+    staticClass: "but-box"
+  }, [_c('button', {
+    on: {
+      "click": function($event) {
+        _vm.daochuNum = 2
+      }
+    }
+  }, [_vm._v("下一步")]), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.daochu = false
+      }
+    }
+  }, [_vm._v("取消")])]) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('div', {
+    staticClass: "daochu-table"
+  }, [_c('table', [_c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "TotalMass,总质量",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "TotalMass,总质量") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "TotalMass,总质量",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("总质量")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Muscle,肌肉",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Muscle,肌肉") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Muscle,肌肉",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("肌肉")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "Fat,脂肪",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "Fat,脂肪") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "Fat,脂肪",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("脂肪")]), _vm._v(" "), _c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "BoneMSalt,骨矿物盐",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "BoneMSalt,骨矿物盐") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "BoneMSalt,骨矿物盐",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("骨矿物盐")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.daochuList),
+      expression: "daochuList"
+    }],
+    attrs: {
+      "value": "BF,体脂率",
+      "type": "checkbox",
+      "name": "daochu"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "BF,体脂率") > -1 : (_vm.daochuList)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.daochuList,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = "BF,体脂率",
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
+          } else {
+            $$i > -1 && (_vm.daochuList = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.daochuList = $$c
+        }
+      }
+    }
+  }), _vm._v("体脂率")]), _vm._v(" "), _c('td')])])]) : _vm._e(), _vm._v(" "), (_vm.daochuNum == 2) ? _c('div', {
+    staticClass: "but-box"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.daochuUrl
+    }
+  }, [_vm._v("确认")]), _c('button', {
+    on: {
+      "click": function($event) {
+        _vm.daochuNum = 1
+      }
+    }
+  }, [_vm._v("上一步")])]) : _vm._e()])]) : _vm._e()], 1)
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "mydate-box"
+  }, [_c('input', {
+    staticClass: "form_datetime",
+    attrs: {
+      "onclick": "myDate.getFocus(this)",
+      "id": "starttime",
+      "readonly": "readonly",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('section', {
+    staticClass: "calendar",
+    attrs: {
+      "id": "starttime-section",
+      "tabindex": "0",
+      "onclick": "myDate.holdBubble()"
+    }
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "mydate-box"
+  }, [_c('input', {
+    staticClass: "form_datetime",
+    attrs: {
+      "onclick": "myDate.getFocus(this)",
+      "id": "endtime",
+      "readonly": "readonly",
+      "type": "text"
+    }
+  }), _vm._v(" "), _c('section', {
+    staticClass: "calendar",
+    staticStyle: {
+      "right": "20px"
+    },
+    attrs: {
+      "id": "endtime-section",
+      "tabindex": "0",
+      "onclick": "myDate.holdBubble()"
+    }
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "body-tu"
+  }, [_c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_vm._v("体成分")]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box"
+  }, [_c('div', {
+    staticStyle: {
+      "width": "100%",
+      "height": "100%",
+      "overflow": "hidden"
+    },
+    attrs: {
+      "id": "biao"
+    }
+  })])])])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("时间")]), _vm._v(" "), _c('th', [_vm._v("体重")]), _vm._v(" "), _c('th', [_vm._v("肌肉")]), _vm._v(" "), _c('th', [_vm._v("脂肪")]), _vm._v(" "), _c('th', [_vm._v("骨矿物盐")]), _vm._v(" "), _c('th', [_vm._v("体脂率")])])])
+}]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7d13624b", esExports)
+  }
+}
+
+/***/ }),
+/* 522 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33594,6 +39089,95 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     directives: [{
       name: "model",
       rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部大项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainId),
+      expression: "trainId"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainId = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部小项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 6 && _vm.trainFirse !== '' && item.SystemId.substr(0, 3) == _vm.zhuanxiangList[_vm.trainFirse].SystemId) ? _c('option', {
+      domProps: {
+        "value": item.Id
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2), _vm._v(" "), (_vm.userType != '分队教练') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sex),
+      expression: "sex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部性别-")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "男"
+    }
+  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "女"
+    }
+  }, [_vm._v("女")])]) : _vm._e(), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
       value: (_vm.sportIndex),
       expression: "sportIndex"
     }],
@@ -33609,24 +39193,35 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.sportIndex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.sportList), function(item, index) {
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部运动员-")]), _vm._v(" "), _vm._l((_vm.sportList), function(item, index) {
     return _c('option', {
       domProps: {
         "value": index
       }
     }, [_vm._v(_vm._s(item.FullName))])
-  })), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
+  })], 2), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
     staticClass: "daochu",
     on: {
       "click": function($event) {
         _vm.daochu = true
       }
     }
-  }, [_vm._v("导出")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("导出")]), _vm._v(" "), _c('button', {
+    staticClass: "daochu",
+    on: {
+      "click": function($event) {
+        _vm.getList()
+      }
+    }
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
     staticStyle: {
       "clear": "both"
     }
-  }), _vm._v(" "), _c('section', {
+  }), _vm._v(" "), (_vm.childNum == 1) ? _c('section', {
     staticClass: "ti-cheng-fen",
     style: ({
       'width': (_vm.showPingFen ? '100%' : '60%')
@@ -33636,7 +39231,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "shuaxin": _vm.shuaxin,
       "body-list": _vm.bodyList
     }
-  })], 1), _vm._v(" "), _c('section', {
+  })], 1) : _vm._e(), _vm._v(" "), (_vm.childNum == 2) ? _c('section', {
+    staticClass: "ti-cheng-fen",
+    style: ({
+      'width': (_vm.showPingFen ? '100%' : '60%')
+    })
+  }, [_c('child-component-first', {
+    attrs: {
+      "again-biao": _vm.againBiao,
+      "shuaxin": _vm.shuaxin,
+      "body-list": _vm.bodyList
+    }
+  })], 1) : _vm._e(), _vm._v(" "), _c('section', {
     staticClass: "ping-fen",
     style: ({
       'margin-right': (_vm.showPingFen ? '-40%' : '0%')
@@ -33654,18 +39260,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }), _vm._v(" "), _c('section', {
     staticStyle: {
       "float": "left",
-      "width": "40%"
-    }
-  }, [_c('child-component-first', {
-    attrs: {
-      "again-biao": _vm.againBiao,
-      "shuaxin": _vm.shuaxin,
-      "body-list": _vm.bodyList
-    }
-  })], 1), _vm._v(" "), _c('section', {
-    staticStyle: {
-      "float": "left",
-      "width": "30%"
+      "width": "50%"
     }
   }, [_c('child-component-third', {
     attrs: {
@@ -33676,7 +39271,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })], 1), _vm._v(" "), _c('section', {
     staticStyle: {
       "float": "left",
-      "width": "30%"
+      "width": "50%"
     }
   }, [_c('child-component-second', {
     attrs: {
@@ -33693,7 +39288,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('img', {
     staticClass: "close-img",
     attrs: {
-      "src": __webpack_require__(71)
+      "src": __webpack_require__(48)
     },
     on: {
       "click": function($event) {
@@ -34141,12 +39736,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       expression: "daochuList"
     }],
     attrs: {
-      "value": "TrainIntensity,训练强度",
+      "value": "TrainIntensity,训练负荷",
       "type": "checkbox",
       "name": "daochu"
     },
     domProps: {
-      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "TrainIntensity,训练强度") > -1 : (_vm.daochuList)
+      "checked": Array.isArray(_vm.daochuList) ? _vm._i(_vm.daochuList, "TrainIntensity,训练负荷") > -1 : (_vm.daochuList)
     },
     on: {
       "__c": function($event) {
@@ -34154,7 +39749,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
           $$el = $event.target,
           $$c = $$el.checked ? (true) : (false);
         if (Array.isArray($$a)) {
-          var $$v = "TrainIntensity,训练强度",
+          var $$v = "TrainIntensity,训练负荷",
             $$i = _vm._i($$a, $$v);
           if ($$el.checked) {
             $$i < 0 && (_vm.daochuList = $$a.concat([$$v]))
@@ -34166,7 +39761,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }
       }
     }
-  }), _vm._v("训练强度")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
+  }), _vm._v("训练负荷")])]), _vm._v(" "), _c('tr', [_c('td', [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -34266,7 +39861,92 @@ if (false) {
 }
 
 /***/ }),
-/* 506 */
+/* 523 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('div', [_vm._v("基础体能参考标准")])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    staticStyle: {
+      "height": "708px !important"
+    }
+  }, [_c('table', [_c('tr', [_c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("评分")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "2",
+      "colspan": "2"
+    }
+  }, [_vm._v("BMI")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("坐位体前屈cm")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("30m冲刺s")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "2",
+      "colspan": "2"
+    }
+  }, [_vm._v("垂直纵跳 cm")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("深蹲相对力量")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("卧推相对力量")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "2",
+      "colspan": "2"
+    }
+  }, [_vm._v("引体向上次")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("腹肌耐力s")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "rowspan": "3"
+    }
+  }, [_vm._v("背肌耐力s")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "colspan": "4"
+    }
+  }, [_vm._v("二选一")])]), _vm._v(" "), _c('tr', [_c('th', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("3000m  min's")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("2000m测功仪 min's")])]), _vm._v(" "), _c('tr', [_c('th', [_vm._v("男子")]), _vm._v(" "), _c('th', [_vm._v("女子")]), _vm._v(" "), _c('th', [_vm._v("男子")]), _vm._v(" "), _c('th', [_vm._v("女子")]), _vm._v(" "), _c('th', [_vm._v("男子")]), _vm._v(" "), _c('th', [_vm._v("女子")]), _vm._v(" "), _c('th', [_vm._v("男子")]), _vm._v(" "), _c('th', [_vm._v("女子")]), _vm._v(" "), _c('th', [_vm._v("男子")]), _vm._v(" "), _c('th', [_vm._v("女子")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("10")]), _vm._v(" "), _c('td', [_vm._v("＜18")]), _vm._v(" "), _c('td', [_vm._v("＜20")]), _vm._v(" "), _c('td', [_vm._v("≥40")]), _vm._v(" "), _c('td', [_vm._v("≤4.5")]), _vm._v(" "), _c('td', [_vm._v("≥55")]), _vm._v(" "), _c('td', [_vm._v("≥50")]), _vm._v(" "), _c('td', [_vm._v("＞1.2")]), _vm._v(" "), _c('td', [_vm._v("＞1.2")]), _vm._v(" "), _c('td', [_vm._v("≥40")]), _vm._v(" "), _c('td', [_vm._v("≥35")]), _vm._v(" "), _c('td', [_vm._v("≥120")]), _vm._v(" "), _c('td', [_vm._v("≥120")]), _vm._v(" "), _c('td', [_vm._v("≤11:00")]), _vm._v(" "), _c('td', [_vm._v("≤11:30")]), _vm._v(" "), _c('td', [_vm._v("≤8:00")]), _vm._v(" "), _c('td', [_vm._v("≤9:00")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("9")]), _vm._v(" "), _c('td', [_vm._v("18.0-18.3")]), _vm._v(" "), _c('td', [_vm._v("20.0-20.3")]), _vm._v(" "), _c('td', [_vm._v("39")]), _vm._v(" "), _c('td', [_vm._v("4.6")]), _vm._v(" "), _c('td', [_vm._v("54")]), _vm._v(" "), _c('td', [_vm._v("49")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("39")]), _vm._v(" "), _c('td', [_vm._v("34")]), _vm._v(" "), _c('td', [_vm._v("115-119")]), _vm._v(" "), _c('td', [_vm._v("115-119")]), _vm._v(" "), _c('td', [_vm._v("11:01-11:30")]), _vm._v(" "), _c('td', [_vm._v("11:31-12:00")]), _vm._v(" "), _c('td', [_vm._v("8:01-8:30")]), _vm._v(" "), _c('td', [_vm._v("9:01-9:30")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("8")]), _vm._v(" "), _c('td', [_vm._v("18.4-18.7")]), _vm._v(" "), _c('td', [_vm._v("20.4-20.7")]), _vm._v(" "), _c('td', [_vm._v("38")]), _vm._v(" "), _c('td', [_vm._v("4.7")]), _vm._v(" "), _c('td', [_vm._v("53")]), _vm._v(" "), _c('td', [_vm._v("48")]), _vm._v(" "), _c('td', [_vm._v("1.1")]), _vm._v(" "), _c('td', [_vm._v("1.1")]), _vm._v(" "), _c('td', [_vm._v("38")]), _vm._v(" "), _c('td', [_vm._v("33")]), _vm._v(" "), _c('td', [_vm._v("110-114")]), _vm._v(" "), _c('td', [_vm._v("110-114")]), _vm._v(" "), _c('td', [_vm._v("11:31-12:00")]), _vm._v(" "), _c('td', [_vm._v("12:01-12:30")]), _vm._v(" "), _c('td', [_vm._v("8:31-9:00")]), _vm._v(" "), _c('td', [_vm._v("9:31-10:00")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("7")]), _vm._v(" "), _c('td', [_vm._v("18.8-19.1")]), _vm._v(" "), _c('td', [_vm._v("20.8-21.1")]), _vm._v(" "), _c('td', [_vm._v("37")]), _vm._v(" "), _c('td', [_vm._v("4.8")]), _vm._v(" "), _c('td', [_vm._v("52")]), _vm._v(" "), _c('td', [_vm._v("47")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("37")]), _vm._v(" "), _c('td', [_vm._v("32")]), _vm._v(" "), _c('td', [_vm._v("105-109")]), _vm._v(" "), _c('td', [_vm._v("105-109")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("6")]), _vm._v(" "), _c('td', [_vm._v("19.2-19.5")]), _vm._v(" "), _c('td', [_vm._v("21.2-21.5")]), _vm._v(" "), _c('td', [_vm._v("36")]), _vm._v(" "), _c('td', [_vm._v("4.9")]), _vm._v(" "), _c('td', [_vm._v("51")]), _vm._v(" "), _c('td', [_vm._v("46")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("36")]), _vm._v(" "), _c('td', [_vm._v("31")]), _vm._v(" "), _c('td', [_vm._v("100-104")]), _vm._v(" "), _c('td', [_vm._v("100-104")]), _vm._v(" "), _c('td', [_vm._v("12:01-12:30")]), _vm._v(" "), _c('td', [_vm._v("12:31-13:00")]), _vm._v(" "), _c('td', [_vm._v("9:01-9:30")]), _vm._v(" "), _c('td', [_vm._v("10:01-10:30")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("5")]), _vm._v(" "), _c('td', [_vm._v("19.6-19.9")]), _vm._v(" "), _c('td', [_vm._v("21.6-21.9")]), _vm._v(" "), _c('td', [_vm._v("35")]), _vm._v(" "), _c('td', [_vm._v("5.0")]), _vm._v(" "), _c('td', [_vm._v("50")]), _vm._v(" "), _c('td', [_vm._v("45")]), _vm._v(" "), _c('td', [_vm._v("1.0")]), _vm._v(" "), _c('td', [_vm._v("1.0")]), _vm._v(" "), _c('td', [_vm._v("35")]), _vm._v(" "), _c('td', [_vm._v("30")]), _vm._v(" "), _c('td', [_vm._v("90-99")]), _vm._v(" "), _c('td', [_vm._v("90-99")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("4")]), _vm._v(" "), _c('td', [_vm._v("20.0-20.3")]), _vm._v(" "), _c('td', [_vm._v("22.0-22.3")]), _vm._v(" "), _c('td', [_vm._v("34")]), _vm._v(" "), _c('td', [_vm._v("5.1")]), _vm._v(" "), _c('td', [_vm._v("47-49")]), _vm._v(" "), _c('td', [_vm._v("42-44")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("31-34")]), _vm._v(" "), _c('td', [_vm._v("26-29")]), _vm._v(" "), _c('td', [_vm._v("80-89")]), _vm._v(" "), _c('td', [_vm._v("80-89")]), _vm._v(" "), _c('td', [_vm._v("12:31-13:00")]), _vm._v(" "), _c('td', [_vm._v("13:01-13:30")]), _vm._v(" "), _c('td', [_vm._v("9:31-10:00")]), _vm._v(" "), _c('td', [_vm._v("10:31-11:00")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("3")]), _vm._v(" "), _c('td', [_vm._v("20.4-20.7")]), _vm._v(" "), _c('td', [_vm._v("22.4-22.7")]), _vm._v(" "), _c('td', [_vm._v("31-33")]), _vm._v(" "), _c('td', [_vm._v("5.2")]), _vm._v(" "), _c('td', [_vm._v("43-46")]), _vm._v(" "), _c('td', [_vm._v("38-41")]), _vm._v(" "), _c('td', [_vm._v("0.9")]), _vm._v(" "), _c('td', [_vm._v("0.9")]), _vm._v(" "), _c('td', [_vm._v("27-30")]), _vm._v(" "), _c('td', [_vm._v("22-25")]), _vm._v(" "), _c('td', [_vm._v("70-79")]), _vm._v(" "), _c('td', [_vm._v("70-79")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("-")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("2")]), _vm._v(" "), _c('td', [_vm._v("20.8-21.1")]), _vm._v(" "), _c('td', [_vm._v("22.8-23.1")]), _vm._v(" "), _c('td', [_vm._v("28-30")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("39-42")]), _vm._v(" "), _c('td', [_vm._v("34-37")]), _vm._v(" "), _c('td', [_vm._v("0.8")]), _vm._v(" "), _c('td', [_vm._v("0.8")]), _vm._v(" "), _c('td', [_vm._v("23-26")]), _vm._v(" "), _c('td', [_vm._v("18-21")]), _vm._v(" "), _c('td', [_vm._v("60-69")]), _vm._v(" "), _c('td', [_vm._v("60-69")]), _vm._v(" "), _c('td', [_vm._v("13:01-13:30")]), _vm._v(" "), _c('td', [_vm._v("13:31-14:00")]), _vm._v(" "), _c('td', [_vm._v("10:01-10:30")]), _vm._v(" "), _c('td', [_vm._v("11:01-11:30")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("1")]), _vm._v(" "), _c('td', [_vm._v("21.2-22.0")]), _vm._v(" "), _c('td', [_vm._v("23.2-24.0")]), _vm._v(" "), _c('td', [_vm._v("25-27")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("35-38")]), _vm._v(" "), _c('td', [_vm._v("30-33")]), _vm._v(" "), _c('td', [_vm._v("0.7")]), _vm._v(" "), _c('td', [_vm._v("0.7")]), _vm._v(" "), _c('td', [_vm._v("18-22")]), _vm._v(" "), _c('td', [_vm._v("13-17")]), _vm._v(" "), _c('td', [_vm._v("30-59")]), _vm._v(" "), _c('td', [_vm._v("30-59")]), _vm._v(" "), _c('td', [_vm._v("13:31-14:00")]), _vm._v(" "), _c('td', [_vm._v("14:01-14:30")]), _vm._v(" "), _c('td', [_vm._v("10:31-11:00")]), _vm._v(" "), _c('td', [_vm._v("11:31-12:00")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("0")]), _vm._v(" "), _c('td', [_vm._v("＞22")]), _vm._v(" "), _c('td', [_vm._v("＞24")]), _vm._v(" "), _c('td', [_vm._v("＜25")]), _vm._v(" "), _c('td', [_vm._v("＞5.2")]), _vm._v(" "), _c('td', [_vm._v("＜35")]), _vm._v(" "), _c('td', [_vm._v("＜30")]), _vm._v(" "), _c('td', [_vm._v("≤0.6")]), _vm._v(" "), _c('td', [_vm._v("≤0.6")]), _vm._v(" "), _c('td', [_vm._v("＜18")]), _vm._v(" "), _c('td', [_vm._v("＜13")]), _vm._v(" "), _c('td', [_vm._v("＜30")]), _vm._v(" "), _c('td', [_vm._v("＜30")]), _vm._v(" "), _c('td', [_vm._v("＞14:00")]), _vm._v(" "), _c('td', [_vm._v("＞14:30")]), _vm._v(" "), _c('td', [_vm._v("＞11:00")]), _vm._v(" "), _c('td', [_vm._v("＞12:00")])])])])])])
+}]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-83f23358", esExports)
+  }
+}
+
+/***/ }),
+/* 524 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34285,7 +39965,96 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "margin-right": "20px",
       "float": "right"
     }
-  }, [(_vm.userType == '教练') ? _c('select', {
+  }, [(_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainFirse),
+      expression: "trainFirse"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainFirse = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部大项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 3) ? _c('option', {
+      domProps: {
+        "value": index
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.trainId),
+      expression: "trainId"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.trainId = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部小项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
+    return (item.SystemId.length == 6 && _vm.trainFirse !== '' && item.SystemId.substr(0, 3) == _vm.zhuanxiangList[_vm.trainFirse].SystemId) ? _c('option', {
+      domProps: {
+        "value": item.Id
+      }
+    }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
+  })], 2) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员' && _vm.userType != '分队教练') ? _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.sex),
+      expression: "sex"
+    }],
+    staticClass: "sport-list",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部性别-")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "男"
+    }
+  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "女"
+    }
+  }, [_vm._v("女")])]) : _vm._e(), _vm._v(" "), (_vm.userType != '运动员') ? _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -34304,13 +40073,17 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.sportIndex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, _vm._l((_vm.sportList), function(item, index) {
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("-全部运动员-")]), _vm._v(" "), _vm._l((_vm.sportList), function(item, index) {
     return _c('option', {
       domProps: {
         "value": index
       }
     }, [_vm._v(_vm._s(item.FullName))])
-  })) : _vm._e(), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), (_vm.userType == '教练') ? _c('button', {
+  })], 2) : _vm._e(), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('span', [_vm._v("-")]), _vm._v(" "), _vm._m(1), _vm._v(" "), (_vm.userType == '教练') ? _c('button', {
     staticClass: "daochu",
     on: {
       "click": function($event) {
@@ -34343,7 +40116,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('img', {
     staticClass: "close-img",
     attrs: {
-      "src": __webpack_require__(71)
+      "src": __webpack_require__(48)
     },
     on: {
       "click": function($event) {
@@ -34739,7 +40512,7 @@ if (false) {
 }
 
 /***/ }),
-/* 507 */
+/* 525 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34766,7 +40539,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }), _vm._v(" "), _c('img', {
     staticClass: "right",
     attrs: {
-      "src": __webpack_require__(56)
+      "src": __webpack_require__(57)
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "injury-menu-text"
@@ -34827,7 +40600,7 @@ if (false) {
 }
 
 /***/ }),
-/* 508 */
+/* 526 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34848,7 +40621,7 @@ if (false) {
 }
 
 /***/ }),
-/* 509 */
+/* 527 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34868,7 +40641,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }) : _c('img', {
     attrs: {
-      "src": __webpack_require__(46)
+      "src": __webpack_require__(53)
     }
   }), _vm._v(" "), _c('input', {
     attrs: {
@@ -34881,7 +40654,27 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "item"
   }, [_c('label', [_vm._v("姓名：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.user.FullName) + " ")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.user.FullName) + " ")])]), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("籍贯：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.user.NativePlace) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("民族：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.user.Nation) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("血型：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.user.BloodType) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("身高：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.user.Height) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+    staticClass: "item"
+  }, [_c('label', [_vm._v("体重：")]), _vm._v(" "), _c('div', {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.user.Weight) + " ")])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('label', [_vm._v("性别：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
@@ -34889,7 +40682,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "item"
   }, [_c('label', [_vm._v("出生年月：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.user.Birthday) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.user.Birthday) + " ")])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('label', [_vm._v("运动等级：")]), _vm._v(" "), (_vm.user.SportGrade === '') ? _c('div', {
     staticClass: "text"
@@ -34905,533 +40698,25 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "text"
   }, [_vm._v("三级运动员")]) : _vm._e(), _vm._v(" "), (_vm.user.SportGrade == 5) ? _c('div', {
     staticClass: "text"
-  }, [_vm._v("其他")]) : _vm._e()]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+  }, [_vm._v("其他")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('label', [_vm._v("运动项目：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.user.TrainName) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.user.TrainName) + " ")])]), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
     staticClass: "item"
   }, [_c('label', [_vm._v("教练：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.user.DepartmentName) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.user.CoachId) + " ")])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('label', [_vm._v("参与训练时间：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.user.Start4Training) + " ")])]) : _vm._e(), _vm._v(" "), (_vm.userType == '运动员') ? _c('div', {
+  }, [_vm._v(_vm._s(_vm.user.Start4Training) + " ")])]), _vm._v(" "), _c('div', {
     staticClass: "item"
   }, [_c('label', [_vm._v("运动年限：")]), _vm._v(" "), _c('div', {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.nianxian) + " ")])]) : _vm._e()]) : _c('div', {
-    staticClass: "person-info-content"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "item"
-  }, [_c('label', [_vm._v("姓名：")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.user.FullName),
-      expression: "user.FullName"
-    }],
-    attrs: {
-      "type": "text"
-    },
-    domProps: {
-      "value": (_vm.user.FullName)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.user.FullName = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), (_vm.isUserName) ? _c('div', {
-    staticStyle: {
-      "color": "#FF4000",
-      "margin": "-9px auto 8px 120px"
-    }
-  }, [_vm._v(_vm._s(_vm.isUserName))]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "item"
-  }, [_c('label', [_vm._v("性别：")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.user.Sex),
-      expression: "user.Sex"
-    }],
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.user.Sex = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": "男"
-    }
-  }, [_vm._v("男")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "女"
-    }
-  }, [_vm._v("女")])])])]), _vm._v(" "), _c('div', {
-    staticClass: "item"
-  }, [_c('label', [_vm._v("生日：")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.year),
-      expression: "year"
-    }],
-    staticStyle: {
-      "float": "left",
-      "width": "90px"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.year = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((81), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i + 1949
-      }
-    }, [_vm._v(_vm._s(i + 1949))])
-  })), _vm._v(" "), _c('span', {
-    staticStyle: {
-      "float": "left",
-      "width": "26px",
-      "text-align": "center"
-    }
-  }, [_vm._v("年")]), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.month),
-      expression: "month"
-    }],
-    staticStyle: {
-      "float": "left",
-      "width": "90px"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.month = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((12), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i
-      }
-    }, [_vm._v(_vm._s(i))])
-  })), _vm._v(" "), _c('span', {
-    staticStyle: {
-      "float": "left",
-      "width": "26px",
-      "text-align": "center"
-    }
-  }, [_vm._v("月")]), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.day),
-      expression: "day"
-    }],
-    staticStyle: {
-      "float": "left",
-      "width": "90px"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.day = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.dayLength), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i
-      }
-    }, [_vm._v(_vm._s(i))])
-  })), _vm._v(" "), _c('span', {
-    staticStyle: {
-      "display": "inline-block",
-      "width": "26px",
-      "text-align": "center"
-    }
-  }, [_vm._v("日")])])]), _vm._v(" "), _c('div', {
-    staticClass: "item"
-  }, [_c('label', [_vm._v("运动等级：")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.user.SportGrade),
-      expression: "user.SportGrade"
-    }],
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.user.SportGrade = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": ""
-    }
-  }, [_vm._v("-等级-")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "0"
-    }
-  }, [_vm._v("国际级运动健将")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "1"
-    }
-  }, [_vm._v("运动健将")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "2"
-    }
-  }, [_vm._v("一级运动员")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "3"
-    }
-  }, [_vm._v("二级运动员")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "4"
-    }
-  }, [_vm._v("三级运动员")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "5"
-    }
-  }, [_vm._v("其他")])])])]), _vm._v(" "), _vm._l((_vm.trainChild), function(tCListItem, tCListIndex) {
-    return _c('div', {
-      staticClass: "item",
-      style: ({
-        'margin-top': tCListIndex == 0 ? '0px' : '-10px'
-      })
-    }, [(tCListIndex == 0) ? _c('label', [_vm._v("运动项目：")]) : _vm._e(), _vm._v(" "), _c('div', {
-      staticClass: "text"
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainFirse[tCListIndex]),
-        expression: "trainFirse[tCListIndex]"
-      }],
-      staticStyle: {
-        "float": "left",
-        "width": "170px",
-        "margin-right": "10px"
-      },
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.trainFirse, tCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.trainChild[tCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
-      domProps: {
-        "value": ''
-      }
-    }, [_vm._v("-运动项目-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangList), function(item, index) {
-      return _c('option', {
-        domProps: {
-          "value": item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))])
-    })], 2), _vm._v(" "), _c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.trainChild[tCListIndex]),
-        expression: "trainChild[tCListIndex]"
-      }],
-      staticStyle: {
-        "display": "inline-block",
-        "width": "170px"
-      },
-      on: {
-        "change": function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.trainChild, tCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-专项-")]), _vm._v(" "), _vm._l((_vm.zhuanxiangChileList), function(item, index) {
-      return (item.SystemId.substr(0, 3) == _vm.trainFirse[tCListIndex]) ? _c('option', {
-        domProps: {
-          "value": item.Id
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2)]), _vm._v(" "), (_vm.trainChild[tCListIndex]) ? _c('img', {
-      staticClass: "cuo",
-      attrs: {
-        "src": __webpack_require__(52)
-      },
-      on: {
-        "click": function($event) {
-          _vm.closeZhuanXiang(tCListIndex)
-        }
-      }
-    }) : _vm._e()])
-  }), _vm._v(" "), (_vm.isT) ? _c('div', {
-    staticStyle: {
-      "color": "#FF4000",
-      "margin": "-9px auto 8px 120px"
-    }
-  }, [_vm._v(_vm._s(_vm.isT))]) : _vm._e(), _vm._v(" "), _vm._l((_vm.departmentChild), function(dCListItem, dCListIndex) {
-    return _c('div', {
-      staticClass: "item",
-      style: ({
-        'margin-top': dCListIndex == 0 ? '0px' : '-10px'
-      })
-    }, [(dCListIndex == 0) ? _c('label', [_vm._v("所属教练：")]) : _vm._e(), _vm._v(" "), _c('div', {
-      staticClass: "text"
-    }, [_c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.departmentFirse[dCListIndex]),
-        expression: "departmentFirse[dCListIndex]"
-      }],
-      staticStyle: {
-        "float": "left",
-        "width": "110px",
-        "margin-right": "10px"
-      },
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.departmentFirse, dCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.departmentChild[dCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-专项-")]), _vm._v(" "), _vm._l((_vm.departmentList), function(item, index) {
-      return (item.SystemId.length == 3) ? _c('option', {
-        domProps: {
-          "value": item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2), _vm._v(" "), _c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.departmentSecond[dCListIndex]),
-        expression: "departmentSecond[dCListIndex]"
-      }],
-      staticStyle: {
-        "float": "left",
-        "width": "110px",
-        "margin-right": "10px"
-      },
-      on: {
-        "change": [function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.departmentSecond, dCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }, function($event) {
-          _vm.departmentChild[dCListIndex] = ''
-        }]
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-教练组-")]), _vm._v(" "), _vm._l((_vm.departmentList), function(item, index) {
-      return (item.SystemId.length == 6 && item.SystemId.substr(0, 3) == _vm.departmentFirse[dCListIndex]) ? _c('option', {
-        domProps: {
-          "value": item.SystemId
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2), _vm._v(" "), _c('select', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (_vm.departmentChild[dCListIndex]),
-        expression: "departmentChild[dCListIndex]"
-      }],
-      staticStyle: {
-        "display": "inline-block",
-        "width": "110px"
-      },
-      on: {
-        "change": function($event) {
-          var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-            return o.selected
-          }).map(function(o) {
-            var val = "_value" in o ? o._value : o.value;
-            return val
-          });
-          _vm.$set(_vm.departmentChild, dCListIndex, $event.target.multiple ? $$selectedVal : $$selectedVal[0])
-        }
-      }
-    }, [_c('option', {
-      attrs: {
-        "value": ""
-      }
-    }, [_vm._v("-教练员-")]), _vm._v(" "), _vm._l((_vm.departmentList), function(item, index) {
-      return (item.SystemId.length == 9 && item.SystemId.substr(0, 6) == _vm.departmentSecond[dCListIndex]) ? _c('option', {
-        domProps: {
-          "value": item.Id
-        }
-      }, [_vm._v(_vm._s(item.Name))]) : _vm._e()
-    })], 2)]), _vm._v(" "), (_vm.departmentChild[dCListIndex]) ? _c('img', {
-      staticClass: "cuo",
-      attrs: {
-        "src": __webpack_require__(52)
-      },
-      on: {
-        "click": function($event) {
-          _vm.closeJiaoLian(dCListIndex)
-        }
-      }
-    }) : _vm._e()])
-  }), _vm._v(" "), (_vm.isD) ? _c('div', {
-    staticStyle: {
-      "color": "#FF4000",
-      "margin": "-9px auto 8px 120px"
-    }
-  }, [_vm._v(_vm._s(_vm.isD))]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "item"
-  }, [_c('label', [_vm._v("专训开始时间：")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.user.Start4Training),
-      expression: "user.Start4Training"
-    }],
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.user.Start4Training = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": ""
-    }
-  }, [_vm._v("-开始时间-")]), _vm._v(" "), _vm._l((81), function(i) {
-    return _c('option', {
-      domProps: {
-        "value": i + 1949
-      }
-    }, [_vm._v(_vm._s(i + 1949))])
-  })], 2)])])], 2), _vm._v(" "), (_vm.zhuangtai && _vm.userType == '运动员') ? _c('div', {
-    staticStyle: {
-      "text-align": "center"
-    }
-  }, [_c('button', {
-    staticClass: "person-but1",
-    staticStyle: {
-      "margin": "0px"
-    },
-    on: {
-      "click": function($event) {
-        _vm.zhuangtai = false
-      }
-    }
-  }, [_vm._v("编辑")])]) : _vm._e(), _vm._v(" "), (!_vm.zhuangtai) ? _c('div', {
-    staticStyle: {
-      "text-align": "center",
-      "margin-bottom": "50px"
-    }
-  }, [_c('button', {
-    staticClass: "person-but1",
-    on: {
-      "click": function($event) {
-        _vm.save()
-      }
-    }
-  }, [_vm._v("保存")]), _vm._v(" "), _c('button', {
-    staticClass: "person-but2",
-    on: {
-      "click": function($event) {
-        _vm.zhuangtai = true
-      }
-    }
-  }, [_vm._v("取消")])]) : _vm._e()])
+  }, [_vm._v(_vm._s(_vm.nianxian) + " ")])])]) : _vm._e()])
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "item"
-  }, [_c('label', [_vm._v("头像：")]), _vm._v(" "), _c('div', {
-    staticClass: "text"
-  }, [_c('img', {
-    attrs: {
-      "src": __webpack_require__(46)
-    }
-  })])])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -35443,19 +40728,47 @@ if (false) {
 }
 
 /***/ }),
-/* 510 */
+/* 528 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "body-item"
   }, [_c('div', {
     staticClass: "title"
-  }, [_c('div', [_vm._v("主观评价统计")])]), _vm._v(" "), _c('section', [_c('div', {
+  }, [_c('ul', {
+    staticClass: "title-tab"
+  }, [_c('li', {
+    staticClass: "item",
+    on: {
+      "click": function($event) {
+        _vm.setChildNum(1)
+      }
+    }
+  }, [_vm._v("数据表")]), _vm._v(" "), _c('li', {
+    staticClass: "item current"
+  }, [_vm._v("折线图")])]), _vm._v(" "), _c('div', [_vm._v("主观评价统计")])]), _vm._v(" "), _c('section', [_c('div', {
+    staticStyle: {
+      "margin": "0px 10px 20px 10px",
+      "float": "right",
+      "color": "#ba2538",
+      "cursor": "pointer",
+      "line-height": "20px"
+    },
+    on: {
+      "click": function($event) {
+        _vm.showPingFen()
+      }
+    }
+  }, [_vm._v("评分标准")]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "clear": "both"
+    }
+  }), _vm._v(" "), _vm._m(0)])])
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "table-box"
   }, [_c('div', {
     staticStyle: {
@@ -35466,7 +40779,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     attrs: {
       "id": "biao-count"
     }
-  })])])])
+  })])
 }]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -35479,7 +40792,7 @@ if (false) {
 }
 
 /***/ }),
-/* 511 */
+/* 529 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35508,12 +40821,12 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }, [_c('img', {
       staticClass: "portrait",
       attrs: {
-        "src": __webpack_require__(46)
+        "src": __webpack_require__(53)
       }
     }), _vm._v(" "), (_vm.sportIndex == index) ? _c('img', {
       staticClass: "right",
       attrs: {
-        "src": __webpack_require__(56)
+        "src": __webpack_require__(57)
       }
     }) : _vm._e(), _vm._v(" "), _c('div', {
       staticClass: "injury-menu-text"
@@ -35540,7 +40853,7 @@ if (false) {
 }
 
 /***/ }),
-/* 512 */
+/* 530 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35552,7 +40865,105 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticClass: "body-item"
   }, [_c('div', {
     staticClass: "title"
-  }, [_c('div', [_vm._v("训练强度")])]), _vm._v(" "), _c('section', [_c('div', {
+  }, [_c('div', [_vm._v("躯干稳定性和上下肢左右侧力量均衡性参考标准")])]), _vm._v(" "), _c('section', [_c('div', {
+    staticClass: "table-box",
+    staticStyle: {
+      "height": "708px !important"
+    }
+  }, [_c('table', [_c('tr', [_c('th', [_vm._v("评分")]), _vm._v(" "), _c('th', [_vm._v("左45°s")]), _vm._v(" "), _c('th', [_vm._v("右45°s")]), _vm._v(" "), _c('th', [_vm._v("左135°s")]), _vm._v(" "), _c('th', [_vm._v("右135°s")]), _vm._v(" "), _c('th', [_vm._v("左90°s")]), _vm._v(" "), _c('th', [_vm._v("右90°s")]), _vm._v(" "), _c('th', [_vm._v("0°s")]), _vm._v(" "), _c('th', [_vm._v("180°s")]), _vm._v(" "), _c('th', [_vm._v("评分")]), _vm._v(" "), _c('th', [_vm._v("上肢比值%")]), _vm._v(" "), _c('th', [_vm._v("下肢比值%")]), _vm._v(" "), _c('th', [_vm._v("评分")]), _vm._v(" "), _c('th', [_vm._v("男子上肢w/kg")]), _vm._v(" "), _c('th', [_vm._v("男子下肢w/kg")]), _vm._v(" "), _c('th', [_vm._v("女子上肢w/kg")]), _vm._v(" "), _c('th', [_vm._v("女子下肢w/kg")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("10")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("≥120")]), _vm._v(" "), _c('td', [_vm._v("5")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("＜1")]), _vm._v(" "), _c('td', [_vm._v("5")]), _vm._v(" "), _c('td', [_vm._v("≥6")]), _vm._v(" "), _c('td', [_vm._v("≥17")]), _vm._v(" "), _c('td', [_vm._v("≥4")]), _vm._v(" "), _c('td', [_vm._v("≥13")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("9")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("115-119")]), _vm._v(" "), _c('td', [_vm._v("4")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("1-3.1")]), _vm._v(" "), _c('td', [_vm._v("4")]), _vm._v(" "), _c('td', [_vm._v("5.7-5.9")]), _vm._v(" "), _c('td', [_vm._v("16.0-16.9")]), _vm._v(" "), _c('td', [_vm._v("3.5-3.9")]), _vm._v(" "), _c('td', [_vm._v("12.0-12.9")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("8")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("110-114")]), _vm._v(" "), _c('td', [_vm._v("3")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("3.2-5.4")]), _vm._v(" "), _c('td', [_vm._v("3")]), _vm._v(" "), _c('td', [_vm._v("5.4-5.6")]), _vm._v(" "), _c('td', [_vm._v("15.0-15.9")]), _vm._v(" "), _c('td', [_vm._v("3.0-3.4")]), _vm._v(" "), _c('td', [_vm._v("11.0-11.9")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("7")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("105-109")]), _vm._v(" "), _c('td', [_vm._v("2")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("5.5-7.7")]), _vm._v(" "), _c('td', [_vm._v("2")]), _vm._v(" "), _c('td', [_vm._v("5.1-5.3")]), _vm._v(" "), _c('td', [_vm._v("14.0-14.9")]), _vm._v(" "), _c('td', [_vm._v("2.5-2.9")]), _vm._v(" "), _c('td', [_vm._v("10.0-10.9")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("6")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("100-104")]), _vm._v(" "), _c('td', [_vm._v("1")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("7.8-10")]), _vm._v(" "), _c('td', [_vm._v("1")]), _vm._v(" "), _c('td', [_vm._v("4.2-5.0")]), _vm._v(" "), _c('td', [_vm._v("12.0-13.9")]), _vm._v(" "), _c('td', [_vm._v("1.5-2.4")]), _vm._v(" "), _c('td', [_vm._v("8.0-9.9")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("5")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("90-99")]), _vm._v(" "), _c('td', [_vm._v("0")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("＞10")]), _vm._v(" "), _c('td', [_vm._v("0")]), _vm._v(" "), _c('td', [_vm._v("＜4.2")]), _vm._v(" "), _c('td', [_vm._v("＜12")]), _vm._v(" "), _c('td', [_vm._v("＜1.5")]), _vm._v(" "), _c('td', [_vm._v("＜8")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("4")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("80-89")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("3")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("70-79")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("2")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("60-69")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("1")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("--")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("0")]), _vm._v(" "), _c('td', {
+    attrs: {
+      "colspan": "8"
+    }
+  }, [_vm._v("＜60")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td')])])])])])
+}]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-c3b3dd5e", esExports)
+  }
+}
+
+/***/ }),
+/* 531 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "body-item"
+  }, [_c('div', {
+    staticClass: "title"
+  }, [_c('div', [_vm._v("训练负荷")])]), _vm._v(" "), _c('section', [_c('div', {
     staticClass: "table-box"
   }, [_c('div', {
     staticStyle: {
@@ -35576,7 +40987,7 @@ if (false) {
 }
 
 /***/ }),
-/* 513 */
+/* 532 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35599,7 +41010,7 @@ if (false) {
 }
 
 /***/ }),
-/* 514 */
+/* 533 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35627,7 +41038,7 @@ if (false) {
 }
 
 /***/ }),
-/* 515 */
+/* 534 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35655,7 +41066,7 @@ if (false) {
 }
 
 /***/ }),
-/* 516 */
+/* 535 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35678,7 +41089,7 @@ if (false) {
 }
 
 /***/ }),
-/* 517 */
+/* 536 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35720,7 +41131,7 @@ if (false) {
 }
 
 /***/ }),
-/* 518 */
+/* 537 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38231,20 +43642,20 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["default"] = (VueRouter);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(137)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(140)))
 
 /***/ }),
-/* 519 */
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(406);
+var content = __webpack_require__(422);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("ae125dda", content, false);
+var update = __webpack_require__(36)("ae125dda", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38260,17 +43671,17 @@ if(false) {
 }
 
 /***/ }),
-/* 520 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(407);
+var content = __webpack_require__(423);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("7d8772d7", content, false);
+var update = __webpack_require__(36)("7d8772d7", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38286,17 +43697,43 @@ if(false) {
 }
 
 /***/ }),
-/* 521 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(408);
+var content = __webpack_require__(424);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("a605999a", content, false);
+var update = __webpack_require__(36)("77833882", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js?sourceMap!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3b723a0e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./person-band.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js?sourceMap!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3b723a0e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./person-band.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 541 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(425);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(36)("a605999a", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38312,17 +43749,17 @@ if(false) {
 }
 
 /***/ }),
-/* 522 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(409);
+var content = __webpack_require__(426);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("378e5d90", content, false);
+var update = __webpack_require__(36)("378e5d90", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38338,17 +43775,17 @@ if(false) {
 }
 
 /***/ }),
-/* 523 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(410);
+var content = __webpack_require__(427);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("458392c9", content, false);
+var update = __webpack_require__(36)("458392c9", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38364,17 +43801,17 @@ if(false) {
 }
 
 /***/ }),
-/* 524 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(411);
+var content = __webpack_require__(428);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("1c33c0f2", content, false);
+var update = __webpack_require__(36)("1c33c0f2", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38390,17 +43827,17 @@ if(false) {
 }
 
 /***/ }),
-/* 525 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(412);
+var content = __webpack_require__(429);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(47)("dc571696", content, false);
+var update = __webpack_require__(36)("dc571696", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -38416,7 +43853,7 @@ if(false) {
 }
 
 /***/ }),
-/* 526 */
+/* 546 */
 /***/ (function(module, exports) {
 
 /**
@@ -38449,10 +43886,10 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 527 */
+/* 547 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
-],[203]);
+],[219]);

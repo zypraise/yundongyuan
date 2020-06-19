@@ -38,8 +38,8 @@
 				<img v-else src="../assets/imgs/menu-7.png" />
 				<div class="text" :style="{'color':(menu == 7?'#ba2538':'#545454')}">主观评价</div>
 			</div>
-			<div class="top-menu-item" v-on:click="goUrl('/phyConstituents')">
-				<img v-if="menu == 3" src="../assets/imgs/menu-current-3.png" />
+			<div class="top-menu-item" v-on:click="goUrl('/allConstituents')">
+				<img v-if="menu == 12" src="../assets/imgs/menu-current-3.png" />
 				<img v-else src="../assets/imgs/menu-3.png" />
 				<div class="text" :style="{'color':(menu == 3?'#ba2538':'#545454')}">生理生化</div>
 			</div>
@@ -48,8 +48,8 @@
 				<img v-else src="../assets/imgs/menu-2.png" />
 				<div class="text" :style="{'color':(menu == 8?'#ba2538':'#545454')}">体能测试</div>
 			</div>
-			<div class="top-menu-item" v-on:click="goUrl('/bodyComposition')">
-				<img v-if="menu == 4" src="../assets/imgs/menu-current-4.png" />
+			<div class="top-menu-item" v-on:click="goUrl('/allComposition')">
+				<img v-if="menu == 11" src="../assets/imgs/menu-current-4.png" />
 				<img v-else src="../assets/imgs/menu-4.png" />
 				<div class="text" :style="{'color':(menu == 4?'#ba2538':'#545454')}">体重/体成分</div>
 			</div>
@@ -107,9 +107,16 @@
 						//体成分
 						_d = 4;
 						break;
+					case '/allComposition':
+						//体成分
+						_d = 11;
 					case '/phyConstituents':
 						//体成分
 						_d = 3;
+						break;
+					case '/allConstituents':
+						//体成分
+						_d = 12;
 						break;
 					case '/stamina':
 						//体成分

@@ -18,8 +18,8 @@
     			</div>
     			<ul v-if="isMenu" class="header-menu">
     				<li class="jiao"></li>
-    				<li class="item" v-on:click="goUrl('/person')"><span>个人中心</span></li>
-    				<hr />
+    				<li class="item" v-if="userType != '系统管理员'" v-on:click="goUrl('/person')"><span>个人中心</span></li>
+    				<hr v-if="userType != '系统管理员'" />
     				<li class="item" v-on:click="logout()"><span>注销</span></li>
     			</ul>
     		</div>

@@ -132,11 +132,13 @@
 				userType: '',
 				
 				sex: '',
+				trainId: '', //小项
+				trainFirse: '', //专项父级
 				zhuanxiangList: [], //项目列表
 				
 				
 				sportList: [],
-				sportIndex: 0
+				sportIndex: ''
 			}
 		},
 		//公共模板
@@ -217,30 +219,87 @@
 			},
 			//查询生理生化
 			getPhyConstituents: function() {
-				// var userId = '';
-				// if(vm.userType == '教练') {
-				// 	userId = vm.sportList[vm.sportIndex].UserId;
-				// }
-				// vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest', {
-				// 	params: {
-				// 		sportuserid: userId,
-				// 		starttime: document.getElementById('starttime').value,
-				// 		endtime: document.getElementById('endtime').value,
-				// 		pagesize: 999,
-				// 		pageindex: 1
-				// 	}
-				// }).then(function(result) {
-				// 	if(result.body.StateCode == 0) {
-				// 		vm.phyConstituentsList = result.body.Data;
-				// 		vm.againBiao = !vm.againBiao;
-				// 	} else {
-				// 		vm.$router.push({
-				// 			path: '/login'
-				// 		});
-				// 	}
-				// }).catch(function(error) {
-				// 	console.log(error);
-				// });
+				var userId = '';
+				if(vm.userType == '教练') {
+					userId = vm.sportList[vm.sportIndex].UserId;
+				}
+				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest', {
+					params: {
+						sportuserid: userId,
+						starttime: document.getElementById('starttime').value,
+						endtime: document.getElementById('endtime').value,
+						pagesize: 999,
+						pageindex: 1
+					}
+				}).then(function(result) {
+					if(result.body.StateCode == 0) {
+						vm.phyConstituentsList = result.body.Data;
+						vm.againBiao = !vm.againBiao;
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
+					}
+				}).catch(function(error) {
+					console.log(error);
+				});
+			},
+			//获取训练专项
+			GetAllTrain: function() {
+				return new Promise(function(resolve, reject) {
+					vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+							params: {
+								userName: ''
+							}
+						}).then(function(result) {
+							if (result.body.StateCode == 0) {
+								vm.zhuanxiangList = result.body.Data;
+								vm.$nextTick(function() {
+									var _id = JSON.parse(window.localStorage.getItem('user')).TrainId;
+									for (var i = 0; i < vm.zhuanxiangList.length; i++) {
+										if (vm.zhuanxiangList[i].Id == _id) {
+			
+											vm.trainFirse = i;
+											break;
+										}
+									}
+								})
+							}
+							resolve()
+						})
+						.catch(function(error) {
+							console.log(error);
+							reject()
+						});
+				});
+			
+			},
+			//获取远动员列表
+			getSport: function() {
+				return new Promise(function(resolve, reject) {
+					vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + vm.trainId + '&sex=' + vm.sex, {})
+						.then(function(
+							result) {
+
+							if (result.body.StateCode == 0) {
+								vm.sportList = result.body.Data;
+								for (var i = 0; i < result.body.Data.length; i++) {
+									vm.userXuanZe.push(result.body.Data[i].UserId);
+								}
+								// if (result.body.Data && result.body.Data.length > 0) {
+								// 	vm.sportIndex = 0;
+								// }
+							} else {
+								vm.$router.push({
+									path: '/login'
+								});
+							}
+							resolve();
+
+						}).catch(function(error) {
+							console.log(error);
+						});
+				});
 			},
 			setTimeInp: function() {
 				document.getElementById('starttime-section').addEventListener('blur', function() {

@@ -16,18 +16,19 @@
 					</section>
 				</div>
 				<div style="clear: both;"></div>
-
-				<section class="ti-cheng-fen" v-if="isshow" :style="{'width':(showPingFen?'100%':'60%')}">
+				<section class="ti-cheng-fen" v-if="isshow && childNum == 1" :style="{'width':(showPingFen?'100%':'60%')}">
 					<subjective-index v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList"></subjective-index>
 				</section>
+				
+				<section class="ti-cheng-fen" v-if="isshow && childNum == 2" :style="{'width':(showPingFen?'100%':'60%')}">
+					<subjective-count v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList" v-bind:again-biao="againBiao"></subjective-count>
+				</section>
+				
 				<section class="ping-fen" v-if="isshow" :style="{'margin-right':(showPingFen?'-40%':'0%')}">
 					<ping-fen v-bind:show-ping-fen="showPingFen"></ping-fen>
 				</section>
-				<div class="col-hr"></div>
-				<section class="tong-ji" v-if="isshow">
-					<subjective-count v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList" v-bind:again-biao="againBiao"></subjective-count>
-				</section>
 
+				<div class="col-hr"></div>
 				<section class="tong-jeida" v-if="isshow">
 					<subjective-lei-da v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList" v-bind:again-biao="againBiao"></subjective-lei-da>
 				</section>
@@ -58,7 +59,8 @@
 				showPingFen: true,
 				shuaxin:true,
 				isshow:false,
-				bodyList:[]
+				bodyList:[],
+				childNum:1
 			}
 		},
 		//公共模板
@@ -71,7 +73,8 @@
 			subjectiveLeiDa:subjectiveLeiDa,
 			topMenu: topMenu
 		},
-		watch: {},
+		watch: {
+		},
 		//计算属性
 		computed: {},
 		methods: {
@@ -81,6 +84,9 @@
 				vm.isshow = true;
 				window.bus.$on('pingfen', function(val) {
 					vm.showPingFen = val;
+				});
+				window.bus.$on('childNum', function(val) {
+					vm.childNum = val;
 				});
 				vm.setTimeInp();
 				vm.getList();
@@ -146,6 +152,7 @@
 		},
 		beforeDestroy: function() {
 			window.bus.$off('pingfen');
+			window.bus.$off('childNum');
 		},
 		mounted: function() {
 			vm.start();

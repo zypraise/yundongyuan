@@ -1,5 +1,5 @@
 <template>
-	<div id="workout">
+	<div id="stamina">
 		<header-component></header-component>
 		<section class="content">
 			<top-menu style="min-width: 1172px;"></top-menu>
@@ -11,14 +11,13 @@
 						<div class="title">运动员</div>
 						<section>
 							<ul class="injury-menu-list">
-								<li v-for="(item,index) in sportList" :style="{'background-color':sportIndex == index?'#fafafa':'#FFFFFF'}"
-								 v-on:click="sportIndex = index">
-									<img v-if="item.Img" class="portrait" :src="url + item.Img">
-									<img v-else class="portrait" src="../../assets/imgs/person.png">
-									<img v-if="sportIndex == index" class="right" src="../../assets/imgs/right.png" />
+								<li>
+									<img class="portrait" v-if="picture" :src="picture">
+									<img class="portrait" v-else  src="../../assets/imgs/person.png">
+									<img class="right" src="../../assets/imgs/right.png" />
 									<div class="injury-menu-text">
-										<p>{{item.FullName}}</p>
-										<p>{{item.TrainName}}</p>
+										<p>{{user.FullName}}</p>
+										<p>{{user.TrainName}}</p>
 									</div>
 								</li>
 							</ul>
@@ -33,7 +32,7 @@
 									<span>时间</span>
 									<section class='mydate-box'>
 										<input class='form_datetime' onclick='myDate.getFocus(this)' id='staminaTime' readonly='readonly' type='text'>
-										<section style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()" v-on:blur="getSportValue(sportIndex)"></section>
+										<section style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()" v-on:blur="getSportValue()"></section>
 									</section>
 								</div>
 								<div class="workout-inp-main">
@@ -58,16 +57,14 @@
 	var vm;
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
-	import '../../assets/styles/workout.css';
+	import '../../assets/styles/stamina.css';
 	export default {
 		//变量
 		data: function() {
 			return {
 				url: '',
+				user:'',
 				trainList: [], //训练项目
-				sportList: [], //运动员
-				sportIndex: 0,
-				sex: ''
 			}
 		},
 		//公共模板
@@ -76,24 +73,19 @@
 			topMenu: topMenu
 		},
 		watch: {
-			sportIndex: function(newVal, oldVal) {
-				vm.getSportValue();
-			},
 		},
 		//计算属性
 		computed: {},
 		methods: {
 			start: function() {
+				vm.user = JSON.parse(window.localStorage.getItem('user'));
 				document.getElementById('staminaTime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				vm.url = myPublic.publicUrl;
-				if (vm.userType == '分队教练') {
-					vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
-				}
-				vm.getSport();
+				vm.getSportItem();
 			},
 			//查询体能测试项目
 			getSportItem: function() {
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainNames?sex=' + vm.sex, {
+				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainNames?sex=' + '', {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
@@ -116,8 +108,8 @@
 					console.log(error);
 				});
 			},
-			getSportValue: function(i) {
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetNewTrainResult?sportuserid=' + vm.sportList[vm.sportIndex].UserId +
+			getSportValue: function() {
+				vm.$http.get(myPublic.publicUrl + '/API/Test/GetNewTrainResult?sportuserid=' + vm.user.Id +
 					'&date=' +
 					document.getElementById('staminaTime').value, {
 						headers: {
@@ -140,26 +132,6 @@
 					console.log(error);
 				});
 			},
-			//查询运动员
-			getSport: function() {
-				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + '' + '&sex=' + vm.sex, {})
-					.then(function(
-						result) {
-						if (result.body.StateCode == 0) {
-							vm.sportList = result.body.Data;
-							if (result.body.Data && result.body.Data.length > 0) {
-								vm.sportIndex = 0;
-							}
-							vm.getSportItem();
-						} else {
-							vm.$router.push({
-								path: '/login'
-							});
-						}
-					}).catch(function(error) {
-						console.log(error);
-					});
-			},
 			//保存体能训练
 			save: function() {
 				var _list = [];
@@ -170,7 +142,7 @@
 						TestDate: document.getElementById('staminaTime').value //评测时间
 					});
 				}
-				vm.$http.post(myPublic.publicUrl + '/API/Test/SaveTrainResult?sportuserid=' + vm.sportList[vm.sportIndex].UserId,
+				vm.$http.post(myPublic.publicUrl + '/API/Test/SaveTrainResult?sportuserid=' + vm.user.Id,
 						_list, {
 							headers: {
 								token: window.localStorage.getItem('Sport_Access_Token')
@@ -178,7 +150,7 @@
 						}).then(function(result) {
 						if (result.body.StateCode == 0) {
 							myPublic.alertResult(result.body.Message);
-							// vm.closeChild(1);
+							vm.closeChild(1);
 						}
 					})
 					.catch(function(error) {

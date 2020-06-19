@@ -14,9 +14,6 @@
 			}
 		},
 		watch: {
-			phyConstituentsList: function() {
-				vm.setBiao();
-			},
 			showPingFen:function(){
 				window.setTimeout(function(){
 					vm.setBiao();
@@ -39,67 +36,56 @@
 				var _series = [{
 							name: '白细胞',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '红细胞',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name:'血红蛋白',
 							type:'line',
-							smooth:true,
 							data:[]
 						},
 						{
 							name: '中性粒细胞',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '淋巴细胞',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '血红蛋白',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '红细胞压积',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '血尿素',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '肌酸激酶',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '睾酮',
 							type: 'line',
-							smooth: true,
 							data: []
 						},
 						{
 							name: '皮质醇',
 							type: 'line',
-							smooth: true,
 							data: []
 						}
 						

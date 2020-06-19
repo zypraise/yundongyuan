@@ -1,6 +1,10 @@
 <template>
 	<div class="body-item">
 		<div class="title">
+			<ul class="title-tab">
+				<li class="item current">数据表</li>
+				<li class="item" v-on:click="setChildNum(2)">折线图</li>
+			</ul>
 			<div>主观评价指标</div>
 		</div>
 		<section>
@@ -20,7 +24,7 @@
 						<th>伤病疼痛评价</th>
 						<th>自我训练状态评价</th>
 						<th>RPE</th>
-						<th>训练强度</th>
+						<th>训练负荷</th>
 						<th>教练评价</th>
 					</tr>
 					</thead>
@@ -66,6 +70,9 @@
 		methods: {
 			start: function() {
 				myPublic.tableHeader('.table-box')
+			},
+			setChildNum:function(num){
+				window.bus.$emit('childNum', num)
 			},
 			showPingFen:function(){
 				vm.pingfen = !vm.pingfen;

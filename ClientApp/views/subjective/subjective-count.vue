@@ -1,9 +1,15 @@
 <template>
 		<div class="body-item">
 			<div class="title">
+				<ul class="title-tab">
+					<li class="item" v-on:click="setChildNum(1)">数据表</li>
+					<li class="item current">折线图</li>
+				</ul>
 				<div>主观评价统计</div>
 			</div>
 			<section>
+				<div style="margin: 0px 10px 20px 10px;float: right;color: #ba2538;cursor: pointer;line-height: 20px;" v-on:click="showPingFen()">评分标准</div>
+				<div style="clear: both;"></div>
 				<div class="table-box">
 					<div id="biao-count" style="width: 100%;height: 100%;overflow: hidden;">
 					</div>
@@ -18,6 +24,7 @@
 		props: ['shuaxin','bodyList','againBiao'],
 		data: function() {
 			return {
+				pingfen:true
 			}
 		},
 		watch:{
@@ -33,6 +40,13 @@
 		methods: {
 			start: function() {
 				vm.setBiao();
+			},
+			showPingFen: function() {
+				vm.pingfen = !vm.pingfen;
+				window.bus.$emit('pingfen', vm.pingfen)
+			},
+			setChildNum:function(num){
+				window.bus.$emit('childNum', num)
 			},
 			setBiao:function(){
 				var _dateList = [];
