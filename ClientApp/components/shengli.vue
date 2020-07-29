@@ -2,6 +2,7 @@
 
 	<div class="body-item">
 		<div class="title">
+			<img v-on:click="closePingFen()" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 20px;cursor: pointer;" src="../assets/imgs/close.png" />
 			<div>生理生化标准</div>
 		</div>
 		<section>
@@ -29,18 +30,6 @@
 						<td>4-5.6 ×10<sup>12</sup>/L</td>
 					</tr>
 					<tr>
-						<td>淋巴细胞</td>
-						<td>LY#</td>
-						<td>0.8-3.5 ×10<sup>9</sup>/L</td>
-						<td>0.8-3.5 ×10<sup>9</sup>/L</td>
-					</tr>
-					<tr>
-						<td>中性粒细胞</td>
-						<td>NE#</td>
-						<td>1.8-6.30 ×10<sup>9</sup>/L</td>
-						<td>1.8-6.30 ×10<sup>9</sup>/L</td>
-					</tr>
-					<tr>
 						<td>血红蛋白</td>
 						<td>HGB</td>
 						<td>120-160 g/L</td>
@@ -53,17 +42,31 @@
 						<td>0.32-0.54</td>
 					</tr>
 					<tr>
+						<td>淋巴细胞</td>
+						<td>LY#</td>
+						<td>0.8-3.5 ×10<sup>9</sup>/L</td>
+						<td>0.8-3.5 ×10<sup>9</sup>/L</td>
+					</tr>
+					<tr>
+						<td>中性粒细胞</td>
+						<td>NE#</td>
+						<td>1.8-6.30 ×10<sup>9</sup>/L</td>
+						<td>1.8-6.30 ×10<sup>9</sup>/L</td>
+					</tr>
+					<tr>
 						<td>血尿素</td>
 						<td>BUN</td>
 						<td>4-7 mmol/L</td>
 						<td>4-7 mmol/L</td>
 					</tr>
+					
 					<tr>
 						<td>肌酸激酶</td>
 						<td>CK</td>
 						<td>10-300 U/L</td>
 						<td>10-200 U/L</td>
 					</tr>
+					
 					<tr>
 						<td>皮质醇</td>
 						<td>Cortisol</td>
@@ -91,7 +94,10 @@
 		//计算属性
 		computed: {},
 		methods: {
-			start: function() {}
+			start: function() {},
+			closePingFen:function(){
+				window.bus.$emit('pingfen', true)
+			}
 		},
 		beforeCreate: function() {
 			vm = this;

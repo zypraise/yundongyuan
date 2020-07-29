@@ -14,27 +14,28 @@
 						<input class='form_datetime' onclick='myDate.getFocus(this)' id='endtime' readonly='readonly' type='text'>
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
+					<button class="daochu" v-on:click="getList()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
-				<section class="ti-cheng-fen" v-if="isshow && childNum == 1" :style="{'width':(showPingFen?'100%':'60%')}">
-					<subjective-index v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList"></subjective-index>
+				<section class="ti-cheng-fen" v-if="isshow && childNum == 1">
+					<subjective-index v-bind:shuaxin="shuaxin" v-bind:sortlist='sortlist' v-bind:body-list="bodyList"></subjective-index>
 				</section>
 				
-				<section class="ti-cheng-fen" v-if="isshow && childNum == 2" :style="{'width':(showPingFen?'100%':'60%')}">
+				<section class="ti-cheng-fen" v-if="isshow && childNum == 2">
 					<subjective-count v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList" v-bind:again-biao="againBiao"></subjective-count>
 				</section>
 				
-				<section class="ping-fen" v-if="isshow" :style="{'margin-right':(showPingFen?'-40%':'0%')}">
+				<section class="ti-cheng-fen" v-if="isshow && childNum == 3">
+					<subjective-lei-da v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList" v-bind:again-biao="againBiao"></subjective-lei-da>
+				</section>
+				
+				<section class="ti-cheng-fen" v-if="isshow && childNum == 4">
+					<subjective-train v-bind:shuaxin="shuaxin" v-bind:again-biao="againBiao"></subjective-train>
+				</section>
+				<section class="ping-fen" v-if="isshow" :style="{'display':(showPingFen?'none':'block')}">
 					<ping-fen v-bind:show-ping-fen="showPingFen"></ping-fen>
 				</section>
 
-				<div class="col-hr"></div>
-				<section class="tong-jeida" v-if="isshow">
-					<subjective-lei-da v-bind:shuaxin="shuaxin" v-bind:body-list="bodyList" v-bind:again-biao="againBiao"></subjective-lei-da>
-				</section>
-				<section class="xun-lian" v-if="isshow">
-					<subjective-train v-bind:shuaxin="shuaxin" v-bind:again-biao="againBiao"></subjective-train>
-				</section>
 			</div>
 		</section>
 	</div>
@@ -54,6 +55,18 @@
 		//变量
 		data: function() {
 			return {
+				sortlist:[
+					{
+						type:'DateSign',
+						is:true,
+						sort:true
+					},
+					{
+						type:'SportName',
+						is:false,
+						sort:false
+					}
+				],
 				againBiao:true,
 				getOnr:{},
 				showPingFen: true,
@@ -88,21 +101,29 @@
 				window.bus.$on('childNum', function(val) {
 					vm.childNum = val;
 				});
+				window.bus.$on('sortlist', function(val){
+					vm.sortlist = val;
+					vm.getList();
+				});
 				vm.setTimeInp();
 				vm.getList();
 			},
 			getList:function(){
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllUserSubjective', {
 					params: {
-						sportuserid: '',
+						trainId: '',
+						trainSecId: '',
+						sex: '',
+						sportuserid: JSON.parse(window.localStorage.getItem('user')).Id,
 						starttime: document.getElementById('starttime').value,
 						endtime: document.getElementById('endtime').value,
-						pagesize:999,
-						pageindex:1
+						sort:'',
+						pagesize: 9999,
+						pageindex: 1
 					}
 				}).then(function(result) {
 					if(result.body.StateCode == 0) {
-						vm.bodyList = result.body.Data;
+						vm.bodyList = result.body.Data?result.body.Data:[];
 						vm.shuaxin = !vm.shuaxin;
 					} else {
 						vm.$router.push({
@@ -119,12 +140,10 @@
 					var _date2 = document.getElementById('endtime').value;
 					var isDate = _date1.split('-')[0]*10000 + _date1.split('-')[1]*100 + _date1.split('-')[2]*1 <= _date2.split('-')[0]*10000 + _date2.split('-')[1]*100 + _date2.split('-')[2]*1;
 					if(_date2 == '' || isDate){
-						vm.getList();
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
 					document.getElementById('starttime').value = document.getElementById('endtime').value;
-            		vm.getList();
 				});
 				document.getElementById('endtime-section').addEventListener('blur',function(){
 					var _date1 = document.getElementById('starttime').value;
@@ -133,17 +152,14 @@
 					var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
 					if(_isDate) {
 						document.getElementById('endtime').value = _thisDate;
-						vm.getList();
 						return;
 					}
 					var isDate = _date1.split('-')[0]*10000 + _date1.split('-')[1]*100 + _date1.split('-')[2]*1 <= _date2.split('-')[0]*10000 + _date2.split('-')[1]*100 + _date2.split('-')[2]*1;
 					if(_date1 == '' || isDate){
-						vm.getList();
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
 					document.getElementById('endtime').value = document.getElementById('starttime').value;
-            		vm.getList();
 				});
 			}
 		},
@@ -153,6 +169,7 @@
 		beforeDestroy: function() {
 			window.bus.$off('pingfen');
 			window.bus.$off('childNum');
+			window.bus.$off('sortlist');
 		},
 		mounted: function() {
 			vm.start();

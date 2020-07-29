@@ -9,7 +9,8 @@
     		<div class="header-portrait" v-if="is && !isPath">
     			<div class="header-portrait-text">
     				<p>{{user.FullName}}</p>
-    				<p>{{user.TrainName}}</p>
+    				<p v-if="userType == '运动员'">{{user.TrainName}}</p>
+    				<p v-else>{{userType}}</p>
     			</div>
     			<div style="display:  inline-block;width:  44px;height: 44px;overflow: hidden;">
     			<img v-if="picture" v-on:click="setIsMenu()" :src="picture">
@@ -18,8 +19,8 @@
     			</div>
     			<ul v-if="isMenu" class="header-menu">
     				<li class="jiao"></li>
-    				<li class="item" v-if="userType != '系统管理员'" v-on:click="goUrl('/person')"><span>个人中心</span></li>
-    				<hr v-if="userType != '系统管理员'" />
+    				<li class="item" v-if="userType != '系统管理员' && userType != '超级管理员'" v-on:click="goUrl('/person')"><span>个人中心</span></li>
+    				<hr v-if="userType != '系统管理员' && userType != '超级管理员'" />
     				<li class="item" v-on:click="logout()"><span>注销</span></li>
     			</ul>
     		</div>
@@ -63,9 +64,6 @@
             start: function () {
             	vm.isPath = vm.$route.path == '/register' || vm.$route.path == '/forget' || vm.$route.path == '/choiceRegister';
             	vm.user =JSON.parse(window.localStorage.getItem('user'));
-            	if(window.localStorage.getItem('Sport_userType') == '教练'){
-            		vm.user.TrainName ='教练';
-            	}
             	if(window.localStorage.getItem('Sport_userPicture')){
             		vm.picture = window.localStorage.getItem('Sport_userPicture');
             	}

@@ -66,7 +66,7 @@
 			</section>
 			<p class="is" v-html="isCode"></p>
 		</li>
-		<li>
+		<!-- <li>
 			<label>运动员等级：</label>
 			<section>
 				<div class="inp">
@@ -80,7 +80,7 @@
 					</select>
 				</div>
 			</section>
-		</li>
+		</li> -->
 		<li>
 			<label><span class="red-text">*</span>运动项目：</label>
 			<section>
@@ -92,18 +92,6 @@
 				</div>
 			</section>
 			<p class="is" v-html="isTrainFirse"></p>
-		</li>
-		<li>
-			<label><span class="red-text">*</span>训练开始时间：</label>
-			<section>
-				<div class="inp">
-					<select v-model="startTime">
-						<option v-for="i in 81" :value="i + 1949">{{i + 1949}}</option>
-					</select>
-				</div>
-
-			</section>
-			<p class="is" v-html="isStartTime"></p>
 		</li>
 		<li style="margin: 0px -25px;"><button class="register-but" v-on:click="register()">注册</button><button class="register-but"
 			 v-on:click="login()">已有账号</button></li>
@@ -137,8 +125,7 @@
 				sex: '男',
 				mobile: '',
 				code: '',
-				SportGrade: 0, //运动等级
-				startTime: '',
+				// SportGrade: 0, //运动等级
 				isUserName: '',
 				isName: '',
 				isPassWord: '',
@@ -146,7 +133,6 @@
 				isMobile: '',
 				isCode: '',
 				isTrainFirse: '',
-				isStartTime: '',
 				isGetCode: false,
 				getCodeText: '获取验证码'
 			}
@@ -241,26 +227,6 @@
 					window.t = '';
 				})
 			},
-			startTime: function(newVal, oldVal) {
-				if (newVal == '') {
-					vm.isStartTime = '训练开始时间不得为空';
-					return;
-				} else {
-					vm.isStartTime = '';
-				}
-				if (!isNaN(newVal)) {
-					if (oldVal == 0) {
-						vm.startTime = parseInt(newVal);
-					}
-					if (parseInt(newVal) > 9999 || parseInt(newVal) < 1000) {
-						vm.isStartTime = '训练开始时间格式不正确';
-					} else {
-						vm.isStartTime = '';
-					}
-				} else {
-					vm.startTime = oldVal;
-				}
-			}
 		},
 		//计算属性
 		computed: {
@@ -293,16 +259,8 @@
 				if (vm.code == '') {
 					vm.isCode = '验证码不得为空';
 				}
-				//开始时间
-				if (vm.startTime == '') {
-					vm.isStartTime = '训练开始时间不得为空';
-				}
-				if (parseInt(vm.startTime) > 9999 || parseInt(vm.startTime) < 1000) {
-					vm.isStartTime = '训练开始时间格式不正确';
-				}
 
-				if (vm.isUserName || vm.isName || vm.isPassWord || vm.isRepeatPassWord || vm.isMobile || vm.isCode || vm.isTrainFirse ||
-					vm.isStartTime) {
+				if (vm.isUserName || vm.isName || vm.isPassWord || vm.isRepeatPassWord || vm.isMobile || vm.isCode || vm.isTrainFirse) {
 					return false;
 				} else {
 					return true;
@@ -313,7 +271,6 @@
 		methods: {
 			start: function() {
 				vm.GetAllTrain();
-				vm.startTime = new Date().getFullYear();
 			},
 			/**
 			 * 获取验证码
@@ -376,11 +333,11 @@
 						UserName: vm.userName,
 						Sex: vm.sex,
 						FullName: vm.name,
-						SportGrade: vm.SportGrade, //运动等级
+						SportGrade: 5, //运动等级
 						TrainId: [vm.trainFirse], //训练项目
 						PhoneNumber: vm.mobile,
 						VerifyCode: vm.code,
-						Start4Training: vm.startTime, //专训开始时间
+						// Start4Training: vm.startTime, //专训开始时间
 						Password: vm.passWord,
 						ConfirmPassword: vm.repeatPassWord,
 					}).then(function(result) {

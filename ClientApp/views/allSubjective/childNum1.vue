@@ -4,14 +4,11 @@
 			<ul class="title-tab">
 				<li class="item" v-on:click="setChildNum(1)">数据表</li>
 				<li class="item current">折线图</li>
+				<li class="item" v-on:click="setChildNum(3)">训练负荷</li>
 			</ul>
-			<div>主观评价统计</div>
 		</div>
 		<section>
-
-			<div style="margin: 0px 10px 20px 10px;float: right;color: #ba2538;cursor: pointer;line-height: 20px;" v-on:click="showPingFen()">评分标准</div>
-			<div style="clear: both;"></div>
-			<div class="table-box" style="height: 380px;">
+			<div class="table-box">
 				<div id="child1" style="width: 100%;height: 100%;overflow: hidden;">
 				</div>
 			</div>
@@ -25,7 +22,6 @@
 		props: ['againBiao', 'shuaxin', 'bodyList'],
 		data: function() {
 			return {
-				pingfen: true
 			}
 		},
 		watch: {
@@ -44,10 +40,10 @@
 		methods: {
 			start: function() {
 				vm.setBiao();
+				vm.showPingFen();
 			},
 			showPingFen: function() {
-				vm.pingfen = !vm.pingfen;
-				window.bus.$emit('pingfen', vm.pingfen)
+				window.bus.$emit('pingfen', true)
 			},
 			setChildNum: function(num) {
 				window.bus.$emit('childNum', num)
@@ -70,17 +66,17 @@
 						data: []
 					},
 					{
-						name: '肌肉酸痛评价',
+						name: '肌肉酸痛',
 						type: 'line',
 						data: []
 					},
 					{
-						name: '伤病疼痛评价',
+						name: '伤病疼痛',
 						type: 'line',
 						data: []
 					},
 					{
-						name: '自我训练状态评价',
+						name: '自我训练状态',
 						type: 'line',
 						data: []
 					},
@@ -102,9 +98,9 @@
 						_series[0].data[i] = vm.bodyList[i].SleepDuration; //睡眠时间
 						_series[1].data[i] = vm.bodyList[i].SleepQuality; //睡眠质量
 						_series[2].data[i] = vm.bodyList[i].Desire; //饮食欲望
-						_series[3].data[i] = vm.bodyList[i].SorenessLevel; //肌肉酸痛评价
-						_series[4].data[i] = vm.bodyList[i].FatigueLevel; //伤病疼痛评价
-						_series[5].data[i] = vm.bodyList[i].TrainStatus; //自我训练状态评价
+						_series[3].data[i] = vm.bodyList[i].SorenessLevel; //肌肉酸痛
+						_series[4].data[i] = vm.bodyList[i].FatigueLevel; //伤病疼痛
+						_series[5].data[i] = vm.bodyList[i].TrainStatus; //自我训练状态
 						_series[6].data[i] = vm.bodyList[i].Fatigue; //RPE
 					}
 				} catch (e) {
@@ -128,15 +124,15 @@
 							'睡眠时间',
 							'睡眠质量',
 							'饮食欲望',
-							'肌肉酸痛评价',
-							'伤病疼痛评价',
-							'自我训练状态评价',
+							'肌肉酸痛',
+							'伤病疼痛',
+							'自我训练状态',
 							'RPE'
 						]
 					},
 					grid: {
 						left: '10px',
-						right: '20px',
+						right: '50px',
 						bottom: '10px',
 						containLabel: true
 					},

@@ -16,7 +16,7 @@
 			
 			<section class="policy-item">
 				<div>主要功能</div>
-				<p>1、可进行运动员主观评测，晨脉、体重、睡眠时间、睡眠质量、饮食欲望、肌肉酸痛评价、伤病疼痛评价、自我训练状态评价、RPE等；</p>
+				<p>1、可进行运动员主观评测，晨脉、体重、睡眠时间、睡眠质量、饮食欲望、肌肉酸痛、伤病疼痛、自我训练状态、RPE等；</p>
 				<div style="border-bottom:1px solid #dddddd;">
 					<img src="../../assets/imgs/technology-3.jpg" />
 				</div>

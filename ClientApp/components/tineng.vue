@@ -1,28 +1,29 @@
 <template>
 
-	<div class="body-item">
+	<div class="body-item" style="width: 1200px;">
 		<div class="title">
+			<img v-on:click="closePingFen()" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 20px;cursor: pointer;" src="../assets/imgs/close.png" />
 			<div>基础体能参考标准</div>
 		</div>
 		<section>
-			<div class="table-box" style="height: 708px !important">
+			<div class="table-box" style="height: 600px !important">
 				<table>
 					<tr>
 						<th rowspan="3">评分</th>
 						<th rowspan="2" colspan="2">BMI</th>
-						<th rowspan="3">坐位体前屈cm</th>
-						<th rowspan="3">30m冲刺s</th>
-						<th rowspan="2"colspan="2">垂直纵跳 cm</th>
-						<th rowspan="3">深蹲相对力量</th>
-						<th rowspan="3">卧推相对力量</th>
-						<th rowspan="2" colspan="2">引体向上次</th>
-						<th rowspan="3">腹肌耐力s</th>
-						<th rowspan="3">背肌耐力s</th>
+						<th rowspan="3">坐位体前屈（cm）</th>
+						<th rowspan="3">30m冲刺（s）</th>
+						<th rowspan="2"colspan="2">垂直纵跳（cm）</th>
+						<th rowspan="3">深蹲相对力量（kg）</th>
+						<th rowspan="3">卧推相对力量（kg）</th>
+						<th rowspan="2" colspan="2">引体向上（次）</th>
+						<th rowspan="3">腹肌耐力（s）</th>
+						<th rowspan="3">背肌耐力（s——</th>
 						<th colspan="4">二选一</th>
 					</tr>
 					<tr>
-						<th colspan="2">3000m  min's</th>
-						<th colspan="2">2000m测功仪 min's</th>
+						<th colspan="2">3000m（min's）</th>
+						<th colspan="2">2000m测功仪（min's）</th>
 					</tr>
 					<tr>
 						<th>男子</th>
@@ -260,7 +261,10 @@
 		//计算属性
 		computed: {},
 		methods: {
-			start: function() {}
+			start: function() {},
+			closePingFen:function(){
+				window.bus.$emit('pingfen', true)
+			}
 		},
 		beforeCreate: function() {
 			vm = this;

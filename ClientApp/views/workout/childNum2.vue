@@ -1,17 +1,20 @@
 <template>
 	<div>
-		<section class="shengli-main" :style="{'width':(showPingFen?'100%':'40%')}">
-			<div class="body-item">
-				<div class="title">
-					<ul class="title-tab">
-						<li class="item" v-on:click="backWorkout(1)">基础体能数据</li>
-						<li class="item current">专项体能数据</li>
-					</ul>
-					<div><span>体能训练记录指标</span><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;"
+		<section class="shengli-main">
+			<div class="body-item" style="overflow-x: hidden;">
+				<div class="title" style="min-width: 852px;">
+					<div style="float: right;"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;"
 						 v-on:click="showPingFen = !showPingFen" /><img v-on:click="workoutAdd()" class="workout-add" src="../../assets/imgs/add.png"></div>
+					<ul class="title-tab">
+						<li class="item" v-on:click="backWorkout('1,1')">基础体能</li>
+						<li class="item" v-on:click="backWorkout('1,2')">板块体能</li>
+						<li class="item" v-on:click="backWorkout('1,3')">稳定和均衡</li>
+						<li class="item current">专项体能</li>
+						<!--<li class="item" v-on:click="backWorkout('3,0')">雷达图</li>-->
+					</ul>
 				</div>
 				<section>
-					<div class="table-box" style="height: auto;min-height: 500px;">
+					<div class="table-box">
 						<div v-if="sport === ''" style="line-height: 500px;text-align: center;color: #999999;font-size: 20px;">选择一位运动员</div>
 						<table v-show="sport !== ''" style="margin-bottom: 50px;">
 							<thead>
@@ -36,7 +39,7 @@
 				</section>
 			</div>
 		</section>
-		<section class="ping-fen" :style="{'width':'60%','margin-right':(showPingFen?'-60%':'0%')}">
+		<section class="ping-fen" :style="{'display':(showPingFen?'none':'block')}">
 			<ping-fen v-bind:show-ping-fen="showPingFen"></ping-fen>
 		</section>
 	</div>
@@ -62,6 +65,11 @@
 			pingFen: pingFen
 		},
 		watch: {
+			showPingFen: function() {
+				window.setTimeout(function() {
+					vm.start();
+				}, 1000);
+			},
 			isGetList: function(newVal, oldVal) {
 				vm.start()
 			}
@@ -71,6 +79,9 @@
 		methods: {
 			start: function() {
 				myPublic.tableHeader('.table-box')
+				window.bus.$on('pingfen', function(val) {
+					vm.showPingFen = val;
+				});
 				vm.sport = vm.sportIndex;
 				vm.getList();
 			},
@@ -197,6 +208,9 @@
 		},
 		beforeCreate: function() {
 			vm = this;
+		},
+		beforeDestroy: function() {
+			window.bus.$off('pingfen');
 		},
 		mounted: function() {
 			vm.start();

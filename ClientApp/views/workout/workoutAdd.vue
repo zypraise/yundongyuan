@@ -77,7 +77,9 @@
 		},
 		watch: {
 			sportIndex: function(newVal, oldVal) {
-				vm.getSportValue();
+				var a = vm.sportList[newVal];
+				
+				vm.getSportItem();
 			},
 		},
 		//计算属性
@@ -86,14 +88,14 @@
 			start: function() {
 				document.getElementById('staminaTime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				vm.url = myPublic.publicUrl;
-				if (vm.userType == '分队教练') {
+				if (vm.userType == '分队教练' || vm.userType == '运动员') {
 					vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
 				}
 				vm.getSport();
 			},
 			//查询体能测试项目
 			getSportItem: function() {
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainNames?sex=' + vm.sex, {
+				vm.$http.get(myPublic.publicUrl + '/API/Test/GetTrainName?sportuserid=' + vm.sportList[vm.sportIndex].UserId, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
@@ -142,7 +144,17 @@
 			},
 			//查询运动员
 			getSport: function() {
-				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainId=' + '' + '&sex=' + vm.sex, {})
+				var _l = JSON.parse(window.localStorage.getItem('user')).TrainId.split(',')
+				if(_l[_l.length -1] == ''){
+					_l.splice(_l.length -1,1);
+				}
+				var _trainFId = '';
+				if(!(_l == 0 || _l > 1)){
+					_trainFId = _l[0];
+				}
+				
+				
+				vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?'+'trainFId=' + _trainFId + '&trainId=' + '' + '&sex=' + vm.sex, {})
 					.then(function(
 						result) {
 						if (result.body.StateCode == 0) {

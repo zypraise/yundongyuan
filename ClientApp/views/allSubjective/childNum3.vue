@@ -8,7 +8,7 @@
 			<div>主观评价雷达图</div>
 		</div>
 		<section>
-			<div class="table-box" style="height: 380px;">
+			<div class="table-box">
 				<div id="biao-leida" style="width: 100%;height: 100%;overflow: hidden;">
 				</div>
 			</div>
@@ -41,8 +41,8 @@
 					Fatigue: 0, //RPE
 					SleepQuality: 0, //睡眠质量
 					Desire: 0, //饮食欲望
-					SorenessLevel: 0, //肌肉酸痛评价
-					FatigueLevel: 0, //伤病疼痛评价
+					SorenessLevel: 0, //肌肉酸痛
+					FatigueLevel: 0, //伤病疼痛
 					TrainStatus: 0, //自我训练状态
 					FatigueLength: 0,
 					SleepQualityLength: 0,
@@ -137,15 +137,15 @@
 								max: 10
 							},
 							{
-								name: '肌肉酸痛评价',
+								name: '肌肉酸痛',
 								max: 10
 							},
 							{
-								name: '伤病疼痛评价',
+								name: '伤病疼痛',
 								max: 10
 							},
 							{
-								name: '自我训练状态评价',
+								name: '自我训练状态',
 								max: 10
 							}
 						]

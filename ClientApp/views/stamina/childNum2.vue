@@ -1,21 +1,20 @@
 <template>
 	<div>
-		<section class="shengli-main" :style="{'width':(showPingFen?'100%':'40%')}">
-			<div class="body-item">
-				<div class="title">
-					<ul class="title-tab">
-						<li class="item" v-on:click="backWorkout(1)">基础体能数据</li>
-						<li class="item current">专项体能数据</li>
-					</ul>
-					<div><span>体能训练记录指标</span><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;"
+		<section class="shengli-main">
+			<div class="body-item" style="overflow-x: hidden;">
+				<div class="title" style="min-width: 700px;">
+					<div style="float: right;"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;"
 						 v-on:click="showPingFen = !showPingFen" /><img v-on:click="workoutAdd()" class="workout-add" src="../../assets/imgs/add.png"></div>
+					<ul class="title-tab">
+						<li class="item" v-on:click="backWorkout('1,1')">基础体能</li>
+						<li class="item" v-on:click="backWorkout('1,2')">板块体能</li>
+						<li class="item" v-on:click="backWorkout('1,3')">稳定和均衡</li>
+						<li class="item current">专项体能</li>
+					</ul>
 				</div>
 				<section>
-					<div class="table-box" style="height: auto;min-height: 500px;">
+					<div class="table-box">
 
-						<div id="biao" style="width: 100%;height: 500px;overflow: hidden;margin-bottom: 50px;">
-
-						</div>
 						<table>
 							<thead>
 								<tr>
@@ -30,13 +29,16 @@
 								</tr>
 							</tbody>
 						</table>
+						<div id="biao" style="width: 100%;height: 500px;overflow: hidden;margin-bottom: 50px;">
+
+						</div>
 
 
 					</div>
 				</section>
 			</div>
 		</section>
-		<section class="ping-fen" :style="{'width':'60%','margin-right':(showPingFen?'-60%':'0%')}">
+		<section class="ping-fen" :style="{'display':(showPingFen?'none':'block')}">
 			<ping-fen v-bind:show-ping-fen="showPingFen"></ping-fen>
 		</section>
 	</div>

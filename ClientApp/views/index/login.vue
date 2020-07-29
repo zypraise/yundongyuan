@@ -14,9 +14,9 @@
 				</div>
 				<section class="message">{{isMessage.UserName}}</section>
 				<section class="message">{{isMessage.Password}}</section>
-				<p>
+				<!-- <p>
 					<input type="checkbox" value="yes" v-model="jiyi" v-on:change="jiyiChange()" /><span>记住用户</span>
-				</p>
+				</p> -->
 				<button v-on:click="login()">登录</button>
 				<p>
 					<span class="login-register" v-on:click="register()">注册</span><span class="login-register" v-on:click="forget()">忘记密码</span>

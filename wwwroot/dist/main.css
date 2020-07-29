@@ -405,6 +405,14 @@
 	border-radius: 4px;
 	border: 1px solid#DDDDDD;
 }
+#person .person-info-content .item>.text .cuoo {
+	width: 16px;
+    height: 16px;
+    float: right;
+    margin-right: -20px;
+    margin-top: 7px;
+    border: none;
+}
 
 #person .person-info-content .item>.text .get-code {
 	line-height: 30px;
@@ -525,7 +533,6 @@
 #injury .injury-main {
 	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
 	height: 100%;
-	margin-left: 340px;
 	position: relative;
 	overflow: hidden;
 	background: #FFFFFF;
@@ -641,11 +648,92 @@
 	width: 40%;
 }
 #physiology .shengli-main{
-	float: left;
 	transition: width ease 1s;
 	-moz-transition: width ease 1s; /* Firefox 4 */
 	-webkit-transition: width ease 1s; /* Safari 和 Chrome */
 	-o-transition: width ease 1s; /* Opera */
+}
+#physiology .edit-mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99999;
+	left: 0;
+	top: 0;
+}
+
+#physiology .is-edit {
+	position: relative;
+	margin: 0 auto 50px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-sizing: border-box;
+	margin-top: 15vh;
+	width: 600px;
+	background: #FFF;
+}
+
+#physiology .is-edit .header {
+	padding: 20px 20px 10px;
+	line-height: 24px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#physiology .is-edit .body {
+	padding: 20px 10px;
+	color: #606266;
+	font-size: 14px;
+	word-break: break-all;
+	min-height: 300px;
+}
+#physiology .is-edit .edit-mask-but{
+	text-align: center;
+	    margin-top: -20px;
+	    padding: 14px 0;
+}
+#physiology .is-edit .edit-mask-but button:nth-child(1){
+	outline: none;
+	    background: #ba2538;
+	    color: #FFFFFF;
+	    border: none;
+	    height: 34px;
+	    width: 130px;
+	    margin-right: 10px;
+}
+#physiology .is-edit .edit-mask-but button:nth-child(2){
+	outline: none;
+	    background: #FFFFFF;
+	    color: #101010;
+	    border: 1px solid #DDDDDD;
+	    height: 34px;
+	    width: 130px;
+	    margin-left: 10px;
+}
+
+#physiology .jing1 {
+	color: #00b050;
+}
+
+#physiology .jing2 {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAABkCAYAAADaIVPoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjQwQ0UyMDdGQzQxNTExRUE4QjE2ODA5NkNFNkFDNkFBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjQwQ0UyMDgwQzQxNTExRUE4QjE2ODA5NkNFNkFDNkFBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NDBDRTIwN0RDNDE1MTFFQThCMTY4MDk2Q0U2QUM2QUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NDBDRTIwN0VDNDE1MTFFQThCMTY4MDk2Q0U2QUM2QUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4j8hz4AAADqklEQVR42uzcS2gTQRgA4JnNJpukeShJpFJjKz4OHnpRKaJCCoIHD4paL9ZqlSKIDwQvhSB40YMHqVBRlCqtQktFrRdBPfTgTfQg9FKwpZeitLWa9ya7O86mac2jtptkZ5PU/4cl+2B258vssDP/YTAhBKkxOjqKZmZmEMuI0mcFBLNjE29qSBGEzRiF3sbF6QitAs/wuT6fDwUCgYUDFaxuSycYRtBlOzDR4P30w++bmPb7Juf9vrHHHlfQxWGO5XNV26KTQwbGXptwfYOJ2y0jtIUeNsUQ2nnaYetuNvONRtXBUHCCoHVy1jFOnyO8gpBzTYJpKMucI5ltTYIrHgAGMIABDGAAAxjAAAYwgAEMYAADGMAABjCAAQxgAAMYwAAGMIABDGAAAxjAAAYwgAEMYAADGMAABjCAAQxgAAMYwAAGMIABDGAAAxjAAP4vwXgNI7NtS2sNiASh7RzCV92OI5vNfKuJoG89odiTd2IyXEs4C9XddTkCfoE/zGMUvj3za+CnQiYLwBa632vn7wdc9q44xZtowV2C+WT77O8THxLJ77WC7fO6b7bZrcEEIZxq2OGydg7ahUP08njOK93hEPY0WyxdswpJLz8Ror88h/c987pfH7Ra6msEe+u43XpjTlG4RYOD45quuexXCvpwi8W8Uc67SZKk0S3Vjs7Cds8rucsMqCZpYVWJXPBAVPxsQ2gO1Rh6Jawa6ms9JclvCsBfxNTUcEy8tJ7DUq2gV8NaMEYRSRrqCUX6CsARul1MyIMvo4lztYDWgpVl6cXZUPLM15SSKgALeOF975wLD1D0+WpGa8W2z4ZOfSRIdGBcOPAgWSiK7q/Wli4G+16Uktm2fw4tM+iqa+lSsJrH0tXW0npgV508ZLV0RdF6YTXNliqN1hOreXpYKbTe2KLmw0ajWWCLTgAYhWaFLSnjwRrNEltyikdvNDYIW1ZOqxQ0XiaThNPZFiKZEHts2Um8YtD7BbM7Qkg8X0wLKRST6vU4g6yxOSmectHq/rE6a9+8Qvj86xaKfup1vRIJ8sRJ7np/Cdq69zzOO1t5/ihrrC5grWgnx7U6MxmIvHA2Umz+H8ECqxtYC1peoWzKIGzZfbjYPq3908QGqztYDzRLLBNwOWjWWGbgUtBGYJmCi0EbhWUO1oLOYIeNwOr6WdL4ycJtddYHEYJsqsxBh11RWRqi2A4jsIaB/6JD/SNxceyC03Z5GyL1z0V55GE49mhcUiSj6vFHgAEAr45Ztl8iIlwAAAAASUVORK5CYII=");
+	background-size: 12px 20px;
+	width: 12px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 2px;
+}
+
+#physiology .jing3 {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAADICAYAAAAjriWnAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjRDMUI4NTVEQzQxNTExRUE4REMzQTQ4NjMzM0I3QjYwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjRDMUI4NTVFQzQxNTExRUE4REMzQTQ4NjMzM0I3QjYwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NEMxQjg1NUJDNDE1MTFFQThEQzNBNDg2MzMzQjdCNjAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NEMxQjg1NUNDNDE1MTFFQThEQzNBNDg2MzMzQjdCNjAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4eIeCEAAAEK0lEQVR42uzdvWtdZRzA8XN+aUolkaapMc1LBye16uAgWhd1dvIFRLqKq7i5+B84SMGp4Msg6OLgqJUShzq4dKm4SWlyk2JSBV9IaXIeT2uRkjbck1DKPT8/X7i5d8i54Xk+9znPvRnuqUop1e23zF1erB5oRziedXw7LW/c6p2odV2nG/hgceadqq7eah8+2U7D9apUF9qBfzS3svFZNuCdpQZePX70mfY1/Gk7qhO7zMi5emvzjbm1P38F3LOuLEyf3K7Hvm1X7sSQablYX998KQPy3YAj4160tnj02Rb3m+G4N1/ST5TxQ+dWj03OZJyLyIjbVHG2xZ3sflSLfODQ9xmRA+5/e9NjGZEDbm7kgJsbOeDmRg64uZEDbm7kgJsbOeDmRg64uZEDbm7kgJsbOeDmRg64uZEDbm7kSIlbyhbkEQW+F7ilqV7b4zFL7Y8PMyJHRtyFwfrXez10/vL6uxmRA25u5ICbGzng5kYOuLmRA25u5ICbGzng5kYOuLmRA25u5ICbGzng5kYOuLmRA25u5ICbGzng5kYOuLmRA25u5ICbGzng5kYOuLmR9w1843uo4I4+cux35d76kjG4I44c+8G9tXIn4I4+cuwT18rtCXJnYHvu6CCvzU4+fE+B7bmjhdyMH1rqupKjC649t7+n67Dn9hi5w0reFXhtYfo5uCOOXNWPD1vJdwW+euTI4SbiK7i9OV1/sifgzYmxD9oj5+D2BvnlweJDpzoDl7p6HW7fTtd3N7sDePXY9Im6qqfg9gy5rk92Ai518xfcHiKXstkJeH7190vt3RW4vUM+3/1jUtOcgdsv5NKUjzsDz69svN8e8tPwJ4U7EsilnFkYbJzd0z86qu1rL7SCp29eCu6O5yvLY83283DvE3Ipp0qpNnZZZafnl9ff3vW917Arn63NHn6kOXDwzRLlqfYdWPtHyoWDm9WXM+vrf4zyxAyOz3S/0mYpS+0kvTjK4/ltamrq7wfHX61K9XSrNtOuzIvRNGdnV67+cNvC2ztwX8sG3G0Y/5NL2wkwYAEWYAEWYAEWYMACLMACLMACLMACDFiABViABViABRiwAAuwAAuwAAswYAEWYAEWYAEWYAEGLMACLMACLMACDFiABViABViABRiwAAuwAAuwAAuwAAMWYAEWYAEWYAEGLMACLMACLMACLMCABViABViABViAAQuwAAuwAAuwAAMWYAEWYAEWYAEWYMACLMACLMACLMCABViABViABViAAQuwAAuwAAuwAAswYAEWYAEWYAEWYMACLMACLMD3sVJV24D71y+df7OuLwHu26oszbnOvqV8B7hvA9u69l6r/PPw03P5Yn55/fOs89C+eMuOs1WdaoCDxaOvtHePlqqe/ne7reqo6qZ9sDrWbP84O7h6Ps9ZqwwHVq7+EWAAI5jg/G3TOU8AAAAASUVORK5CYII=");
+	background-size: 12px 20px;
+	width: 12px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 2px;
 }#stamina .index-content {
 	margin: 0px 20px;
 }
@@ -800,14 +888,6 @@
 
 #workout .shengli-main,
 #stamina .shengli-main {
-	float: left;
-	transition: width ease 1s;
-	-moz-transition: width ease 1s;
-	/* Firefox 4 */
-	-webkit-transition: width ease 1s;
-	/* Safari 和 Chrome */
-	-o-transition: width ease 1s;
-	/* Opera */
 }
 
 #stamina .edit-mask {
@@ -947,6 +1027,41 @@
 }
 #subjective .wen:hover p{
 	display: block;
+}
+#subjective .edit-mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99999;
+	left: 0;
+	top: 0;
+}
+
+#subjective .is-edit {
+	position: relative;
+	margin: 0 auto 50px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-sizing: border-box;
+	margin-top: 15vh;
+	width: 600px;
+	background: #FFF;
+}
+
+#subjective .is-edit .header {
+	padding: 20px 20px 10px;
+	line-height: 24px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#subjective .is-edit .body {
+	padding: 20px 10px;
+	color: #606266;
+	font-size: 14px;
+	word-break: break-all;
+	min-height: 300px;
 }#all-subjective .ti-cheng-fen{
 	float: left;
 	width: 100%;
@@ -956,9 +1071,7 @@
 	-o-transition: width ease 1s; /* Opera */
 }
 
-#all-subjective .ti-cheng-fen .table-box{
-	height: 395px !important;
-}
+
 #all-subjective .wen{
 	float: right;
     width: 20px;
@@ -986,8 +1099,42 @@
 #all-subjective .wen:hover p{
 	display: block;
 }
-#workout .index-content {
-	margin: 0px 30px;
+#all-subjective .edit-mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99999;
+	left: 0;
+	top: 0;
+}
+
+#all-subjective .is-edit {
+	position: relative;
+	margin: 0 auto 50px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-sizing: border-box;
+	margin-top: 15vh;
+	width: 600px;
+	background: #FFF;
+}
+
+#all-subjective .is-edit .header {
+	padding: 20px 20px 10px;
+	line-height: 24px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#all-subjective .is-edit .body {
+	padding: 20px 10px;
+	color: #606266;
+	font-size: 14px;
+	word-break: break-all;
+	min-height: 300px;
+}#workout .index-content {
+	margin: 0px 20px;
 }
 
 #workout .injury-menu {
@@ -1290,4 +1437,38 @@
     left: 0px;
     right: 0px;
     overflow-y: auto;
+}
+#trainingPlan .edit-mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99999;
+	left: 0;
+	top: 0;
+}
+
+#trainingPlan .is-edit {
+	position: relative;
+	margin: 0 auto 50px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+	box-sizing: border-box;
+	margin-top: 15vh;
+	width: 600px;
+	background: #FFF;
+}
+
+#trainingPlan .is-edit .header {
+	padding: 20px 20px 10px;
+	line-height: 24px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#trainingPlan .is-edit .body {
+	padding: 30px 10px;
+	color: #606266;
+	font-size: 14px;
+	word-break: break-all;
 }

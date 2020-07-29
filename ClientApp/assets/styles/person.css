@@ -111,6 +111,14 @@
 	border-radius: 4px;
 	border: 1px solid#DDDDDD;
 }
+#person .person-info-content .item>.text .cuoo {
+	width: 16px;
+    height: 16px;
+    float: right;
+    margin-right: -20px;
+    margin-top: 7px;
+    border: none;
+}
 
 #person .person-info-content .item>.text .get-code {
 	line-height: 30px;

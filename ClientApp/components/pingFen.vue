@@ -2,6 +2,7 @@
 
 	<div class="body-item">
 		<div class="title">
+			<img v-on:click="closePingFen()" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 20px;cursor: pointer;" src="../assets/imgs/close.png" />
 			<div>评分标准</div>
 		</div>
 		<section>
@@ -53,21 +54,21 @@
 						<td class="cha">0-4</td>
 					</tr>
 					<tr>
-						<td>肌肉酸痛评价</td>
+						<td>肌肉酸痛</td>
 						<td>1-10分</td>
 						<td class="you">0-4</td>
 						<td class="liang">5-7</td>
 						<td class="cha">8-10</td>
 					</tr>
 					<tr>
-						<td>伤病疼痛评价</td>
+						<td>伤病疼痛</td>
 						<td>1-10分</td>
 						<td class="you">0-4</td>
 						<td class="liang">5-7</td>
 						<td class="cha">8-10</td>
 					</tr>
 					<tr>
-						<td>自我训练状态评价</td>
+						<td>自我训练状态</td>
 						<td>1-10分</td>
 						<td class="you">8-10</td>
 						<td class="liang">5-7</td>
@@ -102,7 +103,10 @@
 		//计算属性
 		computed: {},
 		methods: {
-			start: function() {}
+			start: function() {},
+			closePingFen:function(){
+				window.bus.$emit('pingfen', true)
+			}
 		},
 		beforeCreate: function() {
 			vm = this;

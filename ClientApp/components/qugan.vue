@@ -1,22 +1,23 @@
 <template>
 
-	<div class="body-item">
+	<div class="body-item" style="width: 1200px;">
 		<div class="title">
+			<img v-on:click="closePingFen()" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 20px;cursor: pointer;" src="../assets/imgs/close.png" />
 			<div>躯干稳定性和上下肢左右侧力量均衡性参考标准</div>
 		</div>
 		<section>
-			<div class="table-box" style="height: 708px !important">
+			<div class="table-box" style="height: 450px !important">
 				<table>
 					<tr>
 						<th>评分</th>
-						<th>左45°s</th>
-						<th>右45°s</th>
-						<th>左135°s</th>
-						<th>右135°s</th>
-						<th>左90°s</th>
-						<th>右90°s</th>
-						<th>0°s</th>
-						<th>180°s</th>
+						<th>左45°</th>
+						<th>右45°</th>
+						<th>左135°</th>
+						<th>右135°</th>
+						<th>左90°</th>
+						<th>右90°</th>
+						<th>0°</th>
+						<th>180°</th>
 						<th>评分</th>
 						<th>上肢比值%</th>
 						<th>下肢比值%</th>
@@ -167,7 +168,10 @@
 		//计算属性
 		computed: {},
 		methods: {
-			start: function() {}
+			start: function() {},
+			closePingFen:function(){
+				window.bus.$emit('pingfen', true)
+			}
 		},
 		beforeCreate: function() {
 			vm = this;

@@ -5,7 +5,12 @@
 				<img src="../../assets/imgs/wen.png" />
 				<p>雷达图结果为选择时间范围内的平均值</p>
 			</div>
-			<div>主观评价雷达图</div>
+			<ul class="title-tab">
+				<li class="item" v-on:click="setChildNum(1)">数据表</li>
+				<li class="item" v-on:click="setChildNum(2)">折线图</li>
+				<li class="item current">主观评价雷达图</li>
+				<li class="item" v-on:click="setChildNum(4)">训练负荷</li>
+			</ul>
 		</div>
 		<section>
 			<div class="table-box">
@@ -27,6 +32,10 @@
 		watch: {
 			shuaxin: function() {
 				vm.setBiao();
+				vm.showPingFen();
+			},
+			showPingFen: function() {
+				window.bus.$emit('pingfen', true)
 			},
 			againBiao:function(){
 				vm.start();
@@ -39,8 +48,8 @@
 					Fatigue: 0,//RPE
 					SleepQuality: 0,//睡眠质量
 					Desire: 0,//饮食欲望
-					SorenessLevel: 0,//肌肉酸痛评价
-					FatigueLevel: 0,//伤病疼痛评价
+					SorenessLevel: 0,//肌肉酸痛
+					FatigueLevel: 0,//伤病疼痛
 					TrainStatus: 0,//自我训练状态
 					FatigueLength: 0,
 					SleepQualityLength: 0,
@@ -75,6 +84,9 @@
 		methods: {
 			start: function() {
 				vm.setBiao();
+			},
+			setChildNum:function(num){
+				window.bus.$emit('childNum', num)
 			},
 			setBiao: function() {
 				var _series = [vm.leida.Fatigue, vm.leida.SleepQuality, vm.leida.Desire, vm.leida.SorenessLevel, vm.leida.FatigueLevel, vm.leida.TrainStatus];
@@ -128,15 +140,15 @@
 								max: 10
 							},
 							{
-								name: '肌肉酸痛评价',
+								name: '肌肉酸痛',
 								max: 10
 							},
 							{
-								name: '伤病疼痛评价',
+								name: '伤病疼痛',
 								max: 10
 							},
 							{
-								name: '自我训练状态评价',
+								name: '自我训练状态',
 								max: 10
 							}
 						]

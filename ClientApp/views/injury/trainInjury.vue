@@ -4,23 +4,30 @@
 		<section class="content">
 			<top-menu></top-menu>
 			<div class="index-content">
-				<div class="injury-menu">
-					<div class="title">运动员</div>
-					<section>
-						<ul class="injury-menu-list">
-							<li v-for="(item,index) in sportList" :style="{'background-color':sportIndex == index?'#fafafa':'#FFFFFF'}" v-on:click="sportIndex = index">
-								<img v-if="item.Img" class="portrait" :src="url + item.Img">
-								<img v-else class="portrait" src="../../assets/imgs/person.png">
-								<img v-if="sportIndex == index" class="right" src="../../assets/imgs/right.png" />
-								<div class="injury-menu-text">
-									<p>{{item.FullName}}</p>
-									<p>{{item.FullName}}</p>
-								</div>
-							</li>
-						</ul>
-
-					</section>
+				<div style="margin-right:20px;margin-bottom:20px; float:right;">
+					<select class="sport-list" v-model="trainFirse">
+						<!-- <option v-if="userType == '超级管理员'" value="">-全部大项-</option> -->
+						<option value="">-全部大项-</option>
+						<option :value="index" v-for="(item,index) in zhuanxiangList" v-if="item.SystemId.length == 3">{{item.Name}}</option>
+					</select>
+					<select class="sport-list" v-model="trainId">
+						<option value="">-全部小项-</option>
+						<option :value="item.Id" v-for="(item,index) in zhuanxiangLists" v-if="item.SystemId.length == 6 && trainFirse !== '' && item.SystemId.substr(0,3) == zhuanxiangList[trainFirse].SystemId">{{item.Name}}</option>
+					</select>
+					<select class="sport-list" v-if="userType != '分队教练'" v-model="sex">
+						<option value="">-全部性别-</option>
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+					<select class="sport-list" v-model="sportIndex">
+						<option value="">-全部运动员-</option>
+						<option v-for="(item,index) in sportList" :value="index">{{item.FullName}}</option>
+					</select>
+					<!-- <button class="daochu" v-on:click="daochu = true">导出</button> -->
+					<button class="daochu" v-on:click="getDoctor()">查询</button>
 				</div>
+				<div style="clear: both;"></div>
+				
 				<div class="injury-main">
 					<div class="title">
 						<div class="injury-add">
@@ -84,11 +91,23 @@
 		data: function() {
 			return {
 				url:'',
-				sportList: [], //运动员列表
 				doctorList: [], //伤病记录
 				showMask: false, //显示添加伤病记录
 				doctorText:'',
-				sportIndex: 0
+				userType: '', //用户类型
+				
+				sex: '',
+
+				trainFirse: '',
+				trainId: '',
+				sportIndex: '',
+
+				sportList: [],
+				zhuanxiangList: [],
+				zhuanxiangLists: []
+				
+				
+				
 			}
 		},
 		//公共模板
@@ -97,8 +116,18 @@
 			topMenu: topMenu
 		},
 		watch: {
-			sportIndex: function(newVal, oldVal) {
-				vm.getDoctor();
+			trainFirse: function(newVal, oldVal) {
+				vm.trainId = '';
+				vm.sportIndex = '';
+				vm.getSport();
+			},
+			trainId: function(newVal, oldVal) {
+				vm.sportIndex = '';
+				vm.getSport();
+			},
+			sex: function(newVal, oldVal) {
+				vm.sportIndex = '';
+				vm.getSport();
 			},
 			//关闭窗口清空信息
 			showMask:function(newVal,oldVal){
@@ -111,36 +140,95 @@
 		computed: {},
 		methods: {
 			start: function() {
+				vm.userType = window.localStorage.getItem('Sport_userType');
+				if(vm.userType == '分队教练') {
+					vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
+				}
 				vm.url = myPublic.publicUrl;
-				vm.getSport();
+				vm.GetAllTrain().then(() => {
+					vm.getSport().then(() => {
+						vm.getDoctor()
+					});
+				});
+			},
+			//获取训练专项
+			GetAllTrain: function() {
+				return new Promise(function(resolve, reject) {
+					vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+							params: {
+								userName: ''
+							}
+						}).then(function(result) {
+							if(result.body.StateCode == 0) {
+								var _z = [];
+								var _id = JSON.parse(window.localStorage.getItem('user')).TrainId.split(',');
+								if(!(_id[0] === '' && _id.length == 1)) {
+									for(var i = 0; i < result.body.Data.length; i++) {
+										if(_id.includes(result.body.Data[i].Id)) {
+											_z.push(result.body.Data[i]);
+											if(_z.length >= _id.length){break;}
+										}
+									}
+								} else {
+									_z = [...result.body.Data];
+								}
+								vm.zhuanxiangList = _z;
+								vm.zhuanxiangLists = [...result.body.Data];
+								vm.$nextTick(function() {
+									// if(vm.userType == '超级管理员'){
+									// 	vm.trainFirse = '';
+									// }else{
+									// 	for(var i = 0; i < _z.length; i++) {
+									// 		if(_z[i].SystemId.length == 3) {
+									// 			vm.trainFirse = i;
+									// 			break;
+									// 		}
+									// 	}
+									// }
+									resolve()
+								});
+
+							}
+						})
+						.catch(function(error) {
+							console.log(error);
+							reject()
+						});
+				});
+
 			},
 			//查询运动员
 			getSport: function() {
-				vm.$http.get(myPublic.publicUrl + '/API/Account/GetMySportsman', {
-					headers: {
-						token: window.localStorage.getItem('Sport_Access_Token')
-					}
-				}).then(function(result) {
-					if(result.body.StateCode == 0) {
-						vm.sportList = result.body.Data;
-						if(result.body.Data && result.body.Data.length > 0) {
-							vm.sportIndex = 0;
-							vm.getDoctor();
-						}
-					} else {
-						vm.$router.push({
-							path: '/login'
+				return new Promise(function(resolve, reject) {
+					vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainFId=' + (vm.trainFirse !== '' ? vm.zhuanxiangList[vm.trainFirse].Id : '') + '&trainId=' + vm.trainId + '&sex=' + vm.sex, {})
+						.then(function(
+							result) {
+							if(result.body.StateCode == 0) {
+								vm.sportList = result.body.Data;
+								for(var i = 0; i < result.body.Data.length; i++) {
+									vm.userXuanZe.push(result.body.Data[i].UserId);
+								}
+							} else {
+								vm.$router.push({
+									path: '/login'
+								});
+							}
+							resolve();
+
+						}).catch(function(error) {
+							console.log(error);
 						});
-					}
-				}).catch(function(error) {
-					console.log(error);
 				});
 			},
 			//查询伤病记录
 			getDoctor: function() {
+				if(vm.sportIndex === ''){
+					myPublic.alertMy('请选择一位运动员')
+return;					
+				}
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllDoctorRecord', {
 					params: {
-						userid: vm.sportList[vm.sportIndex].UserId,
+						userid: (vm.sportIndex === '' ? '' : vm.sportList[vm.sportIndex].UserId),
 						pagesize:9999,
 						pageindex:1
 					}

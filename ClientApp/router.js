@@ -23,6 +23,8 @@ import allSubjective from './views/allSubjective/allSubjective.vue';//主观评�
 import workout from './views/workout/workout.vue';//体能测试
 import workoutAdd from './views/workout/workoutAdd.vue';//体能测试
 import mixedAbility from './views/mixedAbility/mixedAbility.vue';//综合能力
+import trainingPlan from './views/trainingPlan/trainingPlan.vue';//训练计划
+import allTrainingPlan from './views/trainingPlan/allTrainingPlan.vue';//训练计划
 
 Vue.use(Router)
 window.router = new Router({
@@ -89,7 +91,14 @@ window.router = new Router({
 		},{
 			path:"/mixedAbility",
 			component:mixedAbility
+		},{
+			path:"/trainingPlan",
+			component:trainingPlan
+		},{
+			path:'/allTrainingPlan',
+			component:allTrainingPlan
 		}
+		
 	]
 })
 export default router;

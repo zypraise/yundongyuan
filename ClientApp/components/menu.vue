@@ -1,31 +1,36 @@
 <template>
 	<div id="top-menu">
-		<section v-if="userjuese == 1" class="top-menu-box" style="width: 550px;">
+		<section v-if="userjuese == 1" class="top-menu-box" style="width: 660px;">
 			<div class="top-menu-item" v-on:click="goUrl('/subjective')">
 				<img v-if="menu == 1" src="../assets/imgs/menu-current-1.png" />
 				<img v-else src="../assets/imgs/menu-1.png" />
 				<div class="text" :style="{'color':(menu == 1?'#ba2538':'#545454')}">主观评价</div>
-			</div>
-			<div class="top-menu-item" v-on:click="goUrl('/stamina')">
-				<img v-if="menu == 2" src="../assets/imgs/menu-current-2.png" />
-				<img v-else src="../assets/imgs/menu-2.png" />
-				<div class="text" :style="{'color':(menu == 2?'#ba2538':'#545454')}">体能数据</div>
 			</div>
 			<div class="top-menu-item" v-on:click="goUrl('/phyConstituents')">
 				<img v-if="menu == 3" src="../assets/imgs/menu-current-3.png" />
 				<img v-else src="../assets/imgs/menu-3.png" />
 				<div class="text" :style="{'color':(menu == 3?'#ba2538':'#545454')}">生理生化</div>
 			</div>
+			<div class="top-menu-item" v-on:click="goUrl('/stamina')">
+				<img v-if="menu == 2" src="../assets/imgs/menu-current-2.png" />
+				<img v-else src="../assets/imgs/menu-2.png" />
+				<div class="text" :style="{'color':(menu == 2?'#ba2538':'#545454')}">体能数据</div>
+			</div>
 			<div class="top-menu-item" v-on:click="goUrl('/bodyComposition')">
 				<img v-if="menu == 4" src="../assets/imgs/menu-current-4.png" />
 				<img v-else src="../assets/imgs/menu-4.png" />
 				<div class="text" :style="{'color':(menu == 4?'#ba2538':'#545454')}">体重/体成分</div>
 			</div>
-			<div class="top-menu-item" v-on:click="goUrl('/sportInjury')">
+			<div class="top-menu-item" v-on:click="goUrl('/trainingPlan')">
+				<img v-if="menu == 13" src="../assets/imgs/menu-current-9.png" />
+				<img v-else src="../assets/imgs/menu-9.png" />
+				<div class="text" :style="{'color':(menu == 13?'#ba2538':'#545454')}">训练计划</div>
+			</div>
+			<!-- <div class="top-menu-item" v-on:click="goUrl('/sportInjury')">
 				<img v-if="menu == 5" src="../assets/imgs/menu-current-5.png" />
 				<img v-else src="../assets/imgs/menu-5.png" />
 				<div class="text" :style="{'color':(menu == 5?'#ba2538':'#545454')}">伤病记录</div>
-			</div>
+			</div> -->
 		</section>
 		<section v-if="userjuese == 2" class="top-menu-box" style="width: 660px;">
 			<!--<div class="top-menu-item" v-on:click="goUrl('/primary')">
@@ -41,7 +46,7 @@
 			<div class="top-menu-item" v-on:click="goUrl('/allConstituents')">
 				<img v-if="menu == 12" src="../assets/imgs/menu-current-3.png" />
 				<img v-else src="../assets/imgs/menu-3.png" />
-				<div class="text" :style="{'color':(menu == 3?'#ba2538':'#545454')}">生理生化</div>
+				<div class="text" :style="{'color':(menu == 12?'#ba2538':'#545454')}">生理生化</div>
 			</div>
 			<div class="top-menu-item" v-on:click="goUrl('/workout')">
 				<img v-if="menu == 8" src="../assets/imgs/menu-current-2.png" />
@@ -51,13 +56,18 @@
 			<div class="top-menu-item" v-on:click="goUrl('/allComposition')">
 				<img v-if="menu == 11" src="../assets/imgs/menu-current-4.png" />
 				<img v-else src="../assets/imgs/menu-4.png" />
-				<div class="text" :style="{'color':(menu == 4?'#ba2538':'#545454')}">体重/体成分</div>
+				<div class="text" :style="{'color':(menu == 11?'#ba2538':'#545454')}">体重/体成分</div>
 			</div>
-			<div class="top-menu-item" v-on:click="goUrl('/trainInjury')">
+			<div class="top-menu-item" v-on:click="goUrl('/allTrainingPlan')">
+				<img v-if="menu == 14" src="../assets/imgs/menu-current-9.png" />
+				<img v-else src="../assets/imgs/menu-9.png" />
+				<div class="text" :style="{'color':(menu == 14?'#ba2538':'#545454')}">训练计划</div>
+			</div>
+			<!-- <div class="top-menu-item" v-on:click="goUrl('/trainInjury')">
 				<img v-if="menu == 10" src="../assets/imgs/menu-current-5.png" />
 				<img v-else src="../assets/imgs/menu-5.png" />
 				<div class="text" :style="{'color':(menu == 10?'#ba2538':'#545454')}">伤病记录</div>
-			</div>
+			</div> -->
 			<!--<div class="top-menu-item" v-on:click="goUrl('/mixedAbility')">
 				<img v-if="menu == 9" src="../assets/imgs/menu-current-8.png" />
 				<img v-else src="../assets/imgs/menu-8.png" />
@@ -65,7 +75,7 @@
 			</div>-->
 		</section>
 		<!-- <a href="http://www.cissatmes.com/platform" style="float: right;margin: 12px;border: 1px solid #bcbcbc;border-radius: 4px;width: 120px;text-align: center;line-height: 34px;text-decoration: none;" v-if="userjuese == 2">后台管理</a> -->
-		<a href="http://www.sport.uare.vip/platform" style="float: right;margin: 12px;border: 1px solid #bcbcbc;border-radius: 4px;width: 120px;text-align: center;line-height: 34px;text-decoration: none;" v-if="userjuese == 2">后台管理</a>
+		<a href="http://www.cissatmes.com/platform" style="float: right;margin: 12px;border: 1px solid #bcbcbc;border-radius: 4px;width: 120px;text-align: center;line-height: 34px;text-decoration: none;" v-if="ishoutai">后台管理</a>
 	</div>
 </template>
 
@@ -74,7 +84,8 @@
 	export default {
 		data: function() {
 			return {
-				userjuese:0//1:远动员 2:教练员
+				userjuese:0,//1:远动员 2:教练员
+				ishoutai:false
 			}
 		},
 		//计算属性
@@ -82,6 +93,19 @@
 			menu: function() {
 				var _d = '';
 				switch(vm.$route.path) {
+					
+					case '/allTrainingPlan':
+					_d = 14;
+					break;
+					case '/trainingPlan':
+					_d = 13;
+					break;
+					case '/allConstituents':
+					_d = 12;
+					break;
+					case '/allComposition':
+					_d = 11;
+					break;
 					case '/trainInjury':
 						_d = 10;
 						break;
@@ -132,7 +156,14 @@
 		},
 		methods: {
 			start: function() {
-				vm.userjuese = window.localStorage.getItem('Sport_userType') == '运动员'?1:2;
+				if(window.localStorage.getItem('Sport_userType') == '运动员'){
+					vm.userjuese = 1;
+				}else{
+					vm.userjuese = 2;
+				}
+				
+				
+				vm.ishoutai = (window.localStorage.getItem('Sport_userType') == '超级管理员' || window.localStorage.getItem('Sport_userType') == '系统管理员');
 			},
 			goUrl: function(url) {
 				vm.$router.push({

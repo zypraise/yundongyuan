@@ -1,11 +1,18 @@
 <template>
 	<div class="body-item">
 		<div class="title">
-			<div>训练负荷</div>
+			<ul class="title-tab">
+				<li class="item" v-on:click="setChildNum(1)">数据表</li>
+				<li class="item" v-on:click="setChildNum(2)">折线图</li>
+				<li class="item current">训练负荷</li>
+			</ul>
 		</div>
 		<section>
-			<div class="table-box" style="height: 380px;">
-				<div id="child2" style="width: 100%;height: 100%;overflow: hidden;">
+			<div class="table-box">
+				<div v-if="!userId" style="width: 100%;height: 100%;line-height: 380px;font-size: 20px;text-align: center;color: #999999;">
+					选择一位运动员
+				</div>
+				<div v-show="userId" id="child2" style="width: 100%;height: 100%;overflow: hidden;">
 				</div>
 			</div>
 		</section>
@@ -34,6 +41,13 @@
 		methods: {
 			start: function() {
 				vm.getList();
+				vm.showPingFen();
+			},
+			showPingFen: function() {
+				window.bus.$emit('pingfen', true)
+			},
+			setChildNum: function(num) {
+				window.bus.$emit('childNum', num)
 			},
 			getList: function() {
 				if(!vm.userId) {
@@ -47,7 +61,7 @@
 					}
 				}).then(function(result) {
 					if(result.body.StateCode == 0) {
-						vm.bodyList = result.body.Data;
+						vm.bodyList = result.body.Data?result.body.Data:[];
 						vm.setBiao();
 					} else {
 						vm.$router.push({
@@ -95,7 +109,7 @@
 					},
 					grid: {
 						left: '10px',
-						right: '20px',
+						right: '50px',
 						bottom: '10px',
 						containLabel: true
 					},

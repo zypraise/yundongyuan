@@ -18,7 +18,7 @@
 					<p v-if="roleIndex == role.length - 1" class="is" v-html="isRole"></p>
 				</li>
 				<li style="margin: 0px -25px;"><button class="choice-but" v-on:click="next()">确认教练</button><button class="back-but"
-					 v-on:click="back()">返回</button></li>
+					 v-on:click="back()">跳过</button></li>
 			</ul>
 		</section>
 	</div>
@@ -118,7 +118,9 @@
 				});
 			},
 			back: function() {
-				vm.$router.back(-1);
+				vm.$router.push({
+					path: '/subjective'
+				});
 			}
 		},
 		beforeCreate: function() {

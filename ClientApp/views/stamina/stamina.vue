@@ -19,7 +19,7 @@
 				<div style="clear: both;"></div>
 				
 				<section v-if="childNum == 1">
-					<jichu :is-get-list="isGetList"></jichu>
+					<jichu :is-get-list="isGetList" :plist-type="plistType"></jichu>
 				</section>
 				<section v-if="childNum == 2">
 					<zhuanxiang :is-get-list="isGetList"></zhuanxiang>
@@ -32,6 +32,7 @@
 	var vm;
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
+	import pingFen from '../../components/pingFen.vue';
 	import jichu from '../stamina/childNum1.vue';
 	import zhuanxiang from '../stamina/childNum2.vue';
 	import '../../assets/styles/stamina.css';
@@ -42,12 +43,15 @@
 			return {
 				isGetList:true,
 				childNum:0,
+				showPingFen: true,
+				plistType:1
 			}
 		},
 		//公共模板
 		components: {
 			headerComponent: header,
 			jichu: jichu,
+			pingFen: pingFen,
 			zhuanxiang: zhuanxiang,
 			topMenu: topMenu
 		},
@@ -67,8 +71,13 @@
 				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd')
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd')
 				vm.setTimeInp();
+				window.bus.$on('pingfen', function(val) {
+					vm.showPingFen = val;
+				});
 				window.bus.$on('stamina', function(val) {
-					vm.childNum = val;
+					vm.childNum = val.split(',')[0];
+					vm.plistType = val.split(',')[1];
+					vm.isGetList = !vm.isGetList;
 				});
 				if(window.localStorage.getItem('workoutFrom') == '0'){
 					vm.childNum = 2;
@@ -109,6 +118,7 @@
 			vm = this;
 		},
 		beforeDestroy: function() {
+			window.bus.$off('pingfen');
 			window.bus.$off('stamina');
 		},
 		mounted: function() {

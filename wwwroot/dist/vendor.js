@@ -150,12 +150,12 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 220);
+/******/ 	return __webpack_require__(__webpack_require__.s = 222);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 160:
+/***/ 161:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -329,7 +329,7 @@
 
 /***/ }),
 
-/***/ 161:
+/***/ 162:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1123,7 +1123,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 162:
+/***/ 163:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1131,17 +1131,112 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 //自定义全局变量
 (function () {
+	var idTmr;
+	var tableToExcel = function () {
+		var uri = 'data:application/vnd.ms-excel;base64,',
+		    template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' + '<head>' + '<meta charset="UTF-8">' + '<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>' + '<x:Name>${worksheet}</x:Name>' + '<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>' + '</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->' + '</head>' + '<body><table>{table}</table></body></html>',
+		    base64 = function base64(s) {
+			return window.btoa(unescape(encodeURIComponent(s)));
+		},
+		    format = function format(s, c) {
+			return s.replace(/{(\w+)}/g, function (m, p) {
+				return c[p];
+			});
+		};
+		return function (table, name) {
+			if (!table.nodeType) table = document.getElementById(table);
+			var ctx = {
+				worksheet: name || 'Worksheet',
+				table: table.innerHTML
+			};
+			window.location.href = uri + base64(format(template, ctx));
+		};
+	}();
+
+	function getExplorer() {
+		var explorer = window.navigator.userAgent;
+		//ie
+		if (explorer.indexOf("MSIE") >= 0) {
+			return 'ie';
+		}
+		//firefox
+		else if (explorer.indexOf("Firefox") >= 0) {
+				return 'Firefox';
+			}
+			//Chrome
+			else if (explorer.indexOf("Chrome") >= 0) {
+					return 'Chrome';
+				}
+				//Opera
+				else if (explorer.indexOf("Opera") >= 0) {
+						return 'Opera';
+					}
+					//Safari
+					else if (explorer.indexOf("Safari") >= 0) {
+							return 'Safari';
+						}
+	}
+
+	function Cleanup() {
+		window.clearInterval(idTmr);
+		CollectGarbage();
+	}
 	var myPublic = {
-		// publicUrl:'http://www.cissatmes.com',
-		publicUrl: 'http://www.sport.uare.vip',
-		// publicUrl:'http://localhost:80',
+		publicUrl: 'http://www.cissatmes.com',
+		//		publicUrl:'http://www.sport.uare.vip',
+		// publicUrl: 'http://localhost:80',
 		setTitle: function setTitle(title) {
 			document.title = title;
 		},
+		tableExcel: function tableExcel(tableid) {
+			if (getExplorer() == 'ie') {
+				var curTbl = document.getElementById(tableid);
+				var oXL = new ActiveXObject("Excel.Application");
+				var oWB = oXL.Workbooks.Add();
+				var xlsheet = oWB.Worksheets(1);
+				var sel = document.body.createTextRange();
+				sel.moveToElementText(curTbl);
+				sel.select();
+				sel.execCommand("Copy");
+				xlsheet.Paste();
+				oXL.Visible = true;
+
+				try {
+					var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+				} catch (e) {
+					print("Nested catch caught " + e);
+				} finally {
+					oWB.SaveAs(fname);
+					oWB.Close(savechanges = false);
+					oXL.Quit();
+					oXL = null;
+					idTmr = window.setInterval("Cleanup();", 1);
+				}
+			} else {
+				tableToExcel(tableid);
+			}
+		},
+		getUrlParam: function getUrlParam(variable) {
+			var query = window.location.hash.split("?")[1];
+			var vars = query.split("&");
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if (pair[0] == variable) {
+					return pair[1];
+				}
+			}
+			return false;
+		},
 		tableHeader: function tableHeader(id) {
+			return;
 			var tableCont = document.querySelector(id);
+
 			function scrollHandle(e) {
 				var scrollTop = this.scrollTop;
+				if (scrollTop > this.querySelector('tbody').offsetHeight - 36) {
+					return;
+				}
+
 				this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
 			}
 			tableCont.addEventListener('scroll', scrollHandle);
@@ -1263,13 +1358,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 165:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 166:
 /***/ (function(module, exports) {
 
@@ -1284,23 +1372,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ 220:
+/***/ 168:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 222:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(161);
-
 __webpack_require__(162);
 
-__webpack_require__(160);
+__webpack_require__(163);
+
+__webpack_require__(161);
+
+__webpack_require__(168);
 
 __webpack_require__(167);
 
 __webpack_require__(166);
-
-__webpack_require__(165);
 
 /***/ })
 

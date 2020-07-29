@@ -494,31 +494,46 @@
 						_l.push(vm.trainChildList[i]);
 					}
 				}
-				vm.$http.post(myPublic.publicUrl + '/API/Account/Register', {
-						Type: '运动员', //注册类型（运动员/教练）
-						UserName: vm.userName, //用户名
-						Sex: vm.sex, //性别
-						FullName: vm.name, //姓名
-						Birthday: vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day), //生日
-						NativePlace: vm.nativePlace, //籍贯
-						Nation: vm.nation, //民族
-						BloodType: vm.bloodType, //血型
-						Height: vm.height, //身高(cm)
-						Weight: vm.weight, //体重(kg)
-						SportGrade: vm.SportGrade, //运动等级
-						TrainId: _l, //运动小项
-						PhoneNumber: vm.mobile, //手机号
-						VerifyCode: vm.code, //验证码
-						Start4Training: vm.startTime, //专训开始时间
-						Password: vm.passWord, //密码
-						ConfirmPassword: vm.repeatPassWord //确认密码(注册时该项为必填项、关联该字段不填)
-					}).then(function(result) {
+
+
+				var _d = {
+					Type: '运动员', //注册类型（运动员/教练）
+					UserName: vm.userName, //用户名
+					Sex: vm.sex, //性别
+					FullName: vm.name, //姓名
+					Birthday: vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day), //生日
+					SportGrade: vm.SportGrade, //运动等级
+					TrainId: _l, //运动小项
+					PhoneNumber: vm.mobile, //手机号
+					VerifyCode: vm.code, //验证码
+					Start4Training: vm.startTime, //专训开始时间
+					Password: vm.passWord, //密码
+					ConfirmPassword: vm.repeatPassWord //确认密码(注册时该项为必填项、关联该字段不填)
+
+				}
+				if (vm.nativePlace) {
+					_d.NativePlace = vm.nativePlace;
+				}
+				if (vm.nation) {
+					_d.Nation = vm.nation;
+				}
+				if (vm.bloodType) {
+					_d.BloodType = vm.bloodType;
+				}
+				if (vm.height) {
+					_d.Height = vm.height;
+				}
+				if (vm.weight) {
+					_d.Weight = vm.weight;
+				}
+
+				vm.$http.post(myPublic.publicUrl + '/API/Account/Register', _d).then(function(result) {
 						if (result.body.StateCode == 0) {
 							myPublic.alertResult('注册成功')
 							vm.$router.push({
 								path: '/login'
 							});
-						}else{
+						} else {
 							myPublic.alertResult(result.body.Message);
 						}
 					})

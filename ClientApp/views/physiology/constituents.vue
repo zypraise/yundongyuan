@@ -5,23 +5,6 @@
 			<top-menu></top-menu>
 			<div class="index-content">
 				<div style="margin-bottom:20px;margin-right:20px;float:right;">
-					<select v-if="userType != '运动员'" class="sport-list" v-model="trainFirse">
-						<option value="">-全部大项-</option>
-						<option :value="index" v-for="(item,index) in zhuanxiangList" v-if="item.SystemId.length == 3">{{item.Name}}</option>
-					</select>
-					<select v-if="userType != '运动员'" class="sport-list" v-model="trainId">
-						<option value="">-全部小项-</option>
-						<option :value="item.Id" v-for="(item,index) in zhuanxiangList" v-if="item.SystemId.length == 6 && trainFirse !== '' && item.SystemId.substr(0,3) == zhuanxiangList[trainFirse].SystemId">{{item.Name}}</option>
-					</select>
-					<select v-if="userType != '运动员' && userType != '分队教练'" class="sport-list" v-model="sex">
-						<option value="">-全部性别-</option>
-						<option value="男">男</option>
-						<option value="女">女</option>
-					</select>
-					<select v-if="userType != '运动员'" class="sport-list" v-model="sportIndex">
-						<option value="">-全部运动员-</option>
-						<option v-for="(item,index) in sportList" :value="index">{{item.FullName}}</option>
-					</select>
 					<section class='mydate-box'>
 						<input class='form_datetime' onclick='myDate.getFocus(this)' id='starttime' readonly='readonly' type='text'>
 						<section id="starttime-section" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
@@ -31,77 +14,31 @@
 						<input class='form_datetime' onclick='myDate.getFocus(this)' id='endtime' readonly='readonly' type='text'>
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
-					<button v-if="userType == '教练'" class="daochu" v-on:click="daochu = true">导出</button>
-					
 					<button class="daochu" v-on:click="getPhyConstituents()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
-				<section class="shengli-main" :style="{'width':(showPingFen?'100%':'60%')}">
+				<section class="shengli-main">
 					<div class="body-item">
 						<div class="title">
+							<div style="float: right;"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;" v-on:click="showPingFen = false" /></div>
 							<ul class="title-tab">
 								<li class="item" :class="{'current':childNum == 3}" v-on:click="childNum = 3">数据表</li>
 								<li class="item" :class="{'current':childNum == 2}" v-on:click="childNum = 2">折线图</li>
-								<li class="item" :class="{'current':childNum == 1}" v-on:click="childNum = 1">睾酮/皮质醇</li>
 							</ul>
-							<div>生理生化<img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;" v-on:click="showPingFen = !showPingFen" /></div>
 						</div>
 						<section>
 							<div class="table-box">
-								<child-component-first v-bind:again-biao="againBiao" v-bind:show-ping-fen="showPingFen" v-bind:phy-constituents-list="phyConstituentsList" v-if="childNum == 1"></child-component-first>
 								<child-component-second v-bind:again-biao="againBiao" v-bind:show-ping-fen="showPingFen" v-bind:phy-constituents-list="phyConstituentsList" v-if="childNum == 2"></child-component-second>
-								<child-component-third v-bind:phy-constituents-list="phyConstituentsList" v-if="childNum == 3"></child-component-third>
+								<child-component-third v-bind:phy-constituents-list="phyConstituentsList" v-bind:sortlist='sortlist' v-if="childNum == 3"></child-component-third>
 							</div>
 						</section>
 					</div>
 				</section>
-				<section class="ping-fen" :style="{'margin-right':(showPingFen?'-40%':'0%')}">
-					<sheng-li v-bind:show-ping-fen="showPingFen"></sheng-li>
+				<section class="ping-fen" :style="{'display':(showPingFen?'none':'block')}">
+					<sheng-li></sheng-li>
 				</section>
 			</div>
 		</section>
-		<div class="mask" v-if="daochu">
-			<div class="daochu-mask">
-				<div class="title">
-					<img class="close-img" src="../../assets/imgs/close.png" v-on:click="daochu = false">
-					<span>选择导出项</span>
-					<input v-if="daochuNum == 1" style="margin: 17px 6px 0px 20px;vertical-align:  top;" value="1" type="checkbox" name="alldaochu" v-model="allDaoChu">
-					<input v-if="daochuNum == 2" style="margin: 17px 6px 0px 20px;vertical-align:  top;" value="1" type="checkbox" name="alldaochunext" v-model="allDaoChuNext">
-					<span>全选/全不选</span>
-				</div>
-				<div v-if="daochuNum == 1" class="daochu-table">
-					<div style="line-height: 40px;float: left;width: 50%;" v-for="item in sportList"><input style="margin-left: 6px;" :value="item.UserId" type="checkbox" name="user" v-model="userXuanZe" />{{item.FullName}}</div>
-				</div>
-				<div v-if="daochuNum == 1" class="but-box"><button v-on:click="daochuNum = 2">下一步</button><button v-on:click="daochu = false">取消</button></div>
-
-				<div v-if="daochuNum == 2" class="daochu-table">
-					<table>
-						<tr>
-							<td><input value="Leukocyte,白细胞" type="checkbox" name="daochu" v-model="daochuList" />白细胞</td>
-							<td><input value="Erythrocyte,红细胞" type="checkbox" name="daochu" v-model="daochuList" />红细胞</td>
-						</tr>
-						<tr>
-							<td><input value="Hemoglobin,血红蛋白" type="checkbox" name="daochu" v-model="daochuList" />血红蛋白</td>
-							<td><input value="Neutrophils,中性粒细胞" type="checkbox" name="daochu" v-model="daochuList" />中性粒细胞</td>
-						</tr>
-						<tr>
-							<td><input value="Lymphocyte,淋巴细胞" type="checkbox" name="daochu" v-model="daochuList" />淋巴细胞</td>
-							<td><input value="Hematocrit,血球积压" type="checkbox" name="daochu" v-model="daochuList" />红细胞积压</td>
-						</tr>
-						<tr>
-							<td><input value="BloodUrea,血尿素" type="checkbox" name="daochu" v-model="daochuList" />血尿素</td>
-							<td><input value="CreatineKinase,肌酸激酶" type="checkbox" name="daochu" v-model="daochuList" />肌酸激酶</td>
-						</tr>
-						<tr>
-							<td><input value="Cortisol,皮质醇" type="checkbox" name="daochu" v-model="daochuList" />皮质醇</td>
-							<td><input value="Testosterone,睾酮" type="checkbox" name="daochu" v-model="daochuList" />睾酮</td>
-						</tr>
-					</table>
-				</div>
-				<div v-if="daochuNum == 2" class="but-box">
-					<a :href="daochuUrl">确认</a><button v-on:click="daochuNum = 1">上一步</button></div>
-			</div>
-		</div>
 	</div>
 </template>
 <script>
@@ -109,7 +46,6 @@
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
 	import shengLi from '../../components/shengli.vue';
-	import childComponent1 from '../physiology/childNum1.vue';
 	import childComponent2 from '../physiology/childNum2.vue';
 	import childComponent3 from '../physiology/childNum3.vue';
 	import '../../assets/styles/physiology.css';
@@ -118,86 +54,37 @@
 		//变量
 		data: function() {
 			return {
+				sortlist:[
+					{
+						type:'Testdate',
+						is:true,
+						sort:true
+					},
+					{
+						type:'SportName',
+						is:false,
+						sort:false
+					}
+				],
 				againBiao:true,
 				getOnr:{},
-				allDaoChu:['1'],
-				allDaoChuNext:[],
-				daochuNum: 1,
-				userXuanZe: [],
 				childNum: 0,
-				daochu: false,
-				daochuList: [],
 				showPingFen: true,
-				phyConstituentsList: [],
-				userType: '',
-				
-				sex: '',
-				zhuanxiangList: [], //项目列表
-				
-				
-				sportList: [],
-				sportIndex: 0
+				phyConstituentsList: []
 			}
 		},
 		//公共模板
 		components: {
 			headerComponent: header,
 			shengLi: shengLi,
-			childComponentFirst: childComponent1,
 			childComponentSecond: childComponent2,
 			childComponentThird: childComponent3,
 			topMenu: topMenu
 		},
 		watch: {
-			allDaoChu:function(newVal,oldVal){
-				if(newVal.length>0){
-					vm.getSport()
-				}else{
-					vm.userXuanZe = [];
-				}
-			},
-			allDaoChuNext: function(newVal, oldVal) {
-				if(newVal.length > 0) {
-					vm.daochuList = [
-						"Leukocyte,白细胞",
-						"Erythrocyte,红细胞",
-						"Hemoglobin,血红蛋白",
-						"Lymphocyte,淋巴细胞",
-						"Hematocrit,血球积压",
-						"BloodUrea,血尿素",
-						"CreatineKinase,肌酸激酶",
-						"Cortisol,皮质醇",
-						"Testosterone,睾酮"
-					];
-				} else {
-					vm.daochuList = [];
-				}
-			}
-
 		},
 		//计算属性
 		computed: {
-			daochuUrl: function() {
-				var _nameList = [];
-				var _valueList = [];
-				for(var i = 0; i < vm.daochuList.length; i++) {
-					if(vm.daochuList[i]) {
-						if(i != 0) {
-							_nameList += ',';
-							_valueList += ',';
-						}
-						_nameList += vm.daochuList[i].split(',')[0];
-						_valueList += vm.daochuList[i].split(',')[1];
-					}
-				}
-				var data = '';
-				data += "starttime=" + document.getElementById('starttime').value;
-				data += "&endtime=" + document.getElementById('endtime').value;
-				data += "&userid=" + vm.userXuanZe.join(',');
-				data += "&projectValue=" + _nameList;
-				data += "&projectName=" + _valueList;
-				return myPublic.publicUrl + '/API/Excelreport/PeriodicTestExport?' + data;
-			}
 		},
 		methods: {
 			start: function() {
@@ -206,41 +93,40 @@
 				window.bus.$on('pingfen', function(val) {
 					vm.showPingFen = val;
 				});
-					vm.userType = window.localStorage.getItem('Sport_userType');
-				vm.GetAllTrain().then(() => {
-					vm.setTimeInp();
-					vm.getSport().then(() => {
-						vm.childNum = 3;
-					});
-					// vm.getSportItem();
+				window.bus.$on('sortlist', function(val){
+					vm.sortlist = val;
+					vm.getPhyConstituents();
 				});
+					vm.setTimeInp();
+					vm.getPhyConstituents()
+					vm.childNum = 3;
 			},
 			//查询生理生化
 			getPhyConstituents: function() {
-				// var userId = '';
-				// if(vm.userType == '教练') {
-				// 	userId = vm.sportList[vm.sportIndex].UserId;
-				// }
-				// vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest', {
-				// 	params: {
-				// 		sportuserid: userId,
-				// 		starttime: document.getElementById('starttime').value,
-				// 		endtime: document.getElementById('endtime').value,
-				// 		pagesize: 999,
-				// 		pageindex: 1
-				// 	}
-				// }).then(function(result) {
-				// 	if(result.body.StateCode == 0) {
-				// 		vm.phyConstituentsList = result.body.Data;
-				// 		vm.againBiao = !vm.againBiao;
-				// 	} else {
-				// 		vm.$router.push({
-				// 			path: '/login'
-				// 		});
-				// 	}
-				// }).catch(function(error) {
-				// 	console.log(error);
-				// });
+				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest', {
+					params: {
+						trainId: '',
+						trainSecId: '',
+						sex: '',
+						sportuserid: JSON.parse(window.localStorage.getItem('user')).Id,
+						starttime: document.getElementById('starttime').value,
+						endtime: document.getElementById('endtime').value,
+						sort:'',
+						pagesize: 9999,
+						pageindex: 1
+					}
+				}).then(function(result) {
+					if (result.body.StateCode == 0) {
+						vm.phyConstituentsList = result.body.Data?result.body.Data:[];
+						vm.againBiao = !vm.againBiao;
+					} else {
+						vm.$router.push({
+							path: '/login'
+						});
+					}
+				}).catch(function(error) {
+					console.log(error);
+				});
 			},
 			setTimeInp: function() {
 				document.getElementById('starttime-section').addEventListener('blur', function() {
@@ -276,6 +162,8 @@
 		},
 		beforeDestroy: function() {
 			window.bus.$off('pingfen');
+			window.bus.$off('sortlist');
+			
 		},
 		mounted: function() {
 			vm.start();
