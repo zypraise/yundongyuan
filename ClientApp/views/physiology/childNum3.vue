@@ -70,7 +70,7 @@
 					<td v-if="item.Sex == '男'">{{item.Testosterone}}<span :class="{'jing2':item.Testosterone<270,'jing3':item.Testosterone>1000}"></span></td>
 					<td v-else>{{item.Testosterone}}<span :class="{'jing2':item.Testosterone<10,'jing3':item.Testosterone>100}"></span></td>
 
-					<td v-if="item.Testosterone > 0" :style="{'color':(item.Cortisol<1?'#ba2538':'inherit')}">{{(item.Testosterone/item.Cortisol).toFixed(2)}}</td>
+					<td v-if="item.Cortisol > 0" :style="{'color':(item.Cortisol<1?'#ba2538':'inherit')}">{{(item.Testosterone/item.Cortisol).toFixed(2)}}</td>
 					<td v-else style="color: #ba2538;">0</td>
 
 					<td>

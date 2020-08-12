@@ -1,5 +1,14 @@
 <template>
-	<div id="workout">
+	<div id="trainingPlan">
+		<div class="edit-mask" v-if="isEdit">
+			<div class="is-edit">
+				<div class="header">评价<img v-on:click="isEdit = false" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 2px;cursor: pointer;"
+					 src="../../assets/imgs/close.png" /></div>
+				<div class="body">
+					{{text}}
+				</div>
+			</div>
+		</div>
 		<header-component></header-component>
 		<section class="content">
 			<top-menu></top-menu>
@@ -32,20 +41,47 @@
 						<input class='form_datetime' onclick='myDate.getFocus(this)' id='endtime' readonly='readonly' type='text'>
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
-					<button class="daochu" v-on:click="isGetList = !isGetList;">查询</button>
-					<button class="daochu" v-on:click="daochu = true">导出</button>
+					<button class="daochu" v-on:click="getList()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
-				<!-- 子集 -->
-				<section v-if="childNum == 1">
-					<jichu :daochu="daochu" :is-get-list="isGetList" :zhuanxiang-list="zhuanxiangList" :userXuanZe="userXuanZe" :train-firse="trainFirse" :train-id="trainId" :sport-list="sportList" :sport-index="sportIndex" :sex="sex" :plist-type="plistType"></jichu>
+
+				<section class="shengli-main" style="width:100%">
+					<div class="body-item">
+						<section>
+							<div class="table-box">
+								<table style="margin-bottom: 50px;">
+									<thead>
+										<tr>
+											<th style="min-width: 100px;">时间</th>
+											<th style="min-width: 100px;">姓名</th>
+											<th style="min-width: 100px;">专项训练</th>
+											<th style="min-width: 100px;">体能训练</th>
+											<th style="min-width: 100px;">康复训练</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="(item,index) in list">
+											<td>{{item.PlanDate.split('T')[0]}}</td>
+											<td>{{item.UserName}}</td>
+											<td>
+												<span v-if="item.SpecialTrainContent" style="color: #007AFF;cursor: pointer;" v-on:click="setText(item.SpecialTrainContent)">详情</span>
+												<span v-else style="color: #999999;">详情</span>
+											</td>
+											<td>
+												<span v-if="item.PhysicalTrainContent" style="color: #007AFF;cursor: pointer;" v-on:click="setText(item.PhysicalTrainContent)">详情</span>
+												<span v-else style="color: #999999;">详情</span>
+											</td>
+											<td>
+												<span v-if="item.RecoveryTrainContent" style="color: #007AFF;cursor: pointer;" v-on:click="setText(item.RecoveryTrainContent)">详情</span>
+												<span v-else style="color: #999999;">详情</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</section>
+					</div>
 				</section>
-				<section v-if="childNum == 2">
-					<zhuanxiang :is-get-list="isGetList" :sport-list="sportList" :sport-index="sportIndex"></zhuanxiang>
-				</section>
-				<!--<section v-if="childNum == 3">
-					<duibi :sport-list="sportList"></duibi>
-				</section>-->
 			</div>
 		</section>
 	</div>
@@ -54,38 +90,30 @@
 	var vm;
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
-	import jichu from '../workout/childNum1.vue'; //基础组件
-	import zhuanxiang from '../workout/childNum2.vue'; //基础组件
-	import '../../assets/styles/workout.css';
+	import '../../assets/styles/trainingPlan.css';
 
 	export default {
 		//变量
 		data: function() {
 			return {
-				daochu:false,
+				list: [],
+				text: '',
+				isEdit: false,
+
 				userType: '', //用户类型
 				sex: '',
-				childNum: 0,
-				isGetList: true,
-
 				trainFirse: '',
 				trainId: '',
 				sportIndex: '',
-
 				sportList: [],
 				zhuanxiangList: [],
-				zhuanxiangLists: [],
-				userXuanZe: [], //导出用户项
-				plistType: 1
-
+				zhuanxiangLists: []
 			}
 		},
 		//公共模板
 		components: {
 			headerComponent: header,
-			topMenu: topMenu,
-			jichu: jichu,
-			zhuanxiang: zhuanxiang
+			topMenu: topMenu
 		},
 		watch: {
 			trainFirse: function(newVal, oldVal) {
@@ -102,44 +130,49 @@
 				vm.getSport();
 			},
 		},
-		beforeRouteEnter(to, from, next) {
-			if(from.fullPath == '/workoutAdd') {
-				window.localStorage.setItem('workoutFrom', '0')
-			} else {
-				window.localStorage.setItem('workoutFrom', '1')
-			}
-			next();
-		},
 		//计算属性
 		computed: {},
 		methods: {
 			start: function() {
-				// myPublic.alertResult('请选择一位运动员');
+				myPublic.tableHeader(".table-box");
 				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2),
 					'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				vm.setTimeInp();
 				vm.userType = window.localStorage.getItem('Sport_userType');
-				if(vm.userType == '分队教练') {
+				if (vm.userType == '分队教练') {
 					vm.sex = JSON.parse(window.localStorage.getItem('user')).Sex;
 				}
-				window.bus.$on('workout', function(val) {
-					vm.childNum = val.split(',')[0];
-					vm.plistType = val.split(',')[1];
-					vm.isGetList = !vm.isGetList;
-				});
-				window.bus.$on('daochu', function(val) {
-					vm.daochu = val;
-				});
 				vm.GetAllTrain().then(() => {
 					vm.getSport().then(() => {
-						if(window.localStorage.getItem('workoutFrom') == '0') {
-							vm.childNum = 2;
-						} else {
-							vm.childNum = 1;
-						}
+						vm.getList();
 					});
 				});
+			},
+			getList: function() {
+				var _d = '';
+				_d += 'trainId=' + (vm.trainFirse !== '' ? vm.zhuanxiangList[vm.trainFirse].Id : "");
+				_d += '&trainSecId=' + vm.trainId;
+				_d += '&sex=' + vm.sex;
+				_d += '&sportuserid=' + (vm.sportIndex === '' ? '' : vm.sportList[vm.sportIndex].UserId);
+				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
+					.value +
+					'&pagesize=9999&pageindex=1';
+				vm.$http.post(myPublic.publicUrl + '/API/TrainPlan/TrainPlanList?' + _d, {})
+					.then(function(result) {
+						if (result.body.StateCode == 0) {
+							vm.list = result.body.Data ? result.body.Data : [];
+						} else {
+							vm.$router.push({
+								path: '/login'
+							});
+						}
+						resolve();
+
+					}).catch(function(error) {
+						console.log(error);
+					});
+
 			},
 			//获取训练专项
 			GetAllTrain: function() {
@@ -147,24 +180,25 @@
 					vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
 							params: {
 								userName: ''
+								
 							}
 						}).then(function(result) {
-							if(result.body.StateCode == 0) {
+							if (result.body.StateCode == 0) {
 								var _z = [];
 								var _id = JSON.parse(window.localStorage.getItem('user')).TrainId.split(',');
-								if(!(_id[0] === '' && _id.length == 1)) {
+								if(!(_id[0] === '' && _id.length == 1)){
 									for(var i = 0; i < result.body.Data.length; i++) {
 										if(_id.includes(result.body.Data[i].Id)) {
 											_z.push(result.body.Data[i]);
 											if(_z.length >= _id.length){break;}
 										}
 									}
-								} else {
+								}else{
 									_z = [...result.body.Data];
 								}
 								vm.zhuanxiangList = _z;
-								vm.zhuanxiangLists = [...result.body.Data];
-								vm.$nextTick(function() {
+								vm.zhuanxiangLists= [...result.body.Data];
+								vm.$nextTick(function(){
 									// if(vm.userType == '超级管理员'){
 									// 	vm.trainFirse = '';
 									// }else{
@@ -186,21 +220,14 @@
 						});
 				});
 
-			}, //获取远动员列表
+			},
+			//获取远动员列表
 			getSport: function() {
 				return new Promise(function(resolve, reject) {
-					vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?' + 'trainFId=' + (vm.trainFirse !== '' ? vm.zhuanxiangList[vm.trainFirse].Id : '') + '&trainId=' + vm.trainId + '&sex=' + vm.sex, {})
-						.then(function(
-							result) {
-
-							if(result.body.StateCode == 0) {
+					vm.$http.post(myPublic.publicUrl + '/API/Account/AthletesSelect?'+'trainFId=' + (vm.trainFirse !== ''?vm.zhuanxiangList[vm.trainFirse].Id:'') + '&trainId=' + vm.trainId + '&sex=' + vm.sex, {})
+						.then(function(result) {
+							if (result.body.StateCode == 0) {
 								vm.sportList = result.body.Data;
-								for(var i = 0; i < result.body.Data.length; i++) {
-									vm.userXuanZe.push(result.body.Data[i].FullName);
-								}
-								// if (result.body.Data && result.body.Data.length > 0) {
-								// 	vm.sportIndex = 0;
-								// }
 							} else {
 								vm.$router.push({
 									path: '/login'
@@ -219,7 +246,7 @@
 					var _date2 = document.getElementById('endtime').value;
 					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split(
 						'-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-					if(_date2 == '' || isDate) {
+					if (_date2 == '' || isDate) {
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
@@ -231,32 +258,28 @@
 					var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 					var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 <
 						_date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-					if(_isDate) {
+					if (_isDate) {
 						document.getElementById('endtime').value = _thisDate;
 						return;
 					}
 					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split(
 						'-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-					if(_date1 == '' || isDate) {
+					if (_date1 == '' || isDate) {
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
 					document.getElementById('endtime').value = document.getElementById('starttime').value;
 				});
 			},
-			workoutAdd: function() {
-				vm.$router.push({
-					path: '/workoutAdd'
-				});
+			setText: function(text) {
+				vm.text = text;
+				vm.isEdit = true;
 			}
 		},
 		beforeCreate: function() {
 			vm = this;
 		},
-		beforeDestroy: function() {
-			window.bus.$off('workout');
-			window.bus.$off('daochu');
-		},
+		beforeDestroy: function() {},
 		mounted: function() {
 			vm.start();
 		}

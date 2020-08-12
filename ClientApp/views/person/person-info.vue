@@ -33,7 +33,7 @@
 				<label>体重：</label>
 				<div class="text">{{user.Weight}}&nbsp;</div>
 			</div>
-			
+
 			<div class="item">
 				<label>性别：</label>
 				<div class="text">{{user.Sex}}&nbsp;</div>
@@ -77,11 +77,11 @@
 				<div class="text">{{nianxian}}&nbsp;</div>
 			</div>
 		</div>
-		
-		
-		
-		
-		
+
+
+
+
+
 		<!-- 编辑 -->
 		<div v-else class="person-info-content">
 			<div class="item">
@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<div style="color: #FF4000;margin: -9px auto 8px 120px;" v-if="isUserName">{{isUserName}}</div>
-			
+
 			<div class="item">
 				<label>籍贯：</label>
 				<div class="text">
@@ -129,8 +129,8 @@
 					<input v-model="user.Weight" type="text" />
 				</div>
 			</div>
-			
-			
+
+
 			<div class="item">
 				<label><span class="red-text">*</span>性别：</label>
 				<div class="text">
@@ -184,7 +184,7 @@
 				<div style="margin-bottom: 16px;" class="text" v-for="(item,i) in trainChilds">
 					<img v-if="trainChilds[i] !== ''" class="cuoo" src="../../assets/imgs/cuo.png" @click="closeZhuanXiang(i)" />
 					<select v-model="trainChilds[i]">
-						<option :value="citem.Id"  v-for="(citem,index) in zhuanxiangChileList" v-if="(!trainChilds.includes(citem.Id) || citem.Id == trainChilds[i]) && citem.SystemId.substr(0,3) == trainFirse">{{citem.Name}}</option>
+						<option :value="citem.Id" v-for="(citem,index) in zhuanxiangChileList" v-if="(!trainChilds.includes(citem.Id) || citem.Id == trainChilds[i]) && citem.SystemId.substr(0,3) == trainFirse">{{citem.Name}}</option>
 					</select>
 				</div>
 			</div>
@@ -197,7 +197,7 @@
 					</select>
 				</div>
 			</div>
-			
+
 			<div class="item">
 				<label>专训开始时间：</label>
 				<div class="text">
@@ -223,29 +223,29 @@
 	export default {
 		data: function() {
 			return {
-				roleList:[],//教练列表
-				role:[''],//教练列表
-				isUserName:'',
-				isT:'',
-				isD:'',
+				roleList: [], //教练列表
+				role: [''], //教练列表
+				isUserName: '',
+				isT: '',
+				isD: '',
 				userType: '',
 				zhuangtai: true, //true 显示，false 编辑
 				personImg: '', //头像
 				zhuanxiangList: [],
-				zhuanxiangChileList:[],
-				trainFirse:'',//运动主项
-				trainChild:[],//我的专项
-				trainChilds:[],//我的专项 编辑
-				year:'',
-				month:'',
-				day:'',
+				zhuanxiangChileList: [],
+				trainFirse: '', //运动主项
+				trainChild: [], //我的专项
+				trainChilds: [], //我的专项 编辑
+				year: '',
+				month: '',
+				day: '',
 				user: {
 					FullName: '',
-					nativePlace:'',
-					nation:'',
-					bloodType:'',
-					height:'',
-					weight:'',
+					nativePlace: '',
+					nation: '',
+					bloodType: '',
+					height: '',
+					weight: '',
 					Sex: '',
 					Birthday: '',
 					SportGrade: 0,
@@ -257,16 +257,16 @@
 			}
 		},
 		watch: {
-			role:function(newVal, oldVal){
-				if(newVal[newVal.length - 1] !== ''){
+			role: function(newVal, oldVal) {
+				if (newVal[newVal.length - 1] !== '') {
 					vm.role.push('');
 				}
 			},
-			trainFirse:function(newVal, oldVal){
+			trainFirse: function(newVal, oldVal) {
 				vm.trainChilds = [''];
 			},
 			trainChildJson: function(newVal, oldVal) {
-				if(!newVal){
+				if (!newVal) {
 					return;
 				}
 				var _d = JSON.parse(newVal);
@@ -289,14 +289,14 @@
 			nianxian: function() {
 				return myPublic.dateForFormat(null, 'yyyy') - vm.user.Start4Training;
 			},
-			dayLengths:function(){
+			dayLengths: function() {
 				return vm.month;
 			},
 			valiDate: function() {
 				//用户名
-				if(vm.user.FullName == '') {
+				if (vm.user.FullName == '') {
 					vm.isUserName = '用户名不得为空';
-				}else{
+				} else {
 					vm.isUserName = '';
 				}
 				//姓名
@@ -309,7 +309,7 @@
 				// if(d == '') {
 				// 	vm.isD = '教练不得为空';
 				// }
-				if(vm.isUserName || vm.isT || vm.isD) {
+				if (vm.isUserName || vm.isT || vm.isD) {
 					return false;
 				} else {
 					return true;
@@ -319,20 +319,21 @@
 				return JSON.stringify(vm.trainChilds);
 			},
 			dayLength: function() {
-				if(vm.month == 1 || vm.month == 3 || vm.month == 5 || vm.month == 7 || vm.month == 8 || vm.month == 10 || vm.month == 12) {
+				if (vm.month == 1 || vm.month == 3 || vm.month == 5 || vm.month == 7 || vm.month == 8 || vm.month == 10 || vm.month ==
+					12) {
 					return 31;
-				} else if(vm.month == 4 || vm.month == 6 || vm.month == 9 || vm.month == 11) {
-					if(vm.day > 30){
+				} else if (vm.month == 4 || vm.month == 6 || vm.month == 9 || vm.month == 11) {
+					if (vm.day > 30) {
 						vm.day = 30;
 					}
 					return 30;
-				} else if((vm.year % 4 == 0 && vm.year % 100 != 0) || vm.year % 400 == 0) {
-					if(vm.day > 29){
+				} else if ((vm.year % 4 == 0 && vm.year % 100 != 0) || vm.year % 400 == 0) {
+					if (vm.day > 29) {
 						vm.day = 29;
 					}
 					return 29;
 				} else {
-					if(vm.day > 28){
+					if (vm.day > 28) {
 						vm.day = 28;
 					}
 					return 28;
@@ -343,39 +344,39 @@
 			start: function() {
 				vm.getUserInfo(window.localStorage.getItem('Sport_Access_Token'), false);
 				vm.userType = window.localStorage.getItem('Sport_userType');
-				if(window.localStorage.getItem('Sport_userPicture')) {
+				if (window.localStorage.getItem('Sport_userPicture')) {
 					vm.personImg = window.localStorage.getItem('Sport_userPicture');
 				}
 				vm.imgInp();
 			},
-//			changeRole:function(){
-//				vm.role.includes()
-//			},
-			bianji:function(){
-					vm.GetAllDepartment().then(() => {
-						vm.GetAllTrain().then(() => {
-							vm.$nextTick(function(){
-								vm.zhuangtai = false;
-								vm.$nextTick(function(){
-									vm.role = vm.user.CoachName.split(',');
-									vm.role.push('');
+			//			changeRole:function(){
+			//				vm.role.includes()
+			//			},
+			bianji: function() {
+				vm.GetAllDepartment().then(() => {
+					vm.GetAllTrain().then(() => {
+						vm.$nextTick(function() {
+							vm.zhuangtai = false;
+							vm.$nextTick(function() {
+								vm.role = vm.user.CoachName.split(',');
+								vm.role.push('');
 								vm.trainChilds = myPublic.copys(vm.trainChild);
-							});
 							});
 						});
 					});
+				});
 			},
-			closeZhuanXiang:function(i){
-				if(vm.trainChilds.length>1){
-					vm.trainChilds.splice(i,1);
+			closeZhuanXiang: function(i) {
+				if (vm.trainChilds.length > 1) {
+					vm.trainChilds.splice(i, 1);
 				}
 			},
-			closerole:function(i){
-				if(vm.role.length>1){
-					vm.role.splice(i,1);
+			closerole: function(i) {
+				if (vm.role.length > 1) {
+					vm.role.splice(i, 1);
 				}
 			},
-			closeJiaoLian:function(i){},
+			closeJiaoLian: function(i) {},
 			imgInp: function() {
 				document.getElementById('file').onchange = function() {
 
@@ -385,9 +386,9 @@
 					var httpDemo = new XMLHttpRequest(); //创建httprequest对象
 					httpDemo.open('post', 'http://localhost/API/User/SetUserHead', true); //初始化请求  post方式  接口  异步
 					httpDemo.onreadystatechange = function(e) {
-						if(httpDemo.readyState == 4 && httpDemo.status == 200) {
+						if (httpDemo.readyState == 4 && httpDemo.status == 200) {
 							var res = JSON.parse(httpDemo.responseText)
-							if(res.StateCode == 0) {
+							if (res.StateCode == 0) {
 								var reader = new FileReader();
 								reader.readAsDataURL(fileInput.files[0]);
 								reader.onload = function(e) {
@@ -405,49 +406,48 @@
 			},
 			save: function() {
 				var a = myPublic.copys(vm.role);
-				a.splice(a.length-1,1);
-				var b =  myPublic.copys(vm.trainChilds);
-				b.splice(b.length-1,1);
-				
-				
+				a.splice(a.length - 1, 1);
+				var b = myPublic.copys(vm.trainChilds);
+				b.splice(b.length - 1, 1);
+
+
 				var _role = a.join(',')
 				var _TrainId = b.join(',')
-				
-				
-				
-				vm.$http.post(myPublic.publicUrl + '/API/User/SaveUserInfo',{
-					  "Id": vm.user.Id,
-					  "FullName": vm.user.FullName,
-					  "Sex": vm.user.Sex,
-					  "Birthday": vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day : vm.day), //生日
-					  "NativePlace": vm.user.NativePlace,
-					  "Nation": vm.user.Nation,
-					  "BloodType": vm.user.BloodType,
-					  "Height": vm.user.Height,
-					  "Weight": vm.user.Weight,
-					  "SportGrade": vm.user.SportGrade,
-					  "TrainId": _TrainId,
-					  "CoachId": _role,
-					  "Start4Training": vm.user.Start4Training,
-					  "Train4year": 0
-					}
-				).then(function(result) {
+
+
+
+				vm.$http.post(myPublic.publicUrl + '/API/User/SaveUserInfo', {
+						"Id": vm.user.Id,
+						"FullName": vm.user.FullName,
+						"Sex": vm.user.Sex,
+						"Birthday": vm.year + '-' + (vm.month < 10 ? '0' + vm.month : vm.month) + '-' + (vm.day < 10 ? '0' + vm.day :
+							vm.day), //生日
+						"NativePlace": vm.user.NativePlace,
+						"Nation": vm.user.Nation,
+						"BloodType": vm.user.BloodType,
+						"Height": vm.user.Height,
+						"Weight": vm.user.Weight,
+						"SportGrade": vm.user.SportGrade,
+						"TrainId": _TrainId,
+						"CoachId": _role,
+						"Start4Training": vm.user.Start4Training,
+						"Train4year": 0
+					}).then(function(result) {
 						if (result.body.StateCode == 0) {
 							vm.quxiao();
-						} else {
-						}
+						} else {}
 					})
 					.catch(function(error) {
 						console.log(error);
 					});
-				
-				
+
+
 			},
-			quxiao:function(){
+			quxiao: function() {
 				vm.zhuangtai = true;
 				vm.getUserInfo(window.localStorage.getItem('Sport_Access_Token'), false);
 				vm.userType = window.localStorage.getItem('Sport_userType');
-				if(window.localStorage.getItem('Sport_userPicture')) {
+				if (window.localStorage.getItem('Sport_userPicture')) {
 					vm.personImg = window.localStorage.getItem('Sport_userPicture');
 				}
 			},
@@ -458,14 +458,14 @@
 					}
 				}).then(function(result) {
 					try {
-						if(result.body.StateCode != 0) {
+						if (result.body.StateCode != 0) {
 							vm.$router.push({
 								path: '/login'
 							});
 						} else {
 							window.localStorage.setItem('user', JSON.stringify(result.body.Data));
 						}
-					} catch(err) {
+					} catch (err) {
 						vm.$router.push({
 							path: '/login'
 						});
@@ -475,12 +475,14 @@
 					vm.month = parseInt(vm.user.Birthday.split('-')[1]);
 					vm.day = parseInt(vm.user.Birthday.split('-')[2]);
 					var _TrainId = result.body.Data.TrainId.split(',');
-					for(var i = 0;i<_TrainId.length;i++){
-						if(_TrainId[i]){
-							vm.trainChild.push(_TrainId[i]);
+					var _l = [];
+					for (var i = 0; i < _TrainId.length; i++) {
+						if (_TrainId[i]) {
+							_l.push(_TrainId[i]);
 						}
 					}
-					if(is) {
+					vm.trainChild = _l;
+					if (is) {
 						vm.zhuangtai = true;
 						window.bus.$emit('person', 1);
 					}
@@ -490,63 +492,65 @@
 				});
 			},
 			//获取教练员
-			GetAllDepartment: function() {return new Promise(function(resolve, reject) {
-				vm.$http.post(myPublic.publicUrl + '/API/Account/GetAllCoach').then(function(result) {
-						if (result.body.StateCode == 0) {
-							vm.roleList = result.body.Data;
-							vm.$forceUpdate();
-						} else {
-							vm.$router.push({
-								path: '/login'
-							});
-						}
-						resolve();
-					})
-					.catch(function(error) {
-						console.log(error);
-					});
-			})},
+			GetAllDepartment: function() {
+				return new Promise(function(resolve, reject) {
+					vm.$http.post(myPublic.publicUrl + '/API/Account/GetAllCoach').then(function(result) {
+							if (result.body.StateCode == 0) {
+								vm.roleList = result.body.Data;
+								vm.$forceUpdate();
+							} else {
+								vm.$router.push({
+									path: '/login'
+								});
+							}
+							resolve();
+						})
+						.catch(function(error) {
+							console.log(error);
+						});
+				})
+			},
 			//获取训练专项
 			GetAllTrain: function() {
-			return new Promise(function(resolve, reject) {
-				
-				vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
-						params: {
-							userName: ''
-						}
-					}).then(function(result) {
-						if (result.body.StateCode == 0) {
-							var _SystemId = ''; //id
-							for (var i = 0; i < result.body.Data.length; i++) {
-								if (result.body.Data[i].SystemId.length == 3) {
-									vm.zhuanxiangList.push(result.body.Data[i]);
-								} else {
-									if(_SystemId == '' && vm.user.TrainId.split(',')[0] == result.body.Data[i].Id){
-										_SystemId = result.body.Data[i].SystemId.substr(0,3);
-									}
-									vm.zhuanxiangChileList.push(result.body.Data[i]);
-								}
+				return new Promise(function(resolve, reject) {
+
+					vm.$http.get(myPublic.publicUrl + '/API/Account/GetAllTrain', {
+							params: {
+								userName: ''
 							}
-							vm.trainFirse = _SystemId;
-							
-							
-							
-						}
-						resolve();
-					})
-					.catch(function(error) {
-						console.log(error);
-						resolve();
-					});
-					
-			})
+						}).then(function(result) {
+							if (result.body.StateCode == 0) {
+								var _SystemId = ''; //id
+								for (var i = 0; i < result.body.Data.length; i++) {
+									if (result.body.Data[i].SystemId.length == 3) {
+										vm.zhuanxiangList.push(result.body.Data[i]);
+									} else {
+										if (_SystemId == '' && vm.user.TrainId.split(',')[0] == result.body.Data[i].Id) {
+											_SystemId = result.body.Data[i].SystemId.substr(0, 3);
+										}
+										vm.zhuanxiangChileList.push(result.body.Data[i]);
+									}
+								}
+								vm.trainFirse = _SystemId;
+
+
+
+							}
+							resolve();
+						})
+						.catch(function(error) {
+							console.log(error);
+							resolve();
+						});
+
+				})
 			},
 		},
 		beforeCreate: function() {
 			vm = this;
 		},
 		mounted: function() {
-			if(!window.localStorage.getItem('Sport_Access_Token')) {
+			if (!window.localStorage.getItem('Sport_Access_Token')) {
 				vm.$router.push({
 					path: '/login'
 				});

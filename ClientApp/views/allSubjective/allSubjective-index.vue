@@ -56,29 +56,29 @@
 							<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;">{{item.SportName}}</th>
 							<td>{{item.TrainName}}</td>
 							<td>{{item.TrainSecName}}</span></td>
-							<td>-</td>
+							<td>{{item.Age}}</td>
 							<td>{{item.Sex}}</td>
 
 							<td>{{item.MorPulse}}</td>
 							<td>{{item.Weight}}</td>
-							<td><span v-if="item.SleepDuration>=8" class="shuiping1"></span><span v-if="item.SleepDuration>=5 && item.SleepDuration<=7"
-								 class="shuiping2"></span><span v-if="item.SleepDuration>=0 && item.SleepDuration<=4" class="shuiping3"></span>{{item.SleepDuration}}</td>
-							<td><span v-if="item.SleepQuality>=8" class="shuiping1"></span><span v-if="item.SleepQuality>=5 && item.SleepQuality<=7"
-								 class="shuiping2"></span><span v-if="item.SleepQuality>=0 && item.SleepQuality<=4" class="shuiping3"></span>{{item.SleepQuality}}</td>
-							<td><span v-if="item.Desire>=8" class="shuiping1"></span><span v-if="item.Desire>=5 && item.Desire<=7" class="shuiping2"></span><span
-								 v-if="item.Desire>=0 && item.Desire<=4" class="shuiping3"></span>{{item.Desire}}</td>
-							<td><span v-if="item.SorenessLevel>=0 && item.SorenessLevel<=4" class="shuiping1"></span><span v-if="item.SorenessLevel>=5 && item.SorenessLevel<=7"
+							<td><span v-if="item.SleepDuration>=8" class="shuiping1"></span><span v-if="item.SleepDuration>=5 && item.SleepDuration<8"
+								 class="shuiping2"></span><span v-if="item.SleepDuration>=0 && item.SleepDuration<5" class="shuiping3"></span>{{item.SleepDuration}}</td>
+							<td><span v-if="item.SleepQuality>=8" class="shuiping1"></span><span v-if="item.SleepQuality>=5 && item.SleepQuality<8"
+								 class="shuiping2"></span><span v-if="item.SleepQuality>=0 && item.SleepQuality<5" class="shuiping3"></span>{{item.SleepQuality}}</td>
+							<td><span v-if="item.Desire>=8" class="shuiping1"></span><span v-if="item.Desire>=5 && item.Desire<8" class="shuiping2"></span><span
+								 v-if="item.Desire>=0 && item.Desire<5" class="shuiping3"></span>{{item.Desire}}</td>
+							<td><span v-if="item.SorenessLevel>=0 && item.SorenessLevel<5" class="shuiping1"></span><span v-if="item.SorenessLevel>=5 && item.SorenessLevel<8"
 								 class="shuiping2"></span><span v-if="item.SorenessLevel>=8" class="shuiping3"></span>{{item.SorenessLevel}}</td>
-							<td><span v-if="item.FatigueLevel>=0 && item.FatigueLevel<=4" class="shuiping1"></span><span v-if="item.FatigueLevel>=5 && item.FatigueLevel<=7"
+							<td><span v-if="item.FatigueLevel>=0 && item.FatigueLevel<5" class="shuiping1"></span><span v-if="item.FatigueLevel>=5 && item.FatigueLevel<8"
 								 class="shuiping2"></span><span v-if="item.FatigueLevel>=8" class="shuiping3"></span>{{item.FatigueLevel}}</td>
-							<td><span v-if="item.TrainStatus>=8" class="shuiping1"></span><span v-if="item.TrainStatus>=5 && item.TrainStatus<=7"
-								 class="shuiping2"></span><span v-if="item.TrainStatus>=0 && item.TrainStatus<=4" class="shuiping3"></span>{{item.TrainStatus}}</td>
-							<td><span v-if="item.Fatigue>=0 && item.Fatigue<=4" class="shuiping1"></span><span v-if="item.Fatigue>=5 && item.Fatigue<=7"
+							<td><span v-if="item.TrainStatus>=8" class="shuiping1"></span><span v-if="item.TrainStatus>=5 && item.TrainStatus<8"
+								 class="shuiping2"></span><span v-if="item.TrainStatus>=0 && item.TrainStatus<5" class="shuiping3"></span>{{item.TrainStatus}}</td>
+							<td><span v-if="item.Fatigue>=0 && item.Fatigue<5" class="shuiping1"></span><span v-if="item.Fatigue>=5 && item.Fatigue<8"
 								 class="shuiping2"></span><span v-if="item.Fatigue>=8" class="shuiping3"></span>{{item.Fatigue}}</td>
 							<td>{{item.TrainIntensity}}</td>
-							<td v-if="item.Evaluate"><span v-if="item.Evaluate>=8" class="shuiping1"></span><span v-if="item.Evaluate>=5 && item.Evaluate<=7"
-								 class="shuiping2"></span><span v-if="item.Evaluate>=0 && item.Evaluate<=4" class="shuiping3"></span>{{item.Evaluate}}</td>
-							<td v-else>-</td>
+							<td v-if="item.Evaluate"><span v-if="item.Evaluate>=8" class="shuiping1"></span><span v-if="item.Evaluate>=5 && item.Evaluate<8"
+								 class="shuiping2"></span><span v-if="item.Evaluate>=0 && item.Evaluate<5" class="shuiping3"></span>{{item.Evaluate}}</td>
+							<td v-else>暂无评价</td>
 							<td style="color: #007AFF;cursor: pointer;" v-on:click="setText(item.DoctorRecord)">详情</td>
 						</tr>
 					</tbody>

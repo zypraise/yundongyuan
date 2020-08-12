@@ -151,6 +151,9 @@
 </template>
 <script>
 	var vm;
+	import {
+		getSortText
+	} from '../../components/sort.js';
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
 	import pingFen from '../../components/pingFen.vue';
@@ -167,7 +170,7 @@
 					{
 						type:'DateSign',
 						is:true,
-						sort:true
+						sort:false
 					},
 					{
 						type:'SportName',
@@ -365,7 +368,7 @@
 						sportuserid: (vm.sportIndex === '' ? '' : vm.sportList[vm.sportIndex].UserId),
 						starttime: document.getElementById('starttime').value,
 						endtime: document.getElementById('endtime').value,
-						sort:'',
+						sort:getSortText(vm.sortlist),
 						pagesize: 9999,
 						pageindex: 1
 					}

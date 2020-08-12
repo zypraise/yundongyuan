@@ -32,7 +32,7 @@
 	var vm;
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
-	import pingFen from '../../components/pingFen.vue';
+	// import pingFen from '../../components/pingFen.vue';
 	import jichu from '../stamina/childNum1.vue';
 	import zhuanxiang from '../stamina/childNum2.vue';
 	import '../../assets/styles/stamina.css';
@@ -51,7 +51,7 @@
 		components: {
 			headerComponent: header,
 			jichu: jichu,
-			pingFen: pingFen,
+			// pingFen: pingFen,
 			zhuanxiang: zhuanxiang,
 			topMenu: topMenu
 		},
@@ -68,7 +68,7 @@
 		computed: {},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd')
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2), 'yyyy-MM-dd')
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd')
 				vm.setTimeInp();
 				window.bus.$on('pingfen', function(val) {

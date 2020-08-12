@@ -157,15 +157,15 @@
 						window.localStorage.setItem('user', JSON.stringify(result.body.Data));
 						if (result.body.StateCode == 0) {
 							if (window.localStorage.getItem('Sport_userType') == '运动员') {
-								if(result.body.Data.CoachId){
+								// if(result.body.Data.CoachId){
 								vm.$router.push({
 									path: '/subjective'
 								});
-								}else{
-									vm.$router.push({
-										path: '/choiceRegister'
-									});
-								}
+								// }else{
+									// vm.$router.push({
+									// 	path: '/choiceRegister'
+									// });
+								// }
 							} else {
 								vm.$router.push({
 									path: '/allSubjective'

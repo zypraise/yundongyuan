@@ -4,7 +4,7 @@
 			<div class="item">
 				<label>手机号：</label>
 				<div class="text">
-					<input v-model="user.mobile" type="text" />
+					<input :value="mobiles" readonly="readonly" type="text" />
 				</div>
 			</div>
 			<div class="item">
@@ -55,6 +55,10 @@
 		watch: {},
 		//计算属性
 		computed: {
+			mobiles:function(){
+				var s = vm.user.mobile.substr(0,3) + '****' + vm.user.mobile.substr(7,4);
+				return s;
+			},
 			valiDate: function() {}
 		},
 		methods: {
@@ -144,7 +148,14 @@
 							path: '/login'
 						});
 					}
-					vm.user = JSON.parse(window.localStorage.getItem('user'));
+					
+					var _u = JSON.parse(window.localStorage.getItem('user'));
+					vm.user = {
+								mobile: _u.PhoneNumber,
+								mobileNew: '',
+								code: '',
+								codeNew: ''
+							};
 				}).catch(function(error) {
 					console.log(error);
 				});

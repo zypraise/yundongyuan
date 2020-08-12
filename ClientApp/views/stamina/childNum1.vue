@@ -77,13 +77,29 @@
 								</tr>
 							</tbody>
 						</table>
-						<div id="biao1" style="margin-bottom: 50px;width: 100%;height: 500px;overflow: hidden;"></div>
-						<div v-if="listType == 1 || listType == 3" id="biao2" style="width: 100%;height: 500px;overflow: hidden;"></div>
 
 
 					</div>
 				</section>
 			</div>
+			
+			<div class="body-item" style="overflow-x: hidden;margin-top: 30px;">
+				<div class="title" style="min-width: 852px;">
+					线图
+				</div>
+				<section>
+					<div id="biao1" style="margin-bottom: 50px;width: 100%;height: 500px;overflow: hidden;"></div>
+				</section>
+			</div>
+			<div v-if="listType == 1 || listType == 3" class="body-item" style="overflow-x: hidden;margin-top: 30px;margin-bottom: 30px;">
+				<div class="title" style="min-width: 852px;">
+					雷达图
+				</div>
+				<section>
+					<div id="biao2" style="width: 100%;height: 500px;overflow: hidden;"></div>
+				</section>
+			</div>
+			
 		</section>
 		<section class="ping-fen" :style="{'display':(showPingFen?'none':'block')}">
 			<ti-neng v-if="listType == 1" v-bind:show-ping-fen="showPingFen"></ti-neng>
@@ -99,7 +115,8 @@
 	import qugan from '../../components/qugan.vue';
 	import bankuai from '../../components/bankuai.vue';
 	import {
-		sortimg
+		sortimg,
+		getSortText
 	} from '../../components/sort.js';
 	export default {
 		props: ["isGetList","plistType"],
@@ -109,7 +126,7 @@
 					{
 						type:'TestDate',
 						is:true,
-						sort:true
+						sort:false
 					},
 					{
 						type:'SportName',
@@ -707,7 +724,7 @@
 				_d += '&sex=' + '';
 				_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' +
+					.value + '&sort=' + getSortText(vm.sortlist) +
 					'&pagesize=9999&pageindex=1';
 
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
@@ -849,7 +866,7 @@
 				_d += '&sex=' + '';
 				_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' +
+					.value + '&sort=' + getSortText(vm.sortlist) +
 					'&pagesize=9999&pageindex=1';
 
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
@@ -899,7 +916,7 @@
 				_d += '&sex=' + '';
 				_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' +
+					.value + '&sort=' + getSortText(vm.sortlist) +
 					'&pagesize=9999&pageindex=1';
 
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {

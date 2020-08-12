@@ -179,6 +179,11 @@
 						name: '皮质醇',
 						type: 'line',
 						data: []
+					},
+					{
+						name: '睾酮/皮质醇',
+						type: 'line',
+						data: []
 					}
 
 				];
@@ -195,6 +200,11 @@
 					_series[8].data.push(vm.phyConstituentsList[i].CreatineKinase);
 					_series[9].data.push(vm.phyConstituentsList[i].Testosterone);
 					_series[10].data.push(vm.phyConstituentsList[i].Cortisol);
+					if(vm.phyConstituentsList[i].Cortisol>0){
+						_series[11].data.push((vm.phyConstituentsList[i].Testosterone/vm.phyConstituentsList[i].Cortisol).toFixed(2));
+					}else{
+						_series[11].data.push(0);
+					}
 				}
 				document.getElementById('biao2').setAttribute("_echarts_instance_", "");
 				document.getElementById('biao2').innerHTML = '';
@@ -207,10 +217,10 @@
 						trigger: 'axis'
 					},
 					color: ['#ff0000', '#ff00ff', '#7f00ff', '#0000ff', '#007fff', '#00ffff', '#00ff00', '#ffff00', '#000000',
-						'#7f7f7f', '#ff7f00'
+						'#7f7f7f', '#ff7f00','#ff8181'
 					],
 					legend: {
-						data: ['白细胞', '红细胞', '血红蛋白', '中性粒细胞', '淋巴细胞', '血红蛋白', '红细胞压积', '血尿素', '肌酸激酶', '睾酮', '皮质醇']
+						data: ['白细胞', '红细胞', '血红蛋白', '中性粒细胞', '淋巴细胞', '血红蛋白', '红细胞压积', '血尿素', '肌酸激酶', '睾酮', '皮质醇', '睾酮/皮质醇']
 					},
 					grid: {
 						left: '10px',

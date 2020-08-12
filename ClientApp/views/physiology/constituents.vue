@@ -42,7 +42,9 @@
 	</div>
 </template>
 <script>
-	var vm;
+	var vm;import {
+		getSortText
+	} from '../../components/sort.js';
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
 	import shengLi from '../../components/shengli.vue';
@@ -58,7 +60,7 @@
 					{
 						type:'Testdate',
 						is:true,
-						sort:true
+						sort:false
 					},
 					{
 						type:'SportName',
@@ -88,7 +90,7 @@
 		},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4), 'yyyy-MM-dd');
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2), 'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				window.bus.$on('pingfen', function(val) {
 					vm.showPingFen = val;
@@ -111,7 +113,7 @@
 						sportuserid: JSON.parse(window.localStorage.getItem('user')).Id,
 						starttime: document.getElementById('starttime').value,
 						endtime: document.getElementById('endtime').value,
-						sort:'',
+						sort:getSortText(vm.sortlist),
 						pagesize: 9999,
 						pageindex: 1
 					}

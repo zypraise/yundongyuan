@@ -161,6 +161,9 @@
 </template>
 <script>
 	var vm;
+	import {
+		getSortText
+	} from '../../components/sort.js';
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
 	import shengLi from '../../components/shengli.vue';
@@ -176,7 +179,7 @@
 					{
 						type:'Testdate',
 						is:true,
-						sort:true
+						sort:false
 					},
 					{
 						type:'SportName',
@@ -263,7 +266,7 @@
 		computed: {},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -4),
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2),
 					'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				window.bus.$on('pingfen', function(val) {
@@ -297,7 +300,7 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sportIndex === '' ? '' : vm.sportList[vm.sportIndex].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' +
+					.value + '&sort=' + getSortText(vm.sortlist) +
 					'&pagesize=9999&pageindex=1';
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest?' + _d, {}).then(function(result) {
 					if (result.body.StateCode == 0) {

@@ -19,7 +19,7 @@
 
 		<div class="edit-mask" v-if="isDuibi">
 			<div class="is-edit" style="width: 800px;">
-				<div class="header" style="text-align: center;">基础体能雷达对比图<img v-on:click="isDuibi = false" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 2px;cursor: pointer;"
+				<div class="header" style="text-align: center;">{{listType == 1?'基础体能雷达对比图':'稳定和均衡雷达对比图'}}<img v-on:click="isDuibi = false" style="width: 20px;height: 20px;vertical-align: top;float: right;margin-top: 2px;cursor: pointer;"
 					 src="../../assets/imgs/close.png" /></div>
 				<div class="body">
 					<div id="ditu" style="width: 100%;height: 500px;"></div>
@@ -87,10 +87,25 @@
 								</tr>
 							</tbody>
 						</table>
-						<div v-if="sport !== ''" id="biao1" style="margin-bottom: 50px;width: 100%;height: 500px;overflow: hidden;"></div>
-						<div v-if="sport !== '' && (listType == 1 || listType == 3)" id="biao2" style="width: 100%;height: 500px;overflow: hidden;"></div>
+						
 
 					</div>
+				</section>
+			</div>
+			<div v-if="sport !== ''" class="body-item" style="overflow-x: hidden;margin-top: 30px;">
+				<div class="title" style="min-width: 852px;">
+					线图
+				</div>
+				<section>
+					<div id="biao1" style="margin-bottom: 50px;width: 100%;height: 500px;overflow: hidden;"></div>
+				</section>
+			</div>
+			<div v-if="sport !== '' && (listType == 1 || listType == 3)" class="body-item" style="overflow-x: hidden;margin-top: 30px;margin-bottom: 30px;">
+				<div class="title" style="min-width: 852px;">
+					雷达图
+				</div>
+				<section>
+					<div id="biao2" style="width: 100%;height: 500px;overflow: hidden;"></div>
 				</section>
 			</div>
 		</section>
@@ -181,7 +196,8 @@
 	import qugan from '../../components/qugan.vue';
 	import bankuai from '../../components/bankuai.vue';
 	import {
-		sortimg
+		sortimg,
+		getSortText
 	} from '../../components/sort.js';
 	export default {
 		props: ["daochu", "isGetList", "zhuanxiangList", "trainFirse", "trainId", "sportList", "userXuanZe", "sportIndex",
@@ -193,7 +209,7 @@
 					{
 						type:'TestDate',
 						is:true,
-						sort:true
+						sort:false
 					},
 					{
 						type:'SportName',
@@ -1068,7 +1084,7 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' + '&pagesize=9999&pageindex=1';
+					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize=9999&pageindex=1';
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
@@ -1227,7 +1243,7 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' + '&pagesize=9999&pageindex=1';
+					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize=9999&pageindex=1';
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
@@ -1271,7 +1287,7 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' + '&pagesize=9999&pageindex=1';
+					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize=9999&pageindex=1';
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')

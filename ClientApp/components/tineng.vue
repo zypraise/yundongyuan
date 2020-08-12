@@ -11,6 +11,7 @@
 					<tr>
 						<th rowspan="3">评分</th>
 						<th rowspan="2" colspan="2">BMI</th>
+						<th rowspan="2" colspan="2">体脂（%）</th>
 						<th rowspan="3">坐位体前屈（cm）</th>
 						<th rowspan="3">30m冲刺（s）</th>
 						<th rowspan="2"colspan="2">垂直纵跳（cm）</th>
@@ -18,7 +19,7 @@
 						<th rowspan="3">卧推相对力量（kg）</th>
 						<th rowspan="2" colspan="2">引体向上（次）</th>
 						<th rowspan="3">腹肌耐力（s）</th>
-						<th rowspan="3">背肌耐力（s——</th>
+						<th rowspan="3">背肌耐力（s）</th>
 						<th colspan="4">二选一</th>
 					</tr>
 					<tr>
@@ -36,11 +37,15 @@
 						<th>女子</th>
 						<th>男子</th>
 						<th>女子</th>
+						<th>男子</th>
+						<th>女子</th>
 					</tr>
 					<tr>
 						<td>10</td>
 						<td>＜18</td>
 						<td>＜20</td>
+						<td>≤8</td>
+						<td>≤15</td>
 						<td>≥40</td>
 						<td>≤4.5</td>
 						<td>≥55</td>
@@ -60,6 +65,8 @@
 						<td>9</td>
 						<td>18.0-18.3</td>
 						<td>20.0-20.3</td>
+						<td>≤9</td>
+						<td>≤16</td>
 						<td>39</td>
 						<td>4.6</td>
 						<td>54</td>
@@ -79,6 +86,8 @@
 						<td>8</td>
 						<td>18.4-18.7</td>
 						<td>20.4-20.7</td>
+						<td>≤10</td>
+						<td>≤17</td>
 						<td>38</td>
 						<td>4.7</td>
 						<td>53</td>
@@ -98,6 +107,8 @@
 						<td>7</td>
 						<td>18.8-19.1</td>
 						<td>20.8-21.1</td>
+						<td>-</td>
+						<td>-</td>
 						<td>37</td>
 						<td>4.8</td>
 						<td>52</td>
@@ -117,6 +128,8 @@
 						<td>6</td>
 						<td>19.2-19.5</td>
 						<td>21.2-21.5</td>
+						<td>≤11</td>
+						<td>≤18</td>
 						<td>36</td>
 						<td>4.9</td>
 						<td>51</td>
@@ -136,6 +149,8 @@
 						<td>5</td>
 						<td>19.6-19.9</td>
 						<td>21.6-21.9</td>
+						<td>-</td>
+						<td>-</td>
 						<td>35</td>
 						<td>5.0</td>
 						<td>50</td>
@@ -155,6 +170,8 @@
 						<td>4</td>
 						<td>20.0-20.3</td>
 						<td>22.0-22.3</td>
+						<td>≤12</td>
+						<td>≤19</td>
 						<td>34</td>
 						<td>5.1</td>
 						<td>47-49</td>
@@ -174,6 +191,8 @@
 						<td>3</td>
 						<td>20.4-20.7</td>
 						<td>22.4-22.7</td>
+						<td>-</td>
+						<td>-</td>
 						<td>31-33</td>
 						<td>5.2</td>
 						<td>43-46</td>
@@ -193,6 +212,8 @@
 						<td>2</td>
 						<td>20.8-21.1</td>
 						<td>22.8-23.1</td>
+						<td>≤13</td>
+						<td>≤20</td>
 						<td>28-30</td>
 						<td>-</td>
 						<td>39-42</td>
@@ -212,6 +233,8 @@
 						<td>1</td>
 						<td>21.2-22.0</td>
 						<td>23.2-24.0</td>
+						<td>13-16</td>
+						<td>20-23</td>
 						<td>25-27</td>
 						<td>-</td>
 						<td>35-38</td>
@@ -231,6 +254,8 @@
 						<td>0</td>
 						<td>＞22</td>
 						<td>＞24</td>
+						<td>＞16</td>
+						<td>＞23</td>
 						<td>＜25</td>
 						<td>＞5.2</td>
 						<td>＜35</td>

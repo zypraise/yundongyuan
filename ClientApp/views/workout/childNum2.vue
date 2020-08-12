@@ -3,8 +3,8 @@
 		<section class="shengli-main">
 			<div class="body-item" style="overflow-x: hidden;">
 				<div class="title" style="min-width: 852px;">
-					<div style="float: right;"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;"
-						 v-on:click="showPingFen = !showPingFen" /><img v-on:click="workoutAdd()" class="workout-add" src="../../assets/imgs/add.png"></div>
+					<div style="float: right;"><!-- <img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;"
+						 v-on:click="showPingFen = !showPingFen" /> --><img v-on:click="workoutAdd()" class="workout-add" src="../../assets/imgs/add.png"></div>
 					<ul class="title-tab">
 						<li class="item" v-on:click="backWorkout('1,1')">基础体能</li>
 						<li class="item" v-on:click="backWorkout('1,2')">板块体能</li>
@@ -39,15 +39,15 @@
 				</section>
 			</div>
 		</section>
-		<section class="ping-fen" :style="{'display':(showPingFen?'none':'block')}">
+		<!-- <section class="ping-fen" :style="{'display':(showPingFen?'none':'block')}">
 			<ping-fen v-bind:show-ping-fen="showPingFen"></ping-fen>
-		</section>
+		</section> -->
 	</div>
 </template>
 
 <script>
 	var vm;
-	import pingFen from '../../components/pingFen.vue';
+	// import pingFen from '../../components/pingFen.vue';
 	export default {
 		props: ["isGetList","sportList", "sportIndex"],
 		data: function() {
@@ -62,14 +62,14 @@
 		},
 		//公共模板
 		components: {
-			pingFen: pingFen
+			// pingFen: pingFen
 		},
 		watch: {
-			showPingFen: function() {
-				window.setTimeout(function() {
-					vm.start();
-				}, 1000);
-			},
+			// showPingFen: function() {
+			// 	window.setTimeout(function() {
+			// 		vm.start();
+			// 	}, 1000);
+			// },
 			isGetList: function(newVal, oldVal) {
 				vm.start()
 			}
