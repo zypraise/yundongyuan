@@ -33,7 +33,7 @@
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
 					<button class="daochu" v-on:click="isGetList = !isGetList;">查询</button>
-					<button class="daochu" v-on:click="daochu = true">导出</button>
+					<!--<button class="daochu" v-on:click="daochu = true">导出</button>-->
 				</div>
 				<div style="clear: both;"></div>
 				<!-- 子集 -->

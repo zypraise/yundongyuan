@@ -1184,7 +1184,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	var myPublic = {
 		publicUrl: 'http://www.cissatmes.com',
 		//		publicUrl:'http://www.sport.uare.vip',
-		// publicUrl: 'http://localhost:80',
+		//		  publicUrl: 'http://localhost:80', 
 		setTitle: function setTitle(title) {
 			document.title = title;
 		},

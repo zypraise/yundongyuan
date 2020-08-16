@@ -63,7 +63,7 @@
 	const myPublic = {
 		publicUrl:'http://www.cissatmes.com',
 //		publicUrl:'http://www.sport.uare.vip',
-		 // publicUrl: 'http://localhost:80',
+//		  publicUrl: 'http://localhost:80', 
 		setTitle: function(title) {
 			document.title = title;
 		},

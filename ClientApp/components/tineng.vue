@@ -10,8 +10,7 @@
 				<table>
 					<tr>
 						<th rowspan="3">评分</th>
-						<th rowspan="2" colspan="2">BMI</th>
-						<th rowspan="2" colspan="2">体脂（%）</th>
+						<th colspan="4">二选一</th>
 						<th rowspan="3">坐位体前屈（cm）</th>
 						<th rowspan="3">30m冲刺（s）</th>
 						<th rowspan="2"colspan="2">垂直纵跳（cm）</th>
@@ -23,6 +22,8 @@
 						<th colspan="4">二选一</th>
 					</tr>
 					<tr>
+						<th colspan="2">BMI</th>
+						<th colspan="2">体脂（%）</th>
 						<th colspan="2">3000m（min's）</th>
 						<th colspan="2">2000m测功仪（min's）</th>
 					</tr>

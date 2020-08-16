@@ -15384,6 +15384,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 var vm;
 exports["default"] = {
@@ -16283,11 +16284,8 @@ exports["default"] = {
 				barWidth: '50%',
 				data: []
 			}];
-			var _thisTime = new Date(document.getElementById('starttime').value.replace(/-/g, '/')).getTime();
-			var _time = new Date(document.getElementById('starttime').value.substr(0, 4) + '/01/01').getTime();
-			var addIndex = parseInt((_thisTime - _time) / (60 * 60 * 24 * 1000 * 7));
 			for (var i = 0; i < vm.bodyList.length; i++) {
-				_dateList.push('第' + (parseInt(vm.bodyList[i].Testdate) + addIndex) + '周');
+				_dateList.push('第' + vm.bodyList[i].Testdate + '周');
 				_series[0].data.push(vm.bodyList[i].AvgIntensity); //平均值
 			}
 			document.getElementById('child2').setAttribute("_echarts_instance_", "");
@@ -21882,12 +21880,33 @@ function _toConsumableArray(arr) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var vm;
 exports["default"] = {
 	props: ["isGetList", "plistType"],
 	data: function data() {
 		return {
+			pages: 0,
+			pageslist: [],
+			total: 0,
+			pageNum: 1,
+			tpageNum: '', //跳转页码
+			limit: 10,
+
 			sortlist: [{
 				type: 'TestDate',
 				is: true,
@@ -22017,15 +22036,29 @@ exports["default"] = {
 		banKuai: _bankuai2["default"]
 	},
 	watch: {
+		pageNum: function pageNum(newVal, oldVal) {
+			if (newVal == 0) {
+				vm.pageNum = oldVal;
+				return;
+			} else if (newVal > vm.pages) {
+				vm.pageNum = oldVal;
+				return;
+			}
+			vm.getinfo();
+		},
 		showPingFen: function showPingFen() {
 			window.setTimeout(function () {
 				vm.getinfo();
 			}, 1000);
 		},
 		isGetList: function isGetList(newVal, oldVal) {
+			vm.pageNum = 1;
+			vm.tpageNum = '';
 			vm.getinfo();
 		},
 		listType: function listType(newVal, oldVal) {
+			vm.pageNum = 1;
+			vm.tpageNum = '';
 			if (newVal == 2) {
 				vm.isEdit = false;
 			}
@@ -22450,14 +22483,19 @@ exports["default"] = {
 			_d += '&trainSecId=' + '';
 			_d += '&sex=' + '';
 			_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
-			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=9999&pageindex=1';
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
+			vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllBasicPhysicalData?' + _d, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
+					vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+					vm.total = result.body.Data.totalCount;
+					vm.setPageList();
+					result.body.Data = result.body.Data.data;
+
 					vm.list = result.body.Data ? result.body.Data : [];
 					var _staminaDate = [];
 					var _staminaList = [];
@@ -22590,14 +22628,18 @@ exports["default"] = {
 			_d += '&trainSecId=' + '';
 			_d += '&sex=' + '';
 			_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
-			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=9999&pageindex=1';
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
+			vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllPlateFitnessData?' + _d, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
+					vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+					vm.total = result.body.Data.totalCount;
+					vm.setPageList();
+					result.body.Data = result.body.Data.data;
 					var _staminaName = ['攀爬时间', '攀爬距离', '平均心率', '最大心率', '80%以上最大心率保持'];
 					var _staminaDate = [];
 					var _staminaList = [];
@@ -22632,14 +22674,18 @@ exports["default"] = {
 			_d += '&trainSecId=' + '';
 			_d += '&sex=' + '';
 			_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
-			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=9999&pageindex=1';
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {
+			vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllTrunkStabilityBalance?' + _d, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
+					vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+					vm.total = result.body.Data.totalCount;
+					vm.setPageList();
+					result.body.Data = result.body.Data.data;
 					var _staminaName = [];
 					var _staminaDate = [];
 					var _staminaList = [];
@@ -23266,6 +23312,26 @@ exports["default"] = {
 		},
 		backWorkout: function backWorkout(num) {
 			window.bus.$emit('stamina', num);
+		},
+		setPageList: function setPageList() {
+			vm.pageslist = [];
+			if (vm.pages > 4) {
+				if (vm.pageNum < 3) {
+					vm.pageslist = [1, 2, 3, 4];
+				} else if (vm.pageNum > vm.pages - 2) {
+					for (var i = 3; i >= 0; i -= 1) {
+						vm.pageslist.push(vm.pages - i);
+					}
+				} else {
+					for (var i = -2; i <= 2; i += 1) {
+						vm.pageslist.push(vm.pageNum + i);
+					}
+				}
+			} else {
+				for (var i = 1; i <= vm.pages; i += 1) {
+					vm.pageslist.push(i);
+				}
+			}
 		}
 	},
 	beforeCreate: function beforeCreate() {
@@ -24818,6 +24884,10 @@ function _toConsumableArray(arr) {
 //
 //
 //
+//
+//
+//
+//
 
 var vm;
 exports["default"] = {
@@ -25026,6 +25096,10 @@ function _interopRequireDefault(obj) {
 	return obj && obj.__esModule ? obj : { "default": obj };
 }
 
+//
+//
+//
+//
 //
 //
 //
@@ -25409,17 +25483,19 @@ function _toConsumableArray(arr) {
 //
 //
 //
-//
-//
-//
-//
-//
 
 var vm;
 exports["default"] = {
 	props: ["daochu", "isGetList", "zhuanxiangList", "trainFirse", "trainId", "sportList", "userXuanZe", "sportIndex", "sex", "plistType"],
 	data: function data() {
 		return {
+			pages: 0,
+			pageslist: [],
+			total: 0,
+			pageNum: 1,
+			tpageNum: '', //跳转页码
+			limit: 10,
+
 			sortlist: [{
 				type: 'TestDate',
 				is: true,
@@ -25563,19 +25639,34 @@ exports["default"] = {
 		banKuai: _bankuai2["default"]
 	},
 	watch: {
+		pageNum: function pageNum(newVal, oldVal) {
+			if (newVal == 0) {
+				vm.pageNum = oldVal;
+				return;
+			} else if (newVal > vm.pages) {
+				vm.pageNum = oldVal;
+				return;
+			}
+			vm.getinfo();
+		},
 		showPingFen: function showPingFen() {
 			window.setTimeout(function () {
 				vm.getinfo();
 			}, 1000);
 		},
 		isGetList: function isGetList(newVal, oldVal) {
+			vm.pageNum = 1;
+			vm.tpageNum = '';
 			vm.sport = vm.sportIndex;
 			vm.getinfo();
 		},
 		listType: function listType(newVal, oldVal) {
+			vm.pageNum = 1;
+			vm.tpageNum = '';
 			if (newVal == 2) {
 				vm.isEdit = false;
 			}
+			vm.staminaList = [];
 			vm.getinfo();
 		},
 		allDaoChu1: function allDaoChu1(newVal, oldVal) {
@@ -26283,13 +26374,18 @@ exports["default"] = {
 			_d += '&trainSecId=' + vm.trainId;
 			_d += '&sex=' + vm.sex;
 			_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
-			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=9999&pageindex=1';
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
+			vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllBasicPhysicalData?' + _d, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
+					vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+					vm.total = result.body.Data.totalCount;
+					vm.setPageList();
+					result.body.Data = result.body.Data.data;
+
 					vm.list = result.body.Data ? result.body.Data : [];
 					var _staminaDate = [];
 					var _staminaList = [];
@@ -26441,13 +26537,17 @@ exports["default"] = {
 			_d += '&trainSecId=' + vm.trainId;
 			_d += '&sex=' + vm.sex;
 			_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
-			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=9999&pageindex=1';
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
+			vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllPlateFitnessData?' + _d, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
+					vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+					vm.total = result.body.Data.totalCount;
+					vm.setPageList();
+					result.body.Data = result.body.Data.data;
 					var _staminaName = ['攀爬时间', '攀爬距离', '平均心率', '最大心率', '80%以上最大心率保持'];
 					var _staminaDate = [];
 					var _staminaList = [];
@@ -26482,13 +26582,18 @@ exports["default"] = {
 			_d += '&trainSecId=' + vm.trainId;
 			_d += '&sex=' + vm.sex;
 			_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
-			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=9999&pageindex=1';
-			vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {
+			_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime').value + '&sort=' + (0, _sort.getSortText)(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
+			vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllTrunkStabilityBalance?' + _d, {
 				headers: {
 					token: window.localStorage.getItem('Sport_Access_Token')
 				}
 			}).then(function (result) {
 				if (result.body.StateCode == 0) {
+					vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+					vm.total = result.body.Data.totalCount;
+					vm.setPageList();
+					result.body.Data = result.body.Data.data;
+
 					var _staminaName = [];
 					var _staminaDate = [];
 					var _staminaList = [];
@@ -27105,6 +27210,26 @@ exports["default"] = {
 		},
 		backWorkout: function backWorkout(num) {
 			window.bus.$emit('workout', num);
+		},
+		setPageList: function setPageList() {
+			vm.pageslist = [];
+			if (vm.pages > 4) {
+				if (vm.pageNum < 3) {
+					vm.pageslist = [1, 2, 3, 4];
+				} else if (vm.pageNum > vm.pages - 2) {
+					for (var i = 3; i >= 0; i -= 1) {
+						vm.pageslist.push(vm.pages - i);
+					}
+				} else {
+					for (var i = -2; i <= 2; i += 1) {
+						vm.pageslist.push(vm.pageNum + i);
+					}
+				}
+			} else {
+				for (var i = 1; i <= vm.pages; i += 1) {
+					vm.pageslist.push(i);
+				}
+			}
 		}
 	},
 	beforeCreate: function beforeCreate() {
@@ -39163,7 +39288,73 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }, [_vm._v(_vm._s(_vm.list[index].SportName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].TrainName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].TrainSecName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].Age))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].Sex))]), _vm._v(" "), (_vm.listType == 1) ? _c('td', [_vm._v(_vm._s(_vm.list[index].Height))]) : _vm._e(), _vm._v(" "), (_vm.listType == 1) ? _c('td', [_vm._v(_vm._s(_vm.list[index].Weight))]) : _vm._e(), _vm._v(" "), _vm._l((item.valueList), function(val) {
       return _c('td', [_vm._v(_vm._s(val))])
     }), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].Score))])], 2)
-  }))])])])]), _vm._v(" "), (_vm.sport !== '') ? _c('div', {
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "list-footer"
+  }, [_c('div', {
+    staticClass: "list-page"
+  }, [_c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = 1
+      }
+    }
+  }, [_vm._v("首页")]), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.pageNum - 1
+      }
+    }
+  }, [_vm._v("上一页")]), _vm._v(" "), _vm._l((_vm.pageslist), function(i) {
+    return _c('div', {
+      "class": {
+        'current': _vm.pageNum == i
+      },
+      on: {
+        "click": function($event) {
+          _vm.pageNum = i
+        }
+      }
+    }, [_vm._v(_vm._s(i))])
+  }), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.pageNum + 1
+      }
+    }
+  }, [_vm._v("下一页")]), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.pages
+      }
+    }
+  }, [_vm._v("尾页")]), _vm._v(" "), _c('span', [_vm._v("到第")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.tpageNum),
+      expression: "tpageNum"
+    }],
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.tpageNum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.tpageNum = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', [_vm._v("页")]), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.tpageNum
+      }
+    }
+  }, [_vm._v("跳转")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "list-footer-common"
+  }, [_vm._v("共" + _vm._s(_vm.total) + "条/" + _vm._s(_vm.pages) + "页")])])])]), _vm._v(" "), (_vm.sport !== '') ? _c('div', {
     staticClass: "body-item",
     staticStyle: {
       "overflow-x": "hidden",
@@ -40272,7 +40463,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "margin-bottom": "50px"
     }
   }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.list), function(item, index) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(item.PlanDate.split('T')[0]))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.UserName))]), _vm._v(" "), _c('td', [(item.SpecialTrainContent) ? _c('span', {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.PlanDate))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].UserName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].TrainName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].TrainSecName))]), _vm._v(" "), _c('td', [(item.SpecialTrainContent) ? _c('span', {
       staticStyle: {
         "color": "#007AFF",
         "cursor": "pointer"
@@ -40363,11 +40554,19 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticStyle: {
       "min-width": "100px"
     }
-  }, [_vm._v("时间")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("测试时间")]), _vm._v(" "), _c('th', {
     staticStyle: {
       "min-width": "100px"
     }
-  }, [_vm._v("姓名")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("运动员")]), _vm._v(" "), _c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("运动项目")]), _vm._v(" "), _c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("参赛主项")]), _vm._v(" "), _c('th', {
     staticStyle: {
       "min-width": "100px"
     }
@@ -40785,14 +40984,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.isGetList = !_vm.isGetList;
       }
     }
-  }, [_vm._v("查询")]), _vm._v(" "), _c('button', {
-    staticClass: "daochu",
-    on: {
-      "click": function($event) {
-        _vm.daochu = true
-      }
-    }
-  }, [_vm._v("导出")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("查询")])]), _vm._v(" "), _c('div', {
     staticStyle: {
       "clear": "both"
     }
@@ -41584,7 +41776,73 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     })), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].Age))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].Sex))]), _vm._v(" "), (_vm.listType == 1) ? _c('td', [_vm._v(_vm._s(_vm.list[index].Height))]) : _vm._e(), _vm._v(" "), (_vm.listType == 1) ? _c('td', [_vm._v(_vm._s(_vm.list[index].Weight))]) : _vm._e(), _vm._v(" "), _vm._l((item.valueList), function(val) {
       return _c('td', [_vm._v(_vm._s(val))])
     }), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].Score))])], 2)
-  }))])])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), (_vm.listType == 1 || _vm.listType == 3) ? _c('div', {
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "list-footer"
+  }, [_c('div', {
+    staticClass: "list-page"
+  }, [_c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = 1
+      }
+    }
+  }, [_vm._v("首页")]), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.pageNum - 1
+      }
+    }
+  }, [_vm._v("上一页")]), _vm._v(" "), _vm._l((_vm.pageslist), function(i) {
+    return _c('div', {
+      "class": {
+        'current': _vm.pageNum == i
+      },
+      on: {
+        "click": function($event) {
+          _vm.pageNum = i
+        }
+      }
+    }, [_vm._v(_vm._s(i))])
+  }), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.pageNum + 1
+      }
+    }
+  }, [_vm._v("下一页")]), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.pages
+      }
+    }
+  }, [_vm._v("尾页")]), _vm._v(" "), _c('span', [_vm._v("到第")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.tpageNum),
+      expression: "tpageNum"
+    }],
+    attrs: {
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.tpageNum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.tpageNum = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', [_vm._v("页")]), _vm._v(" "), _c('div', {
+    on: {
+      "click": function($event) {
+        _vm.pageNum = _vm.tpageNum
+      }
+    }
+  }, [_vm._v("跳转")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "list-footer-common"
+  }, [_vm._v("共" + _vm._s(_vm.total) + "条/" + _vm._s(_vm.pages) + "页")])])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), (_vm.listType == 1 || _vm.listType == 3) ? _c('div', {
     staticClass: "body-item",
     staticStyle: {
       "overflow-x": "hidden",
@@ -42687,7 +42945,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "margin-bottom": "50px"
     }
   }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.list), function(item, index) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(item.PlanDate.split('T')[0]))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.UserName))]), _vm._v(" "), _c('td', [(item.SpecialTrainContent) ? _c('span', {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.PlanDate))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].UserName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].TrainName))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.list[index].TrainSecName))]), _vm._v(" "), _c('td', [(item.SpecialTrainContent) ? _c('span', {
       staticStyle: {
         "color": "#007AFF",
         "cursor": "pointer"
@@ -42778,11 +43036,19 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     staticStyle: {
       "min-width": "100px"
     }
-  }, [_vm._v("时间")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("测试时间")]), _vm._v(" "), _c('th', {
     staticStyle: {
       "min-width": "100px"
     }
-  }, [_vm._v("姓名")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("运动员")]), _vm._v(" "), _c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("运动项目")]), _vm._v(" "), _c('th', {
+    staticStyle: {
+      "min-width": "100px"
+    }
+  }, [_vm._v("参赛主项")]), _vm._v(" "), _c('th', {
     staticStyle: {
       "min-width": "100px"
     }
@@ -44376,15 +44642,9 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     }
   }, [_vm._v("评分")]), _vm._v(" "), _c('th', {
     attrs: {
-      "rowspan": "2",
-      "colspan": "2"
+      "colspan": "4"
     }
-  }, [_vm._v("BMI")]), _vm._v(" "), _c('th', {
-    attrs: {
-      "rowspan": "2",
-      "colspan": "2"
-    }
-  }, [_vm._v("体脂（%）")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("二选一")]), _vm._v(" "), _c('th', {
     attrs: {
       "rowspan": "3"
     }
@@ -44423,6 +44683,14 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
       "colspan": "4"
     }
   }, [_vm._v("二选一")])]), _vm._v(" "), _c('tr', [_c('th', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("BMI")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("体脂（%）")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "2"
     }

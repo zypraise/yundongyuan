@@ -34,8 +34,10 @@
 								<table style="margin-bottom: 50px;">
 									<thead>
 										<tr>
-											<th style="min-width: 100px;">时间</th>
-											<th style="min-width: 100px;">姓名</th>
+											<th style="min-width: 100px;">测试时间</th>
+											<th style="min-width: 100px;">运动员</th>
+											<th style="min-width: 100px;">运动项目</th>
+											<th style="min-width: 100px;">参赛主项</th>
 											<th style="min-width: 100px;">专项训练</th>
 											<th style="min-width: 100px;">体能训练</th>
 											<th style="min-width: 100px;">康复训练</th>
@@ -43,8 +45,10 @@
 									</thead>
 									<tbody>
 										<tr v-for="(item,index) in list">
-											<td>{{item.PlanDate.split('T')[0]}}</td>
-											<td>{{item.UserName}}</td>
+											<td>{{item.PlanDate}}</td>
+											<td>{{list[index].UserName}}</td>
+											<td>{{list[index].TrainName}}</td>
+											<td>{{list[index].TrainSecName}}</span></td>
 											<td>
 												<span v-if="item.SpecialTrainContent" style="color: #007AFF;cursor: pointer;" v-on:click="setText(item.SpecialTrainContent)">详情</span>
 												<span v-else style="color: #999999;">详情</span>

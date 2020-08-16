@@ -1162,6 +1162,65 @@ text-align: center;
 	    text-align: center;
 	    margin-top: 10px;
 	    background: #FFF;
+}
+.list-footer {
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.list-footer-common {
+	color: #888888;
+	display: inline-block;
+	line-height: 29px;
+}
+
+.list-page {
+	float: right;
+	display: flex
+}
+
+.list-page div {
+	float: left;
+	border: 1px solid #dddddd;
+	border-radius: 2px;
+	padding: 5px 10px;
+	line-height: 17px;
+	margin: 0 2px;
+	cursor: pointer
+}
+
+.list-page div.current {
+	color: #ffffff;
+	background-color: #1d89cf;
+	border-color: #1d89cf;
+	position: relative;
+}
+.list-page div.current input{
+	position: absolute;
+    left: 0px;
+    background: transparent;
+    color: #FFFFFF;
+    text-align: center;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+.list-page>span{
+    color: #888888;
+    line-height: 29px;
+    font-size: 14px;
+    margin: 0px 8px;
+}
+.list-page>input{
+    text-align: center;
+    width: 30px;
+    border-radius:  2px;
+    padding:  0px;
+    margin:  0px;
+    border: 1px solid #aaaaaa;
+    background: #FFFFFF;
+    color: #333333;
 }/* 整体设置 */
 *{margin:0px;padding:0px;}
 /**

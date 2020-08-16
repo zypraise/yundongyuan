@@ -80,6 +80,20 @@
 
 
 					</div>
+					<div class="list-footer">
+						<div class="list-page">
+							<div v-on:click="pageNum = 1">首页</div>
+							<div v-on:click="pageNum = pageNum-1">上一页</div>
+							<div v-for="i in pageslist" :class="{'current':pageNum == i}" v-on:click="pageNum = i">{{i}}</div>
+							<div v-on:click="pageNum = pageNum+1">下一页</div>
+							<div v-on:click="pageNum = pages">尾页</div>
+							<span>到第</span>
+							<input type="text" v-model="tpageNum" />
+							<span>页</span>
+							<div v-on:click="pageNum = tpageNum">跳转</div>
+						</div>
+						<div class="list-footer-common">共{{total}}条/{{pages}}页</div>
+					</div>
 				</section>
 			</div>
 			
@@ -122,6 +136,13 @@
 		props: ["isGetList","plistType"],
 		data: function() {
 			return {
+				pages: 0,
+				pageslist: [],
+				total: 0,
+				pageNum: 1,
+				tpageNum: '', //跳转页码
+				limit: 10,
+				
 				sortlist:[
 					{
 						type:'TestDate',
@@ -283,15 +304,29 @@
 			banKuai: bankuai
 		},
 		watch: {
+			pageNum:function(newVal, oldVal) {
+				if(newVal == 0) {
+					vm.pageNum = oldVal;
+					return
+				} else if(newVal > vm.pages) {
+					vm.pageNum = oldVal;
+					return
+				}
+				vm.getinfo()
+			},
 			showPingFen: function() {
 				window.setTimeout(function() {
 					vm.getinfo()
 				}, 1000)
 			},
 			isGetList: function(newVal, oldVal) {
-				vm.getinfo()
+				vm.pageNum = 1;
+				vm.tpageNum = '';
+				vm.getinfo();
 			},
 			listType: function(newVal, oldVal) {
+				vm.pageNum = 1;
+				vm.tpageNum = '';
 				if (newVal == 2) {
 					vm.isEdit = false;
 				}
@@ -725,14 +760,19 @@
 				_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
 					.value + '&sort=' + getSortText(vm.sortlist) +
-					'&pagesize=9999&pageindex=1';
+					'&pagesize='+vm.limit+'&pageindex='+vm.pageNum;
 
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllBasicPhysicalData?' + _d, {
+				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllBasicPhysicalData?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
 				}).then(function(result) {
 					if (result.body.StateCode == 0) {
+						vm.pages = Math.ceil(result.body.Data.totalCount/vm.limit);
+						vm.total = result.body.Data.totalCount;
+						vm.setPageList();
+						result.body.Data = result.body.Data.data;
+						
 						vm.list = result.body.Data ? result.body.Data : [];
 						var _staminaDate = [];
 						var _staminaList = [];
@@ -867,14 +907,18 @@
 				_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
 					.value + '&sort=' + getSortText(vm.sortlist) +
-					'&pagesize=9999&pageindex=1';
+					'&pagesize='+vm.limit+'&pageindex='+vm.pageNum;
 
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPlateFitnessData?' + _d, {
+				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllPlateFitnessData?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
 				}).then(function(result) {
 					if (result.body.StateCode == 0) {
+						vm.pages = Math.ceil(result.body.Data.totalCount/vm.limit);
+						vm.total = result.body.Data.totalCount;
+						vm.setPageList();
+						result.body.Data = result.body.Data.data;
 						var _staminaName = ['攀爬时间', '攀爬距离', '平均心率', '最大心率', '80%以上最大心率保持'];
 						var _staminaDate = [];
 						var _staminaList = [];
@@ -917,14 +961,18 @@
 				_d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
 					.value + '&sort=' + getSortText(vm.sortlist) +
-					'&pagesize=9999&pageindex=1';
+					'&pagesize='+vm.limit+'&pageindex='+vm.pageNum;
 
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrunkStabilityBalance?' + _d, {
+				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllTrunkStabilityBalance?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
 				}).then(function(result) {
 					if (result.body.StateCode == 0) {
+						vm.pages = Math.ceil(result.body.Data.totalCount/vm.limit);
+						vm.total = result.body.Data.totalCount;
+						vm.setPageList();
+						result.body.Data = result.body.Data.data;
 						var _staminaName = [];
 						var _staminaDate = [];
 						var _staminaList = [];
@@ -1566,6 +1614,26 @@
 			},
 			backWorkout: function(num) {
 				window.bus.$emit('stamina', num);
+			},
+			setPageList: function() {
+				vm.pageslist = [];
+				if(vm.pages > 4) {
+					if(vm.pageNum < 3) {
+						vm.pageslist = [1, 2, 3, 4]
+					} else if(vm.pageNum > vm.pages - 2) {
+						for(var i = 3; i >= 0; i -= 1) {
+							vm.pageslist.push(vm.pages - i)
+						}
+					} else {
+						for(var i = -2; i <= 2; i += 1) {
+							vm.pageslist.push(vm.pageNum + i)
+						}
+					}
+				} else {
+					for(var i = 1; i <= vm.pages; i += 1) {
+						vm.pageslist.push(i)
+					}
+				}
 			}
 		},
 		beforeCreate: function() {
