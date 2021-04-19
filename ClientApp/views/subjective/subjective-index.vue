@@ -28,24 +28,24 @@
 				<table>
 					<thead>
 						<tr>
-							<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;">测试时间<img @click="sortbut('DateSign')"
+							<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;" @click="sortbut('DateSign')">测试时间<img
 								 :src="sort('DateSign')" /></th>
-							<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;">运动员<img @click="sortbut('SportName')"
+							<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;" @click="sortbut('SportName')">运动员<img
 								 :src="sort('SportName')" /></th>
 							<th>运动项目</th>
 							<th>参赛主项</th>
 							<th>年龄</th>
 							<th>性别</th>
-							<th>晨脉</th>
-							<th>体重</th>
-							<th>睡眠时间</th>
-							<th>睡眠质量</th>
-							<th>饮食欲望</th>
-							<th>肌肉酸痛</th>
-							<th>伤病疼痛</th>
-							<th>自我训练状态</th>
-							<th>RPE</th>
-							<th>训练负荷</th>
+							<th @click="sortbut('MorPulse')">晨脉<img :src="sort('MorPulse')" /></th>
+							<th @click="sortbut('Weight')">体重<img :src="sort('Weight')" /></th>
+							<th @click="sortbut('SleepDuration')">睡眠时间<img :src="sort('SleepDuration')" /></th>
+							<th @click="sortbut('SleepQuality')">睡眠质量<img :src="sort('SleepQuality')" /></th>
+							<th @click="sortbut('Desire')">饮食欲望<img :src="sort('Desire')" /></th>
+							<th @click="sortbut('SorenessLevel')">肌肉酸痛<img :src="sort('SorenessLevel')" /></th>
+							<th @click="sortbut('FatigueLevel')">伤病疼痛<img :src="sort('FatigueLevel')" /></th>
+							<th @click="sortbut('TrainStatus')">自我训练状态<img :src="sort('TrainStatus')" /></th>
+							<th @click="sortbut('Fatigue')">RPE<img :src="sort('Fatigue')" /></th>
+							<th @click="sortbut('TrainIntensity')">训练负荷<img :src="sort('TrainIntensity')" /></th>
 							<th>教练评价</th>
 							<th>伤病</th>
 						</tr>

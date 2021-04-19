@@ -34,7 +34,7 @@
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
 					<button class="daochu" v-on:click="getBodyFatTrend()">查询</button>
-					<button class="daochu" v-on:click="daochu = true">导出</button>
+					<!-- <button class="daochu" v-on:click="daochu = true">导出</button> -->
 				</div>
 				<div style="clear: both;"></div>
 				<section class="">
@@ -50,19 +50,19 @@
 								<table>
 									<thead>
 										<tr>
-											<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;">测试时间<img @click="sortbut('Testdate')"
+											<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;" @click="sortbut('Testdate')">测试时间<img
 								 :src="sort('Testdate')" /></th>
-											<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;">运动员<img @click="sortbut('SportName')"
+											<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;" @click="sortbut('SportName')">运动员<img
 								 :src="sort('SportName')" /></th>
 											<th>运动项目</th>
 											<th>参赛主项</th>
 											<th>年龄</th>
 											<th>性别</th>
-											<th>体重</th>
-											<th>肌肉</th>
-											<th>脂肪</th>
-											<th>骨矿物盐</th>
-											<th>体脂率</th>
+											<th @click="sortbut('TotalMass')">体重<img :src="sort('TotalMass')" /></th>
+											<th @click="sortbut('Muscle')">肌肉<img :src="sort('Muscle')" /></th>
+											<th @click="sortbut('Fat')">脂肪<img :src="sort('Fat')" /></th>
+											<th @click="sortbut('BoneMSalt')">骨矿物盐<img :src="sort('BoneMSalt')" /></th>
+											<th @click="sortbut('BF')">体脂率<img :src="sort('BF')" /></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -194,7 +194,35 @@
 						type:'SportName',
 						is:false,
 						sort:false
+					},
+					{
+						type:'TotalMass',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Muscle',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Fat',
+						is:false,
+						sort:false
+					},
+					{
+						type:'BoneMSalt',
+						is:false,
+						sort:false
+					},
+					{
+						type:'BF',
+						is:false,
+						sort:false
 					}
+					
+					
+					
 				],
 				childNum: 1,
 				getOnr: {},
@@ -261,7 +289,7 @@
 		computed: {},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2),
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -1),
 					'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				vm.userType = window.localStorage.getItem('Sport_userType');

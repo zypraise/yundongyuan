@@ -27,7 +27,7 @@
 					<button class="daochu" v-on:click="getDoctor()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
-				
+
 				<div class="injury-main">
 					<div class="title">
 						<div class="injury-add">
@@ -51,7 +51,7 @@
 									<th>伤病记录</th>
 								</tr>
 							</table>
-							
+
 						</div>
 						<div style="position: absolute;left: 20px;right: 20px;top: 20px;bottom: 20px;overflow-y: auto;overflow-x: hidden;">
 							<table>
@@ -61,7 +61,7 @@
 									<td style="text-align: left;">{{item.Record}}</td>
 								</tr>
 							</table>
-							
+
 						</div>
 					</div>
 				</div>
@@ -90,12 +90,12 @@
 		//变量
 		data: function() {
 			return {
-				url:'',
+				url: '',
 				doctorList: [], //伤病记录
 				showMask: false, //显示添加伤病记录
-				doctorText:'',
+				doctorText: '',
 				userType: '', //用户类型
-				
+
 				sex: '',
 
 				trainFirse: '',
@@ -105,9 +105,7 @@
 				sportList: [],
 				zhuanxiangList: [],
 				zhuanxiangLists: []
-				
-				
-				
+
 			}
 		},
 		//公共模板
@@ -130,8 +128,8 @@
 				vm.getSport();
 			},
 			//关闭窗口清空信息
-			showMask:function(newVal,oldVal){
-				if(!newVal){
+			showMask: function(newVal, oldVal) {
+				if(!newVal) {
 					vm.doctorText = '';
 				}
 			}
@@ -166,7 +164,9 @@
 									for(var i = 0; i < result.body.Data.length; i++) {
 										if(_id.includes(result.body.Data[i].Id)) {
 											_z.push(result.body.Data[i]);
-											if(_z.length >= _id.length){break;}
+											if(_z.length >= _id.length) {
+												break;
+											}
 										}
 									}
 								} else {
@@ -222,15 +222,15 @@
 			},
 			//查询伤病记录
 			getDoctor: function() {
-				if(vm.sportIndex === ''){
+				if(vm.sportIndex === '') {
 					myPublic.alertMy('请选择一位运动员')
-return;					
+					return;
 				}
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllDoctorRecord', {
 					params: {
 						userid: (vm.sportIndex === '' ? '' : vm.sportList[vm.sportIndex].UserId),
-						pagesize:9999,
-						pageindex:1
+						pagesize: 9999,
+						pageindex: 1
 					}
 				}).then(function(result) {
 					if(result.body.StateCode == 0) {
@@ -244,10 +244,10 @@ return;
 					console.log(error);
 				});
 			},
-			save:function(){
-				
+			save: function() {
+
 			},
-			del:function(){}
+			del: function() {}
 		},
 		beforeCreate: function() {
 			vm = this;

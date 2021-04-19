@@ -17,12 +17,12 @@
 					<button class="daochu" v-on:click="getBodyFatTrend()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
-				
-				
-				
-				
-				
-				
+
+
+
+
+
+
 				<section class="">
 					<div class="body-item">
 						<div class="title">
@@ -36,31 +36,31 @@
 								<table>
 									<thead>
 										<tr>
-											<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;">测试时间<img @click="sortbut('Testdate')"
-								 :src="sort('Testdate')" /></th>
-											<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;">运动员<img @click="sortbut('SportName')"
-								 :src="sort('SportName')" /></th>
+											<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;" @click="sortbut('Testdate')">测试时间<img
+												 :src="sort('Testdate')" /></th>
+											<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;" @click="sortbut('SportName')">运动员<img
+												 :src="sort('SportName')" /></th>
 											<th>运动项目</th>
 											<th>参赛主项</th>
 											<th>年龄</th>
 											<th>性别</th>
-											<th>体重</th>
-											<th>肌肉</th>
-											<th>脂肪</th>
-											<th>骨矿物盐</th>
-											<th>体脂率</th>
+											<th @click="sortbut('TotalMass')">体重<img :src="sort('TotalMass')" /></th>
+											<th @click="sortbut('Muscle')">肌肉<img :src="sort('Muscle')" /></th>
+											<th @click="sortbut('Fat')">脂肪<img :src="sort('Fat')" /></th>
+											<th @click="sortbut('BoneMSalt')">骨矿物盐<img :src="sort('BoneMSalt')" /></th>
+											<th @click="sortbut('BF')">体脂率<img :src="sort('BF')" /></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-for="(item,index) in bodyList">
 											<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;">{{item.Testdate}}</th>
-											
+
 											<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;">{{item.SportName}}</th>
 											<td>{{item.TrainName}}</td>
 											<td>{{item.TrainSecName}}</span></td>
 											<td>{{item.Age}}</td>
 											<td>{{item.Sex}}</td>
-											
+
 											<td>{{item.TotalMass.toFixed(2)}}</td>
 											<td>{{item.Muscle.toFixed(2)}}</td>
 											<td>{{item.Fat.toFixed(2)}}</td>
@@ -69,13 +69,13 @@
 										</tr>
 									</tbody>
 								</table>
-						
+
 							</div>
 						</section>
 						<section v-show="childNum == 2">
 							<div class="table-box">
 								<div id="biao" style="width: 100%;height: 100%;overflow: hidden;">
-				
+
 								</div>
 							</div>
 						</section>
@@ -101,19 +101,46 @@
 		//变量
 		data: function() {
 			return {
-				sortlist:[
-					{
-						type:'Testdate',
-						is:true,
-						sort:false
+				sortlist: [{
+						type: 'Testdate',
+						is: true,
+						sort: false
 					},
 					{
-						type:'SportName',
-						is:false,
-						sort:false
+						type: 'SportName',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'TotalMass',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Muscle',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Fat',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'BoneMSalt',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'BF',
+						is: false,
+						sort: false
 					}
+
+
+
 				],
-				childNum:1,
+				childNum: 1,
 				getOnr: {},
 				bodyList: [],
 			}
@@ -124,11 +151,11 @@
 			topMenu: topMenu
 		},
 		watch: {
-			childNum:function(newVal,oldVal){
-				if(newVal == 2){
-					vm.$nextTick(function(){
-						
-					vm.setBiao();
+			childNum: function(newVal, oldVal) {
+				if (newVal == 2) {
+					vm.$nextTick(function() {
+
+						vm.setBiao();
 					})
 				}
 			},
@@ -137,13 +164,14 @@
 		computed: {},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2), 'yyyy-MM-dd');
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -1),
+					'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				myPublic.tableHeader('#table-header');
 				vm.getBodyFatTrend();
 			},
-			sort: function(res){
-				return sortimg(res,vm.sortlist);
+			sort: function(res) {
+				return sortimg(res, vm.sortlist);
 			},
 			sortbut: function(res) {
 				var l = [...vm.sortlist];
@@ -167,13 +195,13 @@
 						sportuserid: JSON.parse(window.localStorage.getItem('user')).Id,
 						starttime: document.getElementById('starttime').value,
 						endtime: document.getElementById('endtime').value,
-						sort:getSortText(vm.sortlist),
+						sort: getSortText(vm.sortlist),
 						pagesize: 9999,
 						pageindex: 1
 					}
 				}).then(function(result) {
-					if(result.body.StateCode == 0) {
-						vm.bodyList = result.body.Data?result.body.Data:[];
+					if (result.body.StateCode == 0) {
+						vm.bodyList = result.body.Data ? result.body.Data : [];
 						vm.setBiao();
 					} else {
 						vm.$router.push({
@@ -212,7 +240,7 @@
 						data: []
 					}
 				];
-				for(var i = 0; i < vm.bodyList.length; i++) {
+				for (var i = 0; i < vm.bodyList.length; i++) {
 					_dateList.push(vm.bodyList[i].Testdate);
 					_series[0].data.push(vm.bodyList[i].BF)
 					_series[1].data.push(vm.bodyList[i].BoneMSalt)
@@ -270,8 +298,9 @@
 				document.getElementById('starttime-section').addEventListener('blur', function() {
 					var _date1 = document.getElementById('starttime').value;
 					var _date2 = document.getElementById('endtime').value;
-					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-					if(_date2 == '' || isDate) {
+					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split(
+						'-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+					if (_date2 == '' || isDate) {
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');
@@ -281,13 +310,15 @@
 					var _date1 = document.getElementById('starttime').value;
 					var _date2 = document.getElementById('endtime').value;
 					var _thisDate = myPublic.dateForFormat(null, 'yyyy-MM-dd');
-					var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 < _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-					if(_isDate) {
+					var _isDate = _thisDate.split('-')[0] * 10000 + _thisDate.split('-')[1] * 100 + _thisDate.split('-')[2] * 1 <
+						_date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+					if (_isDate) {
 						document.getElementById('endtime').value = _thisDate;
 						return;
 					}
-					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split('-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
-					if(_date1 == '' || isDate) {
+					var isDate = _date1.split('-')[0] * 10000 + _date1.split('-')[1] * 100 + _date1.split('-')[2] * 1 <= _date2.split(
+						'-')[0] * 10000 + _date2.split('-')[1] * 100 + _date2.split('-')[2] * 1;
+					if (_date1 == '' || isDate) {
 						return;
 					}
 					myPublic.alertMy('开始时间不能大于结束时间');

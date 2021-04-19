@@ -17,24 +17,24 @@
 		<table>
 			<thead>
 				<tr>
-					<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;">测试时间<img @click="sortbut('Testdate')"
+					<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;" @click="sortbut('Testdate')">测试时间<img
 								 :src="sort('Testdate')" /></th>
-					<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;">运动员<img @click="sortbut('SportName')"
+					<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;" @click="sortbut('SportName')">运动员<img
 								 :src="sort('SportName')" /></th>
 					<th>运动项目</th>
 					<th>参赛主项</th>
 					<th>年龄</th>
 					<th>性别</th>
-					<th>白细胞</th>
-					<th>红细胞</th>
-					<th>血红蛋白</th>
-					<th>血球压积</th>
-					<th>淋巴细胞</th>
-					<th>中性粒细胞</th>
-					<th>血尿素</th>
-					<th>肌酸激酶</th>
-					<th>皮质醇</th>
-					<th>睾酮</th>
+					<th @click="sortbut('Leukocyte')">白细胞<img :src="sort('Leukocyte')" /></th>
+					<th @click="sortbut('Erythrocyte')">红细胞<img :src="sort('Erythrocyte')" /></th>
+					<th @click="sortbut('Hemoglobin')">血红蛋白<img :src="sort('Hemoglobin')" /></th>
+					<th @click="sortbut('Hematocrit')">血球压积<img :src="sort('Hematocrit')" /></th>
+					<th @click="sortbut('Lymphocyte')">淋巴细胞<img :src="sort('Lymphocyte')" /></th>
+					<th @click="sortbut('Neutrophils')">中性粒细胞<img :src="sort('Neutrophils')" /></th>
+					<th @click="sortbut('BloodUrea')">血尿素<img :src="sort('BloodUrea')" /></th>
+					<th @click="sortbut('CreatineKinase')">肌酸激酶<img :src="sort('CreatineKinase')" /></th>
+					<th @click="sortbut('Cortisol')">皮质醇<img :src="sort('Cortisol')" /></th>
+					<th @click="sortbut('Testosterone')">睾酮<img :src="sort('Testosterone')" /></th>
 					<th>睾酮/皮质醇</th>
 					<th>评价</th>
 				</tr>

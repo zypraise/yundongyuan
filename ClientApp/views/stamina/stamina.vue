@@ -68,7 +68,7 @@
 		computed: {},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2), 'yyyy-MM-dd')
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -1), 'yyyy-MM-dd')
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd')
 				vm.setTimeInp();
 				window.bus.$on('pingfen', function(val) {

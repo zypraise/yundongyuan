@@ -68,6 +68,56 @@
 						type:'SportName',
 						is:false,
 						sort:false
+					},
+					{
+						type:'MorPulse',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Weight',
+						is:false,
+						sort:false
+					},
+					{
+						type:'SleepDuration',
+						is:false,
+						sort:false
+					},
+					{
+						type:'SleepQuality',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Desire',
+						is:false,
+						sort:false
+					},
+					{
+						type:'SorenessLevel',
+						is:false,
+						sort:false
+					},
+					{
+						type:'FatigueLevel',
+						is:false,
+						sort:false
+					},
+					{
+						type:'TrainStatus',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Fatigue',
+						is:false,
+						sort:false
+					},
+					{
+						type:'TrainIntensity',
+						is:false,
+						sort:false
 					}
 				],
 				againBiao:true,

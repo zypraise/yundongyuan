@@ -33,7 +33,7 @@
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
 					<button class="daochu" v-on:click="isGetList = !isGetList;">查询</button>
-					<!--<button class="daochu" v-on:click="daochu = true">导出</button>-->
+					<!-- <button class="daochu" v-on:click="daochu = true">导出</button> -->
 				</div>
 				<div style="clear: both;"></div>
 				<!-- 子集 -->
@@ -43,6 +43,10 @@
 				<section v-if="childNum == 2">
 					<zhuanxiang :is-get-list="isGetList" :sport-list="sportList" :sport-index="sportIndex"></zhuanxiang>
 				</section>
+				<section v-if="childNum == 3">
+					<paiming :daochu="daochu" :is-get-list="isGetList" :zhuanxiang-list="zhuanxiangList" :userXuanZe="userXuanZe" :train-firse="trainFirse" :train-id="trainId" :sport-list="sportList" :sport-index="sportIndex" :sex="sex" :plist-type="plistType"></paiming>
+				</section>
+				
 				<!--<section v-if="childNum == 3">
 					<duibi :sport-list="sportList"></duibi>
 				</section>-->
@@ -56,6 +60,7 @@
 	import topMenu from '../../components/menu.vue';
 	import jichu from '../workout/childNum1.vue'; //基础组件
 	import zhuanxiang from '../workout/childNum2.vue'; //基础组件
+	import paiming from '../workout/childNum3.vue'; //基础组件
 	import '../../assets/styles/workout.css';
 
 	export default {
@@ -85,7 +90,8 @@
 			headerComponent: header,
 			topMenu: topMenu,
 			jichu: jichu,
-			zhuanxiang: zhuanxiang
+			zhuanxiang: zhuanxiang,
+			paiming:paiming
 		},
 		watch: {
 			trainFirse: function(newVal, oldVal) {
@@ -115,7 +121,7 @@
 		methods: {
 			start: function() {
 				// myPublic.alertResult('请选择一位运动员');
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2),
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -1),
 					'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				vm.setTimeInp();

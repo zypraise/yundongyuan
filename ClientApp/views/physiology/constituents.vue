@@ -23,12 +23,12 @@
 							<div style="float: right;"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;" v-on:click="showPingFen = false" /></div>
 							<ul class="title-tab">
 								<li class="item" :class="{'current':childNum == 3}" v-on:click="childNum = 3">数据表</li>
-								<li class="item" :class="{'current':childNum == 2}" v-on:click="childNum = 2">折线图</li>
+								<li class="item" :class="{'current':childNum == 2}" v-on:click="childNum = 2">柱状图</li>
 							</ul>
 						</div>
 						<section>
 							<div class="table-box">
-								<child-component-second v-bind:again-biao="againBiao" v-bind:show-ping-fen="showPingFen" v-bind:phy-constituents-list="phyConstituentsList" v-if="childNum == 2"></child-component-second>
+								<child-component-second v-bind:userId="1" v-bind:again-biao="againBiao" v-bind:show-ping-fen="showPingFen" v-bind:phy-constituents-list="phyConstituentsList" v-if="childNum == 2"></child-component-second>
 								<child-component-third v-bind:phy-constituents-list="phyConstituentsList" v-bind:sortlist='sortlist' v-if="childNum == 3"></child-component-third>
 							</div>
 						</section>
@@ -66,6 +66,56 @@
 						type:'SportName',
 						is:false,
 						sort:false
+					},
+					{
+						type:'Leukocyte',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Erythrocyte',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Hemoglobin',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Hematocrit',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Lymphocyte',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Neutrophils',
+						is:false,
+						sort:false
+					},
+					{
+						type:'BloodUrea',
+						is:false,
+						sort:false
+					},
+					{
+						type:'CreatineKinase',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Cortisol',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Testosterone',
+						is:false,
+						sort:false
 					}
 				],
 				againBiao:true,
@@ -90,7 +140,7 @@
 		},
 		methods: {
 			start: function() {
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2), 'yyyy-MM-dd');
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -1), 'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				window.bus.$on('pingfen', function(val) {
 					vm.showPingFen = val;

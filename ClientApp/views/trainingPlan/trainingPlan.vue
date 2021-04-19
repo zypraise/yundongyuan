@@ -98,7 +98,7 @@
 		methods: {
 			start: function() {
 				myPublic.tableHeader(".table-box");
-				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -2),
+				document.getElementById('starttime').value = myPublic.dateForFormat(myPublic.getAddMonthDate(null, -1),
 					'yyyy-MM-dd');
 				document.getElementById('endtime').value = myPublic.dateForFormat(null, 'yyyy-MM-dd');
 				vm.setTimeInp();

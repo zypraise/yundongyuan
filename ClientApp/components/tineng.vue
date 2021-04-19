@@ -16,7 +16,7 @@
 						<th rowspan="2"colspan="2">垂直纵跳（cm）</th>
 						<th rowspan="3">深蹲相对力量（kg）</th>
 						<th rowspan="3">卧推相对力量（kg）</th>
-						<th rowspan="2" colspan="2">引体向上（次）</th>
+						<th rowspan="2" colspan="2">引体向上</th>
 						<th rowspan="3">腹肌耐力（s）</th>
 						<th rowspan="3">背肌耐力（s）</th>
 						<th colspan="4">二选一</th>

@@ -37,7 +37,7 @@
 						<li class="item" :class="{'current':listType == 2}" v-on:click="listType = 2">板块体能</li>
 						<li class="item" :class="{'current':listType == 3}" v-on:click="listType = 3">稳定和均衡</li>
 						<li class="item" v-on:click="backWorkout('2,0')">专项体能</li>
-						<!--<li class="item" v-on:click="backWorkout('3,0')">雷达图</li>-->
+						<li class="item" v-if="userType == '超级管理员'" v-on:click="backWorkout('3,0')">排名</li>
 					</ul>
 				</div>
 				<section>
@@ -45,17 +45,17 @@
 						<table style="margin-bottom: 50px;">
 							<thead>
 								<tr>
-									<th style="min-width: 80px;max-width: 80px;width: 80px;left:0px;z-index: 100;">对比选择</th>
-									<th style="min-width: 130px;max-width: 130px;width: 130px;left:93px;z-index: 100;">测试时间<img @click="sortbut('TestDate')" :src="sort('TestDate')" /></th>
-									<th style="min-width: 130px;max-width: 130px;width: 130px;left:236px;z-index: 100;">运动员<img @click="sortbut('SportName')" :src="sort('SportName')" /></th>
+									<th style="min-width: 80px;max-width: 80px;width: 80px;left:0px;z-index: 100;">选择</th>
+									<th style="min-width: 130px;max-width: 130px;width: 130px;left:93px;z-index: 100;" @click="sortbut('TestDate')">测试时间<img :src="sort('TestDate')" /></th>
+									<th style="min-width: 130px;max-width: 130px;width: 130px;left:236px;z-index: 100;" @click="sortbut('SportName')">运动员<img :src="sort('SportName')" /></th>
 									<th>运动项目</th>
 									<th>参赛主项</th>
 									<th>年龄</th>
 									<th>性别</th>
 									<th v-if="listType == 1">身高</th>
 									<th v-if="listType == 1">体重</th>
-									<th v-for="(item,index) in staminaName">{{item}}</th>
-									<th>评分<img @click="sortbut('Score')" :src="sort('Score')" /></th>
+									<th v-for="(item,index) in staminaName" @click="sortbut(item.type)">{{item.name}}<img :src="sort(item.type)" /></th>
+									<th @click="sortbut('Score')">评分<img :src="sort('Score')" /></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -154,7 +154,7 @@
 								<th>性别</th>
 								<th v-if="listType == 1">身高</th>
 								<th v-if="listType == 1">体重</th>
-								<th v-for="(item,index) in staminaName">{{item}}</th>
+								<th v-for="(item,index) in staminaName">{{item.name}}</th>
 								<th>评分</th>
 							</tr>
 						</thead>
@@ -205,8 +205,8 @@
 				total: 0,
 				pageNum: 1,
 				tpageNum: '', //跳转页码
-				limit: 10,
-
+				limit: 20,
+				userType:'',
 				sortlist: [{
 						type: 'TestDate',
 						is: true,
@@ -221,8 +221,184 @@
 						type: 'Score',
 						is: false,
 						sort: false
+					},
+					{
+						type: 'BMI',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'BodyFat',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'SitForward',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'ThirtyMeterDash',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'VerticalJump',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'SquatMaxStrength',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'RelativeSquatMaxStrength',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'LyingPushMaxStrength',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'RelativeLyingPushMaxStrength',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'PullUp',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'CantileverSuspension',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'AbdominalEndurance',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'BackMuscleEndurance',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'ThreeKm',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'TwoKmDynamometer',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'YoyoTest',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Left45',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Right45',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Left135',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Right135',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Left90',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Right90',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'Zero',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'OneHundredEighty',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'UpperLimbRatio',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'LowerLimbRatio',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'LeftUpperLimb',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'RightUpperLimb',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'LeftLowerLimb',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'RightLowerLimb',
+						is: false,
+						sort: false
+					},
+					{
+						type: 'ClimbingTime',
+						is: false,
+						sort: false
+					},
+						{
+						type: 'ClimbingDistance',
+						is: false,
+						sort: false
+					},
+						{
+						type: 'MeanHeartRate',
+						is: false,
+						sort: false
+					},
+						{
+						type: 'MaxHeartRate',
+						is: false,
+						sort: false
+					},
+						{
+						type: 'MaxHeartRateHoldTime',
+						is: false,
+						sort: false
 					}
 				],
+
 				daochuNum: 1,
 				userXuanZe1: [],
 				userXuanZe2: [],
@@ -353,7 +529,7 @@
 			banKuai: bankuai
 		},
 		watch: {
-			pageNum:function(newVal, oldVal) {
+			pageNum: function(newVal, oldVal) {
 				if(newVal == 0) {
 					vm.pageNum = oldVal;
 					return
@@ -375,6 +551,14 @@
 				vm.getinfo()
 			},
 			listType: function(newVal, oldVal) {
+				var l = [...vm.sortlist];
+				for(var i = 0; i < l.length; i++) {
+					l[i].is = false;
+					if(i == 0) {
+						l[i].is = true;
+						l[i].sort = false;
+					}
+				}
 				vm.pageNum = 1;
 				vm.tpageNum = '';
 				if(newVal == 2) {
@@ -435,6 +619,7 @@
 		methods: {
 			start: function() {
 				myPublic.tableHeader(".table-box");
+				vm.userType = window.localStorage.getItem('Sport_userType');
 				window.bus.$on('pingfen', function(val) {
 					vm.showPingFen = val;
 				});
@@ -1098,69 +1283,117 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize='+vm.limit+'&pageindex='+vm.pageNum;
+					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllBasicPhysicalData?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
 				}).then(function(result) {
 					if(result.body.StateCode == 0) {
-						vm.pages = Math.ceil(result.body.Data.totalCount/vm.limit);
+						vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
 						vm.total = result.body.Data.totalCount;
 						vm.setPageList();
 						result.body.Data = result.body.Data.data;
-						
+
 						vm.list = result.body.Data ? result.body.Data : [];
 						var _staminaDate = [];
 						var _staminaList = [];
 						var _staminaName = [];
 						if(vm.xuanze[0].is) {
-							_staminaName.push('BMI')
+							_staminaName.push({
+								name: 'BMI',
+								type: 'BMI'
+							})
 						}
 						if(vm.xuanze[1].is) {
-							_staminaName.push('体脂')
+							_staminaName.push({
+								name: '体脂',
+								type: 'BodyFat'
+							})
 						}
 						if(vm.xuanze[2].is) {
-							_staminaName.push('坐位体前屈')
+							_staminaName.push({
+								name: '坐位体前屈',
+								type: 'SitForward'
+							})
 						}
 						if(vm.xuanze[3].is) {
-							_staminaName.push('30米冲刺')
+							_staminaName.push({
+								name: '30米冲刺',
+								type: 'ThirtyMeterDash'
+							})
 						}
 						if(vm.xuanze[4].is) {
-							_staminaName.push('垂直纵跳')
+							_staminaName.push({
+								name: '垂直纵跳',
+								type: 'VerticalJump'
+							})
 						}
 						if(vm.xuanze[5].is) {
-							_staminaName.push('深蹲最大力量')
+							_staminaName.push({
+								name: '深蹲最大力量',
+								type: 'SquatMaxStrength'
+							})
 						}
 						if(vm.xuanze[6].is) {
-							_staminaName.push('深蹲相对力量')
+							_staminaName.push({
+								name: '深蹲相对力量',
+								type: 'RelativeSquatMaxStrength'
+							})
 						}
 						if(vm.xuanze[7].is) {
-							_staminaName.push('卧推最大力量')
+							_staminaName.push({
+								name: '卧推最大力量',
+								type: 'LyingPushMaxStrength'
+							})
 						}
 						if(vm.xuanze[8].is) {
-							_staminaName.push('卧推相对力量')
+							_staminaName.push({
+								name: '卧推相对力量',
+								type: 'RelativeLyingPushMaxStrength'
+							})
 						}
 						if(vm.xuanze[9].is) {
-							_staminaName.push('引体向上')
+							_staminaName.push({
+								name: '引体向上',
+								type: 'PullUp'
+							})
 						}
 						if(vm.xuanze[10].is) {
-							_staminaName.push('屈臂悬垂')
+							_staminaName.push({
+								name: '屈臂悬垂',
+								type: 'CantileverSuspension'
+							})
 						}
 						if(vm.xuanze[11].is) {
-							_staminaName.push('腹肌耐力')
+							_staminaName.push({
+								name: '腹肌耐力',
+								type: 'AbdominalEndurance'
+							})
 						}
 						if(vm.xuanze[12].is) {
-							_staminaName.push('背肌耐力')
+							_staminaName.push({
+								name: '背肌耐力',
+								type: 'BackMuscleEndurance'
+							})
 						}
 						if(vm.xuanze[13].is) {
-							_staminaName.push('3000米')
+							_staminaName.push({
+								name: '3000米',
+								type: 'ThreeKm'
+							})
 						}
 						if(vm.xuanze[14].is) {
-							_staminaName.push('2000米测功仪')
+							_staminaName.push({
+								name: '2000米测功仪',
+								type: 'TwoKmDynamometer'
+							})
 						}
 						if(vm.xuanze[15].is) {
-							_staminaName.push('Yo-Yo')
+							_staminaName.push({
+								name: 'Yo-Yo',
+								type: 'YoyoTest'
+							})
 						}
 						if(result.body.Data) {
 							var valueList;
@@ -1262,18 +1495,33 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize='+vm.limit+'&pageindex='+vm.pageNum;
+					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllPlateFitnessData?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
 				}).then(function(result) {
 					if(result.body.StateCode == 0) {
-						vm.pages = Math.ceil(result.body.Data.totalCount/vm.limit);
+						vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
 						vm.total = result.body.Data.totalCount;
 						vm.setPageList();
 						result.body.Data = result.body.Data.data;
-						var _staminaName = ['攀爬时间', '攀爬距离', '平均心率', '最大心率', '80%以上最大心率保持'];
+						var _staminaName = [{
+							name: '攀爬时间',
+							type:'ClimbingTime'
+						}, {
+							name: '攀爬距离',
+							type:'ClimbingDistance'
+						}, {
+							name: '平均心率',
+							type:'MeanHeartRate'
+						}, {
+							name: '最大心率',
+							type:'MaxHeartRate'
+						}, {
+							name: '80%以上最大心率保持',
+							type:'MaxHeartRateHoldTime'
+						}];
 						var _staminaDate = [];
 						var _staminaList = [];
 						vm.list = result.body.Data ? result.body.Data : [];
@@ -1310,62 +1558,104 @@
 				_d += '&sex=' + vm.sex;
 				_d += '&sportuserid=' + (vm.sport === '' ? '' : vm.sportList[vm.sport].UserId);
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize='+vm.limit+'&pageindex='+vm.pageNum;
+					.value + '&sort=' + getSortText(vm.sortlist) + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllTrunkStabilityBalance?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
 				}).then(function(result) {
 					if(result.body.StateCode == 0) {
-						vm.pages = Math.ceil(result.body.Data.totalCount/vm.limit);
+						vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
 						vm.total = result.body.Data.totalCount;
 						vm.setPageList();
 						result.body.Data = result.body.Data.data;
-						
+
 						var _staminaName = [];
 						var _staminaDate = [];
 						var _staminaList = [];
 						if(vm.peizhi[0].is) {
-							_staminaName.push('左45°')
+							_staminaName.push({
+								name: '左45°',
+								type: 'Left45'
+							})
 						}
 						if(vm.peizhi[1].is) {
-							_staminaName.push('右45°')
+							_staminaName.push({
+								name: '右45°',
+								type: 'Right45'
+							})
 						}
 						if(vm.peizhi[2].is) {
-							_staminaName.push('左135°')
+							_staminaName.push({
+								name: '左135°',
+								type: 'Left135'
+							})
 						}
 						if(vm.peizhi[3].is) {
-							_staminaName.push('右135°')
+							_staminaName.push({
+								name: '右135°',
+								type: 'Right135'
+							})
 						}
 						if(vm.peizhi[4].is) {
-							_staminaName.push('左90°')
+							_staminaName.push({
+								name: '左90°',
+								type: 'Left90'
+							})
 						}
 						if(vm.peizhi[5].is) {
-							_staminaName.push('右90°')
+							_staminaName.push({
+								name: '右90°',
+								type: 'Right90'
+							})
 						}
 						if(vm.peizhi[6].is) {
-							_staminaName.push('0°')
+							_staminaName.push({
+								name: '0°',
+								type: 'Zero'
+							})
 						}
 						if(vm.peizhi[7].is) {
-							_staminaName.push('180°')
+							_staminaName.push({
+								name: '180°',
+								type: 'OneHundredEighty'
+							})
 						}
 						if(vm.peizhi[8].is) {
-							_staminaName.push('上肢比值%')
+							_staminaName.push({
+								name: '上肢比值%',
+								type: 'UpperLimbRatio'
+							})
 						}
 						if(vm.peizhi[9].is) {
-							_staminaName.push('下肢比值%')
+							_staminaName.push({
+								name: '下肢比值%',
+								type: 'LowerLimbRatio'
+							})
 						}
 						if(vm.peizhi[10].is) {
-							_staminaName.push('左上肢')
+							_staminaName.push({
+								name: '左上肢',
+								type: 'LeftUpperLimb'
+							})
 						}
 						if(vm.peizhi[11].is) {
-							_staminaName.push('右上肢')
+							_staminaName.push({
+								name: '右上肢',
+								type: 'RightUpperLimb'
+							})
 						}
 						if(vm.peizhi[12].is) {
-							_staminaName.push('左下肢')
+							_staminaName.push({
+								name: '左下肢',
+								type: 'LeftLowerLimb'
+							})
 						}
 						if(vm.peizhi[13].is) {
-							_staminaName.push('右下肢')
+							_staminaName.push({
+								name: '右下肢',
+								type: 'RightLowerLimb'
+							})
 						}
 						if(result.body.Data) {
 							vm.list = result.body.Data ? result.body.Data : [];
@@ -1457,13 +1747,15 @@
 				try {
 					var _series = [];
 					var _val = [];
+					var _legend = [];
 					for(var i = 0; i < vm.staminaName.length; i += 1) {
 						_val = [];
 						for(var j = 0; j < _dateList.length; j += 1) {
 							_val.push(_list[j].valueList[i])
 						}
+						_legend.push(vm.staminaName[i].name);
 						_series.push({
-							name: vm.staminaName[i],
+							name: vm.staminaName[i].name,
 							type: 'line',
 							data: _val
 						})
@@ -1479,7 +1771,7 @@
 							}
 						},
 						legend: {
-							data: vm.staminaName
+							data: _legend
 						},
 						grid: {
 							left: '10px',

@@ -29,12 +29,29 @@
 								</tr>
 							</tbody>
 						</table>
-						<div id="biao" style="width: 100%;height: 500px;overflow: hidden;margin-bottom: 50px;">
-
-						</div>
-
-
 					</div>
+					<div class="list-footer">
+						<div class="list-page">
+							<div v-on:click="pageNum = 1">首页</div>
+							<div v-on:click="pageNum = pageNum-1">上一页</div>
+							<div v-for="i in pageslist" :class="{'current':pageNum == i}" v-on:click="pageNum = i">{{i}}</div>
+							<div v-on:click="pageNum = pageNum+1">下一页</div>
+							<div v-on:click="pageNum = pages">尾页</div>
+							<span>到第</span>
+							<input type="text" v-model="tpageNum" />
+							<span>页</span>
+							<div v-on:click="pageNum = tpageNum">跳转</div>
+						</div>
+						<div class="list-footer-common">共{{total}}条/{{pages}}页</div>
+					</div>
+				</section>
+			</div>
+			<div class="body-item" style="overflow-x: hidden;margin-top: 30px;margin-bottom: 30px;">
+				<div class="title" style="min-width: 852px;">
+					线图
+				</div>
+				<section>
+					<div id="biao" style="width: 100%;height: 500px;overflow: hidden;"></div>
 				</section>
 			</div>
 		</section>
@@ -51,6 +68,13 @@
 		props: ["isGetList"],
 		data: function() {
 			return {
+				pages: 0,
+				pageslist: [],
+				total: 0,
+				pageNum: 1,
+				tpageNum: '', //跳转页码
+				limit: 9999,
+				
 				getOnr: {},
 				staminaList: [],
 				staminaName: [],
@@ -63,6 +87,16 @@
 			// pingFen: pingFen
 		},
 		watch: {
+			pageNum: function(newVal, oldVal) {
+				if(newVal == 0) {
+					vm.pageNum = oldVal;
+					return
+				} else if(newVal > vm.pages) {
+					vm.pageNum = oldVal;
+					return
+				}
+				vm.getList()
+			},
 			isGetList: function(newVal, oldVal) {
 				vm.start()
 			}
@@ -78,9 +112,9 @@
 				var _d = '';
 				_d += 'sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
 				_d += '&starttime=' + document.getElementById('starttime').value + '&endtime=' + document.getElementById('endtime')
-					.value + '&pagesize=9999&pageindex=1';
+					.value + '&pagesize=' + vm.limit + '&pageindex=' + vm.pageNum;
 
-				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllTrainResult?' + _d, {
+				vm.$http.get(myPublic.publicUrl + '/API/PcTest/GetAllTrainResult?' + _d, {
 					headers: {
 						token: window.localStorage.getItem('Sport_Access_Token')
 					}
@@ -91,6 +125,10 @@
 						var _l = [];
 						var _staminaList = [];
 						if (result.body.Data) {
+							vm.pages = Math.ceil(result.body.Data.totalCount / vm.limit);
+							vm.total = result.body.Data.totalCount;
+							vm.setPageList();
+							
 							for (var i = 0; i < result.body.Data.length; i++) {
 								if(_staminaName.indexOf(result.body.Data[i].TypeName)<0){
 								_staminaName.push(result.body.Data[i].TypeName);
@@ -183,6 +221,26 @@
 				vm.$router.push({
 					path: '/staminaAdd'
 				});
+			},
+			setPageList: function() {
+				vm.pageslist = [];
+				if(vm.pages > 4) {
+					if(vm.pageNum < 3) {
+						vm.pageslist = [1, 2, 3, 4]
+					} else if(vm.pageNum > vm.pages - 2) {
+						for(var i = 3; i >= 0; i -= 1) {
+							vm.pageslist.push(vm.pages - i)
+						}
+					} else {
+						for(var i = -2; i <= 2; i += 1) {
+							vm.pageslist.push(vm.pageNum + i)
+						}
+					}
+				} else {
+					for(var i = 1; i <= vm.pages; i += 1) {
+						vm.pageslist.push(i)
+					}
+				}
 			}
 		},
 		beforeCreate: function() {

@@ -33,7 +33,7 @@
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
 					<button class="daochu" v-on:click="getList()">查询</button>
-					<button class="daochu" v-on:click="daochu = true">导出</button>
+					<button class="daochu" v-if="userType == '超级管理员'" v-on:click="daochu = true">导出</button>
 				</div>
 				<div style="clear: both;"></div>
 				<section class="ti-cheng-fen" v-if="childNum == 1">
@@ -176,7 +176,62 @@
 						type:'SportName',
 						is:false,
 						sort:false
-					}
+					},
+					{
+						type:'MorPulse',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Weight',
+						is:false,
+						sort:false
+					},
+					{
+						type:'SleepDuration',
+						is:false,
+						sort:false
+					},
+					{
+						type:'SleepQuality',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Desire',
+						is:false,
+						sort:false
+					},
+					{
+						type:'SorenessLevel',
+						is:false,
+						sort:false
+					},
+					{
+						type:'FatigueLevel',
+						is:false,
+						sort:false
+					},
+					{
+						type:'TrainStatus',
+						is:false,
+						sort:false
+					},
+					{
+						type:'Fatigue',
+						is:false,
+						sort:false
+					},
+					{
+						type:'TrainIntensity',
+						is:false,
+						sort:false
+					},
+					
+					
+					
+					
+					
 				],
 				userType: '',
 				trainId: '', //小项

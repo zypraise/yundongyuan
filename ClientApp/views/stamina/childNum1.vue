@@ -44,9 +44,9 @@
 						<table  style="margin-bottom: 50px;">
 							<thead>
 								<tr>
-									<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;">测试时间<img @click="sortbut('TestDate')"
+									<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;z-index: 100;" @click="sortbut('TestDate')">测试时间<img
 								 :src="sort('TestDate')" /></th>
-									<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;">运动员<img @click="sortbut('SportName')"
+									<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;z-index: 100;" @click="sortbut('SportName')">运动员<img
 								 :src="sort('SportName')" /></th>
 									<th>运动项目</th>
 									<th>参赛主项</th>
@@ -55,7 +55,7 @@
 									<th v-if="listType == 1">身高</th>
 									<th v-if="listType == 1">体重</th>
 									<th v-for="(item,index) in staminaName">{{item}}</th>
-									<th>评分<img @click="sortbut('Score')"
+									<th @click="sortbut('Score')">评分<img
 								 :src="sort('Score')" /></th>
 								</tr>
 							</thead>
@@ -141,7 +141,7 @@
 				total: 0,
 				pageNum: 1,
 				tpageNum: '', //跳转页码
-				limit: 10,
+				limit: 20,
 				
 				sortlist:[
 					{
