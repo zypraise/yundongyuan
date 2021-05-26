@@ -14,20 +14,22 @@
 						<input class='form_datetime' onclick='myDate.getFocus(this)' id='endtime' readonly='readonly' type='text'>
 						<section id="endtime-section" style="right:20px;" tabindex='0' class='calendar' onclick="myDate.holdBubble()"></section>
 					</section>
-					<button class="daochu" v-on:click="getPhyConstituents()">查询</button>
+					<button class="daochu" v-on:click="getList()">查询</button>
 				</div>
 				<div style="clear: both;"></div>
 				<section class="shengli-main">
 					<div class="body-item">
 						<div class="title">
-							<div style="float: right;"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;" v-on:click="showPingFen = false" /></div>
+							<div style="float: right;" v-if="childNum == 2 || childNum == 3"><img src="../../assets/imgs/wen.png" style="width:  20px;height:  20px;vertical-align:  top;margin: 18px 10px;cursor: pointer;" v-on:click="showPingFen = false" /></div>
 							<ul class="title-tab">
-								<li class="item" :class="{'current':childNum == 3}" v-on:click="childNum = 3">数据表</li>
+                <li class="item" :class="{'current':childNum == 1}" v-on:click="childNum = 1">尿十项</li>
+                <li class="item" :class="{'current':childNum == 3}" v-on:click="childNum = 3">生理生化</li>
 								<li class="item" :class="{'current':childNum == 2}" v-on:click="childNum = 2">柱状图</li>
 							</ul>
 						</div>
 						<section>
 							<div class="table-box">
+                <child-component-first v-bind:urine-list="urineList" v-bind:sortlist='sortUrine' v-if="childNum == 1"></child-component-first>
 								<child-component-second v-bind:userId="1" v-bind:again-biao="againBiao" v-bind:show-ping-fen="showPingFen" v-bind:phy-constituents-list="phyConstituentsList" v-if="childNum == 2"></child-component-second>
 								<child-component-third v-bind:phy-constituents-list="phyConstituentsList" v-bind:sortlist='sortlist' v-if="childNum == 3"></child-component-third>
 							</div>
@@ -48,6 +50,8 @@
 	import header from '../../components/header.vue';
 	import topMenu from '../../components/menu.vue';
 	import shengLi from '../../components/shengli.vue';
+
+  import childComponent1 from '../physiology/childNum1.vue';
 	import childComponent2 from '../physiology/childNum2.vue';
 	import childComponent3 from '../physiology/childNum3.vue';
 	import '../../assets/styles/physiology.css';
@@ -118,22 +122,89 @@
 						sort:false
 					}
 				],
-				againBiao:true,
+        sortUrine: [
+          {
+            type:'Testdate',
+            is:true,
+            sort:false
+          },
+          {
+            type:'SportName',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'Usg',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'PH',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'PRO',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'NIT',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'BLO',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'WBC',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'GLU',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'BIL',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'KET',
+            is:false,
+            sort:false
+          },
+          {
+            type: 'URO',
+            is:false,
+            sort:false
+          }
+        ],
+        againBiao:true,
 				getOnr:{},
-				childNum: 0,
+				childNum: 1,
 				showPingFen: true,
-				phyConstituentsList: []
+				phyConstituentsList: [],
+        urineList: [],//尿十项列表
 			}
 		},
 		//公共模板
 		components: {
 			headerComponent: header,
 			shengLi: shengLi,
+      childComponentFirst: childComponent1,
 			childComponentSecond: childComponent2,
 			childComponentThird: childComponent3,
 			topMenu: topMenu
 		},
 		watch: {
+      childNum:function(){
+        vm.getList()
+      }
 		},
 		//计算属性
 		computed: {
@@ -145,14 +216,50 @@
 				window.bus.$on('pingfen', function(val) {
 					vm.showPingFen = val;
 				});
-				window.bus.$on('sortlist', function(val){
-					vm.sortlist = val;
-					vm.getPhyConstituents();
-				});
+        window.bus.$on('sortlist', function(val){
+          vm.sortlist = val;
+          vm.getList();
+        });
+        window.bus.$on('sortUrine', function(val){
+          vm.sortUrine = val;
+          vm.getList();
+        });
 					vm.setTimeInp();
-					vm.getPhyConstituents()
-					vm.childNum = 3;
+					vm.getList()
 			},
+      getList: function() {
+        if(vm.childNum == 1){
+          vm.getUrineList()
+        }
+        if(vm.childNum == 3){
+          vm.getPhyConstituents()
+        }
+      },
+      //查询尿十项
+      getUrineList: function() {
+			  debugger
+        var _d = '';
+        _d += 'trainId=';
+        _d += '&trainSecId=';
+        _d += '&sex=';
+        _d += '&sportuserid=' + JSON.parse(window.localStorage.getItem('user')).Id;
+        _d += '&starttime=' + document.getElementById('starttime').value;
+        _d += '&endtime=' + document.getElementById('endtime').value;
+        _d += '&sort=' + getSortText(vm.sortUrine)
+        _d += '&pagesize=9999&pageindex=1';
+
+        vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllUrinalysis?' + _d, {}).then(function(result) {
+          if (result.body.StateCode == 0) {
+            vm.urineList = result.body.Data ? result.body.Data : [];
+          } else {
+            vm.$router.push({
+              path: '/login'
+            });
+          }
+        }).catch(function(error) {
+          console.log(error);
+        });
+      },
 			//查询生理生化
 			getPhyConstituents: function() {
 				vm.$http.get(myPublic.publicUrl + '/API/Test/GetAllPeriodicTest', {
@@ -214,8 +321,9 @@
 		},
 		beforeDestroy: function() {
 			window.bus.$off('pingfen');
-			window.bus.$off('sortlist');
-			
+      window.bus.$off('sortlist');
+      window.bus.$off('sortUrine');
+
 		},
 		mounted: function() {
 			vm.start();

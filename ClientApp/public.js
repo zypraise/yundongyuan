@@ -61,9 +61,9 @@
 		CollectGarbage();
 	}
 	const myPublic = {
-		 publicUrl:'http://www.cissatmes.com',
+		 // publicUrl:'http://www.cissatmes.com',
 //		publicUrl:'http://www.sport.uare.vip',
-		  // publicUrl: 'http://localhost:80', 
+		  publicUrl: 'http://localhost:80',
 		setTitle: function(title) {
 			document.title = title;
 		},
@@ -130,7 +130,7 @@
 			let rq = d1 - d2;
 			let days = Math.ceil(rq / (24 * 60 * 60 * 1000));
 			let num = Math.ceil(days / 7);
-			return num - (0 - 1);
+			return num;
 		},
 		copys: function(obj) {
 			var a = JSON.stringify(obj);
@@ -139,15 +139,15 @@
 		//阻止事件冒泡
 		holdBubble: function(e) {
 			var evt = e ? e : window.event;
-			if (evt.stopPropagation) { //W3C 
+			if (evt.stopPropagation) { //W3C
 				evt.stopPropagation();
-			} else { //IE      
+			} else { //IE
 				evt.cancelBubble = true;
 			}
 		},
 		/**
-		 * 
-		 * @param {Date} date 时间对象 
+		 *
+		 * @param {Date} date 时间对象
 		 * @param {Object} 变化月
 		 */
 		getAddMonthDate: function(d, num) {
@@ -165,8 +165,8 @@
 			return new Date(_date.getTime());
 		},
 		/**
-		 * 
-		 * @param {Date} date 时间对象 
+		 *
+		 * @param {Date} date 时间对象
 		 * @param {Object} 变化天数
 		 */
 		getAddDayDate: function(d, num) {
@@ -175,7 +175,7 @@
 		},
 		/**
 		 * 转换时间格式
-		 * @param {Date} date 时间对象 
+		 * @param {Date} date 时间对象
 		 * @param {Object} str 时间格式
 		 */
 		dateForFormat: function(d, str) {

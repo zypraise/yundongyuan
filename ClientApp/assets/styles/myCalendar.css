@@ -14,7 +14,7 @@
   border:1px solid #DCDCDC;
   z-index:10000;
 }
- 
+
 /**
  * 设置日历顶部盒子
  */
@@ -26,7 +26,7 @@
   text-align:center;
   border-bottom: 1px solid #ddd;
 }
- 
+
 /**
  * 设置上个月的按钮图标
  */
@@ -54,7 +54,7 @@
 	background-size: 100% 100%;
 	cursor: pointer;
 }
- 
+
 /**
  * 设置下个月的按钮图标
  */
@@ -82,20 +82,20 @@
 	background-size: 100% 100%;
 	cursor: pointer;
 }
- 
- 
+
+
 /* 设置日历表格样式 */
 .calendar-table{
   width: 100%;
   border-collapse: collapse;
   text-align:center;
 }
- 
+
 /* 表格行高 */
 .calendar-table tr{
   height: 30px;
   line-height: 30px;
-  
+
 	background: #FFFFFF !important;
 }.calendar-table td,
 .calendar-table th{
@@ -103,17 +103,20 @@
 	padding: 0px;
 	text-align: center;
 }
- 
+.calendar-table td{
+    cursor: pointer;
+}
+
 /* 当前天 颜色特殊显示 */
 .currentDay {
   color: red;
 }
- 
+
 /* 本月 文字颜色 */
 .currentMonth {
   color: #999;
 }
- 
+
 /* 其他月颜色 */
 .otherMonth{
   color: #ede;

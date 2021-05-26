@@ -44,10 +44,10 @@
 					<th style="min-width: 130px;max-width: 130px;width: 130px;left:0px;">{{item.Testdate}}</th>
 					<th style="min-width: 130px;max-width: 130px;width: 130px;left:143px;">{{item.SportName}}</th>
 					<td>{{item.TrainName}}</td>
-					<td>{{item.TrainSecName}}</span></td>
+					<td>{{item.TrainSecName}}</td>
 					<td>{{item.Age?item.Age:'-'}}</td>
 					<td>{{item.Sex}}</td>
-					
+
 					<td>{{item.Leukocyte}}<span :class="{'jing2':item.Leukocyte<4,'jing3':item.Leukocyte>11}"></span></td>
 					<td>{{item.Erythrocyte}}<span :class="{'jing2':item.Erythrocyte<4,'jing3':item.Erythrocyte>5.6}"></span></td>
 					<!--血红蛋白-->

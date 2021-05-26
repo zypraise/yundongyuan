@@ -25,80 +25,88 @@ import workoutAdd from './views/workout/workoutAdd.vue';//体能测试
 import mixedAbility from './views/mixedAbility/mixedAbility.vue';//综合能力
 import trainingPlan from './views/trainingPlan/trainingPlan.vue';//训练计划
 import allTrainingPlan from './views/trainingPlan/allTrainingPlan.vue';//训练计划
+import skiing from './views/skiing/skiing.vue';//越野滑雪
+import allSkiing from './views/skiing/allSkiing.vue';//越野滑雪
 
 Vue.use(Router)
 window.router = new Router({
-	routes: [{
-			path: '/index',
-			component: index
-		}, {
-			path: '/login',
-			component: login
-		}, {
-			path: '/policy',
-			component: policy
-		}, {
-			path: '/technology',
-			component: technology
-		}, {
-			path: '/register',
-			component: register,
-		}, {
-			path: '/forget',
-			component: forget
-		}, {
-			path: '/choiceRegister',
-			component: choiceRegister
-		}, {
-			path: '/person',
-			component: person
-		}, {
-			path: '/sportInjury',
-			component: sportInjury
-		}, {
-			path: '/trainInjury',
-			component: trainInjury
-		},{
-			path: '/bodyComposition',
-			component:bodyComposition
-		},{
-			path: '/allComposition',
-			component:allComposition
-		},{
-			path: '/phyConstituents',
-			component:phyConstituents
-		},{
-			path: '/allConstituents',
-			component:allConstituents
-		}, {
-			path: '/stamina',
-			component:stamina
-		}, {
-			path:'/staminaAdd',
-			component:staminaAdd
-		}, {
-			path: '/subjective',
-			component:subjective
-		}, {
-			path: '/allSubjective',
-			component:allSubjective
-		}, {
-			path:"/workout",
-			component:workout
-		}, {
-			path:"/workoutAdd",
-			component:workoutAdd
-		},{
-			path:"/mixedAbility",
-			component:mixedAbility
-		},{
-			path:"/trainingPlan",
-			component:trainingPlan
-		},{
-			path:'/allTrainingPlan',
-			component:allTrainingPlan
-		}
-		
-	]
+    routes: [
+        {
+            path: '/index',
+            component: index
+        }, {
+            path: '/login',
+            component: login
+        }, {
+            path: '/policy',
+            component: policy
+        }, {
+            path: '/technology',
+            component: technology
+        }, {
+            path: '/register',
+            component: register,
+        }, {
+            path: '/forget',
+            component: forget
+        }, {
+            path: '/choiceRegister',
+            component: choiceRegister
+        }, {
+            path: '/person',
+            component: person
+        }, {
+            path: '/sportInjury',
+            component: sportInjury
+        }, {
+            path: '/trainInjury',
+            component: trainInjury
+        }, {
+            path: '/bodyComposition',
+            component: bodyComposition
+        }, {
+            path: '/allComposition',
+            component: allComposition
+        }, {
+            path: '/phyConstituents',
+            component: phyConstituents
+        }, {
+            path: '/allConstituents',
+            component: allConstituents
+        }, {
+            path: '/stamina',
+            component: stamina
+        }, {
+            path: '/staminaAdd',
+            component: staminaAdd
+        }, {
+            path: '/subjective',
+            component: subjective
+        }, {
+            path: '/allSubjective',
+            component: allSubjective
+        }, {
+            path: "/workout",
+            component: workout
+        }, {
+            path: "/workoutAdd",
+            component: workoutAdd
+        }, {
+            path: "/mixedAbility",
+            component: mixedAbility
+        }, {
+            path: "/trainingPlan",
+            component: trainingPlan
+        }, {
+            path: '/allTrainingPlan',
+            component: allTrainingPlan
+        }, {
+            path: '/skiing',
+            component: skiing
+        }, {
+            path: '/allSkiing',
+            component: allSkiing
+        }
+    ]
 })
 export default router;

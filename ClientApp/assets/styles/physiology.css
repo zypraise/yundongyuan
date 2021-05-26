@@ -86,3 +86,9 @@
 	vertical-align: top;
 	margin-left: 2px;
 }
+#physiology .advice{
+	width: 300px;
+	padding: 5px;
+	text-align: left;
+	line-height: 26px;
+}
